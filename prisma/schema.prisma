@@ -1,0 +1,337 @@
+// Prisma schema for Field Operation MS (FOMS)
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum EducationLevel {
+  NONE
+  PRIMARY
+  SECONDARY
+  BACHELORS
+  MASTERS
+  DOCTORATE
+}
+
+enum AssignmentStatus {
+  ACTIVE
+  ENDED
+}
+
+enum ScenarioType {
+  BASELINE_SURVEY
+  ENDLINE_SURVEY
+  TRACER_STUDY
+  PROGRAM_OUTCOME_ASSESSMENT
+  QUALITATIVE_STUDY
+}
+
+enum ProjectStatus {
+  PLANNING
+  FIELDWORK
+  DATA_CLEANING
+  REPORTING
+  COMPLETED
+}
+
+enum ResponseOutcome {
+  PENDING
+  COMPLETED
+  REFUSED
+  NOT_FOUND
+  RELOCATED
+  DECEASED
+  REPLACED
+}
+
+enum ReplacementStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum NotificationType {
+  ASSIGNMENT_PROGRAM
+  ASSIGNMENT_BENEFICIARY
+  REPLACEMENT_REQUESTED
+  REPLACEMENT_DECIDED
+  SYSTEM
+}
+
+// Notifications — fired whenever something is assigned to a user (a
+// program, a beneficiary, a replacement request needing their decision) or
+// when a decision affecting them is made. Pushed live over Socket.io and
+// also listable/markable-as-read via REST for when the user wasn't online.
+model Notification {
+  id        String           @id @default(uuid())
+  type      NotificationType
+  message   String
+  entityType String?
+  entityId   String?
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Tenant {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roles                  Role[]
+  users                  User[]
+  programs               Program[]
+  beneficiaries          Beneficiary[]
+  programAssignments     ProgramAssignment[]
+  beneficiaryAssignments BeneficiaryAssignment[]
+  replacementRequests    ReplacementRequest[]
+  fieldCheckIns          FieldCheckIn[]
+  activityLogs           ActivityLog[]
+  notifications          Notification[]
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  // Canonical list lives in src/utils/permissions.ts. Stored as a JSON array
+  // of permission-key strings, e.g. ["users:view","programs:manage"].
+  permissions Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  users User[]
+
+  @@unique([tenantId, name])
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  telephone      String?
+  province       String?
+  district       String?
+  sector         String?
+  gender         Gender?
+  dateOfBirth    DateTime?
+  status         UserStatus      @default(ACTIVE)
+  educationLevel EducationLevel?
+
+  // Platform admins manage tenants and are not restricted to a single tenant's data.
+  isPlatformAdmin Boolean @default(false)
+
+  // Bumped on logout to invalidate previously issued JWTs for this user.
+  tokenVersion Int @default(0)
+
+  // Updated (throttled) on each authenticated request. Powers the "online
+  // users" presence indicator alongside the live Socket.io connection.
+  lastSeenAt DateTime?
+
+  // Null for platform admins, who aren't scoped to any tenant.
+  roleId String?
+  role   Role?   @relation(fields: [roleId], references: [id])
+
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  programAssignments     ProgramAssignment[]
+  beneficiaryAssignments BeneficiaryAssignment[]
+  fieldCheckIns          FieldCheckIn[]
+  activityLogs           ActivityLog[]
+  replacementRequestsMade    ReplacementRequest[] @relation("RequestedBy")
+  replacementRequestsDecided ReplacementRequest[] @relation("DecidedBy")
+  notifications          Notification[]
+}
+
+model Program {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Research-operations metadata (additive — all optional/defaulted so
+  // existing rows created before this migration remain valid).
+  scenarioType     ScenarioType?
+  status           ProjectStatus @default(PLANNING)
+  targetSampleSize Int?
+  startDate        DateTime?
+  endDate          DateTime?
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  beneficiaries Beneficiary[]
+  assignments   ProgramAssignment[]
+  fieldCheckIns FieldCheckIn[]
+
+  @@unique([tenantId, name])
+}
+
+model Beneficiary {
+  id   String @id @default(uuid())
+  code String
+
+  name        String
+  telephone   String?
+  gender      Gender?
+  dateOfBirth DateTime?
+  status      UserStatus @default(ACTIVE)
+
+  province String?
+  district String?
+  sector   String?
+
+  nationalId    String?
+  householdSize Int?
+
+  // Consent & fieldwork outcome tracking (PRD FR-3.8 / replacement engine).
+  consentGiven Boolean          @default(false)
+  consentAt    DateTime?
+  outcome      ResponseOutcome  @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  programs    Program[]
+  assignments BeneficiaryAssignment[]
+
+  originalReplacementRequests  ReplacementRequest[] @relation("OriginalRespondent")
+  candidateReplacementRequests ReplacementRequest[] @relation("CandidateRespondent")
+
+  @@unique([tenantId, code])
+  @@unique([tenantId, nationalId])
+}
+
+model ProgramAssignment {
+  id         String           @id @default(uuid())
+  status     AssignmentStatus @default(ACTIVE)
+  assignedAt DateTime         @default(now())
+  endedAt    DateTime?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  programId String
+  program   Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model BeneficiaryAssignment {
+  id         String           @id @default(uuid())
+  status     AssignmentStatus @default(ACTIVE)
+  assignedAt DateTime         @default(now())
+  endedAt    DateTime?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  beneficiaryId String
+  beneficiary   Beneficiary @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+// PRD FR-7 — the replacement engine. An enumerator can never pick their own
+// replacement: they raise a request, and a supervisor/study lead approves or
+// rejects it, optionally naming which reserve-pool respondent replaces the
+// original. Every decision is permanently recorded.
+model ReplacementRequest {
+  id        String            @id @default(uuid())
+  reason    String
+  status    ReplacementStatus @default(PENDING)
+  createdAt DateTime          @default(now())
+  decidedAt DateTime?
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  originalRespondentId String
+  originalRespondent   Beneficiary @relation("OriginalRespondent", fields: [originalRespondentId], references: [id], onDelete: Cascade)
+
+  candidateRespondentId String?
+  candidateRespondent   Beneficiary? @relation("CandidateRespondent", fields: [candidateRespondentId], references: [id])
+
+  requestedByUserId String
+  requestedBy       User   @relation("RequestedBy", fields: [requestedByUserId], references: [id])
+
+  decidedByUserId String?
+  decidedBy       User?   @relation("DecidedBy", fields: [decidedByUserId], references: [id])
+}
+
+// PRD FR-8 — duty-of-care / field monitoring: who is in the field and where.
+model FieldCheckIn {
+  id         String    @id @default(uuid())
+  checkInAt  DateTime  @default(now())
+  checkOutAt DateTime?
+  gpsLat     Float?
+  gpsLng     Float?
+  note       String?
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  projectId String?
+  project   Program? @relation(fields: [projectId], references: [id])
+}
+
+// Audit trail. Powers the "Activity Logs" / user-logs screen and the live
+// activity feed on the dashboard.
+model ActivityLog {
+  id         String   @id @default(uuid())
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+}

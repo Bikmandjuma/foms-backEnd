@@ -1,0 +1,914 @@
+openapi: 3.0.3
+info:
+  title: HUska Survey Backend API
+  description: Multi-tenant survey backend with JWT auth, roles, users, and tenants.
+  version: "1.0.0"
+servers:
+  - url: /api
+    description: API base path
+
+tags:
+  - name: Auth
+  - name: Users
+  - name: Roles
+  - name: Tenants
+  - name: Programs
+  - name: Beneficiaries
+  - name: Program Assignments
+  - name: Beneficiary Assignments
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "Send the login token as `Authorization: Bearer <token>`."
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+      description: Alternative to bearerAuth — the httpOnly cookie set by /auth/login.
+
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: "Request successful"
+        data:
+          nullable: true
+      required: [statusCode, message, data]
+
+    Gender:
+      type: string
+      enum: [MALE, FEMALE, OTHER]
+
+    UserStatus:
+      type: string
+      enum: [ACTIVE, INACTIVE, SUSPENDED]
+
+    EducationLevel:
+      type: string
+      enum: [NONE, PRIMARY, SECONDARY, BACHELORS, MASTERS, DOCTORATE]
+
+    RoleSummary:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+
+    Role:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        description: { type: string, nullable: true }
+        tenantId: { type: string, format: uuid }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    User:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        email: { type: string, format: email }
+        name: { type: string, nullable: true }
+        telephone: { type: string, nullable: true }
+        province: { type: string, nullable: true }
+        district: { type: string, nullable: true }
+        sector: { type: string, nullable: true }
+        gender: { $ref: '#/components/schemas/Gender' }
+        dateOfBirth: { type: string, format: date-time, nullable: true }
+        status: { $ref: '#/components/schemas/UserStatus' }
+        educationLevel: { $ref: '#/components/schemas/EducationLevel' }
+        roleId: { type: string, format: uuid }
+        role: { $ref: '#/components/schemas/RoleSummary' }
+        tenantId: { type: string, format: uuid }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    Tenant:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    UserProfileFields:
+      type: object
+      properties:
+        name: { type: string }
+        telephone: { type: string }
+        province: { type: string }
+        district: { type: string }
+        sector: { type: string }
+        gender: { $ref: '#/components/schemas/Gender' }
+        dateOfBirth: { type: string, format: date }
+        status: { $ref: '#/components/schemas/UserStatus' }
+        educationLevel: { $ref: '#/components/schemas/EducationLevel' }
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string }
+
+    CreateUserRequest:
+      allOf:
+        - type: object
+          required: [email, password, roleId]
+          properties:
+            email: { type: string, format: email }
+            password: { type: string, minLength: 8 }
+            roleId: { type: string, format: uuid }
+        - $ref: '#/components/schemas/UserProfileFields'
+
+    UpdateUserRequest:
+      allOf:
+        - type: object
+          properties:
+            email: { type: string, format: email }
+            password: { type: string, minLength: 8 }
+            roleId: { type: string, format: uuid }
+        - $ref: '#/components/schemas/UserProfileFields'
+
+    CreateRoleRequest:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        description: { type: string }
+
+    UpdateRoleRequest:
+      type: object
+      properties:
+        name: { type: string }
+        description: { type: string }
+
+    CreateTenantRequest:
+      type: object
+      required: [name, admin]
+      properties:
+        name: { type: string }
+        admin:
+          allOf:
+            - type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string, minLength: 8 }
+            - $ref: '#/components/schemas/UserProfileFields'
+
+    UpdateTenantRequest:
+      type: object
+      properties:
+        name: { type: string }
+
+    Program:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        description: { type: string, nullable: true }
+        tenantId: { type: string, format: uuid }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    CreateProgramRequest:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        description: { type: string }
+
+    UpdateProgramRequest:
+      type: object
+      properties:
+        name: { type: string }
+        description: { type: string }
+
+    ProgramSummary:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+
+    Beneficiary:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        code:
+          type: string
+          example: BEN-2026-00001
+          description: Auto-generated on creation, unique per tenant.
+        name: { type: string }
+        telephone: { type: string, nullable: true }
+        gender: { $ref: '#/components/schemas/Gender' }
+        dateOfBirth: { type: string, format: date-time, nullable: true }
+        status: { $ref: '#/components/schemas/UserStatus' }
+        province: { type: string, nullable: true }
+        district: { type: string, nullable: true }
+        sector: { type: string, nullable: true }
+        nationalId: { type: string, nullable: true }
+        householdSize: { type: integer, nullable: true }
+        tenantId: { type: string, format: uuid }
+        programs:
+          type: array
+          items: { $ref: '#/components/schemas/ProgramSummary' }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    BeneficiaryFields:
+      type: object
+      properties:
+        name: { type: string }
+        telephone: { type: string }
+        province: { type: string }
+        district: { type: string }
+        sector: { type: string }
+        gender: { $ref: '#/components/schemas/Gender' }
+        dateOfBirth: { type: string, format: date }
+        status: { $ref: '#/components/schemas/UserStatus' }
+        nationalId: { type: string }
+        householdSize: { type: integer, minimum: 0 }
+        programIds:
+          type: array
+          items: { type: string, format: uuid }
+
+    CreateBeneficiaryRequest:
+      allOf:
+        - type: object
+          required: [name]
+        - $ref: '#/components/schemas/BeneficiaryFields'
+
+    UpdateBeneficiaryRequest:
+      $ref: '#/components/schemas/BeneficiaryFields'
+
+    AssignmentStatus:
+      type: string
+      enum: [ACTIVE, ENDED]
+
+    UserSummary:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string, nullable: true }
+        email: { type: string, format: email }
+
+    BeneficiarySummary:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        code: { type: string }
+        name: { type: string }
+
+    ProgramAssignment:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        status: { $ref: '#/components/schemas/AssignmentStatus' }
+        assignedAt: { type: string, format: date-time }
+        endedAt: { type: string, format: date-time, nullable: true }
+        userId: { type: string, format: uuid }
+        programId: { type: string, format: uuid }
+        tenantId: { type: string, format: uuid }
+        user: { $ref: '#/components/schemas/UserSummary' }
+        program: { $ref: '#/components/schemas/ProgramSummary' }
+
+    CreateProgramAssignmentRequest:
+      type: object
+      required: [userId, programId]
+      properties:
+        userId: { type: string, format: uuid }
+        programId: { type: string, format: uuid }
+
+    BeneficiaryAssignment:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        status: { $ref: '#/components/schemas/AssignmentStatus' }
+        assignedAt: { type: string, format: date-time }
+        endedAt: { type: string, format: date-time, nullable: true }
+        beneficiaryId: { type: string, format: uuid }
+        userId: { type: string, format: uuid }
+        tenantId: { type: string, format: uuid }
+        user: { $ref: '#/components/schemas/UserSummary' }
+        beneficiary: { $ref: '#/components/schemas/BeneficiarySummary' }
+
+    CreateBeneficiaryAssignmentRequest:
+      type: object
+      required: [beneficiaryId, userId]
+      properties:
+        beneficiaryId: { type: string, format: uuid }
+        userId: { type: string, format: uuid }
+
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or revoked authentication token
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiResponse' }
+    Forbidden:
+      description: Authenticated but not permitted to perform this action
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiResponse' }
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiResponse' }
+    ValidationError:
+      description: Request body failed validation
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiResponse' }
+
+security:
+  - bearerAuth: []
+  - cookieAuth: []
+
+paths:
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Log in and receive a JWT
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/LoginRequest' }
+      responses:
+        '200':
+          description: Login successful — token returned in body and set as an httpOnly cookie
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Log out and revoke the current token
+      responses:
+        '200':
+          description: Logout successful
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Get the currently authenticated user
+      responses:
+        '200':
+          description: Current user
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /users:
+    get:
+      tags: [Users]
+      summary: List users in the caller's tenant
+      responses:
+        '200':
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Users]
+      summary: Create a user in the caller's tenant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateUserRequest' }
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+
+  /users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, format: uuid }
+    get:
+      tags: [Users]
+      summary: Get a user by id (scoped to caller's tenant)
+      responses:
+        '200':
+          description: User retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      tags: [Users]
+      summary: Update a user (scoped to caller's tenant)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateUserRequest' }
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+    delete:
+      tags: [Users]
+      summary: Delete a user (scoped to caller's tenant)
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /roles:
+    get:
+      tags: [Roles]
+      summary: List roles in the caller's tenant
+      responses:
+        '200':
+          description: Roles retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Roles]
+      summary: Create a role in the caller's tenant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateRoleRequest' }
+      responses:
+        '201':
+          description: Role created successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+
+  /roles/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, format: uuid }
+    get:
+      tags: [Roles]
+      summary: Get a role by id (scoped to caller's tenant)
+      responses:
+        '200':
+          description: Role retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      tags: [Roles]
+      summary: Update a role (scoped to caller's tenant)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateRoleRequest' }
+      responses:
+        '200':
+          description: Role updated successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+    delete:
+      tags: [Roles]
+      summary: Delete a role (scoped to caller's tenant)
+      responses:
+        '200':
+          description: Role deleted successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /tenants:
+    get:
+      tags: [Tenants]
+      summary: List all tenants (platform admin only)
+      responses:
+        '200':
+          description: Tenants retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    post:
+      tags: [Tenants]
+      summary: Create a tenant and its first admin user (platform admin only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateTenantRequest' }
+      responses:
+        '201':
+          description: Tenant created successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+
+  /tenants/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, format: uuid }
+    get:
+      tags: [Tenants]
+      summary: Get a tenant by id (platform admin only)
+      responses:
+        '200':
+          description: Tenant retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      tags: [Tenants]
+      summary: Update a tenant (platform admin only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateTenantRequest' }
+      responses:
+        '200':
+          description: Tenant updated successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    delete:
+      tags: [Tenants]
+      summary: Delete a tenant (platform admin only)
+      responses:
+        '200':
+          description: Tenant deleted successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /programs:
+    get:
+      tags: [Programs]
+      summary: List programs in the caller's tenant
+      responses:
+        '200':
+          description: Programs retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Programs]
+      summary: Create a program in the caller's tenant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateProgramRequest' }
+      responses:
+        '201':
+          description: Program created successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+
+  /programs/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, format: uuid }
+    get:
+      tags: [Programs]
+      summary: Get a program by id (scoped to caller's tenant)
+      responses:
+        '200':
+          description: Program retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      tags: [Programs]
+      summary: Update a program (scoped to caller's tenant)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateProgramRequest' }
+      responses:
+        '200':
+          description: Program updated successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+    delete:
+      tags: [Programs]
+      summary: Delete a program (scoped to caller's tenant)
+      responses:
+        '200':
+          description: Program deleted successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /beneficiaries:
+    get:
+      tags: [Beneficiaries]
+      summary: List beneficiaries in the caller's tenant
+      responses:
+        '200':
+          description: Beneficiaries retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Beneficiaries]
+      summary: Create a beneficiary in the caller's tenant (code is auto-generated)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateBeneficiaryRequest' }
+      responses:
+        '201':
+          description: Beneficiary created successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+
+  /beneficiaries/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, format: uuid }
+    get:
+      tags: [Beneficiaries]
+      summary: Get a beneficiary by id (scoped to caller's tenant)
+      responses:
+        '200':
+          description: Beneficiary retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      tags: [Beneficiaries]
+      summary: Update a beneficiary (scoped to caller's tenant)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateBeneficiaryRequest' }
+      responses:
+        '200':
+          description: Beneficiary updated successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+    delete:
+      tags: [Beneficiaries]
+      summary: Delete a beneficiary (scoped to caller's tenant)
+      responses:
+        '200':
+          description: Beneficiary deleted successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /program-assignments:
+    get:
+      tags: [Program Assignments]
+      summary: List program assignments in the caller's tenant
+      parameters:
+        - name: userId
+          in: query
+          schema: { type: string, format: uuid }
+        - name: programId
+          in: query
+          schema: { type: string, format: uuid }
+        - name: status
+          in: query
+          schema: { $ref: '#/components/schemas/AssignmentStatus' }
+      responses:
+        '200':
+          description: Program assignments retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Program Assignments]
+      summary: Assign a user to a program
+      description: Multiple users can be actively assigned to the same program at once (team assignment). Assigning the same user to the same program twice while an active assignment exists returns 409.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateProgramAssignmentRequest' }
+      responses:
+        '201':
+          description: Program assignment created successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '409':
+          description: This user is already actively assigned to this program
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+
+  /program-assignments/{id}/end:
+    post:
+      tags: [Program Assignments]
+      summary: End an active program assignment (preserves history, sets status to ENDED)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Program assignment ended successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /program-assignments/{id}:
+    delete:
+      tags: [Program Assignments]
+      summary: Permanently delete a program assignment record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Program assignment deleted successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /beneficiary-assignments:
+    get:
+      tags: [Beneficiary Assignments]
+      summary: List beneficiary assignments in the caller's tenant
+      parameters:
+        - name: userId
+          in: query
+          schema: { type: string, format: uuid }
+        - name: beneficiaryId
+          in: query
+          schema: { type: string, format: uuid }
+        - name: status
+          in: query
+          schema: { $ref: '#/components/schemas/AssignmentStatus' }
+      responses:
+        '200':
+          description: Beneficiary assignments retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Beneficiary Assignments]
+      summary: Assign a beneficiary to a user
+      description: Multiple users can be actively assigned to the same beneficiary at once (team assignment). Assigning the same pair twice while an active assignment exists returns 409.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateBeneficiaryAssignmentRequest' }
+      responses:
+        '201':
+          description: Beneficiary assignment created successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '409':
+          description: This beneficiary is already actively assigned to this user
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+
+  /beneficiary-assignments/{id}/end:
+    post:
+      tags: [Beneficiary Assignments]
+      summary: End an active beneficiary assignment (preserves history, sets status to ENDED)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Beneficiary assignment ended successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /beneficiary-assignments/{id}:
+    delete:
+      tags: [Beneficiary Assignments]
+      summary: Permanently delete a beneficiary assignment record
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Beneficiary assignment deleted successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
