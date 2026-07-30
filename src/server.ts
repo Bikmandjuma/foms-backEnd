@@ -4,15 +4,14 @@ import { createApp } from "./app.js";
 import { initSocket } from "./realtime/socket.js";
 import { prisma } from "./utils/prisma.js";
 
-const PORT = Number(process.env.PORT) || 4000;
-
+const port = process.env.PORT ?? 4000;
 const app = createApp();
 const httpServer = createServer(app);
 initSocket(httpServer);
 
-const server = httpServer.listen(PORT, "0.0.0.0", () => {
-  console.log(`Field Operation MS backend listening on port ${PORT}`);
-  console.log("Socket.io presence/notifications live on the same port");
+const server = httpServer.listen(port, () => {
+  console.log(`Field Operation MS backend listening on port ${port}`);
+  console.log(`Socket.io presence/notifications live on the same port`);
 });
 
 async function shutdown(): Promise<void> {
