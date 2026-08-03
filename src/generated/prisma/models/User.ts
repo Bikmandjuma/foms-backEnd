@@ -45,6 +45,8 @@ export type UserMinAggregateOutputType = {
   province: string | null
   district: string | null
   sector: string | null
+  cell: string | null
+  village: string | null
   gender: $Enums.Gender | null
   dateOfBirth: Date | null
   status: $Enums.UserStatus | null
@@ -67,6 +69,8 @@ export type UserMaxAggregateOutputType = {
   province: string | null
   district: string | null
   sector: string | null
+  cell: string | null
+  village: string | null
   gender: $Enums.Gender | null
   dateOfBirth: Date | null
   status: $Enums.UserStatus | null
@@ -89,6 +93,8 @@ export type UserCountAggregateOutputType = {
   province: number
   district: number
   sector: number
+  cell: number
+  village: number
   gender: number
   dateOfBirth: number
   status: number
@@ -121,6 +127,8 @@ export type UserMinAggregateInputType = {
   province?: true
   district?: true
   sector?: true
+  cell?: true
+  village?: true
   gender?: true
   dateOfBirth?: true
   status?: true
@@ -143,6 +151,8 @@ export type UserMaxAggregateInputType = {
   province?: true
   district?: true
   sector?: true
+  cell?: true
+  village?: true
   gender?: true
   dateOfBirth?: true
   status?: true
@@ -165,6 +175,8 @@ export type UserCountAggregateInputType = {
   province?: true
   district?: true
   sector?: true
+  cell?: true
+  village?: true
   gender?: true
   dateOfBirth?: true
   status?: true
@@ -274,6 +286,8 @@ export type UserGroupByOutputType = {
   province: string | null
   district: string | null
   sector: string | null
+  cell: string | null
+  village: string | null
   gender: $Enums.Gender | null
   dateOfBirth: Date | null
   status: $Enums.UserStatus
@@ -319,6 +333,8 @@ export type UserWhereInput = {
   province?: Prisma.StringNullableFilter<"User"> | string | null
   district?: Prisma.StringNullableFilter<"User"> | string | null
   sector?: Prisma.StringNullableFilter<"User"> | string | null
+  cell?: Prisma.StringNullableFilter<"User"> | string | null
+  village?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
   dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
@@ -350,6 +366,8 @@ export type UserOrderByWithRelationInput = {
   province?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   sector?: Prisma.SortOrderInput | Prisma.SortOrder
+  cell?: Prisma.SortOrderInput | Prisma.SortOrder
+  village?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -385,6 +403,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   province?: Prisma.StringNullableFilter<"User"> | string | null
   district?: Prisma.StringNullableFilter<"User"> | string | null
   sector?: Prisma.StringNullableFilter<"User"> | string | null
+  cell?: Prisma.StringNullableFilter<"User"> | string | null
+  village?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
   dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
@@ -416,6 +436,8 @@ export type UserOrderByWithAggregationInput = {
   province?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   sector?: Prisma.SortOrderInput | Prisma.SortOrder
+  cell?: Prisma.SortOrderInput | Prisma.SortOrder
+  village?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -446,6 +468,8 @@ export type UserScalarWhereWithAggregatesInput = {
   province?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   district?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   sector?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  cell?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  village?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   gender?: Prisma.EnumGenderNullableWithAggregatesFilter<"User"> | $Enums.Gender | null
   dateOfBirth?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
@@ -468,6 +492,8 @@ export type UserCreateInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -497,6 +523,8 @@ export type UserUncheckedCreateInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -526,6 +554,8 @@ export type UserUpdateInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -555,6 +585,8 @@ export type UserUncheckedUpdateInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -584,6 +616,8 @@ export type UserCreateManyInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -606,6 +640,8 @@ export type UserUpdateManyMutationInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -626,6 +662,8 @@ export type UserUncheckedUpdateManyInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -669,6 +707,8 @@ export type UserCountOrderByAggregateInput = {
   province?: Prisma.SortOrder
   district?: Prisma.SortOrder
   sector?: Prisma.SortOrder
+  cell?: Prisma.SortOrder
+  village?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -695,6 +735,8 @@ export type UserMaxOrderByAggregateInput = {
   province?: Prisma.SortOrder
   district?: Prisma.SortOrder
   sector?: Prisma.SortOrder
+  cell?: Prisma.SortOrder
+  village?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -717,6 +759,8 @@ export type UserMinOrderByAggregateInput = {
   province?: Prisma.SortOrder
   district?: Prisma.SortOrder
   sector?: Prisma.SortOrder
+  cell?: Prisma.SortOrder
+  village?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -958,6 +1002,8 @@ export type UserCreateWithoutNotificationsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -986,6 +1032,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1030,6 +1078,8 @@ export type UserUpdateWithoutNotificationsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1058,6 +1108,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1086,6 +1138,8 @@ export type UserCreateWithoutTenantInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1114,6 +1168,8 @@ export type UserUncheckedCreateWithoutTenantInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1171,6 +1227,8 @@ export type UserScalarWhereInput = {
   province?: Prisma.StringNullableFilter<"User"> | string | null
   district?: Prisma.StringNullableFilter<"User"> | string | null
   sector?: Prisma.StringNullableFilter<"User"> | string | null
+  cell?: Prisma.StringNullableFilter<"User"> | string | null
+  village?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
   dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
@@ -1193,6 +1251,8 @@ export type UserCreateWithoutRoleInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1221,6 +1281,8 @@ export type UserUncheckedCreateWithoutRoleInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1275,6 +1337,8 @@ export type UserCreateWithoutProgramAssignmentsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1303,6 +1367,8 @@ export type UserUncheckedCreateWithoutProgramAssignmentsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1347,6 +1413,8 @@ export type UserUpdateWithoutProgramAssignmentsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1375,6 +1443,8 @@ export type UserUncheckedUpdateWithoutProgramAssignmentsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1403,6 +1473,8 @@ export type UserCreateWithoutBeneficiaryAssignmentsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1431,6 +1503,8 @@ export type UserUncheckedCreateWithoutBeneficiaryAssignmentsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1475,6 +1549,8 @@ export type UserUpdateWithoutBeneficiaryAssignmentsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1503,6 +1579,8 @@ export type UserUncheckedUpdateWithoutBeneficiaryAssignmentsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1531,6 +1609,8 @@ export type UserCreateWithoutReplacementRequestsMadeInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1559,6 +1639,8 @@ export type UserUncheckedCreateWithoutReplacementRequestsMadeInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1592,6 +1674,8 @@ export type UserCreateWithoutReplacementRequestsDecidedInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1620,6 +1704,8 @@ export type UserUncheckedCreateWithoutReplacementRequestsDecidedInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1664,6 +1750,8 @@ export type UserUpdateWithoutReplacementRequestsMadeInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1692,6 +1780,8 @@ export type UserUncheckedUpdateWithoutReplacementRequestsMadeInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1731,6 +1821,8 @@ export type UserUpdateWithoutReplacementRequestsDecidedInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1759,6 +1851,8 @@ export type UserUncheckedUpdateWithoutReplacementRequestsDecidedInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1787,6 +1881,8 @@ export type UserCreateWithoutFieldCheckInsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1815,6 +1911,8 @@ export type UserUncheckedCreateWithoutFieldCheckInsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1859,6 +1957,8 @@ export type UserUpdateWithoutFieldCheckInsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1887,6 +1987,8 @@ export type UserUncheckedUpdateWithoutFieldCheckInsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1915,6 +2017,8 @@ export type UserCreateWithoutActivityLogsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1943,6 +2047,8 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1987,6 +2093,8 @@ export type UserUpdateWithoutActivityLogsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2015,6 +2123,8 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2043,6 +2153,8 @@ export type UserCreateManyTenantInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -2064,6 +2176,8 @@ export type UserUpdateWithoutTenantInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2092,6 +2206,8 @@ export type UserUncheckedUpdateWithoutTenantInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2120,6 +2236,8 @@ export type UserUncheckedUpdateManyWithoutTenantInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2141,6 +2259,8 @@ export type UserCreateManyRoleInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
+  cell?: string | null
+  village?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -2162,6 +2282,8 @@ export type UserUpdateWithoutRoleInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2190,6 +2312,8 @@ export type UserUncheckedUpdateWithoutRoleInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2218,6 +2342,8 @@ export type UserUncheckedUpdateManyWithoutRoleInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2324,6 +2450,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   province?: boolean
   district?: boolean
   sector?: boolean
+  cell?: boolean
+  village?: boolean
   gender?: boolean
   dateOfBirth?: boolean
   status?: boolean
@@ -2358,6 +2486,8 @@ export type UserSelectScalar = {
   province?: boolean
   district?: boolean
   sector?: boolean
+  cell?: boolean
+  village?: boolean
   gender?: boolean
   dateOfBirth?: boolean
   status?: boolean
@@ -2369,7 +2499,7 @@ export type UserSelectScalar = {
   tenantId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "createdAt" | "updatedAt" | "telephone" | "province" | "district" | "sector" | "gender" | "dateOfBirth" | "status" | "educationLevel" | "isPlatformAdmin" | "tokenVersion" | "lastSeenAt" | "roleId" | "tenantId", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "createdAt" | "updatedAt" | "telephone" | "province" | "district" | "sector" | "cell" | "village" | "gender" | "dateOfBirth" | "status" | "educationLevel" | "isPlatformAdmin" | "tokenVersion" | "lastSeenAt" | "roleId" | "tenantId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   role?: boolean | Prisma.User$roleArgs<ExtArgs>
   tenant?: boolean | Prisma.User$tenantArgs<ExtArgs>
@@ -2407,6 +2537,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     province: string | null
     district: string | null
     sector: string | null
+    cell: string | null
+    village: string | null
     gender: $Enums.Gender | null
     dateOfBirth: Date | null
     status: $Enums.UserStatus
@@ -2804,6 +2936,8 @@ export interface UserFieldRefs {
   readonly province: Prisma.FieldRef<"User", 'String'>
   readonly district: Prisma.FieldRef<"User", 'String'>
   readonly sector: Prisma.FieldRef<"User", 'String'>
+  readonly cell: Prisma.FieldRef<"User", 'String'>
+  readonly village: Prisma.FieldRef<"User", 'String'>
   readonly gender: Prisma.FieldRef<"User", 'Gender'>
   readonly dateOfBirth: Prisma.FieldRef<"User", 'DateTime'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>

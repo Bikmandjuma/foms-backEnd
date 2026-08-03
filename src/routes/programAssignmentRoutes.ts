@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  bulkCreateProgramAssignments,
   createProgramAssignment,
   deleteProgramAssignment,
   endProgramAssignment,
@@ -14,8 +15,9 @@ const router = Router();
 router.use(authenticate);
 
 router.get("/", requirePermission("assignments:view"), asyncHandler(listProgramAssignments));
-router.post("/", requirePermission("assignments:manage"), asyncHandler(createProgramAssignment));
-router.post("/:id/end", requirePermission("assignments:manage"), asyncHandler(endProgramAssignment));
-router.delete("/:id", requirePermission("assignments:manage"), asyncHandler(deleteProgramAssignment));
+router.post("/", requirePermission("assignments:create"), asyncHandler(createProgramAssignment));
+router.post("/bulk", requirePermission("assignments:create"), asyncHandler(bulkCreateProgramAssignments));
+router.post("/:id/end", requirePermission("assignments:edit"), asyncHandler(endProgramAssignment));
+router.delete("/:id", requirePermission("assignments:delete"), asyncHandler(deleteProgramAssignment));
 
 export default router;

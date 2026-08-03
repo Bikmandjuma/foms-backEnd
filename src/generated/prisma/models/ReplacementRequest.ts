@@ -30,6 +30,8 @@ export type ReplacementRequestMinAggregateOutputType = {
   status: $Enums.ReplacementStatus | null
   createdAt: Date | null
   decidedAt: Date | null
+  matchLevel: $Enums.GeoMatchLevel | null
+  overrideReason: string | null
   tenantId: string | null
   originalRespondentId: string | null
   candidateRespondentId: string | null
@@ -43,6 +45,8 @@ export type ReplacementRequestMaxAggregateOutputType = {
   status: $Enums.ReplacementStatus | null
   createdAt: Date | null
   decidedAt: Date | null
+  matchLevel: $Enums.GeoMatchLevel | null
+  overrideReason: string | null
   tenantId: string | null
   originalRespondentId: string | null
   candidateRespondentId: string | null
@@ -56,6 +60,8 @@ export type ReplacementRequestCountAggregateOutputType = {
   status: number
   createdAt: number
   decidedAt: number
+  matchLevel: number
+  overrideReason: number
   tenantId: number
   originalRespondentId: number
   candidateRespondentId: number
@@ -71,6 +77,8 @@ export type ReplacementRequestMinAggregateInputType = {
   status?: true
   createdAt?: true
   decidedAt?: true
+  matchLevel?: true
+  overrideReason?: true
   tenantId?: true
   originalRespondentId?: true
   candidateRespondentId?: true
@@ -84,6 +92,8 @@ export type ReplacementRequestMaxAggregateInputType = {
   status?: true
   createdAt?: true
   decidedAt?: true
+  matchLevel?: true
+  overrideReason?: true
   tenantId?: true
   originalRespondentId?: true
   candidateRespondentId?: true
@@ -97,6 +107,8 @@ export type ReplacementRequestCountAggregateInputType = {
   status?: true
   createdAt?: true
   decidedAt?: true
+  matchLevel?: true
+  overrideReason?: true
   tenantId?: true
   originalRespondentId?: true
   candidateRespondentId?: true
@@ -183,6 +195,8 @@ export type ReplacementRequestGroupByOutputType = {
   status: $Enums.ReplacementStatus
   createdAt: Date
   decidedAt: Date | null
+  matchLevel: $Enums.GeoMatchLevel | null
+  overrideReason: string | null
   tenantId: string
   originalRespondentId: string
   candidateRespondentId: string | null
@@ -217,6 +231,8 @@ export type ReplacementRequestWhereInput = {
   status?: Prisma.EnumReplacementStatusFilter<"ReplacementRequest"> | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFilter<"ReplacementRequest"> | Date | string
   decidedAt?: Prisma.DateTimeNullableFilter<"ReplacementRequest"> | Date | string | null
+  matchLevel?: Prisma.EnumGeoMatchLevelNullableFilter<"ReplacementRequest"> | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.StringNullableFilter<"ReplacementRequest"> | string | null
   tenantId?: Prisma.StringFilter<"ReplacementRequest"> | string
   originalRespondentId?: Prisma.StringFilter<"ReplacementRequest"> | string
   candidateRespondentId?: Prisma.StringNullableFilter<"ReplacementRequest"> | string | null
@@ -235,6 +251,8 @@ export type ReplacementRequestOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  matchLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  overrideReason?: Prisma.SortOrderInput | Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   originalRespondentId?: Prisma.SortOrder
   candidateRespondentId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -257,6 +275,8 @@ export type ReplacementRequestWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumReplacementStatusFilter<"ReplacementRequest"> | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFilter<"ReplacementRequest"> | Date | string
   decidedAt?: Prisma.DateTimeNullableFilter<"ReplacementRequest"> | Date | string | null
+  matchLevel?: Prisma.EnumGeoMatchLevelNullableFilter<"ReplacementRequest"> | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.StringNullableFilter<"ReplacementRequest"> | string | null
   tenantId?: Prisma.StringFilter<"ReplacementRequest"> | string
   originalRespondentId?: Prisma.StringFilter<"ReplacementRequest"> | string
   candidateRespondentId?: Prisma.StringNullableFilter<"ReplacementRequest"> | string | null
@@ -275,6 +295,8 @@ export type ReplacementRequestOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  matchLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  overrideReason?: Prisma.SortOrderInput | Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   originalRespondentId?: Prisma.SortOrder
   candidateRespondentId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -294,6 +316,8 @@ export type ReplacementRequestScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumReplacementStatusWithAggregatesFilter<"ReplacementRequest"> | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ReplacementRequest"> | Date | string
   decidedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ReplacementRequest"> | Date | string | null
+  matchLevel?: Prisma.EnumGeoMatchLevelNullableWithAggregatesFilter<"ReplacementRequest"> | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.StringNullableWithAggregatesFilter<"ReplacementRequest"> | string | null
   tenantId?: Prisma.StringWithAggregatesFilter<"ReplacementRequest"> | string
   originalRespondentId?: Prisma.StringWithAggregatesFilter<"ReplacementRequest"> | string
   candidateRespondentId?: Prisma.StringNullableWithAggregatesFilter<"ReplacementRequest"> | string | null
@@ -307,6 +331,8 @@ export type ReplacementRequestCreateInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutReplacementRequestsInput
   originalRespondent: Prisma.BeneficiaryCreateNestedOneWithoutOriginalReplacementRequestsInput
   candidateRespondent?: Prisma.BeneficiaryCreateNestedOneWithoutCandidateReplacementRequestsInput
@@ -320,6 +346,8 @@ export type ReplacementRequestUncheckedCreateInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   originalRespondentId: string
   candidateRespondentId?: string | null
@@ -333,6 +361,8 @@ export type ReplacementRequestUpdateInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutReplacementRequestsNestedInput
   originalRespondent?: Prisma.BeneficiaryUpdateOneRequiredWithoutOriginalReplacementRequestsNestedInput
   candidateRespondent?: Prisma.BeneficiaryUpdateOneWithoutCandidateReplacementRequestsNestedInput
@@ -346,6 +376,8 @@ export type ReplacementRequestUncheckedUpdateInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -359,6 +391,8 @@ export type ReplacementRequestCreateManyInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   originalRespondentId: string
   candidateRespondentId?: string | null
@@ -372,6 +406,8 @@ export type ReplacementRequestUpdateManyMutationInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReplacementRequestUncheckedUpdateManyInput = {
@@ -380,6 +416,8 @@ export type ReplacementRequestUncheckedUpdateManyInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -409,6 +447,8 @@ export type ReplacementRequestCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
+  matchLevel?: Prisma.SortOrder
+  overrideReason?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   originalRespondentId?: Prisma.SortOrder
   candidateRespondentId?: Prisma.SortOrder
@@ -422,6 +462,8 @@ export type ReplacementRequestMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
+  matchLevel?: Prisma.SortOrder
+  overrideReason?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   originalRespondentId?: Prisma.SortOrder
   candidateRespondentId?: Prisma.SortOrder
@@ -435,6 +477,8 @@ export type ReplacementRequestMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
+  matchLevel?: Prisma.SortOrder
+  overrideReason?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   originalRespondentId?: Prisma.SortOrder
   candidateRespondentId?: Prisma.SortOrder
@@ -656,12 +700,18 @@ export type EnumReplacementStatusFieldUpdateOperationsInput = {
   set?: $Enums.ReplacementStatus
 }
 
+export type NullableEnumGeoMatchLevelFieldUpdateOperationsInput = {
+  set?: $Enums.GeoMatchLevel | null
+}
+
 export type ReplacementRequestCreateWithoutTenantInput = {
   id?: string
   reason: string
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   originalRespondent: Prisma.BeneficiaryCreateNestedOneWithoutOriginalReplacementRequestsInput
   candidateRespondent?: Prisma.BeneficiaryCreateNestedOneWithoutCandidateReplacementRequestsInput
   requestedBy: Prisma.UserCreateNestedOneWithoutReplacementRequestsMadeInput
@@ -674,6 +724,8 @@ export type ReplacementRequestUncheckedCreateWithoutTenantInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   originalRespondentId: string
   candidateRespondentId?: string | null
   requestedByUserId: string
@@ -715,6 +767,8 @@ export type ReplacementRequestScalarWhereInput = {
   status?: Prisma.EnumReplacementStatusFilter<"ReplacementRequest"> | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFilter<"ReplacementRequest"> | Date | string
   decidedAt?: Prisma.DateTimeNullableFilter<"ReplacementRequest"> | Date | string | null
+  matchLevel?: Prisma.EnumGeoMatchLevelNullableFilter<"ReplacementRequest"> | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.StringNullableFilter<"ReplacementRequest"> | string | null
   tenantId?: Prisma.StringFilter<"ReplacementRequest"> | string
   originalRespondentId?: Prisma.StringFilter<"ReplacementRequest"> | string
   candidateRespondentId?: Prisma.StringNullableFilter<"ReplacementRequest"> | string | null
@@ -728,6 +782,8 @@ export type ReplacementRequestCreateWithoutRequestedByInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutReplacementRequestsInput
   originalRespondent: Prisma.BeneficiaryCreateNestedOneWithoutOriginalReplacementRequestsInput
   candidateRespondent?: Prisma.BeneficiaryCreateNestedOneWithoutCandidateReplacementRequestsInput
@@ -740,6 +796,8 @@ export type ReplacementRequestUncheckedCreateWithoutRequestedByInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   originalRespondentId: string
   candidateRespondentId?: string | null
@@ -762,6 +820,8 @@ export type ReplacementRequestCreateWithoutDecidedByInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutReplacementRequestsInput
   originalRespondent: Prisma.BeneficiaryCreateNestedOneWithoutOriginalReplacementRequestsInput
   candidateRespondent?: Prisma.BeneficiaryCreateNestedOneWithoutCandidateReplacementRequestsInput
@@ -774,6 +834,8 @@ export type ReplacementRequestUncheckedCreateWithoutDecidedByInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   originalRespondentId: string
   candidateRespondentId?: string | null
@@ -828,6 +890,8 @@ export type ReplacementRequestCreateWithoutOriginalRespondentInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutReplacementRequestsInput
   candidateRespondent?: Prisma.BeneficiaryCreateNestedOneWithoutCandidateReplacementRequestsInput
   requestedBy: Prisma.UserCreateNestedOneWithoutReplacementRequestsMadeInput
@@ -840,6 +904,8 @@ export type ReplacementRequestUncheckedCreateWithoutOriginalRespondentInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   candidateRespondentId?: string | null
   requestedByUserId: string
@@ -862,6 +928,8 @@ export type ReplacementRequestCreateWithoutCandidateRespondentInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutReplacementRequestsInput
   originalRespondent: Prisma.BeneficiaryCreateNestedOneWithoutOriginalReplacementRequestsInput
   requestedBy: Prisma.UserCreateNestedOneWithoutReplacementRequestsMadeInput
@@ -874,6 +942,8 @@ export type ReplacementRequestUncheckedCreateWithoutCandidateRespondentInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   originalRespondentId: string
   requestedByUserId: string
@@ -928,6 +998,8 @@ export type ReplacementRequestCreateManyTenantInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   originalRespondentId: string
   candidateRespondentId?: string | null
   requestedByUserId: string
@@ -940,6 +1012,8 @@ export type ReplacementRequestUpdateWithoutTenantInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalRespondent?: Prisma.BeneficiaryUpdateOneRequiredWithoutOriginalReplacementRequestsNestedInput
   candidateRespondent?: Prisma.BeneficiaryUpdateOneWithoutCandidateReplacementRequestsNestedInput
   requestedBy?: Prisma.UserUpdateOneRequiredWithoutReplacementRequestsMadeNestedInput
@@ -952,6 +1026,8 @@ export type ReplacementRequestUncheckedUpdateWithoutTenantInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestedByUserId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -964,6 +1040,8 @@ export type ReplacementRequestUncheckedUpdateManyWithoutTenantInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestedByUserId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -976,6 +1054,8 @@ export type ReplacementRequestCreateManyRequestedByInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   originalRespondentId: string
   candidateRespondentId?: string | null
@@ -988,6 +1068,8 @@ export type ReplacementRequestCreateManyDecidedByInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   originalRespondentId: string
   candidateRespondentId?: string | null
@@ -1000,6 +1082,8 @@ export type ReplacementRequestUpdateWithoutRequestedByInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutReplacementRequestsNestedInput
   originalRespondent?: Prisma.BeneficiaryUpdateOneRequiredWithoutOriginalReplacementRequestsNestedInput
   candidateRespondent?: Prisma.BeneficiaryUpdateOneWithoutCandidateReplacementRequestsNestedInput
@@ -1012,6 +1096,8 @@ export type ReplacementRequestUncheckedUpdateWithoutRequestedByInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1024,6 +1110,8 @@ export type ReplacementRequestUncheckedUpdateManyWithoutRequestedByInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1036,6 +1124,8 @@ export type ReplacementRequestUpdateWithoutDecidedByInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutReplacementRequestsNestedInput
   originalRespondent?: Prisma.BeneficiaryUpdateOneRequiredWithoutOriginalReplacementRequestsNestedInput
   candidateRespondent?: Prisma.BeneficiaryUpdateOneWithoutCandidateReplacementRequestsNestedInput
@@ -1048,6 +1138,8 @@ export type ReplacementRequestUncheckedUpdateWithoutDecidedByInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1060,6 +1152,8 @@ export type ReplacementRequestUncheckedUpdateManyWithoutDecidedByInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1072,6 +1166,8 @@ export type ReplacementRequestCreateManyOriginalRespondentInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   candidateRespondentId?: string | null
   requestedByUserId: string
@@ -1084,6 +1180,8 @@ export type ReplacementRequestCreateManyCandidateRespondentInput = {
   status?: $Enums.ReplacementStatus
   createdAt?: Date | string
   decidedAt?: Date | string | null
+  matchLevel?: $Enums.GeoMatchLevel | null
+  overrideReason?: string | null
   tenantId: string
   originalRespondentId: string
   requestedByUserId: string
@@ -1096,6 +1194,8 @@ export type ReplacementRequestUpdateWithoutOriginalRespondentInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutReplacementRequestsNestedInput
   candidateRespondent?: Prisma.BeneficiaryUpdateOneWithoutCandidateReplacementRequestsNestedInput
   requestedBy?: Prisma.UserUpdateOneRequiredWithoutReplacementRequestsMadeNestedInput
@@ -1108,6 +1208,8 @@ export type ReplacementRequestUncheckedUpdateWithoutOriginalRespondentInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestedByUserId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1120,6 +1222,8 @@ export type ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentInput 
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   candidateRespondentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestedByUserId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1132,6 +1236,8 @@ export type ReplacementRequestUpdateWithoutCandidateRespondentInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutReplacementRequestsNestedInput
   originalRespondent?: Prisma.BeneficiaryUpdateOneRequiredWithoutOriginalReplacementRequestsNestedInput
   requestedBy?: Prisma.UserUpdateOneRequiredWithoutReplacementRequestsMadeNestedInput
@@ -1144,6 +1250,8 @@ export type ReplacementRequestUncheckedUpdateWithoutCandidateRespondentInput = {
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   requestedByUserId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1156,6 +1264,8 @@ export type ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentInput
   status?: Prisma.EnumReplacementStatusFieldUpdateOperationsInput | $Enums.ReplacementStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  matchLevel?: Prisma.NullableEnumGeoMatchLevelFieldUpdateOperationsInput | $Enums.GeoMatchLevel | null
+  overrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRespondentId?: Prisma.StringFieldUpdateOperationsInput | string
   requestedByUserId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1170,6 +1280,8 @@ export type ReplacementRequestSelect<ExtArgs extends runtime.Types.Extensions.In
   status?: boolean
   createdAt?: boolean
   decidedAt?: boolean
+  matchLevel?: boolean
+  overrideReason?: boolean
   tenantId?: boolean
   originalRespondentId?: boolean
   candidateRespondentId?: boolean
@@ -1190,6 +1302,8 @@ export type ReplacementRequestSelectScalar = {
   status?: boolean
   createdAt?: boolean
   decidedAt?: boolean
+  matchLevel?: boolean
+  overrideReason?: boolean
   tenantId?: boolean
   originalRespondentId?: boolean
   candidateRespondentId?: boolean
@@ -1197,7 +1311,7 @@ export type ReplacementRequestSelectScalar = {
   decidedByUserId?: boolean
 }
 
-export type ReplacementRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reason" | "status" | "createdAt" | "decidedAt" | "tenantId" | "originalRespondentId" | "candidateRespondentId" | "requestedByUserId" | "decidedByUserId", ExtArgs["result"]["replacementRequest"]>
+export type ReplacementRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reason" | "status" | "createdAt" | "decidedAt" | "matchLevel" | "overrideReason" | "tenantId" | "originalRespondentId" | "candidateRespondentId" | "requestedByUserId" | "decidedByUserId", ExtArgs["result"]["replacementRequest"]>
 export type ReplacementRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   originalRespondent?: boolean | Prisma.BeneficiaryDefaultArgs<ExtArgs>
@@ -1221,6 +1335,8 @@ export type $ReplacementRequestPayload<ExtArgs extends runtime.Types.Extensions.
     status: $Enums.ReplacementStatus
     createdAt: Date
     decidedAt: Date | null
+    matchLevel: $Enums.GeoMatchLevel | null
+    overrideReason: string | null
     tenantId: string
     originalRespondentId: string
     candidateRespondentId: string | null
@@ -1605,6 +1721,8 @@ export interface ReplacementRequestFieldRefs {
   readonly status: Prisma.FieldRef<"ReplacementRequest", 'ReplacementStatus'>
   readonly createdAt: Prisma.FieldRef<"ReplacementRequest", 'DateTime'>
   readonly decidedAt: Prisma.FieldRef<"ReplacementRequest", 'DateTime'>
+  readonly matchLevel: Prisma.FieldRef<"ReplacementRequest", 'GeoMatchLevel'>
+  readonly overrideReason: Prisma.FieldRef<"ReplacementRequest", 'String'>
   readonly tenantId: Prisma.FieldRef<"ReplacementRequest", 'String'>
   readonly originalRespondentId: Prisma.FieldRef<"ReplacementRequest", 'String'>
   readonly candidateRespondentId: Prisma.FieldRef<"ReplacementRequest", 'String'>

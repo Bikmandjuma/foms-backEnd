@@ -82,6 +82,11 @@ export type ProgramAssignment = Prisma.ProgramAssignmentModel
  */
 export type BeneficiaryAssignment = Prisma.BeneficiaryAssignmentModel
 /**
+ * Model Vehicle
+ * 
+ */
+export type Vehicle = Prisma.VehicleModel
+/**
  * Model ReplacementRequest
  * 
  */
@@ -91,6 +96,16 @@ export type ReplacementRequest = Prisma.ReplacementRequestModel
  * 
  */
 export type FieldCheckIn = Prisma.FieldCheckInModel
+/**
+ * Model FieldVisit
+ * 
+ */
+export type FieldVisit = Prisma.FieldVisitModel
+/**
+ * Model FieldNote
+ * 
+ */
+export type FieldNote = Prisma.FieldNoteModel
 /**
  * Model ActivityLog
  * 

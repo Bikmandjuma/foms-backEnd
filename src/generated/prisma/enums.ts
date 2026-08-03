@@ -91,6 +91,46 @@ export const ReplacementStatus = {
 export type ReplacementStatus = (typeof ReplacementStatus)[keyof typeof ReplacementStatus]
 
 
+export const GeoMatchLevel = {
+  VILLAGE: 'VILLAGE',
+  CELL: 'CELL',
+  SECTOR: 'SECTOR',
+  DISTRICT: 'DISTRICT',
+  PROVINCE: 'PROVINCE',
+  OVERRIDE: 'OVERRIDE'
+} as const
+
+export type GeoMatchLevel = (typeof GeoMatchLevel)[keyof typeof GeoMatchLevel]
+
+
+export const AssignmentStrategy = {
+  EVEN: 'EVEN',
+  DAILY_TARGET: 'DAILY_TARGET',
+  RANDOM: 'RANDOM'
+} as const
+
+export type AssignmentStrategy = (typeof AssignmentStrategy)[keyof typeof AssignmentStrategy]
+
+
+export const VehicleType = {
+  VEHICLE: 'VEHICLE',
+  MOTORCYCLE: 'MOTORCYCLE'
+} as const
+
+export type VehicleType = (typeof VehicleType)[keyof typeof VehicleType]
+
+
+export const TransportMode = {
+  NONE: 'NONE',
+  VEHICLE: 'VEHICLE',
+  MOTORCYCLE: 'MOTORCYCLE',
+  WALKING: 'WALKING',
+  PUBLIC_TRANSPORT: 'PUBLIC_TRANSPORT'
+} as const
+
+export type TransportMode = (typeof TransportMode)[keyof typeof TransportMode]
+
+
 export const NotificationType = {
   ASSIGNMENT_PROGRAM: 'ASSIGNMENT_PROGRAM',
   ASSIGNMENT_BENEFICIARY: 'ASSIGNMENT_BENEFICIARY',

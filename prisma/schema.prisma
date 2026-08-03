@@ -67,6 +67,43 @@ enum ReplacementStatus {
   REJECTED
 }
 
+// How closely a replacement candidate matches the original respondent's
+// location. Computed automatically by comparing village → cell → sector →
+// district → province in priority order. OVERRIDE means an approver picked
+// a candidate outside this hierarchy and had to record why.
+enum GeoMatchLevel {
+  VILLAGE
+  CELL
+  SECTOR
+  DISTRICT
+  PROVINCE
+  OVERRIDE
+}
+
+// Assignment strategy used by the smart assignment engine (PRD FR-6).
+enum AssignmentStrategy {
+  EVEN
+  DAILY_TARGET
+  RANDOM
+}
+
+enum VehicleType {
+  VEHICLE
+  MOTORCYCLE
+}
+
+// Mirrors the field-ops PRD's transport picker: "Transport — None / Vehicle
+// / Motorcycle / Walking / Public Transport". Only VEHICLE and MOTORCYCLE
+// involve an actual Vehicle record; the other three are just a label on the
+// assignment for reporting.
+enum TransportMode {
+  NONE
+  VEHICLE
+  MOTORCYCLE
+  WALKING
+  PUBLIC_TRANSPORT
+}
+
 enum NotificationType {
   ASSIGNMENT_PROGRAM
   ASSIGNMENT_BENEFICIARY
@@ -111,6 +148,7 @@ model Tenant {
   fieldCheckIns          FieldCheckIn[]
   activityLogs           ActivityLog[]
   notifications          Notification[]
+  vehicles               Vehicle[]
 }
 
 model Role {
@@ -143,6 +181,8 @@ model User {
   province       String?
   district       String?
   sector         String?
+  cell           String?
+  village        String?
   gender         Gender?
   dateOfBirth    DateTime?
   status         UserStatus      @default(ACTIVE)
@@ -212,6 +252,8 @@ model Beneficiary {
   province String?
   district String?
   sector   String?
+  cell     String?
+  village  String?
 
   nationalId    String?
   householdSize Int?
@@ -229,6 +271,7 @@ model Beneficiary {
 
   programs    Program[]
   assignments BeneficiaryAssignment[]
+  fieldVisits FieldVisit[]
 
   originalReplacementRequests  ReplacementRequest[] @relation("OriginalRespondent")
   candidateReplacementRequests ReplacementRequest[] @relation("CandidateRespondent")
@@ -271,6 +314,34 @@ model BeneficiaryAssignment {
 
   tenantId String
   tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  // Set only when the smart assignment engine ran with a transport mode
+  // selected — vehicle assignment is optional logistics layered on top of
+  // the core enumerator-only engine, never a requirement (PRD: "the vehicle
+  // is just in case, but where there isn't [one], ... the vehicle should be
+  // optional, not a requirement").
+  transportMode TransportMode?
+  vehicleId     String?
+  vehicle       Vehicle?       @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+}
+
+// A vehicle (or motorcycle) is itself an assignment resource: it has a name/
+// plate, a driver, and a daily carrying capacity that the smart assignment
+// engine respects when it's opted into a run.
+model Vehicle {
+  id             String      @id @default(uuid())
+  name           String
+  type           VehicleType @default(VEHICLE)
+  driverName     String?
+  capacityPerDay Int?
+  active         Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  assignments BeneficiaryAssignment[]
 }
 
 // PRD FR-7 — the replacement engine. An enumerator can never pick their own
@@ -283,6 +354,13 @@ model ReplacementRequest {
   status    ReplacementStatus @default(PENDING)
   createdAt DateTime          @default(now())
   decidedAt DateTime?
+
+  // Computed at decide-time by comparing the original respondent's and the
+  // candidate's village/cell/sector/district/province. OVERRIDE requires
+  // overrideReason to be set — an approver picking a candidate outside the
+  // geographic hierarchy must record why.
+  matchLevel     GeoMatchLevel?
+  overrideReason String?
 
   tenantId String
   tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
@@ -309,6 +387,18 @@ model FieldCheckIn {
   gpsLng     Float?
   note       String?
 
+  // Current live-location ping, refreshed while the field worker is out
+  // (distinct from the check-in gpsLat/gpsLng, which is where they started).
+  currentGpsLat  Float?
+  currentGpsLng  Float?
+  currentGpsAt   DateTime?
+  currentGpsNote String?
+
+  // Set when a supervisor force-checks-out a field worker who still has
+  // respondents without a recorded outcome — the completeness rule is
+  // bypassed but the reason is permanently recorded.
+  checkoutOverrideReason String?
+
   tenantId String
   tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
@@ -317,6 +407,39 @@ model FieldCheckIn {
 
   projectId String?
   project   Program? @relation(fields: [projectId], references: [id])
+
+  visits FieldVisit[]
+  notes  FieldNote[]
+}
+
+// One row per respondent the field worker recorded an outcome for during a
+// given check-in ("today's" attendance). Distinct from Beneficiary.outcome
+// (the respondent's latest global status) — this is the per-day audit trail
+// that gates checkout and feeds the daily report / Excel export.
+model FieldVisit {
+  id          String          @id @default(uuid())
+  outcome     ResponseOutcome @default(PENDING)
+  note        String?
+  recordedAt  DateTime        @default(now())
+
+  checkInId String
+  checkIn   FieldCheckIn @relation(fields: [checkInId], references: [id], onDelete: Cascade)
+
+  beneficiaryId String
+  beneficiary   Beneficiary @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
+
+  @@unique([checkInId, beneficiaryId])
+}
+
+// Timestamped free-text notes a field worker can add throughout the day
+// ("road blocked", "respondent relocated"), not just at check-in/out.
+model FieldNote {
+  id        String   @id @default(uuid())
+  note      String
+  createdAt DateTime @default(now())
+
+  checkInId String
+  checkIn   FieldCheckIn @relation(fields: [checkInId], references: [id], onDelete: Cascade)
 }
 
 // Audit trail. Powers the "Activity Logs" / user-logs screen and the live

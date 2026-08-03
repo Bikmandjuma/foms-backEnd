@@ -405,8 +405,11 @@ export const ModelName = {
   Beneficiary: 'Beneficiary',
   ProgramAssignment: 'ProgramAssignment',
   BeneficiaryAssignment: 'BeneficiaryAssignment',
+  Vehicle: 'Vehicle',
   ReplacementRequest: 'ReplacementRequest',
   FieldCheckIn: 'FieldCheckIn',
+  FieldVisit: 'FieldVisit',
+  FieldNote: 'FieldNote',
   ActivityLog: 'ActivityLog'
 } as const
 
@@ -423,7 +426,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "notification" | "tenant" | "role" | "user" | "program" | "beneficiary" | "programAssignment" | "beneficiaryAssignment" | "replacementRequest" | "fieldCheckIn" | "activityLog"
+    modelProps: "notification" | "tenant" | "role" | "user" | "program" | "beneficiary" | "programAssignment" | "beneficiaryAssignment" | "vehicle" | "replacementRequest" | "fieldCheckIn" | "fieldVisit" | "fieldNote" | "activityLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -955,6 +958,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Vehicle: {
+      payload: Prisma.$VehiclePayload<ExtArgs>
+      fields: Prisma.VehicleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VehicleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VehiclePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VehicleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VehiclePayload>
+        }
+        findFirst: {
+          args: Prisma.VehicleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VehiclePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VehicleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VehiclePayload>
+        }
+        findMany: {
+          args: Prisma.VehicleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VehiclePayload>[]
+        }
+        create: {
+          args: Prisma.VehicleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VehiclePayload>
+        }
+        createMany: {
+          args: Prisma.VehicleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.VehicleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VehiclePayload>
+        }
+        update: {
+          args: Prisma.VehicleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VehiclePayload>
+        }
+        deleteMany: {
+          args: Prisma.VehicleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VehicleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.VehicleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VehiclePayload>
+        }
+        aggregate: {
+          args: Prisma.VehicleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVehicle>
+        }
+        groupBy: {
+          args: Prisma.VehicleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VehicleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VehicleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VehicleCountAggregateOutputType> | number
+        }
+      }
+    }
     ReplacementRequest: {
       payload: Prisma.$ReplacementRequestPayload<ExtArgs>
       fields: Prisma.ReplacementRequestFieldRefs
@@ -1084,6 +1153,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.FieldCheckInCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FieldCheckInCountAggregateOutputType> | number
+        }
+      }
+    }
+    FieldVisit: {
+      payload: Prisma.$FieldVisitPayload<ExtArgs>
+      fields: Prisma.FieldVisitFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FieldVisitFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FieldVisitFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitPayload>
+        }
+        findFirst: {
+          args: Prisma.FieldVisitFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FieldVisitFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitPayload>
+        }
+        findMany: {
+          args: Prisma.FieldVisitFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitPayload>[]
+        }
+        create: {
+          args: Prisma.FieldVisitCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitPayload>
+        }
+        createMany: {
+          args: Prisma.FieldVisitCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FieldVisitDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitPayload>
+        }
+        update: {
+          args: Prisma.FieldVisitUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitPayload>
+        }
+        deleteMany: {
+          args: Prisma.FieldVisitDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FieldVisitUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FieldVisitUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitPayload>
+        }
+        aggregate: {
+          args: Prisma.FieldVisitAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFieldVisit>
+        }
+        groupBy: {
+          args: Prisma.FieldVisitGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldVisitGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FieldVisitCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldVisitCountAggregateOutputType> | number
+        }
+      }
+    }
+    FieldNote: {
+      payload: Prisma.$FieldNotePayload<ExtArgs>
+      fields: Prisma.FieldNoteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FieldNoteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldNotePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FieldNoteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldNotePayload>
+        }
+        findFirst: {
+          args: Prisma.FieldNoteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldNotePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FieldNoteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldNotePayload>
+        }
+        findMany: {
+          args: Prisma.FieldNoteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldNotePayload>[]
+        }
+        create: {
+          args: Prisma.FieldNoteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldNotePayload>
+        }
+        createMany: {
+          args: Prisma.FieldNoteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FieldNoteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldNotePayload>
+        }
+        update: {
+          args: Prisma.FieldNoteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldNotePayload>
+        }
+        deleteMany: {
+          args: Prisma.FieldNoteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FieldNoteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FieldNoteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldNotePayload>
+        }
+        aggregate: {
+          args: Prisma.FieldNoteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFieldNote>
+        }
+        groupBy: {
+          args: Prisma.FieldNoteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldNoteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FieldNoteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldNoteCountAggregateOutputType> | number
         }
       }
     }
@@ -1241,6 +1442,8 @@ export const UserScalarFieldEnum = {
   province: 'province',
   district: 'district',
   sector: 'sector',
+  cell: 'cell',
+  village: 'village',
   gender: 'gender',
   dateOfBirth: 'dateOfBirth',
   status: 'status',
@@ -1283,6 +1486,8 @@ export const BeneficiaryScalarFieldEnum = {
   province: 'province',
   district: 'district',
   sector: 'sector',
+  cell: 'cell',
+  village: 'village',
   nationalId: 'nationalId',
   householdSize: 'householdSize',
   consentGiven: 'consentGiven',
@@ -1320,10 +1525,27 @@ export const BeneficiaryAssignmentScalarFieldEnum = {
   updatedAt: 'updatedAt',
   beneficiaryId: 'beneficiaryId',
   userId: 'userId',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  transportMode: 'transportMode',
+  vehicleId: 'vehicleId'
 } as const
 
 export type BeneficiaryAssignmentScalarFieldEnum = (typeof BeneficiaryAssignmentScalarFieldEnum)[keyof typeof BeneficiaryAssignmentScalarFieldEnum]
+
+
+export const VehicleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  driverName: 'driverName',
+  capacityPerDay: 'capacityPerDay',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  tenantId: 'tenantId'
+} as const
+
+export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
 
 
 export const ReplacementRequestScalarFieldEnum = {
@@ -1332,6 +1554,8 @@ export const ReplacementRequestScalarFieldEnum = {
   status: 'status',
   createdAt: 'createdAt',
   decidedAt: 'decidedAt',
+  matchLevel: 'matchLevel',
+  overrideReason: 'overrideReason',
   tenantId: 'tenantId',
   originalRespondentId: 'originalRespondentId',
   candidateRespondentId: 'candidateRespondentId',
@@ -1349,12 +1573,39 @@ export const FieldCheckInScalarFieldEnum = {
   gpsLat: 'gpsLat',
   gpsLng: 'gpsLng',
   note: 'note',
+  currentGpsLat: 'currentGpsLat',
+  currentGpsLng: 'currentGpsLng',
+  currentGpsAt: 'currentGpsAt',
+  currentGpsNote: 'currentGpsNote',
+  checkoutOverrideReason: 'checkoutOverrideReason',
   tenantId: 'tenantId',
   userId: 'userId',
   projectId: 'projectId'
 } as const
 
 export type FieldCheckInScalarFieldEnum = (typeof FieldCheckInScalarFieldEnum)[keyof typeof FieldCheckInScalarFieldEnum]
+
+
+export const FieldVisitScalarFieldEnum = {
+  id: 'id',
+  outcome: 'outcome',
+  note: 'note',
+  recordedAt: 'recordedAt',
+  checkInId: 'checkInId',
+  beneficiaryId: 'beneficiaryId'
+} as const
+
+export type FieldVisitScalarFieldEnum = (typeof FieldVisitScalarFieldEnum)[keyof typeof FieldVisitScalarFieldEnum]
+
+
+export const FieldNoteScalarFieldEnum = {
+  id: 'id',
+  note: 'note',
+  createdAt: 'createdAt',
+  checkInId: 'checkInId'
+} as const
+
+export type FieldNoteScalarFieldEnum = (typeof FieldNoteScalarFieldEnum)[keyof typeof FieldNoteScalarFieldEnum]
 
 
 export const ActivityLogScalarFieldEnum = {
@@ -1451,6 +1702,8 @@ export const UserOrderByRelevanceFieldEnum = {
   province: 'province',
   district: 'district',
   sector: 'sector',
+  cell: 'cell',
+  village: 'village',
   roleId: 'roleId',
   tenantId: 'tenantId'
 } as const
@@ -1476,6 +1729,8 @@ export const BeneficiaryOrderByRelevanceFieldEnum = {
   province: 'province',
   district: 'district',
   sector: 'sector',
+  cell: 'cell',
+  village: 'village',
   nationalId: 'nationalId',
   tenantId: 'tenantId'
 } as const
@@ -1497,15 +1752,27 @@ export const BeneficiaryAssignmentOrderByRelevanceFieldEnum = {
   id: 'id',
   beneficiaryId: 'beneficiaryId',
   userId: 'userId',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  vehicleId: 'vehicleId'
 } as const
 
 export type BeneficiaryAssignmentOrderByRelevanceFieldEnum = (typeof BeneficiaryAssignmentOrderByRelevanceFieldEnum)[keyof typeof BeneficiaryAssignmentOrderByRelevanceFieldEnum]
 
 
+export const VehicleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  driverName: 'driverName',
+  tenantId: 'tenantId'
+} as const
+
+export type VehicleOrderByRelevanceFieldEnum = (typeof VehicleOrderByRelevanceFieldEnum)[keyof typeof VehicleOrderByRelevanceFieldEnum]
+
+
 export const ReplacementRequestOrderByRelevanceFieldEnum = {
   id: 'id',
   reason: 'reason',
+  overrideReason: 'overrideReason',
   tenantId: 'tenantId',
   originalRespondentId: 'originalRespondentId',
   candidateRespondentId: 'candidateRespondentId',
@@ -1519,12 +1786,33 @@ export type ReplacementRequestOrderByRelevanceFieldEnum = (typeof ReplacementReq
 export const FieldCheckInOrderByRelevanceFieldEnum = {
   id: 'id',
   note: 'note',
+  currentGpsNote: 'currentGpsNote',
+  checkoutOverrideReason: 'checkoutOverrideReason',
   tenantId: 'tenantId',
   userId: 'userId',
   projectId: 'projectId'
 } as const
 
 export type FieldCheckInOrderByRelevanceFieldEnum = (typeof FieldCheckInOrderByRelevanceFieldEnum)[keyof typeof FieldCheckInOrderByRelevanceFieldEnum]
+
+
+export const FieldVisitOrderByRelevanceFieldEnum = {
+  id: 'id',
+  note: 'note',
+  checkInId: 'checkInId',
+  beneficiaryId: 'beneficiaryId'
+} as const
+
+export type FieldVisitOrderByRelevanceFieldEnum = (typeof FieldVisitOrderByRelevanceFieldEnum)[keyof typeof FieldVisitOrderByRelevanceFieldEnum]
+
+
+export const FieldNoteOrderByRelevanceFieldEnum = {
+  id: 'id',
+  note: 'note',
+  checkInId: 'checkInId'
+} as const
+
+export type FieldNoteOrderByRelevanceFieldEnum = (typeof FieldNoteOrderByRelevanceFieldEnum)[keyof typeof FieldNoteOrderByRelevanceFieldEnum]
 
 
 export const ActivityLogOrderByRelevanceFieldEnum = {
@@ -1644,9 +1932,30 @@ export type EnumAssignmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'TransportMode'
+ */
+export type EnumTransportModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransportMode'>
+    
+
+
+/**
+ * Reference to a field of type 'VehicleType'
+ */
+export type EnumVehicleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VehicleType'>
+    
+
+
+/**
  * Reference to a field of type 'ReplacementStatus'
  */
 export type EnumReplacementStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReplacementStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'GeoMatchLevel'
+ */
+export type EnumGeoMatchLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GeoMatchLevel'>
     
 
 
@@ -1815,8 +2124,11 @@ export type GlobalOmitConfig = {
   beneficiary?: Prisma.BeneficiaryOmit
   programAssignment?: Prisma.ProgramAssignmentOmit
   beneficiaryAssignment?: Prisma.BeneficiaryAssignmentOmit
+  vehicle?: Prisma.VehicleOmit
   replacementRequest?: Prisma.ReplacementRequestOmit
   fieldCheckIn?: Prisma.FieldCheckInOmit
+  fieldVisit?: Prisma.FieldVisitOmit
+  fieldNote?: Prisma.FieldNoteOmit
   activityLog?: Prisma.ActivityLogOmit
 }
 

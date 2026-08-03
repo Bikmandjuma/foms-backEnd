@@ -10,8 +10,8 @@ router.use(authenticate);
 
 router.get("/", requirePermission("roles:view"), asyncHandler(listRoles));
 router.get("/:id", requirePermission("roles:view"), asyncHandler(getRole));
-router.post("/", requirePermission("roles:manage"), asyncHandler(createRole));
-router.patch("/:id", requirePermission("roles:manage"), asyncHandler(updateRole));
-router.delete("/:id", requirePermission("roles:manage"), asyncHandler(deleteRole));
+router.post("/", requirePermission("roles:create"), asyncHandler(createRole));
+router.patch("/:id", requirePermission("roles:edit"), asyncHandler(updateRole));
+router.delete("/:id", requirePermission("roles:delete"), asyncHandler(deleteRole));
 
 export default router;

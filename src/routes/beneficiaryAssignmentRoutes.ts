@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  autoAssignBeneficiaries,
   createBeneficiaryAssignment,
   deleteBeneficiaryAssignment,
   endBeneficiaryAssignment,
@@ -14,8 +15,9 @@ const router = Router();
 router.use(authenticate);
 
 router.get("/", requirePermission("assignments:view"), asyncHandler(listBeneficiaryAssignments));
-router.post("/", requirePermission("assignments:manage"), asyncHandler(createBeneficiaryAssignment));
-router.post("/:id/end", requirePermission("assignments:manage"), asyncHandler(endBeneficiaryAssignment));
-router.delete("/:id", requirePermission("assignments:manage"), asyncHandler(deleteBeneficiaryAssignment));
+router.post("/", requirePermission("assignments:create"), asyncHandler(createBeneficiaryAssignment));
+router.post("/auto-assign", requirePermission("assignments:create"), asyncHandler(autoAssignBeneficiaries));
+router.post("/:id/end", requirePermission("assignments:edit"), asyncHandler(endBeneficiaryAssignment));
+router.delete("/:id", requirePermission("assignments:delete"), asyncHandler(deleteBeneficiaryAssignment));
 
 export default router;

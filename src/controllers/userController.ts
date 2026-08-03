@@ -38,6 +38,17 @@ async function assertRoleInTenant(roleId: string, tenantId: string): Promise<voi
   if (!role) throw new ApiError(400, "roleId does not belong to your tenant");
 }
 
+// Editing your OWN record is allowed without users:manage (see
+// requirePermissionOrSelf), but that self-service door must not double as a
+// way to hand yourself a new role or flip your own status — only an actual
+// manager may change those two fields, on anyone, including themselves.
+async function actorHasManagePermission(req: Request): Promise<boolean> {
+  if (req.user!.isPlatformAdmin) return true;
+  if (!req.user!.roleId) return false;
+  const role = await prisma.role.findUnique({ where: { id: req.user!.roleId }, select: { permissions: true } });
+  return Array.isArray(role?.permissions) && (role!.permissions as string[]).includes("users:manage");
+}
+
 export async function listUsers(req: Request, res: Response): Promise<void> {
   const users = await prisma.user.findMany({
     where: { tenantId: requireTenantId(req) },
@@ -88,6 +99,10 @@ export async function updateUser(req: Request, res: Response): Promise<void> {
 
   const existing = await prisma.user.findFirst({ where: { id: idParam(req), tenantId } });
   if (!existing) throw new ApiError(404, "User not found");
+
+  if ((data.roleId !== undefined || data.status !== undefined) && !(await actorHasManagePermission(req))) {
+    throw new ApiError(403, "Only a manager can change role or status");
+  }
 
   if (data.roleId) await assertRoleInTenant(data.roleId, tenantId);
 

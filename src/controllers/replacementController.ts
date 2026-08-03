@@ -6,6 +6,8 @@ import { sendResponse } from "../utils/apiResponse.js";
 import { prisma } from "../utils/prisma.js";
 import { recordActivity } from "../utils/activityLog.js";
 import { notifyUser } from "../utils/notifications.js";
+import { decideReplacementSchema } from "../utils/validators.js";
+import { computeMatchLevel, matchLevelLabel, rankMatchLevel } from "../utils/geo.js";
 
 const include = {
   originalRespondent: { select: { id: true, name: true, code: true } },
@@ -17,11 +19,6 @@ const include = {
 const createSchema = z.object({
   originalRespondentId: z.string().uuid(),
   reason: z.string().min(1),
-  candidateRespondentId: z.string().uuid().optional(),
-});
-
-const decideSchema = z.object({
-  status: z.enum(["APPROVED", "REJECTED"]),
   candidateRespondentId: z.string().uuid().optional(),
 });
 
@@ -73,6 +70,63 @@ export async function listReplacementRequests(req: Request, res: Response): Prom
   sendResponse(res, 200, "Replacement requests retrieved successfully", requests);
 }
 
+/**
+ * Ranked replacement candidates for a given original respondent, searching
+ * outward through the geographic hierarchy — village, then cell, then
+ * sector, then district, then province (PRD FR-7). Only PENDING-outcome
+ * respondents without an active assignment are considered "available" —
+ * i.e. spare/reserve respondents, not someone already someone else's
+ * fieldwork target.
+ */
+export async function getReplacementCandidates(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const originalRespondentId = req.query.originalRespondentId;
+  if (typeof originalRespondentId !== "string" || !originalRespondentId) {
+    throw new ApiError(400, "originalRespondentId query parameter is required");
+  }
+
+  const original = await prisma.beneficiary.findFirst({ where: { id: originalRespondentId, tenantId } });
+  if (!original) throw new ApiError(404, "Original respondent not found");
+
+  const pool = await prisma.beneficiary.findMany({
+    where: {
+      tenantId,
+      id: { not: original.id },
+      outcome: "PENDING",
+      assignments: { none: { status: "ACTIVE" } },
+    },
+    select: {
+      id: true,
+      code: true,
+      name: true,
+      province: true,
+      district: true,
+      sector: true,
+      cell: true,
+      village: true,
+    },
+    take: 500,
+  });
+
+  const ranked = pool
+    .map((candidate) => {
+      const level = computeMatchLevel(original, candidate);
+      return {
+        beneficiary: candidate,
+        matchLevel: level,
+        matchLabel: matchLevelLabel(level),
+        rank: rankMatchLevel(level),
+      };
+    })
+    .sort((a, b) => a.rank - b.rank)
+    .slice(0, 15);
+
+  sendResponse(res, 200, "Replacement candidates retrieved successfully", {
+    original: { id: original.id, code: original.code, name: original.name },
+    candidates: ranked,
+  });
+}
+
 export async function createReplacementRequest(req: Request, res: Response): Promise<void> {
   const data = createSchema.parse(req.body);
   const tenantId = requireTenantId(req);
@@ -106,15 +160,42 @@ export async function createReplacementRequest(req: Request, res: Response): Pro
 }
 
 export async function decideReplacementRequest(req: Request, res: Response): Promise<void> {
-  const data = decideSchema.parse(req.body);
+  const data = decideReplacementSchema.parse(req.body);
   const tenantId = requireTenantId(req);
 
-  const existing = await prisma.replacementRequest.findFirst({ where: { id: idParam(req), tenantId } });
+  const existing = await prisma.replacementRequest.findFirst({
+    where: { id: idParam(req), tenantId },
+    include: { originalRespondent: true },
+  });
   if (!existing) throw new ApiError(404, "Replacement request not found");
   if (existing.status !== "PENDING") throw new ApiError(409, "This request has already been decided");
 
-  if (data.status === "APPROVED" && !data.candidateRespondentId && !existing.candidateRespondentId) {
+  const candidateRespondentId = data.candidateRespondentId ?? existing.candidateRespondentId ?? undefined;
+
+  if (data.status === "APPROVED" && !candidateRespondentId) {
     throw new ApiError(400, "candidateRespondentId is required to approve a replacement");
+  }
+
+  let matchLevel: "VILLAGE" | "CELL" | "SECTOR" | "DISTRICT" | "PROVINCE" | "OVERRIDE" | null = null;
+  if (data.status === "APPROVED" && candidateRespondentId) {
+    const candidate = await prisma.beneficiary.findFirst({ where: { id: candidateRespondentId, tenantId } });
+    if (!candidate) throw new ApiError(400, "candidateRespondentId does not belong to your tenant");
+
+    const computed = computeMatchLevel(existing.originalRespondent, candidate);
+    if (computed === null) {
+      // No overlap anywhere in the hierarchy, not even province — this is
+      // exactly the case the PRD calls out: "Only if nothing exists should
+      // an administrator override this rule with a recorded justification."
+      if (!data.overrideReason) {
+        throw new ApiError(
+          400,
+          "This candidate shares no location with the original respondent. Provide overrideReason to proceed anyway."
+        );
+      }
+      matchLevel = "OVERRIDE";
+    } else {
+      matchLevel = computed;
+    }
   }
 
   const request = await prisma.replacementRequest.update({
@@ -123,7 +204,9 @@ export async function decideReplacementRequest(req: Request, res: Response): Pro
       status: data.status,
       decidedAt: new Date(),
       decidedByUserId: req.user!.sub,
-      candidateRespondentId: data.candidateRespondentId ?? existing.candidateRespondentId,
+      candidateRespondentId,
+      matchLevel,
+      overrideReason: matchLevel === "OVERRIDE" ? data.overrideReason : null,
     },
     include,
   });
@@ -141,6 +224,7 @@ export async function decideReplacementRequest(req: Request, res: Response): Pro
     action: data.status === "APPROVED" ? "approved" : "rejected",
     entityType: "ReplacementRequest",
     entityId: request.id,
+    metadata: matchLevel ? { matchLevel } : undefined,
   });
 
   await notifyUser({

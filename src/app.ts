@@ -19,6 +19,7 @@ import replacementRoutes from "./routes/replacementRoutes.js";
 import roleRoutes from "./routes/roleRoutes.js";
 import tenantRoutes from "./routes/tenantRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import vehicleRoutes from "./routes/vehicleRoutes.js";
 import { sendResponse } from "./utils/apiResponse.js";
 import { openApiSpec } from "./utils/swagger.js";
 
@@ -46,6 +47,7 @@ export function createApp() {
   app.use("/api/beneficiaries", beneficiaryRoutes);
   app.use("/api/program-assignments", programAssignmentRoutes);
   app.use("/api/beneficiary-assignments", beneficiaryAssignmentRoutes);
+  app.use("/api/vehicles", vehicleRoutes);
   app.use("/api/replacement-requests", replacementRoutes);
   app.use("/api/field-checkins", fieldCheckInRoutes);
   app.use("/api/activity-logs", activityLogRoutes);

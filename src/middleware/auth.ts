@@ -22,11 +22,22 @@ export async function authenticate(req: Request, _res: Response, next: NextFunct
 
   const user = await prisma.user.findUnique({
     where: { id: payload.sub },
-    select: { tokenVersion: true, lastSeenAt: true },
+    select: { tokenVersion: true, lastSeenAt: true, status: true, isPlatformAdmin: true },
   });
 
   if (!user || user.tokenVersion !== payload.tokenVersion) {
     throw new ApiError(401, "Session expired, please log in again");
+  }
+
+  // A user can be suspended/deactivated mid-session — the moment that
+  // happens, every request they make (even with a still-valid token) is
+  // unauthorized until an administrator reactivates them.
+  if (!user.isPlatformAdmin && user.status !== "ACTIVE") {
+    const reason =
+      user.status === "SUSPENDED"
+        ? "Your account has been suspended. Contact your administrator for help."
+        : "Your account is inactive. Contact your administrator to reactivate it.";
+    throw new ApiError(403, reason);
   }
 
   req.user = payload;

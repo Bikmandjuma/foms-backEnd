@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
+import { MulterError } from "multer";
 import { ZodError } from "zod";
 import { sendResponse } from "../utils/apiResponse.js";
 
@@ -28,6 +29,18 @@ export function errorHandler(
 
   if (err instanceof ApiError) {
     sendResponse(res, err.status, err.message, null);
+    return;
+  }
+
+  // File uploads (Excel import) reject bad file types/sizes with a plain
+  // Error or MulterError before our own handlers ever run — surface those
+  // as a clean 400 instead of a generic 500.
+  if (err instanceof MulterError) {
+    sendResponse(res, 400, err.message, null);
+    return;
+  }
+  if (err instanceof Error && /only \.xlsx files are supported/i.test(err.message)) {
+    sendResponse(res, 400, err.message, null);
     return;
   }
 

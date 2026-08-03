@@ -16,8 +16,8 @@ router.use(authenticate);
 
 router.get("/", requirePermission("programs:view"), asyncHandler(listPrograms));
 router.get("/:id", requirePermission("programs:view"), asyncHandler(getProgram));
-router.post("/", requirePermission("programs:manage"), asyncHandler(createProgram));
-router.patch("/:id", requirePermission("programs:manage"), asyncHandler(updateProgram));
-router.delete("/:id", requirePermission("programs:manage"), asyncHandler(deleteProgram));
+router.post("/", requirePermission("programs:create"), asyncHandler(createProgram));
+router.patch("/:id", requirePermission("programs:edit"), asyncHandler(updateProgram));
+router.delete("/:id", requirePermission("programs:delete"), asyncHandler(deleteProgram));
 
 export default router;

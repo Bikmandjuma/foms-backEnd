@@ -29,11 +29,15 @@ export type AggregateFieldCheckIn = {
 export type FieldCheckInAvgAggregateOutputType = {
   gpsLat: number | null
   gpsLng: number | null
+  currentGpsLat: number | null
+  currentGpsLng: number | null
 }
 
 export type FieldCheckInSumAggregateOutputType = {
   gpsLat: number | null
   gpsLng: number | null
+  currentGpsLat: number | null
+  currentGpsLng: number | null
 }
 
 export type FieldCheckInMinAggregateOutputType = {
@@ -43,6 +47,11 @@ export type FieldCheckInMinAggregateOutputType = {
   gpsLat: number | null
   gpsLng: number | null
   note: string | null
+  currentGpsLat: number | null
+  currentGpsLng: number | null
+  currentGpsAt: Date | null
+  currentGpsNote: string | null
+  checkoutOverrideReason: string | null
   tenantId: string | null
   userId: string | null
   projectId: string | null
@@ -55,6 +64,11 @@ export type FieldCheckInMaxAggregateOutputType = {
   gpsLat: number | null
   gpsLng: number | null
   note: string | null
+  currentGpsLat: number | null
+  currentGpsLng: number | null
+  currentGpsAt: Date | null
+  currentGpsNote: string | null
+  checkoutOverrideReason: string | null
   tenantId: string | null
   userId: string | null
   projectId: string | null
@@ -67,6 +81,11 @@ export type FieldCheckInCountAggregateOutputType = {
   gpsLat: number
   gpsLng: number
   note: number
+  currentGpsLat: number
+  currentGpsLng: number
+  currentGpsAt: number
+  currentGpsNote: number
+  checkoutOverrideReason: number
   tenantId: number
   userId: number
   projectId: number
@@ -77,11 +96,15 @@ export type FieldCheckInCountAggregateOutputType = {
 export type FieldCheckInAvgAggregateInputType = {
   gpsLat?: true
   gpsLng?: true
+  currentGpsLat?: true
+  currentGpsLng?: true
 }
 
 export type FieldCheckInSumAggregateInputType = {
   gpsLat?: true
   gpsLng?: true
+  currentGpsLat?: true
+  currentGpsLng?: true
 }
 
 export type FieldCheckInMinAggregateInputType = {
@@ -91,6 +114,11 @@ export type FieldCheckInMinAggregateInputType = {
   gpsLat?: true
   gpsLng?: true
   note?: true
+  currentGpsLat?: true
+  currentGpsLng?: true
+  currentGpsAt?: true
+  currentGpsNote?: true
+  checkoutOverrideReason?: true
   tenantId?: true
   userId?: true
   projectId?: true
@@ -103,6 +131,11 @@ export type FieldCheckInMaxAggregateInputType = {
   gpsLat?: true
   gpsLng?: true
   note?: true
+  currentGpsLat?: true
+  currentGpsLng?: true
+  currentGpsAt?: true
+  currentGpsNote?: true
+  checkoutOverrideReason?: true
   tenantId?: true
   userId?: true
   projectId?: true
@@ -115,6 +148,11 @@ export type FieldCheckInCountAggregateInputType = {
   gpsLat?: true
   gpsLng?: true
   note?: true
+  currentGpsLat?: true
+  currentGpsLng?: true
+  currentGpsAt?: true
+  currentGpsNote?: true
+  checkoutOverrideReason?: true
   tenantId?: true
   userId?: true
   projectId?: true
@@ -214,6 +252,11 @@ export type FieldCheckInGroupByOutputType = {
   gpsLat: number | null
   gpsLng: number | null
   note: string | null
+  currentGpsLat: number | null
+  currentGpsLng: number | null
+  currentGpsAt: Date | null
+  currentGpsNote: string | null
+  checkoutOverrideReason: string | null
   tenantId: string
   userId: string
   projectId: string | null
@@ -249,12 +292,19 @@ export type FieldCheckInWhereInput = {
   gpsLat?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
   gpsLng?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
   note?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
+  currentGpsLat?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
+  currentGpsLng?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
+  currentGpsAt?: Prisma.DateTimeNullableFilter<"FieldCheckIn"> | Date | string | null
+  currentGpsNote?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
+  checkoutOverrideReason?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
   tenantId?: Prisma.StringFilter<"FieldCheckIn"> | string
   userId?: Prisma.StringFilter<"FieldCheckIn"> | string
   projectId?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   project?: Prisma.XOR<Prisma.ProgramNullableScalarRelationFilter, Prisma.ProgramWhereInput> | null
+  visits?: Prisma.FieldVisitListRelationFilter
+  notes?: Prisma.FieldNoteListRelationFilter
 }
 
 export type FieldCheckInOrderByWithRelationInput = {
@@ -264,12 +314,19 @@ export type FieldCheckInOrderByWithRelationInput = {
   gpsLat?: Prisma.SortOrderInput | Prisma.SortOrder
   gpsLng?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentGpsLat?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentGpsLng?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentGpsAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentGpsNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkoutOverrideReason?: Prisma.SortOrderInput | Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   project?: Prisma.ProgramOrderByWithRelationInput
+  visits?: Prisma.FieldVisitOrderByRelationAggregateInput
+  notes?: Prisma.FieldNoteOrderByRelationAggregateInput
   _relevance?: Prisma.FieldCheckInOrderByRelevanceInput
 }
 
@@ -283,12 +340,19 @@ export type FieldCheckInWhereUniqueInput = Prisma.AtLeast<{
   gpsLat?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
   gpsLng?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
   note?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
+  currentGpsLat?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
+  currentGpsLng?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
+  currentGpsAt?: Prisma.DateTimeNullableFilter<"FieldCheckIn"> | Date | string | null
+  currentGpsNote?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
+  checkoutOverrideReason?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
   tenantId?: Prisma.StringFilter<"FieldCheckIn"> | string
   userId?: Prisma.StringFilter<"FieldCheckIn"> | string
   projectId?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   project?: Prisma.XOR<Prisma.ProgramNullableScalarRelationFilter, Prisma.ProgramWhereInput> | null
+  visits?: Prisma.FieldVisitListRelationFilter
+  notes?: Prisma.FieldNoteListRelationFilter
 }, "id">
 
 export type FieldCheckInOrderByWithAggregationInput = {
@@ -298,6 +362,11 @@ export type FieldCheckInOrderByWithAggregationInput = {
   gpsLat?: Prisma.SortOrderInput | Prisma.SortOrder
   gpsLng?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentGpsLat?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentGpsLng?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentGpsAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentGpsNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkoutOverrideReason?: Prisma.SortOrderInput | Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -318,6 +387,11 @@ export type FieldCheckInScalarWhereWithAggregatesInput = {
   gpsLat?: Prisma.FloatNullableWithAggregatesFilter<"FieldCheckIn"> | number | null
   gpsLng?: Prisma.FloatNullableWithAggregatesFilter<"FieldCheckIn"> | number | null
   note?: Prisma.StringNullableWithAggregatesFilter<"FieldCheckIn"> | string | null
+  currentGpsLat?: Prisma.FloatNullableWithAggregatesFilter<"FieldCheckIn"> | number | null
+  currentGpsLng?: Prisma.FloatNullableWithAggregatesFilter<"FieldCheckIn"> | number | null
+  currentGpsAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FieldCheckIn"> | Date | string | null
+  currentGpsNote?: Prisma.StringNullableWithAggregatesFilter<"FieldCheckIn"> | string | null
+  checkoutOverrideReason?: Prisma.StringNullableWithAggregatesFilter<"FieldCheckIn"> | string | null
   tenantId?: Prisma.StringWithAggregatesFilter<"FieldCheckIn"> | string
   userId?: Prisma.StringWithAggregatesFilter<"FieldCheckIn"> | string
   projectId?: Prisma.StringNullableWithAggregatesFilter<"FieldCheckIn"> | string | null
@@ -330,9 +404,16 @@ export type FieldCheckInCreateInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutFieldCheckInsInput
   user: Prisma.UserCreateNestedOneWithoutFieldCheckInsInput
   project?: Prisma.ProgramCreateNestedOneWithoutFieldCheckInsInput
+  visits?: Prisma.FieldVisitCreateNestedManyWithoutCheckInInput
+  notes?: Prisma.FieldNoteCreateNestedManyWithoutCheckInInput
 }
 
 export type FieldCheckInUncheckedCreateInput = {
@@ -342,9 +423,16 @@ export type FieldCheckInUncheckedCreateInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   tenantId: string
   userId: string
   projectId?: string | null
+  visits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutCheckInInput
+  notes?: Prisma.FieldNoteUncheckedCreateNestedManyWithoutCheckInInput
 }
 
 export type FieldCheckInUpdateInput = {
@@ -354,9 +442,16 @@ export type FieldCheckInUpdateInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutFieldCheckInsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFieldCheckInsNestedInput
   project?: Prisma.ProgramUpdateOneWithoutFieldCheckInsNestedInput
+  visits?: Prisma.FieldVisitUpdateManyWithoutCheckInNestedInput
+  notes?: Prisma.FieldNoteUpdateManyWithoutCheckInNestedInput
 }
 
 export type FieldCheckInUncheckedUpdateInput = {
@@ -366,9 +461,16 @@ export type FieldCheckInUncheckedUpdateInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visits?: Prisma.FieldVisitUncheckedUpdateManyWithoutCheckInNestedInput
+  notes?: Prisma.FieldNoteUncheckedUpdateManyWithoutCheckInNestedInput
 }
 
 export type FieldCheckInCreateManyInput = {
@@ -378,6 +480,11 @@ export type FieldCheckInCreateManyInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   tenantId: string
   userId: string
   projectId?: string | null
@@ -390,6 +497,11 @@ export type FieldCheckInUpdateManyMutationInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldCheckInUncheckedUpdateManyInput = {
@@ -399,6 +511,11 @@ export type FieldCheckInUncheckedUpdateManyInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -427,6 +544,11 @@ export type FieldCheckInCountOrderByAggregateInput = {
   gpsLat?: Prisma.SortOrder
   gpsLng?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  currentGpsLat?: Prisma.SortOrder
+  currentGpsLng?: Prisma.SortOrder
+  currentGpsAt?: Prisma.SortOrder
+  currentGpsNote?: Prisma.SortOrder
+  checkoutOverrideReason?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
@@ -435,6 +557,8 @@ export type FieldCheckInCountOrderByAggregateInput = {
 export type FieldCheckInAvgOrderByAggregateInput = {
   gpsLat?: Prisma.SortOrder
   gpsLng?: Prisma.SortOrder
+  currentGpsLat?: Prisma.SortOrder
+  currentGpsLng?: Prisma.SortOrder
 }
 
 export type FieldCheckInMaxOrderByAggregateInput = {
@@ -444,6 +568,11 @@ export type FieldCheckInMaxOrderByAggregateInput = {
   gpsLat?: Prisma.SortOrder
   gpsLng?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  currentGpsLat?: Prisma.SortOrder
+  currentGpsLng?: Prisma.SortOrder
+  currentGpsAt?: Prisma.SortOrder
+  currentGpsNote?: Prisma.SortOrder
+  checkoutOverrideReason?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
@@ -456,6 +585,11 @@ export type FieldCheckInMinOrderByAggregateInput = {
   gpsLat?: Prisma.SortOrder
   gpsLng?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  currentGpsLat?: Prisma.SortOrder
+  currentGpsLng?: Prisma.SortOrder
+  currentGpsAt?: Prisma.SortOrder
+  currentGpsNote?: Prisma.SortOrder
+  checkoutOverrideReason?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
@@ -464,6 +598,13 @@ export type FieldCheckInMinOrderByAggregateInput = {
 export type FieldCheckInSumOrderByAggregateInput = {
   gpsLat?: Prisma.SortOrder
   gpsLng?: Prisma.SortOrder
+  currentGpsLat?: Prisma.SortOrder
+  currentGpsLng?: Prisma.SortOrder
+}
+
+export type FieldCheckInScalarRelationFilter = {
+  is?: Prisma.FieldCheckInWhereInput
+  isNot?: Prisma.FieldCheckInWhereInput
 }
 
 export type FieldCheckInCreateNestedManyWithoutTenantInput = {
@@ -600,6 +741,34 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type FieldCheckInCreateNestedOneWithoutVisitsInput = {
+  create?: Prisma.XOR<Prisma.FieldCheckInCreateWithoutVisitsInput, Prisma.FieldCheckInUncheckedCreateWithoutVisitsInput>
+  connectOrCreate?: Prisma.FieldCheckInCreateOrConnectWithoutVisitsInput
+  connect?: Prisma.FieldCheckInWhereUniqueInput
+}
+
+export type FieldCheckInUpdateOneRequiredWithoutVisitsNestedInput = {
+  create?: Prisma.XOR<Prisma.FieldCheckInCreateWithoutVisitsInput, Prisma.FieldCheckInUncheckedCreateWithoutVisitsInput>
+  connectOrCreate?: Prisma.FieldCheckInCreateOrConnectWithoutVisitsInput
+  upsert?: Prisma.FieldCheckInUpsertWithoutVisitsInput
+  connect?: Prisma.FieldCheckInWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FieldCheckInUpdateToOneWithWhereWithoutVisitsInput, Prisma.FieldCheckInUpdateWithoutVisitsInput>, Prisma.FieldCheckInUncheckedUpdateWithoutVisitsInput>
+}
+
+export type FieldCheckInCreateNestedOneWithoutNotesInput = {
+  create?: Prisma.XOR<Prisma.FieldCheckInCreateWithoutNotesInput, Prisma.FieldCheckInUncheckedCreateWithoutNotesInput>
+  connectOrCreate?: Prisma.FieldCheckInCreateOrConnectWithoutNotesInput
+  connect?: Prisma.FieldCheckInWhereUniqueInput
+}
+
+export type FieldCheckInUpdateOneRequiredWithoutNotesNestedInput = {
+  create?: Prisma.XOR<Prisma.FieldCheckInCreateWithoutNotesInput, Prisma.FieldCheckInUncheckedCreateWithoutNotesInput>
+  connectOrCreate?: Prisma.FieldCheckInCreateOrConnectWithoutNotesInput
+  upsert?: Prisma.FieldCheckInUpsertWithoutNotesInput
+  connect?: Prisma.FieldCheckInWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FieldCheckInUpdateToOneWithWhereWithoutNotesInput, Prisma.FieldCheckInUpdateWithoutNotesInput>, Prisma.FieldCheckInUncheckedUpdateWithoutNotesInput>
+}
+
 export type FieldCheckInCreateWithoutTenantInput = {
   id?: string
   checkInAt?: Date | string
@@ -607,8 +776,15 @@ export type FieldCheckInCreateWithoutTenantInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   user: Prisma.UserCreateNestedOneWithoutFieldCheckInsInput
   project?: Prisma.ProgramCreateNestedOneWithoutFieldCheckInsInput
+  visits?: Prisma.FieldVisitCreateNestedManyWithoutCheckInInput
+  notes?: Prisma.FieldNoteCreateNestedManyWithoutCheckInInput
 }
 
 export type FieldCheckInUncheckedCreateWithoutTenantInput = {
@@ -618,8 +794,15 @@ export type FieldCheckInUncheckedCreateWithoutTenantInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   userId: string
   projectId?: string | null
+  visits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutCheckInInput
+  notes?: Prisma.FieldNoteUncheckedCreateNestedManyWithoutCheckInInput
 }
 
 export type FieldCheckInCreateOrConnectWithoutTenantInput = {
@@ -658,6 +841,11 @@ export type FieldCheckInScalarWhereInput = {
   gpsLat?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
   gpsLng?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
   note?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
+  currentGpsLat?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
+  currentGpsLng?: Prisma.FloatNullableFilter<"FieldCheckIn"> | number | null
+  currentGpsAt?: Prisma.DateTimeNullableFilter<"FieldCheckIn"> | Date | string | null
+  currentGpsNote?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
+  checkoutOverrideReason?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
   tenantId?: Prisma.StringFilter<"FieldCheckIn"> | string
   userId?: Prisma.StringFilter<"FieldCheckIn"> | string
   projectId?: Prisma.StringNullableFilter<"FieldCheckIn"> | string | null
@@ -670,8 +858,15 @@ export type FieldCheckInCreateWithoutUserInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutFieldCheckInsInput
   project?: Prisma.ProgramCreateNestedOneWithoutFieldCheckInsInput
+  visits?: Prisma.FieldVisitCreateNestedManyWithoutCheckInInput
+  notes?: Prisma.FieldNoteCreateNestedManyWithoutCheckInInput
 }
 
 export type FieldCheckInUncheckedCreateWithoutUserInput = {
@@ -681,8 +876,15 @@ export type FieldCheckInUncheckedCreateWithoutUserInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   tenantId: string
   projectId?: string | null
+  visits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutCheckInInput
+  notes?: Prisma.FieldNoteUncheckedCreateNestedManyWithoutCheckInInput
 }
 
 export type FieldCheckInCreateOrConnectWithoutUserInput = {
@@ -718,8 +920,15 @@ export type FieldCheckInCreateWithoutProjectInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutFieldCheckInsInput
   user: Prisma.UserCreateNestedOneWithoutFieldCheckInsInput
+  visits?: Prisma.FieldVisitCreateNestedManyWithoutCheckInInput
+  notes?: Prisma.FieldNoteCreateNestedManyWithoutCheckInInput
 }
 
 export type FieldCheckInUncheckedCreateWithoutProjectInput = {
@@ -729,8 +938,15 @@ export type FieldCheckInUncheckedCreateWithoutProjectInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   tenantId: string
   userId: string
+  visits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutCheckInInput
+  notes?: Prisma.FieldNoteUncheckedCreateNestedManyWithoutCheckInInput
 }
 
 export type FieldCheckInCreateOrConnectWithoutProjectInput = {
@@ -759,6 +975,182 @@ export type FieldCheckInUpdateManyWithWhereWithoutProjectInput = {
   data: Prisma.XOR<Prisma.FieldCheckInUpdateManyMutationInput, Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectInput>
 }
 
+export type FieldCheckInCreateWithoutVisitsInput = {
+  id?: string
+  checkInAt?: Date | string
+  checkOutAt?: Date | string | null
+  gpsLat?: number | null
+  gpsLng?: number | null
+  note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutFieldCheckInsInput
+  user: Prisma.UserCreateNestedOneWithoutFieldCheckInsInput
+  project?: Prisma.ProgramCreateNestedOneWithoutFieldCheckInsInput
+  notes?: Prisma.FieldNoteCreateNestedManyWithoutCheckInInput
+}
+
+export type FieldCheckInUncheckedCreateWithoutVisitsInput = {
+  id?: string
+  checkInAt?: Date | string
+  checkOutAt?: Date | string | null
+  gpsLat?: number | null
+  gpsLng?: number | null
+  note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
+  tenantId: string
+  userId: string
+  projectId?: string | null
+  notes?: Prisma.FieldNoteUncheckedCreateNestedManyWithoutCheckInInput
+}
+
+export type FieldCheckInCreateOrConnectWithoutVisitsInput = {
+  where: Prisma.FieldCheckInWhereUniqueInput
+  create: Prisma.XOR<Prisma.FieldCheckInCreateWithoutVisitsInput, Prisma.FieldCheckInUncheckedCreateWithoutVisitsInput>
+}
+
+export type FieldCheckInUpsertWithoutVisitsInput = {
+  update: Prisma.XOR<Prisma.FieldCheckInUpdateWithoutVisitsInput, Prisma.FieldCheckInUncheckedUpdateWithoutVisitsInput>
+  create: Prisma.XOR<Prisma.FieldCheckInCreateWithoutVisitsInput, Prisma.FieldCheckInUncheckedCreateWithoutVisitsInput>
+  where?: Prisma.FieldCheckInWhereInput
+}
+
+export type FieldCheckInUpdateToOneWithWhereWithoutVisitsInput = {
+  where?: Prisma.FieldCheckInWhereInput
+  data: Prisma.XOR<Prisma.FieldCheckInUpdateWithoutVisitsInput, Prisma.FieldCheckInUncheckedUpdateWithoutVisitsInput>
+}
+
+export type FieldCheckInUpdateWithoutVisitsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  checkInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  checkOutAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutFieldCheckInsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutFieldCheckInsNestedInput
+  project?: Prisma.ProgramUpdateOneWithoutFieldCheckInsNestedInput
+  notes?: Prisma.FieldNoteUpdateManyWithoutCheckInNestedInput
+}
+
+export type FieldCheckInUncheckedUpdateWithoutVisitsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  checkInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  checkOutAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.FieldNoteUncheckedUpdateManyWithoutCheckInNestedInput
+}
+
+export type FieldCheckInCreateWithoutNotesInput = {
+  id?: string
+  checkInAt?: Date | string
+  checkOutAt?: Date | string | null
+  gpsLat?: number | null
+  gpsLng?: number | null
+  note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutFieldCheckInsInput
+  user: Prisma.UserCreateNestedOneWithoutFieldCheckInsInput
+  project?: Prisma.ProgramCreateNestedOneWithoutFieldCheckInsInput
+  visits?: Prisma.FieldVisitCreateNestedManyWithoutCheckInInput
+}
+
+export type FieldCheckInUncheckedCreateWithoutNotesInput = {
+  id?: string
+  checkInAt?: Date | string
+  checkOutAt?: Date | string | null
+  gpsLat?: number | null
+  gpsLng?: number | null
+  note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
+  tenantId: string
+  userId: string
+  projectId?: string | null
+  visits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutCheckInInput
+}
+
+export type FieldCheckInCreateOrConnectWithoutNotesInput = {
+  where: Prisma.FieldCheckInWhereUniqueInput
+  create: Prisma.XOR<Prisma.FieldCheckInCreateWithoutNotesInput, Prisma.FieldCheckInUncheckedCreateWithoutNotesInput>
+}
+
+export type FieldCheckInUpsertWithoutNotesInput = {
+  update: Prisma.XOR<Prisma.FieldCheckInUpdateWithoutNotesInput, Prisma.FieldCheckInUncheckedUpdateWithoutNotesInput>
+  create: Prisma.XOR<Prisma.FieldCheckInCreateWithoutNotesInput, Prisma.FieldCheckInUncheckedCreateWithoutNotesInput>
+  where?: Prisma.FieldCheckInWhereInput
+}
+
+export type FieldCheckInUpdateToOneWithWhereWithoutNotesInput = {
+  where?: Prisma.FieldCheckInWhereInput
+  data: Prisma.XOR<Prisma.FieldCheckInUpdateWithoutNotesInput, Prisma.FieldCheckInUncheckedUpdateWithoutNotesInput>
+}
+
+export type FieldCheckInUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  checkInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  checkOutAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutFieldCheckInsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutFieldCheckInsNestedInput
+  project?: Prisma.ProgramUpdateOneWithoutFieldCheckInsNestedInput
+  visits?: Prisma.FieldVisitUpdateManyWithoutCheckInNestedInput
+}
+
+export type FieldCheckInUncheckedUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  checkInAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  checkOutAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visits?: Prisma.FieldVisitUncheckedUpdateManyWithoutCheckInNestedInput
+}
+
 export type FieldCheckInCreateManyTenantInput = {
   id?: string
   checkInAt?: Date | string
@@ -766,6 +1158,11 @@ export type FieldCheckInCreateManyTenantInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   userId: string
   projectId?: string | null
 }
@@ -777,8 +1174,15 @@ export type FieldCheckInUpdateWithoutTenantInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutFieldCheckInsNestedInput
   project?: Prisma.ProgramUpdateOneWithoutFieldCheckInsNestedInput
+  visits?: Prisma.FieldVisitUpdateManyWithoutCheckInNestedInput
+  notes?: Prisma.FieldNoteUpdateManyWithoutCheckInNestedInput
 }
 
 export type FieldCheckInUncheckedUpdateWithoutTenantInput = {
@@ -788,8 +1192,15 @@ export type FieldCheckInUncheckedUpdateWithoutTenantInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visits?: Prisma.FieldVisitUncheckedUpdateManyWithoutCheckInNestedInput
+  notes?: Prisma.FieldNoteUncheckedUpdateManyWithoutCheckInNestedInput
 }
 
 export type FieldCheckInUncheckedUpdateManyWithoutTenantInput = {
@@ -799,6 +1210,11 @@ export type FieldCheckInUncheckedUpdateManyWithoutTenantInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -810,6 +1226,11 @@ export type FieldCheckInCreateManyUserInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   tenantId: string
   projectId?: string | null
 }
@@ -821,8 +1242,15 @@ export type FieldCheckInUpdateWithoutUserInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutFieldCheckInsNestedInput
   project?: Prisma.ProgramUpdateOneWithoutFieldCheckInsNestedInput
+  visits?: Prisma.FieldVisitUpdateManyWithoutCheckInNestedInput
+  notes?: Prisma.FieldNoteUpdateManyWithoutCheckInNestedInput
 }
 
 export type FieldCheckInUncheckedUpdateWithoutUserInput = {
@@ -832,8 +1260,15 @@ export type FieldCheckInUncheckedUpdateWithoutUserInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visits?: Prisma.FieldVisitUncheckedUpdateManyWithoutCheckInNestedInput
+  notes?: Prisma.FieldNoteUncheckedUpdateManyWithoutCheckInNestedInput
 }
 
 export type FieldCheckInUncheckedUpdateManyWithoutUserInput = {
@@ -843,6 +1278,11 @@ export type FieldCheckInUncheckedUpdateManyWithoutUserInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -854,6 +1294,11 @@ export type FieldCheckInCreateManyProjectInput = {
   gpsLat?: number | null
   gpsLng?: number | null
   note?: string | null
+  currentGpsLat?: number | null
+  currentGpsLng?: number | null
+  currentGpsAt?: Date | string | null
+  currentGpsNote?: string | null
+  checkoutOverrideReason?: string | null
   tenantId: string
   userId: string
 }
@@ -865,8 +1310,15 @@ export type FieldCheckInUpdateWithoutProjectInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutFieldCheckInsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFieldCheckInsNestedInput
+  visits?: Prisma.FieldVisitUpdateManyWithoutCheckInNestedInput
+  notes?: Prisma.FieldNoteUpdateManyWithoutCheckInNestedInput
 }
 
 export type FieldCheckInUncheckedUpdateWithoutProjectInput = {
@@ -876,8 +1328,15 @@ export type FieldCheckInUncheckedUpdateWithoutProjectInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  visits?: Prisma.FieldVisitUncheckedUpdateManyWithoutCheckInNestedInput
+  notes?: Prisma.FieldNoteUncheckedUpdateManyWithoutCheckInNestedInput
 }
 
 export type FieldCheckInUncheckedUpdateManyWithoutProjectInput = {
@@ -887,10 +1346,53 @@ export type FieldCheckInUncheckedUpdateManyWithoutProjectInput = {
   gpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentGpsLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  currentGpsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentGpsNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutOverrideReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
+
+/**
+ * Count Type FieldCheckInCountOutputType
+ */
+
+export type FieldCheckInCountOutputType = {
+  visits: number
+  notes: number
+}
+
+export type FieldCheckInCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  visits?: boolean | FieldCheckInCountOutputTypeCountVisitsArgs
+  notes?: boolean | FieldCheckInCountOutputTypeCountNotesArgs
+}
+
+/**
+ * FieldCheckInCountOutputType without action
+ */
+export type FieldCheckInCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FieldCheckInCountOutputType
+   */
+  select?: Prisma.FieldCheckInCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * FieldCheckInCountOutputType without action
+ */
+export type FieldCheckInCountOutputTypeCountVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FieldVisitWhereInput
+}
+
+/**
+ * FieldCheckInCountOutputType without action
+ */
+export type FieldCheckInCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FieldNoteWhereInput
+}
 
 
 export type FieldCheckInSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -900,12 +1402,20 @@ export type FieldCheckInSelect<ExtArgs extends runtime.Types.Extensions.Internal
   gpsLat?: boolean
   gpsLng?: boolean
   note?: boolean
+  currentGpsLat?: boolean
+  currentGpsLng?: boolean
+  currentGpsAt?: boolean
+  currentGpsNote?: boolean
+  checkoutOverrideReason?: boolean
   tenantId?: boolean
   userId?: boolean
   projectId?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.FieldCheckIn$projectArgs<ExtArgs>
+  visits?: boolean | Prisma.FieldCheckIn$visitsArgs<ExtArgs>
+  notes?: boolean | Prisma.FieldCheckIn$notesArgs<ExtArgs>
+  _count?: boolean | Prisma.FieldCheckInCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fieldCheckIn"]>
 
 
@@ -917,16 +1427,24 @@ export type FieldCheckInSelectScalar = {
   gpsLat?: boolean
   gpsLng?: boolean
   note?: boolean
+  currentGpsLat?: boolean
+  currentGpsLng?: boolean
+  currentGpsAt?: boolean
+  currentGpsNote?: boolean
+  checkoutOverrideReason?: boolean
   tenantId?: boolean
   userId?: boolean
   projectId?: boolean
 }
 
-export type FieldCheckInOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "checkInAt" | "checkOutAt" | "gpsLat" | "gpsLng" | "note" | "tenantId" | "userId" | "projectId", ExtArgs["result"]["fieldCheckIn"]>
+export type FieldCheckInOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "checkInAt" | "checkOutAt" | "gpsLat" | "gpsLng" | "note" | "currentGpsLat" | "currentGpsLng" | "currentGpsAt" | "currentGpsNote" | "checkoutOverrideReason" | "tenantId" | "userId" | "projectId", ExtArgs["result"]["fieldCheckIn"]>
 export type FieldCheckInInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.FieldCheckIn$projectArgs<ExtArgs>
+  visits?: boolean | Prisma.FieldCheckIn$visitsArgs<ExtArgs>
+  notes?: boolean | Prisma.FieldCheckIn$notesArgs<ExtArgs>
+  _count?: boolean | Prisma.FieldCheckInCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $FieldCheckInPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -935,6 +1453,8 @@ export type $FieldCheckInPayload<ExtArgs extends runtime.Types.Extensions.Intern
     tenant: Prisma.$TenantPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
     project: Prisma.$ProgramPayload<ExtArgs> | null
+    visits: Prisma.$FieldVisitPayload<ExtArgs>[]
+    notes: Prisma.$FieldNotePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -943,6 +1463,11 @@ export type $FieldCheckInPayload<ExtArgs extends runtime.Types.Extensions.Intern
     gpsLat: number | null
     gpsLng: number | null
     note: string | null
+    currentGpsLat: number | null
+    currentGpsLng: number | null
+    currentGpsAt: Date | null
+    currentGpsNote: string | null
+    checkoutOverrideReason: string | null
     tenantId: string
     userId: string
     projectId: string | null
@@ -1289,6 +1814,8 @@ export interface Prisma__FieldCheckInClient<T, Null = never, ExtArgs extends run
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.FieldCheckIn$projectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldCheckIn$projectArgs<ExtArgs>>): Prisma.Prisma__ProgramClient<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  visits<T extends Prisma.FieldCheckIn$visitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldCheckIn$visitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notes<T extends Prisma.FieldCheckIn$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldCheckIn$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1324,6 +1851,11 @@ export interface FieldCheckInFieldRefs {
   readonly gpsLat: Prisma.FieldRef<"FieldCheckIn", 'Float'>
   readonly gpsLng: Prisma.FieldRef<"FieldCheckIn", 'Float'>
   readonly note: Prisma.FieldRef<"FieldCheckIn", 'String'>
+  readonly currentGpsLat: Prisma.FieldRef<"FieldCheckIn", 'Float'>
+  readonly currentGpsLng: Prisma.FieldRef<"FieldCheckIn", 'Float'>
+  readonly currentGpsAt: Prisma.FieldRef<"FieldCheckIn", 'DateTime'>
+  readonly currentGpsNote: Prisma.FieldRef<"FieldCheckIn", 'String'>
+  readonly checkoutOverrideReason: Prisma.FieldRef<"FieldCheckIn", 'String'>
   readonly tenantId: Prisma.FieldRef<"FieldCheckIn", 'String'>
   readonly userId: Prisma.FieldRef<"FieldCheckIn", 'String'>
   readonly projectId: Prisma.FieldRef<"FieldCheckIn", 'String'>
@@ -1691,6 +2223,54 @@ export type FieldCheckIn$projectArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.ProgramInclude<ExtArgs> | null
   where?: Prisma.ProgramWhereInput
+}
+
+/**
+ * FieldCheckIn.visits
+ */
+export type FieldCheckIn$visitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FieldVisit
+   */
+  select?: Prisma.FieldVisitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FieldVisit
+   */
+  omit?: Prisma.FieldVisitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FieldVisitInclude<ExtArgs> | null
+  where?: Prisma.FieldVisitWhereInput
+  orderBy?: Prisma.FieldVisitOrderByWithRelationInput | Prisma.FieldVisitOrderByWithRelationInput[]
+  cursor?: Prisma.FieldVisitWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FieldVisitScalarFieldEnum | Prisma.FieldVisitScalarFieldEnum[]
+}
+
+/**
+ * FieldCheckIn.notes
+ */
+export type FieldCheckIn$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FieldNote
+   */
+  select?: Prisma.FieldNoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FieldNote
+   */
+  omit?: Prisma.FieldNoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FieldNoteInclude<ExtArgs> | null
+  where?: Prisma.FieldNoteWhereInput
+  orderBy?: Prisma.FieldNoteOrderByWithRelationInput | Prisma.FieldNoteOrderByWithRelationInput[]
+  cursor?: Prisma.FieldNoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FieldNoteScalarFieldEnum | Prisma.FieldNoteScalarFieldEnum[]
 }
 
 /**

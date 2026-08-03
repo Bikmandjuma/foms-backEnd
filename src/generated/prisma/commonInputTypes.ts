@@ -389,11 +389,52 @@ export type EnumAssignmentStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumAssignmentStatusFilter<$PrismaModel>
 }
 
+export type EnumTransportModeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TransportMode | Prisma.EnumTransportModeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TransportMode[] | null
+  notIn?: $Enums.TransportMode[] | null
+  not?: Prisma.NestedEnumTransportModeNullableFilter<$PrismaModel> | $Enums.TransportMode | null
+}
+
+export type EnumTransportModeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TransportMode | Prisma.EnumTransportModeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TransportMode[] | null
+  notIn?: $Enums.TransportMode[] | null
+  not?: Prisma.NestedEnumTransportModeNullableWithAggregatesFilter<$PrismaModel> | $Enums.TransportMode | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTransportModeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTransportModeNullableFilter<$PrismaModel>
+}
+
+export type EnumVehicleTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleType | Prisma.EnumVehicleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleType[]
+  notIn?: $Enums.VehicleType[]
+  not?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel> | $Enums.VehicleType
+}
+
+export type EnumVehicleTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleType | Prisma.EnumVehicleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleType[]
+  notIn?: $Enums.VehicleType[]
+  not?: Prisma.NestedEnumVehicleTypeWithAggregatesFilter<$PrismaModel> | $Enums.VehicleType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel>
+}
+
 export type EnumReplacementStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.ReplacementStatus | Prisma.EnumReplacementStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ReplacementStatus[]
   notIn?: $Enums.ReplacementStatus[]
   not?: Prisma.NestedEnumReplacementStatusFilter<$PrismaModel> | $Enums.ReplacementStatus
+}
+
+export type EnumGeoMatchLevelNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeoMatchLevel | Prisma.EnumGeoMatchLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.GeoMatchLevel[] | null
+  notIn?: $Enums.GeoMatchLevel[] | null
+  not?: Prisma.NestedEnumGeoMatchLevelNullableFilter<$PrismaModel> | $Enums.GeoMatchLevel | null
 }
 
 export type EnumReplacementStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -404,6 +445,16 @@ export type EnumReplacementStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumReplacementStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumReplacementStatusFilter<$PrismaModel>
+}
+
+export type EnumGeoMatchLevelNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeoMatchLevel | Prisma.EnumGeoMatchLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.GeoMatchLevel[] | null
+  notIn?: $Enums.GeoMatchLevel[] | null
+  not?: Prisma.NestedEnumGeoMatchLevelNullableWithAggregatesFilter<$PrismaModel> | $Enums.GeoMatchLevel | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGeoMatchLevelNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGeoMatchLevelNullableFilter<$PrismaModel>
 }
 
 export type FloatNullableFilter<$PrismaModel = never> = {
@@ -798,11 +849,52 @@ export type NestedEnumAssignmentStatusWithAggregatesFilter<$PrismaModel = never>
   _max?: Prisma.NestedEnumAssignmentStatusFilter<$PrismaModel>
 }
 
+export type NestedEnumTransportModeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TransportMode | Prisma.EnumTransportModeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TransportMode[] | null
+  notIn?: $Enums.TransportMode[] | null
+  not?: Prisma.NestedEnumTransportModeNullableFilter<$PrismaModel> | $Enums.TransportMode | null
+}
+
+export type NestedEnumTransportModeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TransportMode | Prisma.EnumTransportModeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TransportMode[] | null
+  notIn?: $Enums.TransportMode[] | null
+  not?: Prisma.NestedEnumTransportModeNullableWithAggregatesFilter<$PrismaModel> | $Enums.TransportMode | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTransportModeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTransportModeNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumVehicleTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleType | Prisma.EnumVehicleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleType[]
+  notIn?: $Enums.VehicleType[]
+  not?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel> | $Enums.VehicleType
+}
+
+export type NestedEnumVehicleTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleType | Prisma.EnumVehicleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleType[]
+  notIn?: $Enums.VehicleType[]
+  not?: Prisma.NestedEnumVehicleTypeWithAggregatesFilter<$PrismaModel> | $Enums.VehicleType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel>
+}
+
 export type NestedEnumReplacementStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.ReplacementStatus | Prisma.EnumReplacementStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ReplacementStatus[]
   notIn?: $Enums.ReplacementStatus[]
   not?: Prisma.NestedEnumReplacementStatusFilter<$PrismaModel> | $Enums.ReplacementStatus
+}
+
+export type NestedEnumGeoMatchLevelNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeoMatchLevel | Prisma.EnumGeoMatchLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.GeoMatchLevel[] | null
+  notIn?: $Enums.GeoMatchLevel[] | null
+  not?: Prisma.NestedEnumGeoMatchLevelNullableFilter<$PrismaModel> | $Enums.GeoMatchLevel | null
 }
 
 export type NestedEnumReplacementStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -813,6 +905,16 @@ export type NestedEnumReplacementStatusWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumReplacementStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumReplacementStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumGeoMatchLevelNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeoMatchLevel | Prisma.EnumGeoMatchLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.GeoMatchLevel[] | null
+  notIn?: $Enums.GeoMatchLevel[] | null
+  not?: Prisma.NestedEnumGeoMatchLevelNullableWithAggregatesFilter<$PrismaModel> | $Enums.GeoMatchLevel | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGeoMatchLevelNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGeoMatchLevelNullableFilter<$PrismaModel>
 }
 
 export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {

@@ -34,6 +34,8 @@ export type BeneficiaryAssignmentMinAggregateOutputType = {
   beneficiaryId: string | null
   userId: string | null
   tenantId: string | null
+  transportMode: $Enums.TransportMode | null
+  vehicleId: string | null
 }
 
 export type BeneficiaryAssignmentMaxAggregateOutputType = {
@@ -46,6 +48,8 @@ export type BeneficiaryAssignmentMaxAggregateOutputType = {
   beneficiaryId: string | null
   userId: string | null
   tenantId: string | null
+  transportMode: $Enums.TransportMode | null
+  vehicleId: string | null
 }
 
 export type BeneficiaryAssignmentCountAggregateOutputType = {
@@ -58,6 +62,8 @@ export type BeneficiaryAssignmentCountAggregateOutputType = {
   beneficiaryId: number
   userId: number
   tenantId: number
+  transportMode: number
+  vehicleId: number
   _all: number
 }
 
@@ -72,6 +78,8 @@ export type BeneficiaryAssignmentMinAggregateInputType = {
   beneficiaryId?: true
   userId?: true
   tenantId?: true
+  transportMode?: true
+  vehicleId?: true
 }
 
 export type BeneficiaryAssignmentMaxAggregateInputType = {
@@ -84,6 +92,8 @@ export type BeneficiaryAssignmentMaxAggregateInputType = {
   beneficiaryId?: true
   userId?: true
   tenantId?: true
+  transportMode?: true
+  vehicleId?: true
 }
 
 export type BeneficiaryAssignmentCountAggregateInputType = {
@@ -96,6 +106,8 @@ export type BeneficiaryAssignmentCountAggregateInputType = {
   beneficiaryId?: true
   userId?: true
   tenantId?: true
+  transportMode?: true
+  vehicleId?: true
   _all?: true
 }
 
@@ -181,6 +193,8 @@ export type BeneficiaryAssignmentGroupByOutputType = {
   beneficiaryId: string
   userId: string
   tenantId: string
+  transportMode: $Enums.TransportMode | null
+  vehicleId: string | null
   _count: BeneficiaryAssignmentCountAggregateOutputType | null
   _min: BeneficiaryAssignmentMinAggregateOutputType | null
   _max: BeneficiaryAssignmentMaxAggregateOutputType | null
@@ -214,9 +228,12 @@ export type BeneficiaryAssignmentWhereInput = {
   beneficiaryId?: Prisma.StringFilter<"BeneficiaryAssignment"> | string
   userId?: Prisma.StringFilter<"BeneficiaryAssignment"> | string
   tenantId?: Prisma.StringFilter<"BeneficiaryAssignment"> | string
+  transportMode?: Prisma.EnumTransportModeNullableFilter<"BeneficiaryAssignment"> | $Enums.TransportMode | null
+  vehicleId?: Prisma.StringNullableFilter<"BeneficiaryAssignment"> | string | null
   beneficiary?: Prisma.XOR<Prisma.BeneficiaryScalarRelationFilter, Prisma.BeneficiaryWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  vehicle?: Prisma.XOR<Prisma.VehicleNullableScalarRelationFilter, Prisma.VehicleWhereInput> | null
 }
 
 export type BeneficiaryAssignmentOrderByWithRelationInput = {
@@ -229,9 +246,12 @@ export type BeneficiaryAssignmentOrderByWithRelationInput = {
   beneficiaryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  transportMode?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicleId?: Prisma.SortOrderInput | Prisma.SortOrder
   beneficiary?: Prisma.BeneficiaryOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   tenant?: Prisma.TenantOrderByWithRelationInput
+  vehicle?: Prisma.VehicleOrderByWithRelationInput
   _relevance?: Prisma.BeneficiaryAssignmentOrderByRelevanceInput
 }
 
@@ -248,9 +268,12 @@ export type BeneficiaryAssignmentWhereUniqueInput = Prisma.AtLeast<{
   beneficiaryId?: Prisma.StringFilter<"BeneficiaryAssignment"> | string
   userId?: Prisma.StringFilter<"BeneficiaryAssignment"> | string
   tenantId?: Prisma.StringFilter<"BeneficiaryAssignment"> | string
+  transportMode?: Prisma.EnumTransportModeNullableFilter<"BeneficiaryAssignment"> | $Enums.TransportMode | null
+  vehicleId?: Prisma.StringNullableFilter<"BeneficiaryAssignment"> | string | null
   beneficiary?: Prisma.XOR<Prisma.BeneficiaryScalarRelationFilter, Prisma.BeneficiaryWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  vehicle?: Prisma.XOR<Prisma.VehicleNullableScalarRelationFilter, Prisma.VehicleWhereInput> | null
 }, "id">
 
 export type BeneficiaryAssignmentOrderByWithAggregationInput = {
@@ -263,6 +286,8 @@ export type BeneficiaryAssignmentOrderByWithAggregationInput = {
   beneficiaryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  transportMode?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicleId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BeneficiaryAssignmentCountOrderByAggregateInput
   _max?: Prisma.BeneficiaryAssignmentMaxOrderByAggregateInput
   _min?: Prisma.BeneficiaryAssignmentMinOrderByAggregateInput
@@ -281,6 +306,8 @@ export type BeneficiaryAssignmentScalarWhereWithAggregatesInput = {
   beneficiaryId?: Prisma.StringWithAggregatesFilter<"BeneficiaryAssignment"> | string
   userId?: Prisma.StringWithAggregatesFilter<"BeneficiaryAssignment"> | string
   tenantId?: Prisma.StringWithAggregatesFilter<"BeneficiaryAssignment"> | string
+  transportMode?: Prisma.EnumTransportModeNullableWithAggregatesFilter<"BeneficiaryAssignment"> | $Enums.TransportMode | null
+  vehicleId?: Prisma.StringNullableWithAggregatesFilter<"BeneficiaryAssignment"> | string | null
 }
 
 export type BeneficiaryAssignmentCreateInput = {
@@ -290,9 +317,11 @@ export type BeneficiaryAssignmentCreateInput = {
   endedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  transportMode?: $Enums.TransportMode | null
   beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutAssignmentsInput
   user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiaryAssignmentsInput
+  vehicle?: Prisma.VehicleCreateNestedOneWithoutAssignmentsInput
 }
 
 export type BeneficiaryAssignmentUncheckedCreateInput = {
@@ -305,6 +334,8 @@ export type BeneficiaryAssignmentUncheckedCreateInput = {
   beneficiaryId: string
   userId: string
   tenantId: string
+  transportMode?: $Enums.TransportMode | null
+  vehicleId?: string | null
 }
 
 export type BeneficiaryAssignmentUpdateInput = {
@@ -314,9 +345,11 @@ export type BeneficiaryAssignmentUpdateInput = {
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
   beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutAssignmentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
+  vehicle?: Prisma.VehicleUpdateOneWithoutAssignmentsNestedInput
 }
 
 export type BeneficiaryAssignmentUncheckedUpdateInput = {
@@ -329,6 +362,8 @@ export type BeneficiaryAssignmentUncheckedUpdateInput = {
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+  vehicleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryAssignmentCreateManyInput = {
@@ -341,6 +376,8 @@ export type BeneficiaryAssignmentCreateManyInput = {
   beneficiaryId: string
   userId: string
   tenantId: string
+  transportMode?: $Enums.TransportMode | null
+  vehicleId?: string | null
 }
 
 export type BeneficiaryAssignmentUpdateManyMutationInput = {
@@ -350,6 +387,7 @@ export type BeneficiaryAssignmentUpdateManyMutationInput = {
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
 }
 
 export type BeneficiaryAssignmentUncheckedUpdateManyInput = {
@@ -362,6 +400,8 @@ export type BeneficiaryAssignmentUncheckedUpdateManyInput = {
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+  vehicleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryAssignmentListRelationFilter = {
@@ -390,6 +430,8 @@ export type BeneficiaryAssignmentCountOrderByAggregateInput = {
   beneficiaryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  transportMode?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
 }
 
 export type BeneficiaryAssignmentMaxOrderByAggregateInput = {
@@ -402,6 +444,8 @@ export type BeneficiaryAssignmentMaxOrderByAggregateInput = {
   beneficiaryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  transportMode?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
 }
 
 export type BeneficiaryAssignmentMinOrderByAggregateInput = {
@@ -414,6 +458,8 @@ export type BeneficiaryAssignmentMinOrderByAggregateInput = {
   beneficiaryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  transportMode?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
 }
 
 export type BeneficiaryAssignmentCreateNestedManyWithoutTenantInput = {
@@ -542,6 +588,52 @@ export type BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInpu
   deleteMany?: Prisma.BeneficiaryAssignmentScalarWhereInput | Prisma.BeneficiaryAssignmentScalarWhereInput[]
 }
 
+export type NullableEnumTransportModeFieldUpdateOperationsInput = {
+  set?: $Enums.TransportMode | null
+}
+
+export type BeneficiaryAssignmentCreateNestedManyWithoutVehicleInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput, Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput> | Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput[] | Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput[]
+  connectOrCreate?: Prisma.BeneficiaryAssignmentCreateOrConnectWithoutVehicleInput | Prisma.BeneficiaryAssignmentCreateOrConnectWithoutVehicleInput[]
+  createMany?: Prisma.BeneficiaryAssignmentCreateManyVehicleInputEnvelope
+  connect?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+}
+
+export type BeneficiaryAssignmentUncheckedCreateNestedManyWithoutVehicleInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput, Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput> | Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput[] | Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput[]
+  connectOrCreate?: Prisma.BeneficiaryAssignmentCreateOrConnectWithoutVehicleInput | Prisma.BeneficiaryAssignmentCreateOrConnectWithoutVehicleInput[]
+  createMany?: Prisma.BeneficiaryAssignmentCreateManyVehicleInputEnvelope
+  connect?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+}
+
+export type BeneficiaryAssignmentUpdateManyWithoutVehicleNestedInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput, Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput> | Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput[] | Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput[]
+  connectOrCreate?: Prisma.BeneficiaryAssignmentCreateOrConnectWithoutVehicleInput | Prisma.BeneficiaryAssignmentCreateOrConnectWithoutVehicleInput[]
+  upsert?: Prisma.BeneficiaryAssignmentUpsertWithWhereUniqueWithoutVehicleInput | Prisma.BeneficiaryAssignmentUpsertWithWhereUniqueWithoutVehicleInput[]
+  createMany?: Prisma.BeneficiaryAssignmentCreateManyVehicleInputEnvelope
+  set?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+  disconnect?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+  delete?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+  connect?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+  update?: Prisma.BeneficiaryAssignmentUpdateWithWhereUniqueWithoutVehicleInput | Prisma.BeneficiaryAssignmentUpdateWithWhereUniqueWithoutVehicleInput[]
+  updateMany?: Prisma.BeneficiaryAssignmentUpdateManyWithWhereWithoutVehicleInput | Prisma.BeneficiaryAssignmentUpdateManyWithWhereWithoutVehicleInput[]
+  deleteMany?: Prisma.BeneficiaryAssignmentScalarWhereInput | Prisma.BeneficiaryAssignmentScalarWhereInput[]
+}
+
+export type BeneficiaryAssignmentUncheckedUpdateManyWithoutVehicleNestedInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput, Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput> | Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput[] | Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput[]
+  connectOrCreate?: Prisma.BeneficiaryAssignmentCreateOrConnectWithoutVehicleInput | Prisma.BeneficiaryAssignmentCreateOrConnectWithoutVehicleInput[]
+  upsert?: Prisma.BeneficiaryAssignmentUpsertWithWhereUniqueWithoutVehicleInput | Prisma.BeneficiaryAssignmentUpsertWithWhereUniqueWithoutVehicleInput[]
+  createMany?: Prisma.BeneficiaryAssignmentCreateManyVehicleInputEnvelope
+  set?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+  disconnect?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+  delete?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+  connect?: Prisma.BeneficiaryAssignmentWhereUniqueInput | Prisma.BeneficiaryAssignmentWhereUniqueInput[]
+  update?: Prisma.BeneficiaryAssignmentUpdateWithWhereUniqueWithoutVehicleInput | Prisma.BeneficiaryAssignmentUpdateWithWhereUniqueWithoutVehicleInput[]
+  updateMany?: Prisma.BeneficiaryAssignmentUpdateManyWithWhereWithoutVehicleInput | Prisma.BeneficiaryAssignmentUpdateManyWithWhereWithoutVehicleInput[]
+  deleteMany?: Prisma.BeneficiaryAssignmentScalarWhereInput | Prisma.BeneficiaryAssignmentScalarWhereInput[]
+}
+
 export type BeneficiaryAssignmentCreateWithoutTenantInput = {
   id?: string
   status?: $Enums.AssignmentStatus
@@ -549,8 +641,10 @@ export type BeneficiaryAssignmentCreateWithoutTenantInput = {
   endedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  transportMode?: $Enums.TransportMode | null
   beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutAssignmentsInput
   user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
+  vehicle?: Prisma.VehicleCreateNestedOneWithoutAssignmentsInput
 }
 
 export type BeneficiaryAssignmentUncheckedCreateWithoutTenantInput = {
@@ -562,6 +656,8 @@ export type BeneficiaryAssignmentUncheckedCreateWithoutTenantInput = {
   updatedAt?: Date | string
   beneficiaryId: string
   userId: string
+  transportMode?: $Enums.TransportMode | null
+  vehicleId?: string | null
 }
 
 export type BeneficiaryAssignmentCreateOrConnectWithoutTenantInput = {
@@ -603,6 +699,8 @@ export type BeneficiaryAssignmentScalarWhereInput = {
   beneficiaryId?: Prisma.StringFilter<"BeneficiaryAssignment"> | string
   userId?: Prisma.StringFilter<"BeneficiaryAssignment"> | string
   tenantId?: Prisma.StringFilter<"BeneficiaryAssignment"> | string
+  transportMode?: Prisma.EnumTransportModeNullableFilter<"BeneficiaryAssignment"> | $Enums.TransportMode | null
+  vehicleId?: Prisma.StringNullableFilter<"BeneficiaryAssignment"> | string | null
 }
 
 export type BeneficiaryAssignmentCreateWithoutUserInput = {
@@ -612,8 +710,10 @@ export type BeneficiaryAssignmentCreateWithoutUserInput = {
   endedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  transportMode?: $Enums.TransportMode | null
   beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutAssignmentsInput
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiaryAssignmentsInput
+  vehicle?: Prisma.VehicleCreateNestedOneWithoutAssignmentsInput
 }
 
 export type BeneficiaryAssignmentUncheckedCreateWithoutUserInput = {
@@ -625,6 +725,8 @@ export type BeneficiaryAssignmentUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   beneficiaryId: string
   tenantId: string
+  transportMode?: $Enums.TransportMode | null
+  vehicleId?: string | null
 }
 
 export type BeneficiaryAssignmentCreateOrConnectWithoutUserInput = {
@@ -660,8 +762,10 @@ export type BeneficiaryAssignmentCreateWithoutBeneficiaryInput = {
   endedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  transportMode?: $Enums.TransportMode | null
   user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiaryAssignmentsInput
+  vehicle?: Prisma.VehicleCreateNestedOneWithoutAssignmentsInput
 }
 
 export type BeneficiaryAssignmentUncheckedCreateWithoutBeneficiaryInput = {
@@ -673,6 +777,8 @@ export type BeneficiaryAssignmentUncheckedCreateWithoutBeneficiaryInput = {
   updatedAt?: Date | string
   userId: string
   tenantId: string
+  transportMode?: $Enums.TransportMode | null
+  vehicleId?: string | null
 }
 
 export type BeneficiaryAssignmentCreateOrConnectWithoutBeneficiaryInput = {
@@ -701,6 +807,58 @@ export type BeneficiaryAssignmentUpdateManyWithWhereWithoutBeneficiaryInput = {
   data: Prisma.XOR<Prisma.BeneficiaryAssignmentUpdateManyMutationInput, Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryInput>
 }
 
+export type BeneficiaryAssignmentCreateWithoutVehicleInput = {
+  id?: string
+  status?: $Enums.AssignmentStatus
+  assignedAt?: Date | string
+  endedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  transportMode?: $Enums.TransportMode | null
+  beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutAssignmentsInput
+  user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
+  tenant: Prisma.TenantCreateNestedOneWithoutBeneficiaryAssignmentsInput
+}
+
+export type BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput = {
+  id?: string
+  status?: $Enums.AssignmentStatus
+  assignedAt?: Date | string
+  endedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  beneficiaryId: string
+  userId: string
+  tenantId: string
+  transportMode?: $Enums.TransportMode | null
+}
+
+export type BeneficiaryAssignmentCreateOrConnectWithoutVehicleInput = {
+  where: Prisma.BeneficiaryAssignmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput, Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput>
+}
+
+export type BeneficiaryAssignmentCreateManyVehicleInputEnvelope = {
+  data: Prisma.BeneficiaryAssignmentCreateManyVehicleInput | Prisma.BeneficiaryAssignmentCreateManyVehicleInput[]
+  skipDuplicates?: boolean
+}
+
+export type BeneficiaryAssignmentUpsertWithWhereUniqueWithoutVehicleInput = {
+  where: Prisma.BeneficiaryAssignmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.BeneficiaryAssignmentUpdateWithoutVehicleInput, Prisma.BeneficiaryAssignmentUncheckedUpdateWithoutVehicleInput>
+  create: Prisma.XOR<Prisma.BeneficiaryAssignmentCreateWithoutVehicleInput, Prisma.BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput>
+}
+
+export type BeneficiaryAssignmentUpdateWithWhereUniqueWithoutVehicleInput = {
+  where: Prisma.BeneficiaryAssignmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.BeneficiaryAssignmentUpdateWithoutVehicleInput, Prisma.BeneficiaryAssignmentUncheckedUpdateWithoutVehicleInput>
+}
+
+export type BeneficiaryAssignmentUpdateManyWithWhereWithoutVehicleInput = {
+  where: Prisma.BeneficiaryAssignmentScalarWhereInput
+  data: Prisma.XOR<Prisma.BeneficiaryAssignmentUpdateManyMutationInput, Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutVehicleInput>
+}
+
 export type BeneficiaryAssignmentCreateManyTenantInput = {
   id?: string
   status?: $Enums.AssignmentStatus
@@ -710,6 +868,8 @@ export type BeneficiaryAssignmentCreateManyTenantInput = {
   updatedAt?: Date | string
   beneficiaryId: string
   userId: string
+  transportMode?: $Enums.TransportMode | null
+  vehicleId?: string | null
 }
 
 export type BeneficiaryAssignmentUpdateWithoutTenantInput = {
@@ -719,8 +879,10 @@ export type BeneficiaryAssignmentUpdateWithoutTenantInput = {
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
   beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutAssignmentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
+  vehicle?: Prisma.VehicleUpdateOneWithoutAssignmentsNestedInput
 }
 
 export type BeneficiaryAssignmentUncheckedUpdateWithoutTenantInput = {
@@ -732,6 +894,8 @@ export type BeneficiaryAssignmentUncheckedUpdateWithoutTenantInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+  vehicleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryAssignmentUncheckedUpdateManyWithoutTenantInput = {
@@ -743,6 +907,8 @@ export type BeneficiaryAssignmentUncheckedUpdateManyWithoutTenantInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+  vehicleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryAssignmentCreateManyUserInput = {
@@ -754,6 +920,8 @@ export type BeneficiaryAssignmentCreateManyUserInput = {
   updatedAt?: Date | string
   beneficiaryId: string
   tenantId: string
+  transportMode?: $Enums.TransportMode | null
+  vehicleId?: string | null
 }
 
 export type BeneficiaryAssignmentUpdateWithoutUserInput = {
@@ -763,8 +931,10 @@ export type BeneficiaryAssignmentUpdateWithoutUserInput = {
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
   beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutAssignmentsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
+  vehicle?: Prisma.VehicleUpdateOneWithoutAssignmentsNestedInput
 }
 
 export type BeneficiaryAssignmentUncheckedUpdateWithoutUserInput = {
@@ -776,6 +946,8 @@ export type BeneficiaryAssignmentUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+  vehicleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryAssignmentUncheckedUpdateManyWithoutUserInput = {
@@ -787,6 +959,8 @@ export type BeneficiaryAssignmentUncheckedUpdateManyWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+  vehicleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryAssignmentCreateManyBeneficiaryInput = {
@@ -798,6 +972,8 @@ export type BeneficiaryAssignmentCreateManyBeneficiaryInput = {
   updatedAt?: Date | string
   userId: string
   tenantId: string
+  transportMode?: $Enums.TransportMode | null
+  vehicleId?: string | null
 }
 
 export type BeneficiaryAssignmentUpdateWithoutBeneficiaryInput = {
@@ -807,8 +983,10 @@ export type BeneficiaryAssignmentUpdateWithoutBeneficiaryInput = {
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
   user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
+  vehicle?: Prisma.VehicleUpdateOneWithoutAssignmentsNestedInput
 }
 
 export type BeneficiaryAssignmentUncheckedUpdateWithoutBeneficiaryInput = {
@@ -820,6 +998,8 @@ export type BeneficiaryAssignmentUncheckedUpdateWithoutBeneficiaryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+  vehicleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryInput = {
@@ -831,6 +1011,60 @@ export type BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+  vehicleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type BeneficiaryAssignmentCreateManyVehicleInput = {
+  id?: string
+  status?: $Enums.AssignmentStatus
+  assignedAt?: Date | string
+  endedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  beneficiaryId: string
+  userId: string
+  tenantId: string
+  transportMode?: $Enums.TransportMode | null
+}
+
+export type BeneficiaryAssignmentUpdateWithoutVehicleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
+  assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+  beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutAssignmentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
+}
+
+export type BeneficiaryAssignmentUncheckedUpdateWithoutVehicleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
+  assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
+}
+
+export type BeneficiaryAssignmentUncheckedUpdateManyWithoutVehicleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
+  assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
 }
 
 
@@ -845,9 +1079,12 @@ export type BeneficiaryAssignmentSelect<ExtArgs extends runtime.Types.Extensions
   beneficiaryId?: boolean
   userId?: boolean
   tenantId?: boolean
+  transportMode?: boolean
+  vehicleId?: boolean
   beneficiary?: boolean | Prisma.BeneficiaryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  vehicle?: boolean | Prisma.BeneficiaryAssignment$vehicleArgs<ExtArgs>
 }, ExtArgs["result"]["beneficiaryAssignment"]>
 
 
@@ -862,13 +1099,16 @@ export type BeneficiaryAssignmentSelectScalar = {
   beneficiaryId?: boolean
   userId?: boolean
   tenantId?: boolean
+  transportMode?: boolean
+  vehicleId?: boolean
 }
 
-export type BeneficiaryAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "assignedAt" | "endedAt" | "createdAt" | "updatedAt" | "beneficiaryId" | "userId" | "tenantId", ExtArgs["result"]["beneficiaryAssignment"]>
+export type BeneficiaryAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "assignedAt" | "endedAt" | "createdAt" | "updatedAt" | "beneficiaryId" | "userId" | "tenantId" | "transportMode" | "vehicleId", ExtArgs["result"]["beneficiaryAssignment"]>
 export type BeneficiaryAssignmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   beneficiary?: boolean | Prisma.BeneficiaryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  vehicle?: boolean | Prisma.BeneficiaryAssignment$vehicleArgs<ExtArgs>
 }
 
 export type $BeneficiaryAssignmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -877,6 +1117,7 @@ export type $BeneficiaryAssignmentPayload<ExtArgs extends runtime.Types.Extensio
     beneficiary: Prisma.$BeneficiaryPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
     tenant: Prisma.$TenantPayload<ExtArgs>
+    vehicle: Prisma.$VehiclePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -888,6 +1129,8 @@ export type $BeneficiaryAssignmentPayload<ExtArgs extends runtime.Types.Extensio
     beneficiaryId: string
     userId: string
     tenantId: string
+    transportMode: $Enums.TransportMode | null
+    vehicleId: string | null
   }, ExtArgs["result"]["beneficiaryAssignment"]>
   composites: {}
 }
@@ -1231,6 +1474,7 @@ export interface Prisma__BeneficiaryAssignmentClient<T, Null = never, ExtArgs ex
   beneficiary<T extends Prisma.BeneficiaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BeneficiaryDefaultArgs<ExtArgs>>): Prisma.Prisma__BeneficiaryClient<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vehicle<T extends Prisma.BeneficiaryAssignment$vehicleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BeneficiaryAssignment$vehicleArgs<ExtArgs>>): Prisma.Prisma__VehicleClient<runtime.Types.Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1269,6 +1513,8 @@ export interface BeneficiaryAssignmentFieldRefs {
   readonly beneficiaryId: Prisma.FieldRef<"BeneficiaryAssignment", 'String'>
   readonly userId: Prisma.FieldRef<"BeneficiaryAssignment", 'String'>
   readonly tenantId: Prisma.FieldRef<"BeneficiaryAssignment", 'String'>
+  readonly transportMode: Prisma.FieldRef<"BeneficiaryAssignment", 'TransportMode'>
+  readonly vehicleId: Prisma.FieldRef<"BeneficiaryAssignment", 'String'>
 }
     
 
@@ -1614,6 +1860,25 @@ export type BeneficiaryAssignmentDeleteManyArgs<ExtArgs extends runtime.Types.Ex
    * Limit how many BeneficiaryAssignments to delete.
    */
   limit?: number
+}
+
+/**
+ * BeneficiaryAssignment.vehicle
+ */
+export type BeneficiaryAssignment$vehicleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Vehicle
+   */
+  select?: Prisma.VehicleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Vehicle
+   */
+  omit?: Prisma.VehicleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VehicleInclude<ExtArgs> | null
+  where?: Prisma.VehicleWhereInput
 }
 
 /**

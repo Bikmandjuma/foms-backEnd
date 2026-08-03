@@ -27,6 +27,16 @@ export async function login(req: Request, res: Response): Promise<void> {
     throw new ApiError(401, "Invalid email or password");
   }
 
+  // Inactive/suspended accounts are unauthorized outright — no token is
+  // issued at all, regardless of a correct password.
+  if (!user.isPlatformAdmin && user.status !== "ACTIVE") {
+    const reason =
+      user.status === "SUSPENDED"
+        ? "Your account has been suspended. Contact your administrator for help."
+        : "Your account is inactive. Contact your administrator to reactivate it.";
+    throw new ApiError(403, reason);
+  }
+
   const token = signToken({
     sub: user.id,
     roleId: user.roleId,
