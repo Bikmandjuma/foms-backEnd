@@ -4,7 +4,8 @@ import { defineConfig } from "prisma/config";
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 const encodedUser = encodeURIComponent(DB_USER ?? "");
 const encodedPassword = encodeURIComponent(DB_PASSWORD ?? "");
-const databaseUrl = `mysql://${encodedUser}:${encodedPassword}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
+// const databaseUrl = `mysql://${encodedUser}:${encodedPassword}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
+const databaseUrl = 'mysql://root:PASSWORD@altaria.proxy.rlwy.net:55553/railway';
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
