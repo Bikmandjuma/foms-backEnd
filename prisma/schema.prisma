@@ -60,6 +60,9 @@ model User {
   id                         String                  @id @default(uuid())
   email                      String                  @unique
   name                       String?
+  firstName                  String?
+  lastName                   String?
+  avatarUrl                  String?
   password                   String
   createdAt                  DateTime                @default(now())
   updatedAt                  DateTime                @updatedAt
@@ -87,9 +90,35 @@ model User {
   replacementRequestsMade    ReplacementRequest[]    @relation("RequestedBy")
   role                       Role?                   @relation(fields: [roleId], references: [id])
   tenant                     Tenant?                 @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  passwordResetCodes         PasswordResetCode[]
 
   @@index([roleId], map: "User_roleId_fkey")
   @@index([tenantId], map: "User_tenantId_fkey")
+}
+
+model PasswordResetCode {
+  id        String    @id @default(uuid())
+  code      String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AdminLocation {
+  id       String @id @default(uuid())
+  province String
+  district String
+  sector   String
+  cell     String
+  village  String
+
+  @@unique([province, district, sector, cell, village], map: "AdminLocation_full_path_key")
+  @@index([province], map: "AdminLocation_province_idx")
+  @@index([province, district], map: "AdminLocation_province_district_idx")
+  @@index([province, district, sector], map: "AdminLocation_pds_idx")
+  @@index([province, district, sector, cell], map: "AdminLocation_pdsc_idx")
 }
 
 model Program {

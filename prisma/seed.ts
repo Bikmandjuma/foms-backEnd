@@ -9,8 +9,6 @@ const adapter = new PrismaMariaDb({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  connectionLimit: 5,
-  connectTimeout: 30000,
 });
 
 const prisma = new PrismaClient({ adapter });
@@ -25,8 +23,7 @@ async function main(): Promise<void> {
     update: {},
     create: {
       email: "admin@huska.rw",
-      firstName: "Super",
-      lastName: "Admin",
+      name: "Super Admin",
       password,
       isPlatformAdmin: true,
     },

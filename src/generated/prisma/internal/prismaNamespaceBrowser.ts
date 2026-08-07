@@ -55,6 +55,8 @@ export const ModelName = {
   Tenant: 'Tenant',
   Role: 'Role',
   User: 'User',
+  PasswordResetCode: 'PasswordResetCode',
+  AdminLocation: 'AdminLocation',
   Program: 'Program',
   Beneficiary: 'Beneficiary',
   ProgramAssignment: 'ProgramAssignment',
@@ -125,6 +127,9 @@ export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  avatarUrl: 'avatarUrl',
   password: 'password',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -146,6 +151,30 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PasswordResetCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type PasswordResetCodeScalarFieldEnum = (typeof PasswordResetCodeScalarFieldEnum)[keyof typeof PasswordResetCodeScalarFieldEnum]
+
+
+export const AdminLocationScalarFieldEnum = {
+  id: 'id',
+  province: 'province',
+  district: 'district',
+  sector: 'sector',
+  cell: 'cell',
+  village: 'village'
+} as const
+
+export type AdminLocationScalarFieldEnum = (typeof AdminLocationScalarFieldEnum)[keyof typeof AdminLocationScalarFieldEnum]
 
 
 export const ProgramScalarFieldEnum = {
@@ -387,6 +416,9 @@ export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  avatarUrl: 'avatarUrl',
   password: 'password',
   telephone: 'telephone',
   province: 'province',
@@ -399,6 +431,27 @@ export const UserOrderByRelevanceFieldEnum = {
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+export const PasswordResetCodeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  code: 'code',
+  userId: 'userId'
+} as const
+
+export type PasswordResetCodeOrderByRelevanceFieldEnum = (typeof PasswordResetCodeOrderByRelevanceFieldEnum)[keyof typeof PasswordResetCodeOrderByRelevanceFieldEnum]
+
+
+export const AdminLocationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  province: 'province',
+  district: 'district',
+  sector: 'sector',
+  cell: 'cell',
+  village: 'village'
+} as const
+
+export type AdminLocationOrderByRelevanceFieldEnum = (typeof AdminLocationOrderByRelevanceFieldEnum)[keyof typeof AdminLocationOrderByRelevanceFieldEnum]
 
 
 export const ProgramOrderByRelevanceFieldEnum = {
