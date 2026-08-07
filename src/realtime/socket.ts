@@ -5,6 +5,16 @@ import { prisma } from "../utils/prisma.js";
 
 let io: IOServer | null = null;
 
+interface ConnectionInfo {
+  userId: string;
+  tenantId: string | null;
+  isPlatformAdmin: boolean;
+}
+
+// socketId -> who that socket belongs to, so disconnect can look itself up
+// without needing the closure captured at connect-time.
+const socketInfo = new Map<string, ConnectionInfo>();
+
 // userId -> set of live socket ids. A user can have several tabs/devices
 // open at once; they only go "offline" once every socket disconnects.
 const onlineSockets = new Map<string, Set<string>>();
@@ -32,6 +42,7 @@ export function initSocket(httpServer: HTTPServer): IOServer {
       }
       socket.data.userId = payload.sub;
       socket.data.tenantId = payload.tenantId ?? null;
+      socket.data.isPlatformAdmin = payload.isPlatformAdmin ?? false;
       next();
     } catch {
       next(new Error("Invalid token"));
@@ -39,32 +50,56 @@ export function initSocket(httpServer: HTTPServer): IOServer {
   });
 
   io.on("connection", (socket) => {
-    const userId = socket.data.userId as string;
-    const tenantId = socket.data.tenantId as string | null;
+    const info: ConnectionInfo = {
+      userId: socket.data.userId as string,
+      tenantId: socket.data.tenantId as string | null,
+      isPlatformAdmin: !!socket.data.isPlatformAdmin,
+    };
+    socketInfo.set(socket.id, info);
 
-    if (tenantId) socket.join(`tenant:${tenantId}`);
-    socket.join(`user:${userId}`);
+    if (info.tenantId) socket.join(`tenant:${info.tenantId}`);
+    if (info.isPlatformAdmin) socket.join("platform-admins");
+    socket.join(`user:${info.userId}`);
 
-    if (!onlineSockets.has(userId)) onlineSockets.set(userId, new Set());
-    onlineSockets.get(userId)!.add(socket.id);
-    broadcastPresence(tenantId);
+    if (!onlineSockets.has(info.userId)) onlineSockets.set(info.userId, new Set());
+    onlineSockets.get(info.userId)!.add(socket.id);
+
+    broadcastPresence(info.tenantId);
 
     socket.on("disconnect", () => {
-      const set = onlineSockets.get(userId);
+      socketInfo.delete(socket.id);
+      const set = onlineSockets.get(info.userId);
       set?.delete(socket.id);
-      if (set && set.size === 0) onlineSockets.delete(userId);
-      broadcastPresence(tenantId);
+      if (set && set.size === 0) onlineSockets.delete(info.userId);
+      broadcastPresence(info.tenantId);
     });
   });
 
   return io;
 }
 
+// The user ids of every currently-connected socket that belongs to the
+// given tenant. Platform admins pass tenantId = null to mean "everyone,
+// everywhere" instead of one tenant's slice.
+export function getOnlineUserIds(tenantId?: string | null): string[] {
+  const ids = new Set<string>();
+  for (const info of socketInfo.values()) {
+    if (tenantId === undefined || info.tenantId === tenantId) ids.add(info.userId);
+  }
+  return Array.from(ids);
+}
+
 function broadcastPresence(tenantId: string | null): void {
   if (!io) return;
-  const onlineUserIds = Array.from(onlineSockets.keys());
-  const payload = { onlineUserIds, count: onlineUserIds.length };
-  if (tenantId) io.to(`tenant:${tenantId}`).emit("presence:update", payload);
+
+  if (tenantId) {
+    const onlineUserIds = getOnlineUserIds(tenantId);
+    io.to(`tenant:${tenantId}`).emit("presence:update", { onlineUserIds, count: onlineUserIds.length });
+  }
+
+  // Platform admins watch the whole system, not one tenant's room.
+  const globalIds = getOnlineUserIds(undefined);
+  io.to("platform-admins").emit("presence:update", { onlineUserIds: globalIds, count: globalIds.length });
 }
 
 export function emitActivity(tenantId: string | null, entry: unknown): void {
@@ -75,8 +110,4 @@ export function emitActivity(tenantId: string | null, entry: unknown): void {
 export function emitNotification(userId: string, notification: unknown): void {
   if (!io) return;
   io.to(`user:${userId}`).emit("notification:new", notification);
-}
-
-export function getOnlineUserIds(): string[] {
-  return Array.from(onlineSockets.keys());
 }

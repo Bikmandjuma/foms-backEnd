@@ -87,3 +87,13 @@ export type FieldNote = Prisma.FieldNoteModel
  * 
  */
 export type ActivityLog = Prisma.ActivityLogModel
+/**
+ * Model PasswordResetCode
+ * 
+ */
+export type PasswordResetCode = Prisma.PasswordResetCodeModel
+/**
+ * Model AdminLocation
+ * 
+ */
+export type AdminLocation = Prisma.AdminLocationModel

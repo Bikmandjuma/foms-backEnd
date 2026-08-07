@@ -18,3 +18,24 @@ export function signToken(payload: JwtPayload): string {
 export function verifyToken(token: string): JwtPayload {
   return jwt.verify(token, JWT_SECRET) as JwtPayload;
 }
+
+// A separate, short-lived, single-purpose token issued only after a user
+// proves they own the 6-digit email code — it can do nothing except carry
+// them to the "set a new password" step, and only for 10 minutes.
+export interface ResetTokenPayload {
+  purpose: "password-reset";
+  sub: string;
+  codeId: string;
+}
+
+export function signResetToken(payload: Omit<ResetTokenPayload, "purpose">): string {
+  return jwt.sign({ ...payload, purpose: "password-reset" }, JWT_SECRET, { expiresIn: "10m" });
+}
+
+export function verifyResetToken(token: string): ResetTokenPayload {
+  const decoded = jwt.verify(token, JWT_SECRET) as ResetTokenPayload;
+  if (decoded.purpose !== "password-reset") {
+    throw new Error("Invalid token purpose");
+  }
+  return decoded;
+}

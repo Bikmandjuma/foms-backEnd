@@ -6,6 +6,7 @@ import { sendResponse } from "../utils/apiResponse.js";
 import { prisma } from "../utils/prisma.js";
 import { createUserSchema, updateUserSchema } from "../utils/validators.js";
 import { recordActivity } from "../utils/activityLog.js";
+import { hasAction, parsePermissions } from "../utils/permissions.js";
 
 const SALT_ROUNDS = 10;
 
@@ -13,10 +14,15 @@ const userSelect = {
   id: true,
   email: true,
   name: true,
+  firstName: true,
+  lastName: true,
+  avatarUrl: true,
   telephone: true,
   province: true,
   district: true,
   sector: true,
+  cell: true,
+  village: true,
   gender: true,
   dateOfBirth: true,
   status: true,
@@ -28,6 +34,17 @@ const userSelect = {
   role: { select: { id: true, name: true } },
   tenantId: true,
 } as const;
+
+// `name` is kept in sync from firstName+lastName wherever those are the
+// fields actually being edited (the new User form), so anywhere in the app
+// still displaying the old single `.name` field keeps working unchanged.
+function deriveName(data: { name?: string; firstName?: string; lastName?: string }): { name?: string } {
+  if (data.firstName !== undefined || data.lastName !== undefined) {
+    const combined = [data.firstName, data.lastName].filter(Boolean).join(" ").trim();
+    if (combined) return { name: combined };
+  }
+  return {};
+}
 
 function idParam(req: Request): string {
   return req.params.id as string;
@@ -46,7 +63,7 @@ async function actorHasManagePermission(req: Request): Promise<boolean> {
   if (req.user!.isPlatformAdmin) return true;
   if (!req.user!.roleId) return false;
   const role = await prisma.role.findUnique({ where: { id: req.user!.roleId }, select: { permissions: true } });
-  return Array.isArray(role?.permissions) && (role!.permissions as string[]).includes("users:manage");
+  return hasAction(parsePermissions(role?.permissions), "users:edit");
 }
 
 export async function listUsers(req: Request, res: Response): Promise<void> {
@@ -77,7 +94,7 @@ export async function createUser(req: Request, res: Response): Promise<void> {
   const password = await bcrypt.hash(data.password, SALT_ROUNDS);
 
   const user = await prisma.user.create({
-    data: { ...data, password, tenantId },
+    data: { ...data, ...deriveName(data), password, tenantId },
     select: userSelect,
   });
 
@@ -112,6 +129,7 @@ export async function updateUser(req: Request, res: Response): Promise<void> {
     where: { id: existing.id },
     data: {
       ...rest,
+      ...deriveName(rest),
       ...(password ? { password: await bcrypt.hash(password, SALT_ROUNDS) } : {}),
     },
     select: userSelect,
@@ -147,4 +165,30 @@ export async function deleteUser(req: Request, res: Response): Promise<void> {
   });
 
   sendResponse(res, 200, "User deleted successfully", null);
+}
+
+// Self-service avatar upload — separate from the JSON PATCH endpoint since
+// this one carries a multipart file. Always affects the caller's own
+// account; there's no "set someone else's avatar" version of this.
+export async function uploadMyAvatar(req: Request, res: Response): Promise<void> {
+  const file = (req as Request & { file?: Express.Multer.File }).file;
+  if (!file) throw new ApiError(400, "No image file was uploaded");
+
+  const avatarUrl = `/uploads/avatars/${file.filename}`;
+
+  const user = await prisma.user.update({
+    where: { id: req.user!.sub },
+    data: { avatarUrl },
+    select: userSelect,
+  });
+
+  await recordActivity({
+    tenantId: user.tenantId,
+    userId: req.user!.sub,
+    action: "updated profile photo",
+    entityType: "User",
+    entityId: user.id,
+  });
+
+  sendResponse(res, 200, "Profile photo updated successfully", user);
 }

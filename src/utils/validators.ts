@@ -25,6 +25,8 @@ export const updateRoleSchema = z.object({
 
 const userProfileFields = {
   name: z.string().optional(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
   telephone: z.string().optional(),
   province: z.string().optional(),
   district: z.string().optional(),
@@ -159,41 +161,12 @@ export const bulkProgramAssignmentSchema = z.object({
   userIds: z.array(z.string().uuid()).min(1),
 });
 
-// The smart, generic assignment engine (PRD field-ops expansion). Vehicles,
-// drivers, and motorcycles are intentionally NOT required — the core engine
-// only needs a program, a pool of enumerators, and a distribution strategy.
-export const assignmentStrategySchema = z.enum(["EVEN", "DAILY_TARGET", "RANDOM"]);
-
-// Transport is an optional layer on top of the core engine — PRD: "the
-// vehicle is just in case, but where there isn't [one]... the vehicle
-// should be optional, not a requirement." Mirrors the field-ops radio
-// picker: None / Vehicle / Motorcycle / Walking / Public Transport.
-export const transportModeSchema = z.enum(["NONE", "VEHICLE", "MOTORCYCLE", "WALKING", "PUBLIC_TRANSPORT"]);
-
-const vehicleAllocationSchema = z.object({
-  vehicleId: z.string().uuid(),
-  userIds: z.array(z.string().uuid()).min(1),
-});
-
+// The Smart Assignment Engine, per spec: choose a program (its enumerators
+// are auto-detected from ProgramAssignment, never picked manually here),
+// choose one or more vehicles, click Random Top-Up. That's the whole input.
 export const autoAssignBeneficiariesSchema = z.object({
   programId: z.string().uuid(),
-  userIds: z.array(z.string().uuid()).min(1),
-  strategy: assignmentStrategySchema.default("EVEN"),
-  dailyTarget: z.number().int().positive().optional(),
-  // If true (default), only beneficiaries with no ACTIVE assignment yet are
-  // considered. Set false to also re-shuffle beneficiaries already assigned.
-  onlyUnassigned: z.boolean().default(true),
-  // Optional geographic scoping, so a deployment covering only certain
-  // districts/sectors doesn't sweep in respondents from elsewhere.
-  province: z.string().optional(),
-  district: z.string().optional(),
-  sector: z.string().optional(),
-  // Transport is opt-in. When vehicles are given, the pool is distributed
-  // across them first (respecting each vehicle's daily capacity), then
-  // round-robin'd across that vehicle's own enumerators — everyone listed
-  // in a vehicle must also be part of the top-level userIds selection.
-  transportMode: transportModeSchema.default("NONE"),
-  vehicles: z.array(vehicleAllocationSchema).optional(),
+  vehicleIds: z.array(z.string().uuid()).min(1, "Select at least one vehicle"),
 });
 
 export const createVehicleSchema = z.object({

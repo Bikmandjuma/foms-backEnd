@@ -3,6 +3,8 @@ import {
   createTenant,
   deleteTenant,
   getTenant,
+  getTenantOverview,
+  listTenantAdmins,
   listTenants,
   updateTenant,
 } from "../controllers/tenantController.js";
@@ -13,6 +15,8 @@ const router = Router();
 
 router.use(authenticate, requirePlatformAdmin);
 
+router.get("/admins", asyncHandler(listTenantAdmins));
+router.get("/:id/overview", asyncHandler(getTenantOverview));
 router.get("/", asyncHandler(listTenants));
 router.post("/", asyncHandler(createTenant));
 router.get("/:id", asyncHandler(getTenant));

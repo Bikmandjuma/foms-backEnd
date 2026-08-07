@@ -1,3 +1,5 @@
+// Prisma schema for Field Operation MS (FOMS)
+
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -7,390 +9,19 @@ datasource db {
   provider = "mysql"
 }
 
-model activitylog {
-  id         String   @id
-  action     String
-  entityType String
-  entityId   String?
-  metadata   String?  @db.LongText
-  createdAt  DateTime @default(now())
-  tenantId   String?
-  userId     String?
-  tenant     tenant?  @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "ActivityLog_tenantId_fkey")
-  user       user?    @relation(fields: [userId], references: [id], map: "ActivityLog_userId_fkey")
-
-  @@index([tenantId], map: "ActivityLog_tenantId_fkey")
-  @@index([userId], map: "ActivityLog_userId_fkey")
-}
-
-model beneficiary {
-  id                                                                       String                  @id
-  code                                                                     String
-  name                                                                     String
-  telephone                                                                String?
-  gender                                                                   beneficiary_gender?
-  dateOfBirth                                                              DateTime?
-  status                                                                   beneficiary_status      @default(ACTIVE)
-  province                                                                 String?
-  district                                                                 String?
-  sector                                                                   String?
-  nationalId                                                               String?
-  householdSize                                                            Int?
-  createdAt                                                                DateTime                @default(now())
-  updatedAt                                                                DateTime
-  tenantId                                                                 String
-  consentAt                                                                DateTime?
-  consentGiven                                                             Boolean                 @default(false)
-  outcome                                                                  beneficiary_outcome     @default(PENDING)
-  cell                                                                     String?
-  village                                                                  String?
-  tenant                                                                   tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "Beneficiary_tenantId_fkey")
-  beneficiaryassignment                                                    beneficiaryassignment[]
-  fieldvisit                                                               fieldvisit[]
-  replacementrequest_replacementrequest_candidateRespondentIdTobeneficiary replacementrequest[]    @relation("replacementrequest_candidateRespondentIdTobeneficiary")
-  replacementrequest_replacementrequest_originalRespondentIdTobeneficiary  replacementrequest[]    @relation("replacementrequest_originalRespondentIdTobeneficiary")
-  program                                                                  program[]               @relation("beneficiarytoprogram")
-
-  @@unique([tenantId, code], map: "Beneficiary_tenantId_code_key")
-  @@unique([tenantId, nationalId], map: "Beneficiary_tenantId_nationalId_key")
-}
-
-model beneficiaryassignment {
-  id            String                               @id
-  status        beneficiaryassignment_status         @default(ACTIVE)
-  assignedAt    DateTime                             @default(now())
-  endedAt       DateTime?
-  createdAt     DateTime                             @default(now())
-  updatedAt     DateTime
-  beneficiaryId String
-  userId        String
-  tenantId      String
-  transportMode beneficiaryassignment_transportMode?
-  vehicleId     String?
-  beneficiary   beneficiary                          @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade, map: "BeneficiaryAssignment_beneficiaryId_fkey")
-  tenant        tenant                               @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "BeneficiaryAssignment_tenantId_fkey")
-  user          user                                 @relation(fields: [userId], references: [id], onDelete: Cascade, map: "BeneficiaryAssignment_userId_fkey")
-  vehicle       vehicle?                             @relation(fields: [vehicleId], references: [id], map: "BeneficiaryAssignment_vehicleId_fkey")
-
-  @@index([beneficiaryId], map: "BeneficiaryAssignment_beneficiaryId_fkey")
-  @@index([tenantId], map: "BeneficiaryAssignment_tenantId_fkey")
-  @@index([userId], map: "BeneficiaryAssignment_userId_fkey")
-  @@index([vehicleId], map: "BeneficiaryAssignment_vehicleId_fkey")
-}
-
-model fieldcheckin {
-  id                     String       @id
-  checkInAt              DateTime     @default(now())
-  checkOutAt             DateTime?
-  gpsLat                 Float?
-  gpsLng                 Float?
-  note                   String?
-  tenantId               String
-  userId                 String
-  projectId              String?
-  currentGpsLat          Float?
-  currentGpsLng          Float?
-  currentGpsAt           DateTime?
-  currentGpsNote         String?
-  checkoutOverrideReason String?
-  program                program?     @relation(fields: [projectId], references: [id], map: "FieldCheckIn_projectId_fkey")
-  tenant                 tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "FieldCheckIn_tenantId_fkey")
-  user                   user         @relation(fields: [userId], references: [id], onDelete: Cascade, map: "FieldCheckIn_userId_fkey")
-  fieldnote              fieldnote[]
-  fieldvisit             fieldvisit[]
-
-  @@index([projectId], map: "FieldCheckIn_projectId_fkey")
-  @@index([tenantId], map: "FieldCheckIn_tenantId_fkey")
-  @@index([userId], map: "FieldCheckIn_userId_fkey")
-}
-
-model fieldnote {
-  id           String       @id
-  note         String
-  createdAt    DateTime     @default(now())
-  checkInId    String
-  fieldcheckin fieldcheckin @relation(fields: [checkInId], references: [id], onDelete: Cascade, map: "FieldNote_checkInId_fkey")
-
-  @@index([checkInId], map: "FieldNote_checkInId_fkey")
-}
-
-model fieldvisit {
-  id            String             @id
-  outcome       fieldvisit_outcome @default(PENDING)
-  note          String?
-  recordedAt    DateTime           @default(now())
-  checkInId     String
-  beneficiaryId String
-  beneficiary   beneficiary        @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade, map: "FieldVisit_beneficiaryId_fkey")
-  fieldcheckin  fieldcheckin       @relation(fields: [checkInId], references: [id], onDelete: Cascade, map: "FieldVisit_checkInId_fkey")
-
-  @@unique([checkInId, beneficiaryId], map: "FieldVisit_checkInId_beneficiaryId_key")
-  @@index([beneficiaryId], map: "FieldVisit_beneficiaryId_fkey")
-}
-
-model notification {
-  id         String            @id
-  type       notification_type
-  message    String
-  entityType String?
-  entityId   String?
-  read       Boolean           @default(false)
-  createdAt  DateTime          @default(now())
-  tenantId   String?
-  userId     String
-  tenant     tenant?           @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "Notification_tenantId_fkey")
-  user       user              @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Notification_userId_fkey")
-
-  @@index([tenantId], map: "Notification_tenantId_fkey")
-  @@index([userId], map: "Notification_userId_fkey")
-}
-
-model program {
-  id                String                @id
-  name              String
-  description       String?
-  createdAt         DateTime              @default(now())
-  updatedAt         DateTime
-  tenantId          String
-  endDate           DateTime?
-  scenarioType      program_scenarioType?
-  startDate         DateTime?
-  status            program_status        @default(PLANNING)
-  targetSampleSize  Int?
-  fieldcheckin      fieldcheckin[]
-  tenant            tenant                @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "Program_tenantId_fkey")
-  programassignment programassignment[]
-  beneficiary       beneficiary[]         @relation("beneficiarytoprogram")
-
-  @@unique([tenantId, name], map: "Program_tenantId_name_key")
-}
-
-model programassignment {
-  id         String                   @id
-  status     programassignment_status @default(ACTIVE)
-  assignedAt DateTime                 @default(now())
-  endedAt    DateTime?
-  createdAt  DateTime                 @default(now())
-  updatedAt  DateTime
-  userId     String
-  programId  String
-  tenantId   String
-  program    program                  @relation(fields: [programId], references: [id], onDelete: Cascade, map: "ProgramAssignment_programId_fkey")
-  tenant     tenant                   @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "ProgramAssignment_tenantId_fkey")
-  user       user                     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "ProgramAssignment_userId_fkey")
-
-  @@index([programId], map: "ProgramAssignment_programId_fkey")
-  @@index([tenantId], map: "ProgramAssignment_tenantId_fkey")
-  @@index([userId], map: "ProgramAssignment_userId_fkey")
-}
-
-model replacementrequest {
-  id                                                                String                         @id
-  reason                                                            String
-  status                                                            replacementrequest_status      @default(PENDING)
-  createdAt                                                         DateTime                       @default(now())
-  decidedAt                                                         DateTime?
-  tenantId                                                          String
-  originalRespondentId                                              String
-  candidateRespondentId                                             String?
-  requestedByUserId                                                 String
-  decidedByUserId                                                   String?
-  matchLevel                                                        replacementrequest_matchLevel?
-  overrideReason                                                    String?
-  beneficiary_replacementrequest_candidateRespondentIdTobeneficiary beneficiary?                   @relation("replacementrequest_candidateRespondentIdTobeneficiary", fields: [candidateRespondentId], references: [id], map: "ReplacementRequest_candidateRespondentId_fkey")
-  user_replacementrequest_decidedByUserIdTouser                     user?                          @relation("replacementrequest_decidedByUserIdTouser", fields: [decidedByUserId], references: [id], map: "ReplacementRequest_decidedByUserId_fkey")
-  beneficiary_replacementrequest_originalRespondentIdTobeneficiary  beneficiary                    @relation("replacementrequest_originalRespondentIdTobeneficiary", fields: [originalRespondentId], references: [id], onDelete: Cascade, map: "ReplacementRequest_originalRespondentId_fkey")
-  user_replacementrequest_requestedByUserIdTouser                   user                           @relation("replacementrequest_requestedByUserIdTouser", fields: [requestedByUserId], references: [id], map: "ReplacementRequest_requestedByUserId_fkey")
-  tenant                                                            tenant                         @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "ReplacementRequest_tenantId_fkey")
-
-  @@index([candidateRespondentId], map: "ReplacementRequest_candidateRespondentId_fkey")
-  @@index([decidedByUserId], map: "ReplacementRequest_decidedByUserId_fkey")
-  @@index([originalRespondentId], map: "ReplacementRequest_originalRespondentId_fkey")
-  @@index([requestedByUserId], map: "ReplacementRequest_requestedByUserId_fkey")
-  @@index([tenantId], map: "ReplacementRequest_tenantId_fkey")
-}
-
-model role {
-  id          String   @id
-  name        String
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime
-  tenantId    String
-  permissions String?  @db.LongText
-  tenant      tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "Role_tenantId_fkey")
-  user        user[]
-
-  @@unique([tenantId, name], map: "Role_tenantId_name_key")
-}
-
-model tenant {
-  id                    String                  @id
-  name                  String                  @unique(map: "Tenant_name_key")
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime
-  activitylog           activitylog[]
-  beneficiary           beneficiary[]
-  beneficiaryassignment beneficiaryassignment[]
-  fieldcheckin          fieldcheckin[]
-  notification          notification[]
-  program               program[]
-  programassignment     programassignment[]
-  replacementrequest    replacementrequest[]
-  role                  role[]
-  user                  user[]
-  vehicle               vehicle[]
-}
-
-model user {
-  id                                                            String                  @id
-  email                                                         String                  @unique(map: "User_email_key")
-  name                                                          String?
-  password                                                      String
-  createdAt                                                     DateTime                @default(now())
-  updatedAt                                                     DateTime
-  telephone                                                     String?
-  province                                                      String?
-  district                                                      String?
-  sector                                                        String?
-  gender                                                        user_gender?
-  dateOfBirth                                                   DateTime?
-  status                                                        user_status             @default(ACTIVE)
-  educationLevel                                                user_educationLevel?
-  isPlatformAdmin                                               Boolean                 @default(false)
-  tokenVersion                                                  Int                     @default(0)
-  roleId                                                        String?
-  tenantId                                                      String?
-  lastSeenAt                                                    DateTime?
-  cell                                                          String?
-  village                                                       String?
-  activitylog                                                   activitylog[]
-  beneficiaryassignment                                         beneficiaryassignment[]
-  fieldcheckin                                                  fieldcheckin[]
-  notification                                                  notification[]
-  programassignment                                             programassignment[]
-  replacementrequest_replacementrequest_decidedByUserIdTouser   replacementrequest[]    @relation("replacementrequest_decidedByUserIdTouser")
-  replacementrequest_replacementrequest_requestedByUserIdTouser replacementrequest[]    @relation("replacementrequest_requestedByUserIdTouser")
-  role                                                          role?                   @relation(fields: [roleId], references: [id], map: "User_roleId_fkey")
-  tenant                                                        tenant?                 @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "User_tenantId_fkey")
-
-  @@index([roleId], map: "User_roleId_fkey")
-  @@index([tenantId], map: "User_tenantId_fkey")
-}
-
-model vehicle {
-  id                    String                  @id
-  name                  String
-  type                  vehicle_type            @default(VEHICLE)
-  driverName            String?
-  capacityPerDay        Int?
-  active                Boolean                 @default(true)
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime
-  tenantId              String
-  beneficiaryassignment beneficiaryassignment[]
-  tenant                tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade, map: "Vehicle_tenantId_fkey")
-
-  @@index([tenantId], map: "Vehicle_tenantId_fkey")
-}
-
-enum beneficiaryassignment_status {
-  ACTIVE
-  ENDED
-}
-
-enum fieldvisit_outcome {
-  PENDING
-  COMPLETED
-  REFUSED
-  NOT_FOUND
-  RELOCATED
-  DECEASED
-  REPLACED
-}
-
-enum notification_type {
-  ASSIGNMENT_PROGRAM
-  ASSIGNMENT_BENEFICIARY
-  REPLACEMENT_REQUESTED
-  REPLACEMENT_DECIDED
-  SYSTEM
-}
-
-enum programassignment_status {
-  ACTIVE
-  ENDED
-}
-
-enum replacementrequest_status {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
-enum vehicle_type {
-  VEHICLE
-  MOTORCYCLE
-}
-
-enum beneficiary_gender {
+enum Gender {
   MALE
   FEMALE
   OTHER
 }
 
-enum beneficiary_status {
+enum UserStatus {
   ACTIVE
   INACTIVE
   SUSPENDED
 }
 
-enum program_scenarioType {
-  BASELINE_SURVEY
-  ENDLINE_SURVEY
-  TRACER_STUDY
-  PROGRAM_OUTCOME_ASSESSMENT
-  QUALITATIVE_STUDY
-}
-
-enum beneficiaryassignment_transportMode {
-  NONE
-  VEHICLE
-  MOTORCYCLE
-  WALKING
-  PUBLIC_TRANSPORT
-}
-
-enum program_status {
-  PLANNING
-  FIELDWORK
-  DATA_CLEANING
-  REPORTING
-  COMPLETED
-}
-
-enum replacementrequest_matchLevel {
-  VILLAGE
-  CELL
-  SECTOR
-  DISTRICT
-  PROVINCE
-  OVERRIDE
-}
-
-enum user_gender {
-  MALE
-  FEMALE
-  OTHER
-}
-
-enum user_status {
-  ACTIVE
-  INACTIVE
-  SUSPENDED
-}
-
-enum user_educationLevel {
+enum EducationLevel {
   NONE
   PRIMARY
   SECONDARY
@@ -399,7 +30,28 @@ enum user_educationLevel {
   DOCTORATE
 }
 
-enum beneficiary_outcome {
+enum AssignmentStatus {
+  ACTIVE
+  ENDED
+}
+
+enum ScenarioType {
+  BASELINE_SURVEY
+  ENDLINE_SURVEY
+  TRACER_STUDY
+  PROGRAM_OUTCOME_ASSESSMENT
+  QUALITATIVE_STUDY
+}
+
+enum ProjectStatus {
+  PLANNING
+  FIELDWORK
+  DATA_CLEANING
+  REPORTING
+  COMPLETED
+}
+
+enum ResponseOutcome {
   PENDING
   COMPLETED
   REFUSED
@@ -407,4 +59,439 @@ enum beneficiary_outcome {
   RELOCATED
   DECEASED
   REPLACED
+}
+
+enum ReplacementStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// How closely a replacement candidate matches the original respondent's
+// location. Computed automatically by comparing village → cell → sector →
+// district → province in priority order. OVERRIDE means an approver picked
+// a candidate outside this hierarchy and had to record why.
+enum GeoMatchLevel {
+  VILLAGE
+  CELL
+  SECTOR
+  DISTRICT
+  PROVINCE
+  OVERRIDE
+}
+
+// Assignment strategy used by the smart assignment engine (PRD FR-6).
+enum AssignmentStrategy {
+  EVEN
+  DAILY_TARGET
+  RANDOM
+}
+
+enum VehicleType {
+  VEHICLE
+  MOTORCYCLE
+}
+
+// Mirrors the field-ops PRD's transport picker: "Transport — None / Vehicle
+// / Motorcycle / Walking / Public Transport". Only VEHICLE and MOTORCYCLE
+// involve an actual Vehicle record; the other three are just a label on the
+// assignment for reporting.
+enum TransportMode {
+  NONE
+  VEHICLE
+  MOTORCYCLE
+  WALKING
+  PUBLIC_TRANSPORT
+}
+
+enum NotificationType {
+  ASSIGNMENT_PROGRAM
+  ASSIGNMENT_BENEFICIARY
+  REPLACEMENT_REQUESTED
+  REPLACEMENT_DECIDED
+  SYSTEM
+}
+
+// Notifications — fired whenever something is assigned to a user (a
+// program, a beneficiary, a replacement request needing their decision) or
+// when a decision affecting them is made. Pushed live over Socket.io and
+// also listable/markable-as-read via REST for when the user wasn't online.
+model Notification {
+  id        String           @id @default(uuid())
+  type      NotificationType
+  message   String
+  entityType String?
+  entityId   String?
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Tenant {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roles                  Role[]
+  users                  User[]
+  programs               Program[]
+  beneficiaries          Beneficiary[]
+  programAssignments     ProgramAssignment[]
+  beneficiaryAssignments BeneficiaryAssignment[]
+  replacementRequests    ReplacementRequest[]
+  fieldCheckIns          FieldCheckIn[]
+  activityLogs           ActivityLog[]
+  notifications          Notification[]
+  vehicles               Vehicle[]
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  // Canonical list lives in src/utils/permissions.ts. Stored as a JSON array
+  // of permission-key strings, e.g. ["users:view","programs:manage"].
+  permissions Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  users User[]
+
+  @@unique([tenantId, name])
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  firstName String?
+  lastName  String?
+  avatarUrl String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  telephone      String?
+  province       String?
+  district       String?
+  sector         String?
+  cell           String?
+  village        String?
+  gender         Gender?
+  dateOfBirth    DateTime?
+  status         UserStatus      @default(ACTIVE)
+  educationLevel EducationLevel?
+
+  // Platform admins manage tenants and are not restricted to a single tenant's data.
+  isPlatformAdmin Boolean @default(false)
+
+  // Bumped on logout to invalidate previously issued JWTs for this user.
+  tokenVersion Int @default(0)
+
+  // Updated (throttled) on each authenticated request. Powers the "online
+  // users" presence indicator alongside the live Socket.io connection.
+  lastSeenAt DateTime?
+
+  // Null for platform admins, who aren't scoped to any tenant.
+  roleId String?
+  role   Role?   @relation(fields: [roleId], references: [id])
+
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  programAssignments     ProgramAssignment[]
+  beneficiaryAssignments BeneficiaryAssignment[]
+  fieldCheckIns          FieldCheckIn[]
+  activityLogs           ActivityLog[]
+  replacementRequestsMade    ReplacementRequest[] @relation("RequestedBy")
+  replacementRequestsDecided ReplacementRequest[] @relation("DecidedBy")
+  notifications          Notification[]
+  passwordResetCodes     PasswordResetCode[]
+}
+
+model Program {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Research-operations metadata (additive — all optional/defaulted so
+  // existing rows created before this migration remain valid).
+  scenarioType     ScenarioType?
+  status           ProjectStatus @default(PLANNING)
+  targetSampleSize Int?
+  startDate        DateTime?
+  endDate          DateTime?
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  beneficiaries Beneficiary[]
+  assignments   ProgramAssignment[]
+  fieldCheckIns FieldCheckIn[]
+
+  @@unique([tenantId, name])
+}
+
+model Beneficiary {
+  id   String @id @default(uuid())
+  code String
+
+  name        String
+  telephone   String?
+  gender      Gender?
+  dateOfBirth DateTime?
+  status      UserStatus @default(ACTIVE)
+
+  province String?
+  district String?
+  sector   String?
+  cell     String?
+  village  String?
+
+  nationalId    String?
+  householdSize Int?
+
+  // Consent & fieldwork outcome tracking (PRD FR-3.8 / replacement engine).
+  consentGiven Boolean          @default(false)
+  consentAt    DateTime?
+  outcome      ResponseOutcome  @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  programs    Program[]
+  assignments BeneficiaryAssignment[]
+  fieldVisits FieldVisit[]
+
+  originalReplacementRequests  ReplacementRequest[] @relation("OriginalRespondent")
+  candidateReplacementRequests ReplacementRequest[] @relation("CandidateRespondent")
+
+  @@unique([tenantId, code])
+  @@unique([tenantId, nationalId])
+}
+
+model ProgramAssignment {
+  id         String           @id @default(uuid())
+  status     AssignmentStatus @default(ACTIVE)
+  assignedAt DateTime         @default(now())
+  endedAt    DateTime?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  programId String
+  program   Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model BeneficiaryAssignment {
+  id         String           @id @default(uuid())
+  status     AssignmentStatus @default(ACTIVE)
+  assignedAt DateTime         @default(now())
+  endedAt    DateTime?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  beneficiaryId String
+  beneficiary   Beneficiary @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  // Set only when the smart assignment engine ran with a transport mode
+  // selected — vehicle assignment is optional logistics layered on top of
+  // the core enumerator-only engine, never a requirement (PRD: "the vehicle
+  // is just in case, but where there isn't [one], ... the vehicle should be
+  // optional, not a requirement").
+  transportMode TransportMode?
+  vehicleId     String?
+  vehicle       Vehicle?       @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+}
+
+// A vehicle (or motorcycle) is itself an assignment resource: it has a name/
+// plate, a driver, and a daily carrying capacity that the smart assignment
+// engine respects when it's opted into a run.
+model Vehicle {
+  id             String      @id @default(uuid())
+  name           String
+  type           VehicleType @default(VEHICLE)
+  driverName     String?
+  capacityPerDay Int?
+  active         Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  assignments BeneficiaryAssignment[]
+}
+
+// PRD FR-7 — the replacement engine. An enumerator can never pick their own
+// replacement: they raise a request, and a supervisor/study lead approves or
+// rejects it, optionally naming which reserve-pool respondent replaces the
+// original. Every decision is permanently recorded.
+model ReplacementRequest {
+  id        String            @id @default(uuid())
+  reason    String
+  status    ReplacementStatus @default(PENDING)
+  createdAt DateTime          @default(now())
+  decidedAt DateTime?
+
+  // Computed at decide-time by comparing the original respondent's and the
+  // candidate's village/cell/sector/district/province. OVERRIDE requires
+  // overrideReason to be set — an approver picking a candidate outside the
+  // geographic hierarchy must record why.
+  matchLevel     GeoMatchLevel?
+  overrideReason String?
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  originalRespondentId String
+  originalRespondent   Beneficiary @relation("OriginalRespondent", fields: [originalRespondentId], references: [id], onDelete: Cascade)
+
+  candidateRespondentId String?
+  candidateRespondent   Beneficiary? @relation("CandidateRespondent", fields: [candidateRespondentId], references: [id])
+
+  requestedByUserId String
+  requestedBy       User   @relation("RequestedBy", fields: [requestedByUserId], references: [id])
+
+  decidedByUserId String?
+  decidedBy       User?   @relation("DecidedBy", fields: [decidedByUserId], references: [id])
+}
+
+// PRD FR-8 — duty-of-care / field monitoring: who is in the field and where.
+model FieldCheckIn {
+  id         String    @id @default(uuid())
+  checkInAt  DateTime  @default(now())
+  checkOutAt DateTime?
+  gpsLat     Float?
+  gpsLng     Float?
+  note       String?
+
+  // Current live-location ping, refreshed while the field worker is out
+  // (distinct from the check-in gpsLat/gpsLng, which is where they started).
+  currentGpsLat  Float?
+  currentGpsLng  Float?
+  currentGpsAt   DateTime?
+  currentGpsNote String?
+
+  // Set when a supervisor force-checks-out a field worker who still has
+  // respondents without a recorded outcome — the completeness rule is
+  // bypassed but the reason is permanently recorded.
+  checkoutOverrideReason String?
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  projectId String?
+  project   Program? @relation(fields: [projectId], references: [id])
+
+  visits FieldVisit[]
+  notes  FieldNote[]
+}
+
+// One row per respondent the field worker recorded an outcome for during a
+// given check-in ("today's" attendance). Distinct from Beneficiary.outcome
+// (the respondent's latest global status) — this is the per-day audit trail
+// that gates checkout and feeds the daily report / Excel export.
+model FieldVisit {
+  id          String          @id @default(uuid())
+  outcome     ResponseOutcome @default(PENDING)
+  note        String?
+  recordedAt  DateTime        @default(now())
+
+  checkInId String
+  checkIn   FieldCheckIn @relation(fields: [checkInId], references: [id], onDelete: Cascade)
+
+  beneficiaryId String
+  beneficiary   Beneficiary @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
+
+  @@unique([checkInId, beneficiaryId])
+}
+
+// Timestamped free-text notes a field worker can add throughout the day
+// ("road blocked", "respondent relocated"), not just at check-in/out.
+model FieldNote {
+  id        String   @id @default(uuid())
+  note      String
+  createdAt DateTime @default(now())
+
+  checkInId String
+  checkIn   FieldCheckIn @relation(fields: [checkInId], references: [id], onDelete: Cascade)
+}
+
+// Audit trail. Powers the "Activity Logs" / user-logs screen and the live
+// activity feed on the dashboard.
+model ActivityLog {
+  id         String   @id @default(uuid())
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+// Forgot-password: a 6-digit code emailed to the user, short-lived,
+// single-use. Same flow for platform admins, tenant admins, and regular
+// tenant users — there's only one User table.
+model PasswordResetCode {
+  id        String    @id @default(uuid())
+  code      String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Rwanda's administrative hierarchy, flattened one row per village. Powers
+// the cascading province -> district -> sector -> cell -> village selects
+// used when registering a user or a respondent. Seeded via
+// scripts/import-geo-sql.ts (see README).
+model AdminLocation {
+  id       String @id @default(uuid())
+  province String
+  district String
+  sector   String
+  cell     String
+  village  String
+
+  @@unique([province, district, sector, cell, village])
+  @@index([province])
+  @@index([province, district])
+  @@index([province, district, sector])
+  @@index([province, district, sector, cell])
 }

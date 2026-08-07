@@ -64,7 +64,9 @@ export const ModelName = {
   FieldCheckIn: 'FieldCheckIn',
   FieldVisit: 'FieldVisit',
   FieldNote: 'FieldNote',
-  ActivityLog: 'ActivityLog'
+  ActivityLog: 'ActivityLog',
+  PasswordResetCode: 'PasswordResetCode',
+  AdminLocation: 'AdminLocation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -125,6 +127,9 @@ export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  avatarUrl: 'avatarUrl',
   password: 'password',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -312,6 +317,30 @@ export const ActivityLogScalarFieldEnum = {
 export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
 
 
+export const PasswordResetCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type PasswordResetCodeScalarFieldEnum = (typeof PasswordResetCodeScalarFieldEnum)[keyof typeof PasswordResetCodeScalarFieldEnum]
+
+
+export const AdminLocationScalarFieldEnum = {
+  id: 'id',
+  province: 'province',
+  district: 'district',
+  sector: 'sector',
+  cell: 'cell',
+  village: 'village'
+} as const
+
+export type AdminLocationScalarFieldEnum = (typeof AdminLocationScalarFieldEnum)[keyof typeof AdminLocationScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -387,6 +416,9 @@ export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  avatarUrl: 'avatarUrl',
   password: 'password',
   telephone: 'telephone',
   province: 'province',
@@ -515,4 +547,25 @@ export const ActivityLogOrderByRelevanceFieldEnum = {
 } as const
 
 export type ActivityLogOrderByRelevanceFieldEnum = (typeof ActivityLogOrderByRelevanceFieldEnum)[keyof typeof ActivityLogOrderByRelevanceFieldEnum]
+
+
+export const PasswordResetCodeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  code: 'code',
+  userId: 'userId'
+} as const
+
+export type PasswordResetCodeOrderByRelevanceFieldEnum = (typeof PasswordResetCodeOrderByRelevanceFieldEnum)[keyof typeof PasswordResetCodeOrderByRelevanceFieldEnum]
+
+
+export const AdminLocationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  province: 'province',
+  district: 'district',
+  sector: 'sector',
+  cell: 'cell',
+  village: 'village'
+} as const
+
+export type AdminLocationOrderByRelevanceFieldEnum = (typeof AdminLocationOrderByRelevanceFieldEnum)[keyof typeof AdminLocationOrderByRelevanceFieldEnum]
 

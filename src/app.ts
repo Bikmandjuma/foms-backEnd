@@ -11,6 +11,7 @@ import beneficiaryAssignmentRoutes from "./routes/beneficiaryAssignmentRoutes.js
 import beneficiaryRoutes from "./routes/beneficiaryRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import fieldCheckInRoutes from "./routes/fieldCheckInRoutes.js";
+import geoRoutes from "./routes/geoRoutes.js";
 import metaRoutes from "./routes/metaRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import programAssignmentRoutes from "./routes/programAssignmentRoutes.js";
@@ -50,6 +51,8 @@ export function createApp() {
   app.use("/api/vehicles", vehicleRoutes);
   app.use("/api/replacement-requests", replacementRoutes);
   app.use("/api/field-checkins", fieldCheckInRoutes);
+  app.use("/api/geo", geoRoutes);
+  app.use("/uploads", express.static("uploads"));
   app.use("/api/activity-logs", activityLogRoutes);
   app.use("/api/notifications", notificationRoutes);
   app.use("/api/dashboard", dashboardRoutes);

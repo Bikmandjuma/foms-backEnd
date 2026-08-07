@@ -152,3 +152,30 @@ export async function buildDailyReportWorkbook(rows: DailyReportRow[]): Promise<
   const buffer = await workbook.xlsx.writeBuffer();
   return Buffer.from(buffer);
 }
+
+export interface AssignmentReportRow {
+  vehicle: string;
+  driverName: string;
+  respondentCode: string;
+  respondentName: string;
+  enumerator: string;
+  program: string;
+}
+
+/** Excel export for a Smart Assignment Engine run — one row per assigned respondent. */
+export async function buildAssignmentReportWorkbook(rows: AssignmentReportRow[]): Promise<Buffer> {
+  const workbook = new ExcelJS.Workbook();
+  const sheet = workbook.addWorksheet("Assignment report");
+  sheet.columns = [
+    { header: "Vehicle", key: "vehicle", width: 18 },
+    { header: "Driver", key: "driverName", width: 18 },
+    { header: "Respondent code", key: "respondentCode", width: 18 },
+    { header: "Respondent name", key: "respondentName", width: 24 },
+    { header: "Enumerator", key: "enumerator", width: 22 },
+    { header: "Program", key: "program", width: 28 },
+  ];
+  sheet.getRow(1).font = { bold: true };
+  rows.forEach((r) => sheet.addRow(r));
+  const buffer = await workbook.xlsx.writeBuffer();
+  return Buffer.from(buffer);
+}
