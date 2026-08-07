@@ -40,12 +40,12 @@ export type ProgramMinAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  tenantId: string | null
+  endDate: Date | null
   scenarioType: $Enums.ScenarioType | null
+  startDate: Date | null
   status: $Enums.ProjectStatus | null
   targetSampleSize: number | null
-  startDate: Date | null
-  endDate: Date | null
-  tenantId: string | null
 }
 
 export type ProgramMaxAggregateOutputType = {
@@ -54,12 +54,12 @@ export type ProgramMaxAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  tenantId: string | null
+  endDate: Date | null
   scenarioType: $Enums.ScenarioType | null
+  startDate: Date | null
   status: $Enums.ProjectStatus | null
   targetSampleSize: number | null
-  startDate: Date | null
-  endDate: Date | null
-  tenantId: string | null
 }
 
 export type ProgramCountAggregateOutputType = {
@@ -68,12 +68,12 @@ export type ProgramCountAggregateOutputType = {
   description: number
   createdAt: number
   updatedAt: number
+  tenantId: number
+  endDate: number
   scenarioType: number
+  startDate: number
   status: number
   targetSampleSize: number
-  startDate: number
-  endDate: number
-  tenantId: number
   _all: number
 }
 
@@ -92,12 +92,12 @@ export type ProgramMinAggregateInputType = {
   description?: true
   createdAt?: true
   updatedAt?: true
+  tenantId?: true
+  endDate?: true
   scenarioType?: true
+  startDate?: true
   status?: true
   targetSampleSize?: true
-  startDate?: true
-  endDate?: true
-  tenantId?: true
 }
 
 export type ProgramMaxAggregateInputType = {
@@ -106,12 +106,12 @@ export type ProgramMaxAggregateInputType = {
   description?: true
   createdAt?: true
   updatedAt?: true
+  tenantId?: true
+  endDate?: true
   scenarioType?: true
+  startDate?: true
   status?: true
   targetSampleSize?: true
-  startDate?: true
-  endDate?: true
-  tenantId?: true
 }
 
 export type ProgramCountAggregateInputType = {
@@ -120,12 +120,12 @@ export type ProgramCountAggregateInputType = {
   description?: true
   createdAt?: true
   updatedAt?: true
+  tenantId?: true
+  endDate?: true
   scenarioType?: true
+  startDate?: true
   status?: true
   targetSampleSize?: true
-  startDate?: true
-  endDate?: true
-  tenantId?: true
   _all?: true
 }
 
@@ -221,12 +221,12 @@ export type ProgramGroupByOutputType = {
   description: string | null
   createdAt: Date
   updatedAt: Date
+  tenantId: string
+  endDate: Date | null
   scenarioType: $Enums.ScenarioType | null
+  startDate: Date | null
   status: $Enums.ProjectStatus
   targetSampleSize: number | null
-  startDate: Date | null
-  endDate: Date | null
-  tenantId: string
   _count: ProgramCountAggregateOutputType | null
   _avg: ProgramAvgAggregateOutputType | null
   _sum: ProgramSumAggregateOutputType | null
@@ -258,16 +258,16 @@ export type ProgramWhereInput = {
   description?: Prisma.StringNullableFilter<"Program"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Program"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Program"> | Date | string
+  tenantId?: Prisma.StringFilter<"Program"> | string
+  endDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   scenarioType?: Prisma.EnumScenarioTypeNullableFilter<"Program"> | $Enums.ScenarioType | null
+  startDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   status?: Prisma.EnumProjectStatusFilter<"Program"> | $Enums.ProjectStatus
   targetSampleSize?: Prisma.IntNullableFilter<"Program"> | number | null
-  startDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
-  endDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
-  tenantId?: Prisma.StringFilter<"Program"> | string
-  tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
-  beneficiaries?: Prisma.BeneficiaryListRelationFilter
-  assignments?: Prisma.ProgramAssignmentListRelationFilter
   fieldCheckIns?: Prisma.FieldCheckInListRelationFilter
+  tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  assignments?: Prisma.ProgramAssignmentListRelationFilter
+  beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }
 
 export type ProgramOrderByWithRelationInput = {
@@ -276,16 +276,16 @@ export type ProgramOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   scenarioType?: Prisma.SortOrderInput | Prisma.SortOrder
+  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrderInput | Prisma.SortOrder
-  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  tenantId?: Prisma.SortOrder
-  tenant?: Prisma.TenantOrderByWithRelationInput
-  beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
-  assignments?: Prisma.ProgramAssignmentOrderByRelationAggregateInput
   fieldCheckIns?: Prisma.FieldCheckInOrderByRelationAggregateInput
+  tenant?: Prisma.TenantOrderByWithRelationInput
+  assignments?: Prisma.ProgramAssignmentOrderByRelationAggregateInput
+  beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
   _relevance?: Prisma.ProgramOrderByRelevanceInput
 }
 
@@ -299,16 +299,16 @@ export type ProgramWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Program"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Program"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Program"> | Date | string
+  tenantId?: Prisma.StringFilter<"Program"> | string
+  endDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   scenarioType?: Prisma.EnumScenarioTypeNullableFilter<"Program"> | $Enums.ScenarioType | null
+  startDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   status?: Prisma.EnumProjectStatusFilter<"Program"> | $Enums.ProjectStatus
   targetSampleSize?: Prisma.IntNullableFilter<"Program"> | number | null
-  startDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
-  endDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
-  tenantId?: Prisma.StringFilter<"Program"> | string
-  tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
-  beneficiaries?: Prisma.BeneficiaryListRelationFilter
-  assignments?: Prisma.ProgramAssignmentListRelationFilter
   fieldCheckIns?: Prisma.FieldCheckInListRelationFilter
+  tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  assignments?: Prisma.ProgramAssignmentListRelationFilter
+  beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }, "id" | "tenantId_name">
 
 export type ProgramOrderByWithAggregationInput = {
@@ -317,12 +317,12 @@ export type ProgramOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   scenarioType?: Prisma.SortOrderInput | Prisma.SortOrder
+  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrderInput | Prisma.SortOrder
-  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  tenantId?: Prisma.SortOrder
   _count?: Prisma.ProgramCountOrderByAggregateInput
   _avg?: Prisma.ProgramAvgOrderByAggregateInput
   _max?: Prisma.ProgramMaxOrderByAggregateInput
@@ -339,12 +339,12 @@ export type ProgramScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Program"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Program"> | Date | string
+  tenantId?: Prisma.StringWithAggregatesFilter<"Program"> | string
+  endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Program"> | Date | string | null
   scenarioType?: Prisma.EnumScenarioTypeNullableWithAggregatesFilter<"Program"> | $Enums.ScenarioType | null
+  startDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Program"> | Date | string | null
   status?: Prisma.EnumProjectStatusWithAggregatesFilter<"Program"> | $Enums.ProjectStatus
   targetSampleSize?: Prisma.IntNullableWithAggregatesFilter<"Program"> | number | null
-  startDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Program"> | Date | string | null
-  endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Program"> | Date | string | null
-  tenantId?: Prisma.StringWithAggregatesFilter<"Program"> | string
 }
 
 export type ProgramCreateInput = {
@@ -353,15 +353,15 @@ export type ProgramCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
-  tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
-  assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
+  assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateInput = {
@@ -370,15 +370,15 @@ export type ProgramUncheckedCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenantId: string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
-  tenantId: string
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
-  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUpdateInput = {
@@ -387,15 +387,15 @@ export type ProgramUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
-  assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
+  assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateInput = {
@@ -404,15 +404,15 @@ export type ProgramUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
-  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramCreateManyInput = {
@@ -421,12 +421,12 @@ export type ProgramCreateManyInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenantId: string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
-  tenantId: string
 }
 
 export type ProgramUpdateManyMutationInput = {
@@ -435,11 +435,11 @@ export type ProgramUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ProgramUncheckedUpdateManyInput = {
@@ -448,12 +448,12 @@ export type ProgramUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProgramListRelationFilter = {
@@ -483,12 +483,12 @@ export type ProgramCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  endDate?: Prisma.SortOrder
   scenarioType?: Prisma.SortOrder
+  startDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrder
-  startDate?: Prisma.SortOrder
-  endDate?: Prisma.SortOrder
-  tenantId?: Prisma.SortOrder
 }
 
 export type ProgramAvgOrderByAggregateInput = {
@@ -501,12 +501,12 @@ export type ProgramMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  endDate?: Prisma.SortOrder
   scenarioType?: Prisma.SortOrder
+  startDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrder
-  startDate?: Prisma.SortOrder
-  endDate?: Prisma.SortOrder
-  tenantId?: Prisma.SortOrder
 }
 
 export type ProgramMinOrderByAggregateInput = {
@@ -515,12 +515,12 @@ export type ProgramMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  endDate?: Prisma.SortOrder
   scenarioType?: Prisma.SortOrder
+  startDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrder
-  startDate?: Prisma.SortOrder
-  endDate?: Prisma.SortOrder
-  tenantId?: Prisma.SortOrder
 }
 
 export type ProgramSumOrderByAggregateInput = {
@@ -669,14 +669,14 @@ export type ProgramCreateWithoutTenantInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
-  assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateWithoutTenantInput = {
@@ -685,14 +685,14 @@ export type ProgramUncheckedCreateWithoutTenantInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
-  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramCreateOrConnectWithoutTenantInput = {
@@ -730,12 +730,12 @@ export type ProgramScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Program"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Program"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Program"> | Date | string
+  tenantId?: Prisma.StringFilter<"Program"> | string
+  endDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   scenarioType?: Prisma.EnumScenarioTypeNullableFilter<"Program"> | $Enums.ScenarioType | null
+  startDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   status?: Prisma.EnumProjectStatusFilter<"Program"> | $Enums.ProjectStatus
   targetSampleSize?: Prisma.IntNullableFilter<"Program"> | number | null
-  startDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
-  endDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
-  tenantId?: Prisma.StringFilter<"Program"> | string
 }
 
 export type ProgramCreateWithoutBeneficiariesInput = {
@@ -744,14 +744,14 @@ export type ProgramCreateWithoutBeneficiariesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
-  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
 }
 
 export type ProgramUncheckedCreateWithoutBeneficiariesInput = {
@@ -760,14 +760,14 @@ export type ProgramUncheckedCreateWithoutBeneficiariesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenantId: string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
-  tenantId: string
-  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutBeneficiariesInput = {
@@ -797,14 +797,14 @@ export type ProgramCreateWithoutAssignmentsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
-  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
 }
 
 export type ProgramUncheckedCreateWithoutAssignmentsInput = {
@@ -813,14 +813,14 @@ export type ProgramUncheckedCreateWithoutAssignmentsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenantId: string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
-  tenantId: string
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramCreateOrConnectWithoutAssignmentsInput = {
@@ -845,14 +845,14 @@ export type ProgramUpdateWithoutAssignmentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
-  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutAssignmentsInput = {
@@ -861,14 +861,14 @@ export type ProgramUncheckedUpdateWithoutAssignmentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramCreateWithoutFieldCheckInsInput = {
@@ -877,14 +877,14 @@ export type ProgramCreateWithoutFieldCheckInsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateWithoutFieldCheckInsInput = {
@@ -893,14 +893,14 @@ export type ProgramUncheckedCreateWithoutFieldCheckInsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenantId: string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
-  tenantId: string
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramCreateOrConnectWithoutFieldCheckInsInput = {
@@ -925,14 +925,14 @@ export type ProgramUpdateWithoutFieldCheckInsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutFieldCheckInsInput = {
@@ -941,14 +941,14 @@ export type ProgramUncheckedUpdateWithoutFieldCheckInsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramCreateManyTenantInput = {
@@ -957,11 +957,11 @@ export type ProgramCreateManyTenantInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
   status?: $Enums.ProjectStatus
   targetSampleSize?: number | null
-  startDate?: Date | string | null
-  endDate?: Date | string | null
 }
 
 export type ProgramUpdateWithoutTenantInput = {
@@ -970,14 +970,14 @@ export type ProgramUpdateWithoutTenantInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
-  assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutTenantInput = {
@@ -986,14 +986,14 @@ export type ProgramUncheckedUpdateWithoutTenantInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
-  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutTenantInput = {
@@ -1002,11 +1002,11 @@ export type ProgramUncheckedUpdateManyWithoutTenantInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ProgramUpdateWithoutBeneficiariesInput = {
@@ -1015,14 +1015,14 @@ export type ProgramUpdateWithoutBeneficiariesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
-  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutBeneficiariesInput = {
@@ -1031,14 +1031,14 @@ export type ProgramUncheckedUpdateWithoutBeneficiariesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutBeneficiariesInput = {
@@ -1047,12 +1047,12 @@ export type ProgramUncheckedUpdateManyWithoutBeneficiariesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -1061,15 +1061,15 @@ export type ProgramUncheckedUpdateManyWithoutBeneficiariesInput = {
  */
 
 export type ProgramCountOutputType = {
-  beneficiaries: number
-  assignments: number
   fieldCheckIns: number
+  assignments: number
+  beneficiaries: number
 }
 
 export type ProgramCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  beneficiaries?: boolean | ProgramCountOutputTypeCountBeneficiariesArgs
-  assignments?: boolean | ProgramCountOutputTypeCountAssignmentsArgs
   fieldCheckIns?: boolean | ProgramCountOutputTypeCountFieldCheckInsArgs
+  assignments?: boolean | ProgramCountOutputTypeCountAssignmentsArgs
+  beneficiaries?: boolean | ProgramCountOutputTypeCountBeneficiariesArgs
 }
 
 /**
@@ -1085,8 +1085,8 @@ export type ProgramCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * ProgramCountOutputType without action
  */
-export type ProgramCountOutputTypeCountBeneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BeneficiaryWhereInput
+export type ProgramCountOutputTypeCountFieldCheckInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FieldCheckInWhereInput
 }
 
 /**
@@ -1099,8 +1099,8 @@ export type ProgramCountOutputTypeCountAssignmentsArgs<ExtArgs extends runtime.T
 /**
  * ProgramCountOutputType without action
  */
-export type ProgramCountOutputTypeCountFieldCheckInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FieldCheckInWhereInput
+export type ProgramCountOutputTypeCountBeneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BeneficiaryWhereInput
 }
 
 
@@ -1110,16 +1110,16 @@ export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  tenantId?: boolean
+  endDate?: boolean
   scenarioType?: boolean
+  startDate?: boolean
   status?: boolean
   targetSampleSize?: boolean
-  startDate?: boolean
-  endDate?: boolean
-  tenantId?: boolean
-  tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
-  beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
-  assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
   fieldCheckIns?: boolean | Prisma.Program$fieldCheckInsArgs<ExtArgs>
+  tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
+  beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["program"]>
 
@@ -1131,30 +1131,30 @@ export type ProgramSelectScalar = {
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  tenantId?: boolean
+  endDate?: boolean
   scenarioType?: boolean
+  startDate?: boolean
   status?: boolean
   targetSampleSize?: boolean
-  startDate?: boolean
-  endDate?: boolean
-  tenantId?: boolean
 }
 
-export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "scenarioType" | "status" | "targetSampleSize" | "startDate" | "endDate" | "tenantId", ExtArgs["result"]["program"]>
+export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "tenantId" | "endDate" | "scenarioType" | "startDate" | "status" | "targetSampleSize", ExtArgs["result"]["program"]>
 export type ProgramInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
-  beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
-  assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
   fieldCheckIns?: boolean | Prisma.Program$fieldCheckInsArgs<ExtArgs>
+  tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
+  beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Program"
   objects: {
-    tenant: Prisma.$TenantPayload<ExtArgs>
-    beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
-    assignments: Prisma.$ProgramAssignmentPayload<ExtArgs>[]
     fieldCheckIns: Prisma.$FieldCheckInPayload<ExtArgs>[]
+    tenant: Prisma.$TenantPayload<ExtArgs>
+    assignments: Prisma.$ProgramAssignmentPayload<ExtArgs>[]
+    beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1162,12 +1162,12 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     description: string | null
     createdAt: Date
     updatedAt: Date
+    tenantId: string
+    endDate: Date | null
     scenarioType: $Enums.ScenarioType | null
+    startDate: Date | null
     status: $Enums.ProjectStatus
     targetSampleSize: number | null
-    startDate: Date | null
-    endDate: Date | null
-    tenantId: string
   }, ExtArgs["result"]["program"]>
   composites: {}
 }
@@ -1508,10 +1508,10 @@ readonly fields: ProgramFieldRefs;
  */
 export interface Prisma__ProgramClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  beneficiaries<T extends Prisma.Program$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  assignments<T extends Prisma.Program$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fieldCheckIns<T extends Prisma.Program$fieldCheckInsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$fieldCheckInsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldCheckInPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  assignments<T extends Prisma.Program$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  beneficiaries<T extends Prisma.Program$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1546,12 +1546,12 @@ export interface ProgramFieldRefs {
   readonly description: Prisma.FieldRef<"Program", 'String'>
   readonly createdAt: Prisma.FieldRef<"Program", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Program", 'DateTime'>
+  readonly tenantId: Prisma.FieldRef<"Program", 'String'>
+  readonly endDate: Prisma.FieldRef<"Program", 'DateTime'>
   readonly scenarioType: Prisma.FieldRef<"Program", 'ScenarioType'>
+  readonly startDate: Prisma.FieldRef<"Program", 'DateTime'>
   readonly status: Prisma.FieldRef<"Program", 'ProjectStatus'>
   readonly targetSampleSize: Prisma.FieldRef<"Program", 'Int'>
-  readonly startDate: Prisma.FieldRef<"Program", 'DateTime'>
-  readonly endDate: Prisma.FieldRef<"Program", 'DateTime'>
-  readonly tenantId: Prisma.FieldRef<"Program", 'String'>
 }
     
 
@@ -1900,27 +1900,27 @@ export type ProgramDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Program.beneficiaries
+ * Program.fieldCheckIns
  */
-export type Program$beneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Program$fieldCheckInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Beneficiary
+   * Select specific fields to fetch from the FieldCheckIn
    */
-  select?: Prisma.BeneficiarySelect<ExtArgs> | null
+  select?: Prisma.FieldCheckInSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Beneficiary
+   * Omit specific fields from the FieldCheckIn
    */
-  omit?: Prisma.BeneficiaryOmit<ExtArgs> | null
+  omit?: Prisma.FieldCheckInOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BeneficiaryInclude<ExtArgs> | null
-  where?: Prisma.BeneficiaryWhereInput
-  orderBy?: Prisma.BeneficiaryOrderByWithRelationInput | Prisma.BeneficiaryOrderByWithRelationInput[]
-  cursor?: Prisma.BeneficiaryWhereUniqueInput
+  include?: Prisma.FieldCheckInInclude<ExtArgs> | null
+  where?: Prisma.FieldCheckInWhereInput
+  orderBy?: Prisma.FieldCheckInOrderByWithRelationInput | Prisma.FieldCheckInOrderByWithRelationInput[]
+  cursor?: Prisma.FieldCheckInWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.BeneficiaryScalarFieldEnum | Prisma.BeneficiaryScalarFieldEnum[]
+  distinct?: Prisma.FieldCheckInScalarFieldEnum | Prisma.FieldCheckInScalarFieldEnum[]
 }
 
 /**
@@ -1948,27 +1948,27 @@ export type Program$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Program.fieldCheckIns
+ * Program.beneficiaries
  */
-export type Program$fieldCheckInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Program$beneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the FieldCheckIn
+   * Select specific fields to fetch from the Beneficiary
    */
-  select?: Prisma.FieldCheckInSelect<ExtArgs> | null
+  select?: Prisma.BeneficiarySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the FieldCheckIn
+   * Omit specific fields from the Beneficiary
    */
-  omit?: Prisma.FieldCheckInOmit<ExtArgs> | null
+  omit?: Prisma.BeneficiaryOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.FieldCheckInInclude<ExtArgs> | null
-  where?: Prisma.FieldCheckInWhereInput
-  orderBy?: Prisma.FieldCheckInOrderByWithRelationInput | Prisma.FieldCheckInOrderByWithRelationInput[]
-  cursor?: Prisma.FieldCheckInWhereUniqueInput
+  include?: Prisma.BeneficiaryInclude<ExtArgs> | null
+  where?: Prisma.BeneficiaryWhereInput
+  orderBy?: Prisma.BeneficiaryOrderByWithRelationInput | Prisma.BeneficiaryOrderByWithRelationInput[]
+  cursor?: Prisma.BeneficiaryWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.FieldCheckInScalarFieldEnum | Prisma.FieldCheckInScalarFieldEnum[]
+  distinct?: Prisma.BeneficiaryScalarFieldEnum | Prisma.BeneficiaryScalarFieldEnum[]
 }
 
 /**

@@ -36,6 +36,7 @@
     "pdfkit": "^0.19.1",
     "socket.io": "^4.8.3",
     "swagger-ui-express": "^5.0.1",
+    "tsx": "^4.23.10",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -52,7 +53,6 @@
     "@types/pdfkit": "^0.17.6",
     "@types/swagger-ui-express": "^4.1.8",
     "prisma": "^7.9.1",
-    "tsx": "^4.23.10",
     "typescript": "^7.0.2"
   }
 }

@@ -214,9 +214,9 @@ export type ProgramAssignmentWhereInput = {
   userId?: Prisma.StringFilter<"ProgramAssignment"> | string
   programId?: Prisma.StringFilter<"ProgramAssignment"> | string
   tenantId?: Prisma.StringFilter<"ProgramAssignment"> | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type ProgramAssignmentOrderByWithRelationInput = {
@@ -229,9 +229,9 @@ export type ProgramAssignmentOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   programId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   program?: Prisma.ProgramOrderByWithRelationInput
   tenant?: Prisma.TenantOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.ProgramAssignmentOrderByRelevanceInput
 }
 
@@ -248,9 +248,9 @@ export type ProgramAssignmentWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"ProgramAssignment"> | string
   programId?: Prisma.StringFilter<"ProgramAssignment"> | string
   tenantId?: Prisma.StringFilter<"ProgramAssignment"> | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type ProgramAssignmentOrderByWithAggregationInput = {
@@ -290,9 +290,9 @@ export type ProgramAssignmentCreateInput = {
   endedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutProgramAssignmentsInput
   program: Prisma.ProgramCreateNestedOneWithoutAssignmentsInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramAssignmentsInput
+  user: Prisma.UserCreateNestedOneWithoutProgramAssignmentsInput
 }
 
 export type ProgramAssignmentUncheckedCreateInput = {
@@ -314,9 +314,9 @@ export type ProgramAssignmentUpdateInput = {
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutProgramAssignmentsNestedInput
   program?: Prisma.ProgramUpdateOneRequiredWithoutAssignmentsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramAssignmentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutProgramAssignmentsNestedInput
 }
 
 export type ProgramAssignmentUncheckedUpdateInput = {
@@ -553,8 +553,8 @@ export type ProgramAssignmentCreateWithoutTenantInput = {
   endedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutProgramAssignmentsInput
   program: Prisma.ProgramCreateNestedOneWithoutAssignmentsInput
+  user: Prisma.UserCreateNestedOneWithoutProgramAssignmentsInput
 }
 
 export type ProgramAssignmentUncheckedCreateWithoutTenantInput = {
@@ -664,8 +664,8 @@ export type ProgramAssignmentCreateWithoutProgramInput = {
   endedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutProgramAssignmentsInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramAssignmentsInput
+  user: Prisma.UserCreateNestedOneWithoutProgramAssignmentsInput
 }
 
 export type ProgramAssignmentUncheckedCreateWithoutProgramInput = {
@@ -723,8 +723,8 @@ export type ProgramAssignmentUpdateWithoutTenantInput = {
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutProgramAssignmentsNestedInput
   program?: Prisma.ProgramUpdateOneRequiredWithoutAssignmentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutProgramAssignmentsNestedInput
 }
 
 export type ProgramAssignmentUncheckedUpdateWithoutTenantInput = {
@@ -811,8 +811,8 @@ export type ProgramAssignmentUpdateWithoutProgramInput = {
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutProgramAssignmentsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramAssignmentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutProgramAssignmentsNestedInput
 }
 
 export type ProgramAssignmentUncheckedUpdateWithoutProgramInput = {
@@ -849,9 +849,9 @@ export type ProgramAssignmentSelect<ExtArgs extends runtime.Types.Extensions.Int
   userId?: boolean
   programId?: boolean
   tenantId?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["programAssignment"]>
 
 
@@ -870,17 +870,17 @@ export type ProgramAssignmentSelectScalar = {
 
 export type ProgramAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "assignedAt" | "endedAt" | "createdAt" | "updatedAt" | "userId" | "programId" | "tenantId", ExtArgs["result"]["programAssignment"]>
 export type ProgramAssignmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $ProgramAssignmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProgramAssignment"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     program: Prisma.$ProgramPayload<ExtArgs>
     tenant: Prisma.$TenantPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1232,9 +1232,9 @@ readonly fields: ProgramAssignmentFieldRefs;
  */
 export interface Prisma__ProgramAssignmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   program<T extends Prisma.ProgramDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProgramDefaultArgs<ExtArgs>>): Prisma.Prisma__ProgramClient<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

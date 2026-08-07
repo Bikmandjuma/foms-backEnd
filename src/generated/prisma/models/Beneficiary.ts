@@ -45,16 +45,16 @@ export type BeneficiaryMinAggregateOutputType = {
   province: string | null
   district: string | null
   sector: string | null
-  cell: string | null
-  village: string | null
   nationalId: string | null
   householdSize: number | null
-  consentGiven: boolean | null
-  consentAt: Date | null
-  outcome: $Enums.ResponseOutcome | null
   createdAt: Date | null
   updatedAt: Date | null
   tenantId: string | null
+  consentAt: Date | null
+  consentGiven: boolean | null
+  outcome: $Enums.ResponseOutcome | null
+  cell: string | null
+  village: string | null
 }
 
 export type BeneficiaryMaxAggregateOutputType = {
@@ -68,16 +68,16 @@ export type BeneficiaryMaxAggregateOutputType = {
   province: string | null
   district: string | null
   sector: string | null
-  cell: string | null
-  village: string | null
   nationalId: string | null
   householdSize: number | null
-  consentGiven: boolean | null
-  consentAt: Date | null
-  outcome: $Enums.ResponseOutcome | null
   createdAt: Date | null
   updatedAt: Date | null
   tenantId: string | null
+  consentAt: Date | null
+  consentGiven: boolean | null
+  outcome: $Enums.ResponseOutcome | null
+  cell: string | null
+  village: string | null
 }
 
 export type BeneficiaryCountAggregateOutputType = {
@@ -91,16 +91,16 @@ export type BeneficiaryCountAggregateOutputType = {
   province: number
   district: number
   sector: number
-  cell: number
-  village: number
   nationalId: number
   householdSize: number
-  consentGiven: number
-  consentAt: number
-  outcome: number
   createdAt: number
   updatedAt: number
   tenantId: number
+  consentAt: number
+  consentGiven: number
+  outcome: number
+  cell: number
+  village: number
   _all: number
 }
 
@@ -124,16 +124,16 @@ export type BeneficiaryMinAggregateInputType = {
   province?: true
   district?: true
   sector?: true
-  cell?: true
-  village?: true
   nationalId?: true
   householdSize?: true
-  consentGiven?: true
-  consentAt?: true
-  outcome?: true
   createdAt?: true
   updatedAt?: true
   tenantId?: true
+  consentAt?: true
+  consentGiven?: true
+  outcome?: true
+  cell?: true
+  village?: true
 }
 
 export type BeneficiaryMaxAggregateInputType = {
@@ -147,16 +147,16 @@ export type BeneficiaryMaxAggregateInputType = {
   province?: true
   district?: true
   sector?: true
-  cell?: true
-  village?: true
   nationalId?: true
   householdSize?: true
-  consentGiven?: true
-  consentAt?: true
-  outcome?: true
   createdAt?: true
   updatedAt?: true
   tenantId?: true
+  consentAt?: true
+  consentGiven?: true
+  outcome?: true
+  cell?: true
+  village?: true
 }
 
 export type BeneficiaryCountAggregateInputType = {
@@ -170,16 +170,16 @@ export type BeneficiaryCountAggregateInputType = {
   province?: true
   district?: true
   sector?: true
-  cell?: true
-  village?: true
   nationalId?: true
   householdSize?: true
-  consentGiven?: true
-  consentAt?: true
-  outcome?: true
   createdAt?: true
   updatedAt?: true
   tenantId?: true
+  consentAt?: true
+  consentGiven?: true
+  outcome?: true
+  cell?: true
+  village?: true
   _all?: true
 }
 
@@ -280,16 +280,16 @@ export type BeneficiaryGroupByOutputType = {
   province: string | null
   district: string | null
   sector: string | null
-  cell: string | null
-  village: string | null
   nationalId: string | null
   householdSize: number | null
-  consentGiven: boolean
-  consentAt: Date | null
-  outcome: $Enums.ResponseOutcome
   createdAt: Date
   updatedAt: Date
   tenantId: string
+  consentAt: Date | null
+  consentGiven: boolean
+  outcome: $Enums.ResponseOutcome
+  cell: string | null
+  village: string | null
   _count: BeneficiaryCountAggregateOutputType | null
   _avg: BeneficiaryAvgAggregateOutputType | null
   _sum: BeneficiarySumAggregateOutputType | null
@@ -326,22 +326,22 @@ export type BeneficiaryWhereInput = {
   province?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   district?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   sector?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
-  cell?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
-  village?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   nationalId?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   householdSize?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
-  consentGiven?: Prisma.BoolFilter<"Beneficiary"> | boolean
-  consentAt?: Prisma.DateTimeNullableFilter<"Beneficiary"> | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFilter<"Beneficiary"> | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   tenantId?: Prisma.StringFilter<"Beneficiary"> | string
+  consentAt?: Prisma.DateTimeNullableFilter<"Beneficiary"> | Date | string | null
+  consentGiven?: Prisma.BoolFilter<"Beneficiary"> | boolean
+  outcome?: Prisma.EnumResponseOutcomeFilter<"Beneficiary"> | $Enums.ResponseOutcome
+  cell?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
+  village?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
-  programs?: Prisma.ProgramListRelationFilter
   assignments?: Prisma.BeneficiaryAssignmentListRelationFilter
   fieldVisits?: Prisma.FieldVisitListRelationFilter
-  originalReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
   candidateReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
+  originalReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
+  programs?: Prisma.ProgramListRelationFilter
 }
 
 export type BeneficiaryOrderByWithRelationInput = {
@@ -355,22 +355,22 @@ export type BeneficiaryOrderByWithRelationInput = {
   province?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   sector?: Prisma.SortOrderInput | Prisma.SortOrder
-  cell?: Prisma.SortOrderInput | Prisma.SortOrder
-  village?: Prisma.SortOrderInput | Prisma.SortOrder
   nationalId?: Prisma.SortOrderInput | Prisma.SortOrder
   householdSize?: Prisma.SortOrderInput | Prisma.SortOrder
-  consentGiven?: Prisma.SortOrder
-  consentAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  outcome?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  consentAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  consentGiven?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  cell?: Prisma.SortOrderInput | Prisma.SortOrder
+  village?: Prisma.SortOrderInput | Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
-  programs?: Prisma.ProgramOrderByRelationAggregateInput
   assignments?: Prisma.BeneficiaryAssignmentOrderByRelationAggregateInput
   fieldVisits?: Prisma.FieldVisitOrderByRelationAggregateInput
-  originalReplacementRequests?: Prisma.ReplacementRequestOrderByRelationAggregateInput
   candidateReplacementRequests?: Prisma.ReplacementRequestOrderByRelationAggregateInput
+  originalReplacementRequests?: Prisma.ReplacementRequestOrderByRelationAggregateInput
+  programs?: Prisma.ProgramOrderByRelationAggregateInput
   _relevance?: Prisma.BeneficiaryOrderByRelevanceInput
 }
 
@@ -390,22 +390,22 @@ export type BeneficiaryWhereUniqueInput = Prisma.AtLeast<{
   province?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   district?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   sector?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
-  cell?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
-  village?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   nationalId?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   householdSize?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
-  consentGiven?: Prisma.BoolFilter<"Beneficiary"> | boolean
-  consentAt?: Prisma.DateTimeNullableFilter<"Beneficiary"> | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFilter<"Beneficiary"> | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   tenantId?: Prisma.StringFilter<"Beneficiary"> | string
+  consentAt?: Prisma.DateTimeNullableFilter<"Beneficiary"> | Date | string | null
+  consentGiven?: Prisma.BoolFilter<"Beneficiary"> | boolean
+  outcome?: Prisma.EnumResponseOutcomeFilter<"Beneficiary"> | $Enums.ResponseOutcome
+  cell?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
+  village?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
-  programs?: Prisma.ProgramListRelationFilter
   assignments?: Prisma.BeneficiaryAssignmentListRelationFilter
   fieldVisits?: Prisma.FieldVisitListRelationFilter
-  originalReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
   candidateReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
+  originalReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
+  programs?: Prisma.ProgramListRelationFilter
 }, "id" | "tenantId_code" | "tenantId_nationalId">
 
 export type BeneficiaryOrderByWithAggregationInput = {
@@ -419,16 +419,16 @@ export type BeneficiaryOrderByWithAggregationInput = {
   province?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   sector?: Prisma.SortOrderInput | Prisma.SortOrder
-  cell?: Prisma.SortOrderInput | Prisma.SortOrder
-  village?: Prisma.SortOrderInput | Prisma.SortOrder
   nationalId?: Prisma.SortOrderInput | Prisma.SortOrder
   householdSize?: Prisma.SortOrderInput | Prisma.SortOrder
-  consentGiven?: Prisma.SortOrder
-  consentAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  outcome?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  consentAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  consentGiven?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  cell?: Prisma.SortOrderInput | Prisma.SortOrder
+  village?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BeneficiaryCountOrderByAggregateInput
   _avg?: Prisma.BeneficiaryAvgOrderByAggregateInput
   _max?: Prisma.BeneficiaryMaxOrderByAggregateInput
@@ -450,16 +450,16 @@ export type BeneficiaryScalarWhereWithAggregatesInput = {
   province?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
   district?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
   sector?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
-  cell?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
-  village?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
   nationalId?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
   householdSize?: Prisma.IntNullableWithAggregatesFilter<"Beneficiary"> | number | null
-  consentGiven?: Prisma.BoolWithAggregatesFilter<"Beneficiary"> | boolean
-  consentAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Beneficiary"> | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeWithAggregatesFilter<"Beneficiary"> | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Beneficiary"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Beneficiary"> | Date | string
   tenantId?: Prisma.StringWithAggregatesFilter<"Beneficiary"> | string
+  consentAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Beneficiary"> | Date | string | null
+  consentGiven?: Prisma.BoolWithAggregatesFilter<"Beneficiary"> | boolean
+  outcome?: Prisma.EnumResponseOutcomeWithAggregatesFilter<"Beneficiary"> | $Enums.ResponseOutcome
+  cell?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
+  village?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
 }
 
 export type BeneficiaryCreateInput = {
@@ -473,21 +473,21 @@ export type BeneficiaryCreateInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiariesInput
-  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryUncheckedCreateInput = {
@@ -501,21 +501,21 @@ export type BeneficiaryUncheckedCreateInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
-  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryUpdateInput = {
@@ -529,21 +529,21 @@ export type BeneficiaryUpdateInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiariesNestedInput
-  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateInput = {
@@ -557,21 +557,21 @@ export type BeneficiaryUncheckedUpdateInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryCreateManyInput = {
@@ -585,16 +585,16 @@ export type BeneficiaryCreateManyInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
 }
 
 export type BeneficiaryUpdateManyMutationInput = {
@@ -608,15 +608,15 @@ export type BeneficiaryUpdateManyMutationInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryUncheckedUpdateManyInput = {
@@ -630,16 +630,16 @@ export type BeneficiaryUncheckedUpdateManyInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryListRelationFilter = {
@@ -679,16 +679,16 @@ export type BeneficiaryCountOrderByAggregateInput = {
   province?: Prisma.SortOrder
   district?: Prisma.SortOrder
   sector?: Prisma.SortOrder
-  cell?: Prisma.SortOrder
-  village?: Prisma.SortOrder
   nationalId?: Prisma.SortOrder
   householdSize?: Prisma.SortOrder
-  consentGiven?: Prisma.SortOrder
-  consentAt?: Prisma.SortOrder
-  outcome?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  consentAt?: Prisma.SortOrder
+  consentGiven?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  cell?: Prisma.SortOrder
+  village?: Prisma.SortOrder
 }
 
 export type BeneficiaryAvgOrderByAggregateInput = {
@@ -706,16 +706,16 @@ export type BeneficiaryMaxOrderByAggregateInput = {
   province?: Prisma.SortOrder
   district?: Prisma.SortOrder
   sector?: Prisma.SortOrder
-  cell?: Prisma.SortOrder
-  village?: Prisma.SortOrder
   nationalId?: Prisma.SortOrder
   householdSize?: Prisma.SortOrder
-  consentGiven?: Prisma.SortOrder
-  consentAt?: Prisma.SortOrder
-  outcome?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  consentAt?: Prisma.SortOrder
+  consentGiven?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  cell?: Prisma.SortOrder
+  village?: Prisma.SortOrder
 }
 
 export type BeneficiaryMinOrderByAggregateInput = {
@@ -729,16 +729,16 @@ export type BeneficiaryMinOrderByAggregateInput = {
   province?: Prisma.SortOrder
   district?: Prisma.SortOrder
   sector?: Prisma.SortOrder
-  cell?: Prisma.SortOrder
-  village?: Prisma.SortOrder
   nationalId?: Prisma.SortOrder
   householdSize?: Prisma.SortOrder
-  consentGiven?: Prisma.SortOrder
-  consentAt?: Prisma.SortOrder
-  outcome?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  consentAt?: Prisma.SortOrder
+  consentGiven?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  cell?: Prisma.SortOrder
+  village?: Prisma.SortOrder
 }
 
 export type BeneficiarySumOrderByAggregateInput = {
@@ -853,24 +853,16 @@ export type BeneficiaryUpdateOneRequiredWithoutAssignmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BeneficiaryUpdateToOneWithWhereWithoutAssignmentsInput, Prisma.BeneficiaryUpdateWithoutAssignmentsInput>, Prisma.BeneficiaryUncheckedUpdateWithoutAssignmentsInput>
 }
 
-export type BeneficiaryCreateNestedOneWithoutOriginalReplacementRequestsInput = {
-  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput>
-  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutOriginalReplacementRequestsInput
-  connect?: Prisma.BeneficiaryWhereUniqueInput
-}
-
 export type BeneficiaryCreateNestedOneWithoutCandidateReplacementRequestsInput = {
   create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutCandidateReplacementRequestsInput, Prisma.BeneficiaryUncheckedCreateWithoutCandidateReplacementRequestsInput>
   connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutCandidateReplacementRequestsInput
   connect?: Prisma.BeneficiaryWhereUniqueInput
 }
 
-export type BeneficiaryUpdateOneRequiredWithoutOriginalReplacementRequestsNestedInput = {
+export type BeneficiaryCreateNestedOneWithoutOriginalReplacementRequestsInput = {
   create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput>
   connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutOriginalReplacementRequestsInput
-  upsert?: Prisma.BeneficiaryUpsertWithoutOriginalReplacementRequestsInput
   connect?: Prisma.BeneficiaryWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BeneficiaryUpdateToOneWithWhereWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUpdateWithoutOriginalReplacementRequestsInput>, Prisma.BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput>
 }
 
 export type BeneficiaryUpdateOneWithoutCandidateReplacementRequestsNestedInput = {
@@ -881,6 +873,14 @@ export type BeneficiaryUpdateOneWithoutCandidateReplacementRequestsNestedInput =
   delete?: Prisma.BeneficiaryWhereInput | boolean
   connect?: Prisma.BeneficiaryWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BeneficiaryUpdateToOneWithWhereWithoutCandidateReplacementRequestsInput, Prisma.BeneficiaryUpdateWithoutCandidateReplacementRequestsInput>, Prisma.BeneficiaryUncheckedUpdateWithoutCandidateReplacementRequestsInput>
+}
+
+export type BeneficiaryUpdateOneRequiredWithoutOriginalReplacementRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput>
+  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutOriginalReplacementRequestsInput
+  upsert?: Prisma.BeneficiaryUpsertWithoutOriginalReplacementRequestsInput
+  connect?: Prisma.BeneficiaryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BeneficiaryUpdateToOneWithWhereWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUpdateWithoutOriginalReplacementRequestsInput>, Prisma.BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput>
 }
 
 export type BeneficiaryCreateNestedOneWithoutFieldVisitsInput = {
@@ -908,20 +908,20 @@ export type BeneficiaryCreateWithoutTenantInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
-  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryUncheckedCreateWithoutTenantInput = {
@@ -935,20 +935,20 @@ export type BeneficiaryUncheckedCreateWithoutTenantInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
-  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryCreateOrConnectWithoutTenantInput = {
@@ -991,16 +991,16 @@ export type BeneficiaryScalarWhereInput = {
   province?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   district?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   sector?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
-  cell?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
-  village?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   nationalId?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   householdSize?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
-  consentGiven?: Prisma.BoolFilter<"Beneficiary"> | boolean
-  consentAt?: Prisma.DateTimeNullableFilter<"Beneficiary"> | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFilter<"Beneficiary"> | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   tenantId?: Prisma.StringFilter<"Beneficiary"> | string
+  consentAt?: Prisma.DateTimeNullableFilter<"Beneficiary"> | Date | string | null
+  consentGiven?: Prisma.BoolFilter<"Beneficiary"> | boolean
+  outcome?: Prisma.EnumResponseOutcomeFilter<"Beneficiary"> | $Enums.ResponseOutcome
+  cell?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
+  village?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
 }
 
 export type BeneficiaryCreateWithoutProgramsInput = {
@@ -1014,20 +1014,20 @@ export type BeneficiaryCreateWithoutProgramsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiariesInput
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
 }
 
 export type BeneficiaryUncheckedCreateWithoutProgramsInput = {
@@ -1041,20 +1041,20 @@ export type BeneficiaryUncheckedCreateWithoutProgramsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
 }
 
 export type BeneficiaryCreateOrConnectWithoutProgramsInput = {
@@ -1089,20 +1089,20 @@ export type BeneficiaryCreateWithoutAssignmentsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiariesInput
-  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryUncheckedCreateWithoutAssignmentsInput = {
@@ -1116,20 +1116,20 @@ export type BeneficiaryUncheckedCreateWithoutAssignmentsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
-  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryCreateOrConnectWithoutAssignmentsInput = {
@@ -1159,20 +1159,20 @@ export type BeneficiaryUpdateWithoutAssignmentsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiariesNestedInput
-  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateWithoutAssignmentsInput = {
@@ -1186,79 +1186,20 @@ export type BeneficiaryUncheckedUpdateWithoutAssignmentsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
-}
-
-export type BeneficiaryCreateWithoutOriginalReplacementRequestsInput = {
-  id?: string
-  code: string
-  name: string
-  telephone?: string | null
-  gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
-  status?: $Enums.UserStatus
-  province?: string | null
-  district?: string | null
-  sector?: string | null
-  cell?: string | null
-  village?: string | null
-  nationalId?: string | null
-  householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  tenant: Prisma.TenantCreateNestedOneWithoutBeneficiariesInput
-  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
-  assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
-  fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
-  candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
-}
-
-export type BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput = {
-  id?: string
-  code: string
-  name: string
-  telephone?: string | null
-  gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
-  status?: $Enums.UserStatus
-  province?: string | null
-  district?: string | null
-  sector?: string | null
-  cell?: string | null
-  village?: string | null
-  nationalId?: string | null
-  householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  tenantId: string
-  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
-  assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
-  fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
-  candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
-}
-
-export type BeneficiaryCreateOrConnectWithoutOriginalReplacementRequestsInput = {
-  where: Prisma.BeneficiaryWhereUniqueInput
-  create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput>
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryCreateWithoutCandidateReplacementRequestsInput = {
@@ -1272,20 +1213,20 @@ export type BeneficiaryCreateWithoutCandidateReplacementRequestsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiariesInput
-  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryUncheckedCreateWithoutCandidateReplacementRequestsInput = {
@@ -1299,20 +1240,20 @@ export type BeneficiaryUncheckedCreateWithoutCandidateReplacementRequestsInput =
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
-  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryCreateOrConnectWithoutCandidateReplacementRequestsInput = {
@@ -1320,69 +1261,63 @@ export type BeneficiaryCreateOrConnectWithoutCandidateReplacementRequestsInput =
   create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutCandidateReplacementRequestsInput, Prisma.BeneficiaryUncheckedCreateWithoutCandidateReplacementRequestsInput>
 }
 
-export type BeneficiaryUpsertWithoutOriginalReplacementRequestsInput = {
-  update: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput>
+export type BeneficiaryCreateWithoutOriginalReplacementRequestsInput = {
+  id?: string
+  code: string
+  name: string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  province?: string | null
+  district?: string | null
+  sector?: string | null
+  nationalId?: string | null
+  householdSize?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutBeneficiariesInput
+  assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
+  fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
+}
+
+export type BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput = {
+  id?: string
+  code: string
+  name: string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  province?: string | null
+  district?: string | null
+  sector?: string | null
+  nationalId?: string | null
+  householdSize?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenantId: string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
+  assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
+}
+
+export type BeneficiaryCreateOrConnectWithoutOriginalReplacementRequestsInput = {
+  where: Prisma.BeneficiaryWhereUniqueInput
   create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput>
-  where?: Prisma.BeneficiaryWhereInput
-}
-
-export type BeneficiaryUpdateToOneWithWhereWithoutOriginalReplacementRequestsInput = {
-  where?: Prisma.BeneficiaryWhereInput
-  data: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput>
-}
-
-export type BeneficiaryUpdateWithoutOriginalReplacementRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiariesNestedInput
-  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
-  assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
-  fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
-  candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
-}
-
-export type BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
-  assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
-  fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
-  candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
 }
 
 export type BeneficiaryUpsertWithoutCandidateReplacementRequestsInput = {
@@ -1407,20 +1342,20 @@ export type BeneficiaryUpdateWithoutCandidateReplacementRequestsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiariesNestedInput
-  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateWithoutCandidateReplacementRequestsInput = {
@@ -1434,20 +1369,85 @@ export type BeneficiaryUncheckedUpdateWithoutCandidateReplacementRequestsInput =
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
+}
+
+export type BeneficiaryUpsertWithoutOriginalReplacementRequestsInput = {
+  update: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput>
+  create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput>
+  where?: Prisma.BeneficiaryWhereInput
+}
+
+export type BeneficiaryUpdateToOneWithWhereWithoutOriginalReplacementRequestsInput = {
+  where?: Prisma.BeneficiaryWhereInput
+  data: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutOriginalReplacementRequestsInput, Prisma.BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput>
+}
+
+export type BeneficiaryUpdateWithoutOriginalReplacementRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiariesNestedInput
+  assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
+}
+
+export type BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryCreateWithoutFieldVisitsInput = {
@@ -1461,20 +1461,20 @@ export type BeneficiaryCreateWithoutFieldVisitsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiariesInput
-  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryUncheckedCreateWithoutFieldVisitsInput = {
@@ -1488,20 +1488,20 @@ export type BeneficiaryUncheckedCreateWithoutFieldVisitsInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
-  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
 }
 
 export type BeneficiaryCreateOrConnectWithoutFieldVisitsInput = {
@@ -1531,20 +1531,20 @@ export type BeneficiaryUpdateWithoutFieldVisitsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiariesNestedInput
-  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateWithoutFieldVisitsInput = {
@@ -1558,20 +1558,20 @@ export type BeneficiaryUncheckedUpdateWithoutFieldVisitsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryCreateManyTenantInput = {
@@ -1585,15 +1585,15 @@ export type BeneficiaryCreateManyTenantInput = {
   province?: string | null
   district?: string | null
   sector?: string | null
-  cell?: string | null
-  village?: string | null
   nationalId?: string | null
   householdSize?: number | null
-  consentGiven?: boolean
-  consentAt?: Date | string | null
-  outcome?: $Enums.ResponseOutcome
   createdAt?: Date | string
   updatedAt?: Date | string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  cell?: string | null
+  village?: string | null
 }
 
 export type BeneficiaryUpdateWithoutTenantInput = {
@@ -1607,20 +1607,20 @@ export type BeneficiaryUpdateWithoutTenantInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateWithoutTenantInput = {
@@ -1634,20 +1634,20 @@ export type BeneficiaryUncheckedUpdateWithoutTenantInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateManyWithoutTenantInput = {
@@ -1661,15 +1661,15 @@ export type BeneficiaryUncheckedUpdateManyWithoutTenantInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BeneficiaryUpdateWithoutProgramsInput = {
@@ -1683,20 +1683,20 @@ export type BeneficiaryUpdateWithoutProgramsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiariesNestedInput
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateWithoutProgramsInput = {
@@ -1710,20 +1710,20 @@ export type BeneficiaryUncheckedUpdateWithoutProgramsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
-  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateManyWithoutProgramsInput = {
@@ -1737,16 +1737,16 @@ export type BeneficiaryUncheckedUpdateManyWithoutProgramsInput = {
   province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1755,19 +1755,19 @@ export type BeneficiaryUncheckedUpdateManyWithoutProgramsInput = {
  */
 
 export type BeneficiaryCountOutputType = {
-  programs: number
   assignments: number
   fieldVisits: number
-  originalReplacementRequests: number
   candidateReplacementRequests: number
+  originalReplacementRequests: number
+  programs: number
 }
 
 export type BeneficiaryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  programs?: boolean | BeneficiaryCountOutputTypeCountProgramsArgs
   assignments?: boolean | BeneficiaryCountOutputTypeCountAssignmentsArgs
   fieldVisits?: boolean | BeneficiaryCountOutputTypeCountFieldVisitsArgs
-  originalReplacementRequests?: boolean | BeneficiaryCountOutputTypeCountOriginalReplacementRequestsArgs
   candidateReplacementRequests?: boolean | BeneficiaryCountOutputTypeCountCandidateReplacementRequestsArgs
+  originalReplacementRequests?: boolean | BeneficiaryCountOutputTypeCountOriginalReplacementRequestsArgs
+  programs?: boolean | BeneficiaryCountOutputTypeCountProgramsArgs
 }
 
 /**
@@ -1778,13 +1778,6 @@ export type BeneficiaryCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.
    * Select specific fields to fetch from the BeneficiaryCountOutputType
    */
   select?: Prisma.BeneficiaryCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * BeneficiaryCountOutputType without action
- */
-export type BeneficiaryCountOutputTypeCountProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProgramWhereInput
 }
 
 /**
@@ -1804,6 +1797,13 @@ export type BeneficiaryCountOutputTypeCountFieldVisitsArgs<ExtArgs extends runti
 /**
  * BeneficiaryCountOutputType without action
  */
+export type BeneficiaryCountOutputTypeCountCandidateReplacementRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReplacementRequestWhereInput
+}
+
+/**
+ * BeneficiaryCountOutputType without action
+ */
 export type BeneficiaryCountOutputTypeCountOriginalReplacementRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ReplacementRequestWhereInput
 }
@@ -1811,8 +1811,8 @@ export type BeneficiaryCountOutputTypeCountOriginalReplacementRequestsArgs<ExtAr
 /**
  * BeneficiaryCountOutputType without action
  */
-export type BeneficiaryCountOutputTypeCountCandidateReplacementRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ReplacementRequestWhereInput
+export type BeneficiaryCountOutputTypeCountProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramWhereInput
 }
 
 
@@ -1827,22 +1827,22 @@ export type BeneficiarySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   province?: boolean
   district?: boolean
   sector?: boolean
-  cell?: boolean
-  village?: boolean
   nationalId?: boolean
   householdSize?: boolean
-  consentGiven?: boolean
-  consentAt?: boolean
-  outcome?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenantId?: boolean
+  consentAt?: boolean
+  consentGiven?: boolean
+  outcome?: boolean
+  cell?: boolean
+  village?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
-  programs?: boolean | Prisma.Beneficiary$programsArgs<ExtArgs>
   assignments?: boolean | Prisma.Beneficiary$assignmentsArgs<ExtArgs>
   fieldVisits?: boolean | Prisma.Beneficiary$fieldVisitsArgs<ExtArgs>
-  originalReplacementRequests?: boolean | Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs>
   candidateReplacementRequests?: boolean | Prisma.Beneficiary$candidateReplacementRequestsArgs<ExtArgs>
+  originalReplacementRequests?: boolean | Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs>
+  programs?: boolean | Prisma.Beneficiary$programsArgs<ExtArgs>
   _count?: boolean | Prisma.BeneficiaryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["beneficiary"]>
 
@@ -1859,26 +1859,26 @@ export type BeneficiarySelectScalar = {
   province?: boolean
   district?: boolean
   sector?: boolean
-  cell?: boolean
-  village?: boolean
   nationalId?: boolean
   householdSize?: boolean
-  consentGiven?: boolean
-  consentAt?: boolean
-  outcome?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenantId?: boolean
+  consentAt?: boolean
+  consentGiven?: boolean
+  outcome?: boolean
+  cell?: boolean
+  village?: boolean
 }
 
-export type BeneficiaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "telephone" | "gender" | "dateOfBirth" | "status" | "province" | "district" | "sector" | "cell" | "village" | "nationalId" | "householdSize" | "consentGiven" | "consentAt" | "outcome" | "createdAt" | "updatedAt" | "tenantId", ExtArgs["result"]["beneficiary"]>
+export type BeneficiaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "telephone" | "gender" | "dateOfBirth" | "status" | "province" | "district" | "sector" | "nationalId" | "householdSize" | "createdAt" | "updatedAt" | "tenantId" | "consentAt" | "consentGiven" | "outcome" | "cell" | "village", ExtArgs["result"]["beneficiary"]>
 export type BeneficiaryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
-  programs?: boolean | Prisma.Beneficiary$programsArgs<ExtArgs>
   assignments?: boolean | Prisma.Beneficiary$assignmentsArgs<ExtArgs>
   fieldVisits?: boolean | Prisma.Beneficiary$fieldVisitsArgs<ExtArgs>
-  originalReplacementRequests?: boolean | Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs>
   candidateReplacementRequests?: boolean | Prisma.Beneficiary$candidateReplacementRequestsArgs<ExtArgs>
+  originalReplacementRequests?: boolean | Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs>
+  programs?: boolean | Prisma.Beneficiary$programsArgs<ExtArgs>
   _count?: boolean | Prisma.BeneficiaryCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1886,11 +1886,11 @@ export type $BeneficiaryPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "Beneficiary"
   objects: {
     tenant: Prisma.$TenantPayload<ExtArgs>
-    programs: Prisma.$ProgramPayload<ExtArgs>[]
     assignments: Prisma.$BeneficiaryAssignmentPayload<ExtArgs>[]
     fieldVisits: Prisma.$FieldVisitPayload<ExtArgs>[]
-    originalReplacementRequests: Prisma.$ReplacementRequestPayload<ExtArgs>[]
     candidateReplacementRequests: Prisma.$ReplacementRequestPayload<ExtArgs>[]
+    originalReplacementRequests: Prisma.$ReplacementRequestPayload<ExtArgs>[]
+    programs: Prisma.$ProgramPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1903,16 +1903,16 @@ export type $BeneficiaryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     province: string | null
     district: string | null
     sector: string | null
-    cell: string | null
-    village: string | null
     nationalId: string | null
     householdSize: number | null
-    consentGiven: boolean
-    consentAt: Date | null
-    outcome: $Enums.ResponseOutcome
     createdAt: Date
     updatedAt: Date
     tenantId: string
+    consentAt: Date | null
+    consentGiven: boolean
+    outcome: $Enums.ResponseOutcome
+    cell: string | null
+    village: string | null
   }, ExtArgs["result"]["beneficiary"]>
   composites: {}
 }
@@ -2254,11 +2254,11 @@ readonly fields: BeneficiaryFieldRefs;
 export interface Prisma__BeneficiaryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  programs<T extends Prisma.Beneficiary$programsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$programsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignments<T extends Prisma.Beneficiary$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fieldVisits<T extends Prisma.Beneficiary$fieldVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$fieldVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  originalReplacementRequests<T extends Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplacementRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   candidateReplacementRequests<T extends Prisma.Beneficiary$candidateReplacementRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$candidateReplacementRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplacementRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  originalReplacementRequests<T extends Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplacementRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  programs<T extends Prisma.Beneficiary$programsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$programsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2298,16 +2298,16 @@ export interface BeneficiaryFieldRefs {
   readonly province: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly district: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly sector: Prisma.FieldRef<"Beneficiary", 'String'>
-  readonly cell: Prisma.FieldRef<"Beneficiary", 'String'>
-  readonly village: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly nationalId: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly householdSize: Prisma.FieldRef<"Beneficiary", 'Int'>
-  readonly consentGiven: Prisma.FieldRef<"Beneficiary", 'Boolean'>
-  readonly consentAt: Prisma.FieldRef<"Beneficiary", 'DateTime'>
-  readonly outcome: Prisma.FieldRef<"Beneficiary", 'ResponseOutcome'>
   readonly createdAt: Prisma.FieldRef<"Beneficiary", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Beneficiary", 'DateTime'>
   readonly tenantId: Prisma.FieldRef<"Beneficiary", 'String'>
+  readonly consentAt: Prisma.FieldRef<"Beneficiary", 'DateTime'>
+  readonly consentGiven: Prisma.FieldRef<"Beneficiary", 'Boolean'>
+  readonly outcome: Prisma.FieldRef<"Beneficiary", 'ResponseOutcome'>
+  readonly cell: Prisma.FieldRef<"Beneficiary", 'String'>
+  readonly village: Prisma.FieldRef<"Beneficiary", 'String'>
 }
     
 
@@ -2656,30 +2656,6 @@ export type BeneficiaryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * Beneficiary.programs
- */
-export type Beneficiary$programsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Program
-   */
-  select?: Prisma.ProgramSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Program
-   */
-  omit?: Prisma.ProgramOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProgramInclude<ExtArgs> | null
-  where?: Prisma.ProgramWhereInput
-  orderBy?: Prisma.ProgramOrderByWithRelationInput | Prisma.ProgramOrderByWithRelationInput[]
-  cursor?: Prisma.ProgramWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProgramScalarFieldEnum | Prisma.ProgramScalarFieldEnum[]
-}
-
-/**
  * Beneficiary.assignments
  */
 export type Beneficiary$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2728,6 +2704,30 @@ export type Beneficiary$fieldVisitsArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * Beneficiary.candidateReplacementRequests
+ */
+export type Beneficiary$candidateReplacementRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReplacementRequest
+   */
+  select?: Prisma.ReplacementRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReplacementRequest
+   */
+  omit?: Prisma.ReplacementRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReplacementRequestInclude<ExtArgs> | null
+  where?: Prisma.ReplacementRequestWhereInput
+  orderBy?: Prisma.ReplacementRequestOrderByWithRelationInput | Prisma.ReplacementRequestOrderByWithRelationInput[]
+  cursor?: Prisma.ReplacementRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReplacementRequestScalarFieldEnum | Prisma.ReplacementRequestScalarFieldEnum[]
+}
+
+/**
  * Beneficiary.originalReplacementRequests
  */
 export type Beneficiary$originalReplacementRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2752,27 +2752,27 @@ export type Beneficiary$originalReplacementRequestsArgs<ExtArgs extends runtime.
 }
 
 /**
- * Beneficiary.candidateReplacementRequests
+ * Beneficiary.programs
  */
-export type Beneficiary$candidateReplacementRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Beneficiary$programsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ReplacementRequest
+   * Select specific fields to fetch from the Program
    */
-  select?: Prisma.ReplacementRequestSelect<ExtArgs> | null
+  select?: Prisma.ProgramSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ReplacementRequest
+   * Omit specific fields from the Program
    */
-  omit?: Prisma.ReplacementRequestOmit<ExtArgs> | null
+  omit?: Prisma.ProgramOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReplacementRequestInclude<ExtArgs> | null
-  where?: Prisma.ReplacementRequestWhereInput
-  orderBy?: Prisma.ReplacementRequestOrderByWithRelationInput | Prisma.ReplacementRequestOrderByWithRelationInput[]
-  cursor?: Prisma.ReplacementRequestWhereUniqueInput
+  include?: Prisma.ProgramInclude<ExtArgs> | null
+  where?: Prisma.ProgramWhereInput
+  orderBy?: Prisma.ProgramOrderByWithRelationInput | Prisma.ProgramOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ReplacementRequestScalarFieldEnum | Prisma.ReplacementRequestScalarFieldEnum[]
+  distinct?: Prisma.ProgramScalarFieldEnum | Prisma.ProgramScalarFieldEnum[]
 }
 
 /**

@@ -64,9 +64,7 @@ export const ModelName = {
   FieldCheckIn: 'FieldCheckIn',
   FieldVisit: 'FieldVisit',
   FieldNote: 'FieldNote',
-  ActivityLog: 'ActivityLog',
-  PasswordResetCode: 'PasswordResetCode',
-  AdminLocation: 'AdminLocation'
+  ActivityLog: 'ActivityLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -114,10 +112,10 @@ export const RoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  permissions: 'permissions',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  permissions: 'permissions'
 } as const
 
 export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
@@ -127,9 +125,6 @@ export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  avatarUrl: 'avatarUrl',
   password: 'password',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -137,17 +132,17 @@ export const UserScalarFieldEnum = {
   province: 'province',
   district: 'district',
   sector: 'sector',
-  cell: 'cell',
-  village: 'village',
   gender: 'gender',
   dateOfBirth: 'dateOfBirth',
   status: 'status',
   educationLevel: 'educationLevel',
   isPlatformAdmin: 'isPlatformAdmin',
   tokenVersion: 'tokenVersion',
-  lastSeenAt: 'lastSeenAt',
   roleId: 'roleId',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  lastSeenAt: 'lastSeenAt',
+  cell: 'cell',
+  village: 'village'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -159,12 +154,12 @@ export const ProgramScalarFieldEnum = {
   description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  scenarioType: 'scenarioType',
-  status: 'status',
-  targetSampleSize: 'targetSampleSize',
-  startDate: 'startDate',
+  tenantId: 'tenantId',
   endDate: 'endDate',
-  tenantId: 'tenantId'
+  scenarioType: 'scenarioType',
+  startDate: 'startDate',
+  status: 'status',
+  targetSampleSize: 'targetSampleSize'
 } as const
 
 export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
@@ -181,16 +176,16 @@ export const BeneficiaryScalarFieldEnum = {
   province: 'province',
   district: 'district',
   sector: 'sector',
-  cell: 'cell',
-  village: 'village',
   nationalId: 'nationalId',
   householdSize: 'householdSize',
-  consentGiven: 'consentGiven',
-  consentAt: 'consentAt',
-  outcome: 'outcome',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  consentAt: 'consentAt',
+  consentGiven: 'consentGiven',
+  outcome: 'outcome',
+  cell: 'cell',
+  village: 'village'
 } as const
 
 export type BeneficiaryScalarFieldEnum = (typeof BeneficiaryScalarFieldEnum)[keyof typeof BeneficiaryScalarFieldEnum]
@@ -249,13 +244,13 @@ export const ReplacementRequestScalarFieldEnum = {
   status: 'status',
   createdAt: 'createdAt',
   decidedAt: 'decidedAt',
-  matchLevel: 'matchLevel',
-  overrideReason: 'overrideReason',
   tenantId: 'tenantId',
   originalRespondentId: 'originalRespondentId',
   candidateRespondentId: 'candidateRespondentId',
   requestedByUserId: 'requestedByUserId',
-  decidedByUserId: 'decidedByUserId'
+  decidedByUserId: 'decidedByUserId',
+  matchLevel: 'matchLevel',
+  overrideReason: 'overrideReason'
 } as const
 
 export type ReplacementRequestScalarFieldEnum = (typeof ReplacementRequestScalarFieldEnum)[keyof typeof ReplacementRequestScalarFieldEnum]
@@ -268,14 +263,14 @@ export const FieldCheckInScalarFieldEnum = {
   gpsLat: 'gpsLat',
   gpsLng: 'gpsLng',
   note: 'note',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  projectId: 'projectId',
   currentGpsLat: 'currentGpsLat',
   currentGpsLng: 'currentGpsLng',
   currentGpsAt: 'currentGpsAt',
   currentGpsNote: 'currentGpsNote',
-  checkoutOverrideReason: 'checkoutOverrideReason',
-  tenantId: 'tenantId',
-  userId: 'userId',
-  projectId: 'projectId'
+  checkoutOverrideReason: 'checkoutOverrideReason'
 } as const
 
 export type FieldCheckInScalarFieldEnum = (typeof FieldCheckInScalarFieldEnum)[keyof typeof FieldCheckInScalarFieldEnum]
@@ -315,30 +310,6 @@ export const ActivityLogScalarFieldEnum = {
 } as const
 
 export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
-
-
-export const PasswordResetCodeScalarFieldEnum = {
-  id: 'id',
-  code: 'code',
-  expiresAt: 'expiresAt',
-  usedAt: 'usedAt',
-  createdAt: 'createdAt',
-  userId: 'userId'
-} as const
-
-export type PasswordResetCodeScalarFieldEnum = (typeof PasswordResetCodeScalarFieldEnum)[keyof typeof PasswordResetCodeScalarFieldEnum]
-
-
-export const AdminLocationScalarFieldEnum = {
-  id: 'id',
-  province: 'province',
-  district: 'district',
-  sector: 'sector',
-  cell: 'cell',
-  village: 'village'
-} as const
-
-export type AdminLocationScalarFieldEnum = (typeof AdminLocationScalarFieldEnum)[keyof typeof AdminLocationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -416,18 +387,15 @@ export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  avatarUrl: 'avatarUrl',
   password: 'password',
   telephone: 'telephone',
   province: 'province',
   district: 'district',
   sector: 'sector',
-  cell: 'cell',
-  village: 'village',
   roleId: 'roleId',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  cell: 'cell',
+  village: 'village'
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -451,10 +419,10 @@ export const BeneficiaryOrderByRelevanceFieldEnum = {
   province: 'province',
   district: 'district',
   sector: 'sector',
-  cell: 'cell',
-  village: 'village',
   nationalId: 'nationalId',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  cell: 'cell',
+  village: 'village'
 } as const
 
 export type BeneficiaryOrderByRelevanceFieldEnum = (typeof BeneficiaryOrderByRelevanceFieldEnum)[keyof typeof BeneficiaryOrderByRelevanceFieldEnum]
@@ -494,12 +462,12 @@ export type VehicleOrderByRelevanceFieldEnum = (typeof VehicleOrderByRelevanceFi
 export const ReplacementRequestOrderByRelevanceFieldEnum = {
   id: 'id',
   reason: 'reason',
-  overrideReason: 'overrideReason',
   tenantId: 'tenantId',
   originalRespondentId: 'originalRespondentId',
   candidateRespondentId: 'candidateRespondentId',
   requestedByUserId: 'requestedByUserId',
-  decidedByUserId: 'decidedByUserId'
+  decidedByUserId: 'decidedByUserId',
+  overrideReason: 'overrideReason'
 } as const
 
 export type ReplacementRequestOrderByRelevanceFieldEnum = (typeof ReplacementRequestOrderByRelevanceFieldEnum)[keyof typeof ReplacementRequestOrderByRelevanceFieldEnum]
@@ -508,11 +476,11 @@ export type ReplacementRequestOrderByRelevanceFieldEnum = (typeof ReplacementReq
 export const FieldCheckInOrderByRelevanceFieldEnum = {
   id: 'id',
   note: 'note',
-  currentGpsNote: 'currentGpsNote',
-  checkoutOverrideReason: 'checkoutOverrideReason',
   tenantId: 'tenantId',
   userId: 'userId',
-  projectId: 'projectId'
+  projectId: 'projectId',
+  currentGpsNote: 'currentGpsNote',
+  checkoutOverrideReason: 'checkoutOverrideReason'
 } as const
 
 export type FieldCheckInOrderByRelevanceFieldEnum = (typeof FieldCheckInOrderByRelevanceFieldEnum)[keyof typeof FieldCheckInOrderByRelevanceFieldEnum]
@@ -547,25 +515,4 @@ export const ActivityLogOrderByRelevanceFieldEnum = {
 } as const
 
 export type ActivityLogOrderByRelevanceFieldEnum = (typeof ActivityLogOrderByRelevanceFieldEnum)[keyof typeof ActivityLogOrderByRelevanceFieldEnum]
-
-
-export const PasswordResetCodeOrderByRelevanceFieldEnum = {
-  id: 'id',
-  code: 'code',
-  userId: 'userId'
-} as const
-
-export type PasswordResetCodeOrderByRelevanceFieldEnum = (typeof PasswordResetCodeOrderByRelevanceFieldEnum)[keyof typeof PasswordResetCodeOrderByRelevanceFieldEnum]
-
-
-export const AdminLocationOrderByRelevanceFieldEnum = {
-  id: 'id',
-  province: 'province',
-  district: 'district',
-  sector: 'sector',
-  cell: 'cell',
-  village: 'village'
-} as const
-
-export type AdminLocationOrderByRelevanceFieldEnum = (typeof AdminLocationOrderByRelevanceFieldEnum)[keyof typeof AdminLocationOrderByRelevanceFieldEnum]
 

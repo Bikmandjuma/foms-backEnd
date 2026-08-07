@@ -231,8 +231,8 @@ export type BeneficiaryAssignmentWhereInput = {
   transportMode?: Prisma.EnumTransportModeNullableFilter<"BeneficiaryAssignment"> | $Enums.TransportMode | null
   vehicleId?: Prisma.StringNullableFilter<"BeneficiaryAssignment"> | string | null
   beneficiary?: Prisma.XOR<Prisma.BeneficiaryScalarRelationFilter, Prisma.BeneficiaryWhereInput>
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   vehicle?: Prisma.XOR<Prisma.VehicleNullableScalarRelationFilter, Prisma.VehicleWhereInput> | null
 }
 
@@ -249,8 +249,8 @@ export type BeneficiaryAssignmentOrderByWithRelationInput = {
   transportMode?: Prisma.SortOrderInput | Prisma.SortOrder
   vehicleId?: Prisma.SortOrderInput | Prisma.SortOrder
   beneficiary?: Prisma.BeneficiaryOrderByWithRelationInput
-  user?: Prisma.UserOrderByWithRelationInput
   tenant?: Prisma.TenantOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
   vehicle?: Prisma.VehicleOrderByWithRelationInput
   _relevance?: Prisma.BeneficiaryAssignmentOrderByRelevanceInput
 }
@@ -271,8 +271,8 @@ export type BeneficiaryAssignmentWhereUniqueInput = Prisma.AtLeast<{
   transportMode?: Prisma.EnumTransportModeNullableFilter<"BeneficiaryAssignment"> | $Enums.TransportMode | null
   vehicleId?: Prisma.StringNullableFilter<"BeneficiaryAssignment"> | string | null
   beneficiary?: Prisma.XOR<Prisma.BeneficiaryScalarRelationFilter, Prisma.BeneficiaryWhereInput>
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   vehicle?: Prisma.XOR<Prisma.VehicleNullableScalarRelationFilter, Prisma.VehicleWhereInput> | null
 }, "id">
 
@@ -319,8 +319,8 @@ export type BeneficiaryAssignmentCreateInput = {
   updatedAt?: Date | string
   transportMode?: $Enums.TransportMode | null
   beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutAssignmentsInput
-  user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiaryAssignmentsInput
+  user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
   vehicle?: Prisma.VehicleCreateNestedOneWithoutAssignmentsInput
 }
 
@@ -347,8 +347,8 @@ export type BeneficiaryAssignmentUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
   beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutAssignmentsNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
   vehicle?: Prisma.VehicleUpdateOneWithoutAssignmentsNestedInput
 }
 
@@ -763,8 +763,8 @@ export type BeneficiaryAssignmentCreateWithoutBeneficiaryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transportMode?: $Enums.TransportMode | null
-  user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiaryAssignmentsInput
+  user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
   vehicle?: Prisma.VehicleCreateNestedOneWithoutAssignmentsInput
 }
 
@@ -816,8 +816,8 @@ export type BeneficiaryAssignmentCreateWithoutVehicleInput = {
   updatedAt?: Date | string
   transportMode?: $Enums.TransportMode | null
   beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutAssignmentsInput
-  user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
   tenant: Prisma.TenantCreateNestedOneWithoutBeneficiaryAssignmentsInput
+  user: Prisma.UserCreateNestedOneWithoutBeneficiaryAssignmentsInput
 }
 
 export type BeneficiaryAssignmentUncheckedCreateWithoutVehicleInput = {
@@ -984,8 +984,8 @@ export type BeneficiaryAssignmentUpdateWithoutBeneficiaryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
-  user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
   vehicle?: Prisma.VehicleUpdateOneWithoutAssignmentsNestedInput
 }
 
@@ -1037,8 +1037,8 @@ export type BeneficiaryAssignmentUpdateWithoutVehicleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transportMode?: Prisma.NullableEnumTransportModeFieldUpdateOperationsInput | $Enums.TransportMode | null
   beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutAssignmentsNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBeneficiaryAssignmentsNestedInput
 }
 
 export type BeneficiaryAssignmentUncheckedUpdateWithoutVehicleInput = {
@@ -1082,8 +1082,8 @@ export type BeneficiaryAssignmentSelect<ExtArgs extends runtime.Types.Extensions
   transportMode?: boolean
   vehicleId?: boolean
   beneficiary?: boolean | Prisma.BeneficiaryDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   vehicle?: boolean | Prisma.BeneficiaryAssignment$vehicleArgs<ExtArgs>
 }, ExtArgs["result"]["beneficiaryAssignment"]>
 
@@ -1106,8 +1106,8 @@ export type BeneficiaryAssignmentSelectScalar = {
 export type BeneficiaryAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "assignedAt" | "endedAt" | "createdAt" | "updatedAt" | "beneficiaryId" | "userId" | "tenantId" | "transportMode" | "vehicleId", ExtArgs["result"]["beneficiaryAssignment"]>
 export type BeneficiaryAssignmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   beneficiary?: boolean | Prisma.BeneficiaryDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   vehicle?: boolean | Prisma.BeneficiaryAssignment$vehicleArgs<ExtArgs>
 }
 
@@ -1115,8 +1115,8 @@ export type $BeneficiaryAssignmentPayload<ExtArgs extends runtime.Types.Extensio
   name: "BeneficiaryAssignment"
   objects: {
     beneficiary: Prisma.$BeneficiaryPayload<ExtArgs>
-    user: Prisma.$UserPayload<ExtArgs>
     tenant: Prisma.$TenantPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
     vehicle: Prisma.$VehiclePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1472,8 +1472,8 @@ readonly fields: BeneficiaryAssignmentFieldRefs;
 export interface Prisma__BeneficiaryAssignmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   beneficiary<T extends Prisma.BeneficiaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BeneficiaryDefaultArgs<ExtArgs>>): Prisma.Prisma__BeneficiaryClient<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vehicle<T extends Prisma.BeneficiaryAssignment$vehicleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BeneficiaryAssignment$vehicleArgs<ExtArgs>>): Prisma.Prisma__VehicleClient<runtime.Types.Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

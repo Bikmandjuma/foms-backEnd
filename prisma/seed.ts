@@ -23,7 +23,8 @@ async function main(): Promise<void> {
     update: {},
     create: {
       email: "admin@huska.rw",
-      name: "Super Admin",
+      firstName: "Super",
+      lastName: "Admin",
       password,
       isPlatformAdmin: true,
     },

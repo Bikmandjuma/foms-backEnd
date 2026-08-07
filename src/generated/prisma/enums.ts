@@ -103,15 +103,6 @@ export const GeoMatchLevel = {
 export type GeoMatchLevel = (typeof GeoMatchLevel)[keyof typeof GeoMatchLevel]
 
 
-export const AssignmentStrategy = {
-  EVEN: 'EVEN',
-  DAILY_TARGET: 'DAILY_TARGET',
-  RANDOM: 'RANDOM'
-} as const
-
-export type AssignmentStrategy = (typeof AssignmentStrategy)[keyof typeof AssignmentStrategy]
-
-
 export const VehicleType = {
   VEHICLE: 'VEHICLE',
   MOTORCYCLE: 'MOTORCYCLE'

@@ -190,8 +190,8 @@ export type FieldVisitWhereInput = {
   recordedAt?: Prisma.DateTimeFilter<"FieldVisit"> | Date | string
   checkInId?: Prisma.StringFilter<"FieldVisit"> | string
   beneficiaryId?: Prisma.StringFilter<"FieldVisit"> | string
-  checkIn?: Prisma.XOR<Prisma.FieldCheckInScalarRelationFilter, Prisma.FieldCheckInWhereInput>
   beneficiary?: Prisma.XOR<Prisma.BeneficiaryScalarRelationFilter, Prisma.BeneficiaryWhereInput>
+  checkIn?: Prisma.XOR<Prisma.FieldCheckInScalarRelationFilter, Prisma.FieldCheckInWhereInput>
 }
 
 export type FieldVisitOrderByWithRelationInput = {
@@ -201,8 +201,8 @@ export type FieldVisitOrderByWithRelationInput = {
   recordedAt?: Prisma.SortOrder
   checkInId?: Prisma.SortOrder
   beneficiaryId?: Prisma.SortOrder
-  checkIn?: Prisma.FieldCheckInOrderByWithRelationInput
   beneficiary?: Prisma.BeneficiaryOrderByWithRelationInput
+  checkIn?: Prisma.FieldCheckInOrderByWithRelationInput
   _relevance?: Prisma.FieldVisitOrderByRelevanceInput
 }
 
@@ -217,8 +217,8 @@ export type FieldVisitWhereUniqueInput = Prisma.AtLeast<{
   recordedAt?: Prisma.DateTimeFilter<"FieldVisit"> | Date | string
   checkInId?: Prisma.StringFilter<"FieldVisit"> | string
   beneficiaryId?: Prisma.StringFilter<"FieldVisit"> | string
-  checkIn?: Prisma.XOR<Prisma.FieldCheckInScalarRelationFilter, Prisma.FieldCheckInWhereInput>
   beneficiary?: Prisma.XOR<Prisma.BeneficiaryScalarRelationFilter, Prisma.BeneficiaryWhereInput>
+  checkIn?: Prisma.XOR<Prisma.FieldCheckInScalarRelationFilter, Prisma.FieldCheckInWhereInput>
 }, "id" | "checkInId_beneficiaryId">
 
 export type FieldVisitOrderByWithAggregationInput = {
@@ -250,8 +250,8 @@ export type FieldVisitCreateInput = {
   outcome?: $Enums.ResponseOutcome
   note?: string | null
   recordedAt?: Date | string
-  checkIn: Prisma.FieldCheckInCreateNestedOneWithoutVisitsInput
   beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutFieldVisitsInput
+  checkIn: Prisma.FieldCheckInCreateNestedOneWithoutVisitsInput
 }
 
 export type FieldVisitUncheckedCreateInput = {
@@ -268,8 +268,8 @@ export type FieldVisitUpdateInput = {
   outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkIn?: Prisma.FieldCheckInUpdateOneRequiredWithoutVisitsNestedInput
   beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutFieldVisitsNestedInput
+  checkIn?: Prisma.FieldCheckInUpdateOneRequiredWithoutVisitsNestedInput
 }
 
 export type FieldVisitUncheckedUpdateInput = {
@@ -607,8 +607,8 @@ export type FieldVisitSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   recordedAt?: boolean
   checkInId?: boolean
   beneficiaryId?: boolean
-  checkIn?: boolean | Prisma.FieldCheckInDefaultArgs<ExtArgs>
   beneficiary?: boolean | Prisma.BeneficiaryDefaultArgs<ExtArgs>
+  checkIn?: boolean | Prisma.FieldCheckInDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fieldVisit"]>
 
 
@@ -624,15 +624,15 @@ export type FieldVisitSelectScalar = {
 
 export type FieldVisitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "outcome" | "note" | "recordedAt" | "checkInId" | "beneficiaryId", ExtArgs["result"]["fieldVisit"]>
 export type FieldVisitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  checkIn?: boolean | Prisma.FieldCheckInDefaultArgs<ExtArgs>
   beneficiary?: boolean | Prisma.BeneficiaryDefaultArgs<ExtArgs>
+  checkIn?: boolean | Prisma.FieldCheckInDefaultArgs<ExtArgs>
 }
 
 export type $FieldVisitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FieldVisit"
   objects: {
-    checkIn: Prisma.$FieldCheckInPayload<ExtArgs>
     beneficiary: Prisma.$BeneficiaryPayload<ExtArgs>
+    checkIn: Prisma.$FieldCheckInPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -981,8 +981,8 @@ readonly fields: FieldVisitFieldRefs;
  */
 export interface Prisma__FieldVisitClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  checkIn<T extends Prisma.FieldCheckInDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldCheckInDefaultArgs<ExtArgs>>): Prisma.Prisma__FieldCheckInClient<runtime.Types.Result.GetResult<Prisma.$FieldCheckInPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   beneficiary<T extends Prisma.BeneficiaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BeneficiaryDefaultArgs<ExtArgs>>): Prisma.Prisma__BeneficiaryClient<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  checkIn<T extends Prisma.FieldCheckInDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldCheckInDefaultArgs<ExtArgs>>): Prisma.Prisma__FieldCheckInClient<runtime.Types.Result.GetResult<Prisma.$FieldCheckInPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
