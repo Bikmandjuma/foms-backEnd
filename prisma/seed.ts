@@ -10,6 +10,7 @@ const adapter = new PrismaMariaDb({
   password: process.env.DB_PASSWORD!,
   database: process.env.DB_NAME!,
   connectionLimit: 1,
+  connectTimeout: 30000,
 });
 
 const prisma = new PrismaClient({ adapter });
@@ -30,14 +31,11 @@ async function main() {
     },
   });
 
-  console.log("Seed complete.");
+  console.log("Seed completed.");
 }
 
 main()
-  .catch((err) => {
-    console.error(err);
-    process.exitCode = 1;
-  })
+  .catch(console.error)
   .finally(async () => {
     await prisma.$disconnect();
   });
