@@ -1,23 +1,11 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
-import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "../src/generated/prisma/client.js";
 
-const adapter = new PrismaMariaDb({
-  host: process.env.DB_HOST!,
-  port: Number(process.env.DB_PORT!),
-  user: process.env.DB_USER!,
-  password: process.env.DB_PASSWORD!,
-  database: process.env.DB_NAME!,
-  connectionLimit: 5,
-});
-
-const prisma = new PrismaClient({ adapter });
-
-const SALT_ROUNDS = 10;
+const prisma = new PrismaClient();
 
 async function main() {
-  const password = await bcrypt.hash("password", SALT_ROUNDS);
+  const password = await bcrypt.hash("password", 10);
 
   await prisma.user.upsert({
     where: {
