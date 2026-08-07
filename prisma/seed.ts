@@ -1,8 +1,18 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
+import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "../src/generated/prisma/client.js";
 
-const prisma = new PrismaClient();
+const adapter = new PrismaMariaDb({
+  host: process.env.DB_HOST!,
+  port: Number(process.env.DB_PORT!),
+  user: process.env.DB_USER!,
+  password: process.env.DB_PASSWORD!,
+  database: process.env.DB_NAME!,
+  connectionLimit: 1,
+});
+
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   const password = await bcrypt.hash("password", 10);
@@ -20,9 +30,7 @@ async function main() {
     },
   });
 
-  console.log(
-    "Seed complete: super admin user (admin@huska.rw), no tenant"
-  );
+  console.log("Seed complete.");
 }
 
 main()
