@@ -319,7 +319,7 @@ export async function exportAssignmentReport(req: Request, res: Response): Promi
 
   if (fmt === "pdf") {
     const { buildAssignmentReportPdf } = await import("../utils/pdf.js");
-    const buffer = await buildAssignmentReportPdf(rows, `Assignment report — ${program.name}`);
+    const buffer = await buildAssignmentReportPdf(rows, `Assignment report ${program.name}`);
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `attachment; filename="${filenameBase}.pdf"`);
     res.send(buffer);

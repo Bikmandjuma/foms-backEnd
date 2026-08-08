@@ -36,7 +36,7 @@ components:
       type: apiKey
       in: cookie
       name: token
-      description: Alternative to bearerAuth — the httpOnly cookie set by /auth/login.
+      description: Alternative to bearerAuth, the httpOnly cookie set by /auth/login.
 
   schemas:
     ApiResponse:
@@ -352,7 +352,7 @@ components:
       required: [programId, vehicleIds]
       description: >-
         The Smart Assignment Engine ("Random Top-Up"). Enumerators are
-        auto-detected from active ProgramAssignments for this program — they
+        auto-detected from active ProgramAssignments for this program they
         are never listed manually here. Returns 422 if the program has no
         active enumerator yet.
       properties:
@@ -399,7 +399,7 @@ components:
         totalAssigned: { type: integer }
         leftover:
           type: integer
-          description: Eligible respondents not placed this run because every selected vehicle reached capacity — carries into the next run automatically.
+          description: Eligible respondents not placed this run because every selected vehicle reached capacity, carries into the next run automatically.
 
     VehicleType:
       type: string
@@ -441,7 +441,7 @@ components:
       type: string
       nullable: true
       enum: [VILLAGE, CELL, SECTOR, DISTRICT, PROVINCE]
-      description: Null means no geographic overlap was found anywhere — a random respondent was used instead.
+      description: Null means no geographic overlap was found anywhere a random respondent was used instead.
 
     ReplacementStatus:
       type: string
@@ -475,13 +475,13 @@ components:
       type: object
       required: [originalRespondentId, reason]
       description: >-
-        Fully automatic — no approval step. The system searches village ->
+        Fully automatic ,no approval step. The system searches village ->
         cell -> sector -> district -> province for a candidate and finalizes
         the replacement in this same request. If several respondents share
         the closest matching tier, one is picked at random among them; if
         none match anywhere, a random respondent elsewhere in the tenant is
         used. Only falls back to PENDING (status) if literally no other
-        respondent exists yet — use the /retry endpoint once one does.
+        respondent exists yet use the /retry endpoint once one does.
       properties:
         originalRespondentId: { type: string, format: uuid }
         reason: { type: string, minLength: 1 }
@@ -613,7 +613,7 @@ components:
 
     UpdateMyProfileRequest:
       type: object
-      description: Self-service profile update — anyone can edit their own firstName/lastName/telephone/address, regardless of role/permissions. Role and status are not editable here.
+      description: Self-service profile update anyone can edit their own firstName/lastName/telephone/address, regardless of role/permissions. Role and status are not editable here.
       properties:
         firstName: { type: string }
         lastName: { type: string }
@@ -760,7 +760,7 @@ components:
 
     TenantOverview:
       type: object
-      description: Platform-admin only, strictly read-only — nothing on this response is editable through any endpoint that consumes it.
+      description: Platform-admin only, strictly read-only, nothing on this response is editable through any endpoint that consumes it.
       properties:
         tenant: { $ref: '#/components/schemas/Tenant' }
         counts:
@@ -854,7 +854,7 @@ paths:
             schema: { $ref: '#/components/schemas/LoginRequest' }
       responses:
         '200':
-          description: Login successful — token returned in body and set as an httpOnly cookie
+          description: Login successful, token returned in body and set as an httpOnly cookie
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -1458,7 +1458,7 @@ paths:
             schema: { $ref: '#/components/schemas/VerifyResetCodeRequest' }
       responses:
         '200':
-          description: Code verified — returns { resetToken } valid for 10 minutes, single-use
+          description: Code verified ,returns { resetToken } valid for 10 minutes, single-use
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -1472,7 +1472,7 @@ paths:
     post:
       tags: [Auth]
       summary: Set a new password using a verified reset token
-      description: On success, bumps tokenVersion — every other device/session for this account is logged out.
+      description: On success, bumps tokenVersion ,every other device/session for this account is logged out.
       security: []
       requestBody:
         required: true
@@ -1498,7 +1498,7 @@ paths:
     post:
       tags: [Users]
       summary: Upload/replace the caller's own profile photo
-      description: Always affects the caller's own account — there's no endpoint to set someone else's avatar.
+      description: Always affects the caller's own account, there's no endpoint to set someone else's avatar.
       requestBody:
         required: true
         content:
@@ -1513,7 +1513,7 @@ paths:
                   description: JPEG, PNG, WEBP, or GIF, up to 4MB
       responses:
         '200':
-          description: Profile photo updated successfully — returns the updated User
+          description: Profile photo updated successfully ,returns the updated User
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -1545,7 +1545,7 @@ paths:
       summary: Bulk-import respondents from an Excel file
       description: >-
         Programs are matched by exact name (case-insensitive) against the
-        "programs" column (comma-separated) — a program that doesn't already
+        "programs" column (comma-separated), a program that doesn't already
         exist in the tenant is reported as a warning, not auto-created;
         that row still imports without the program link.
       requestBody:
@@ -1575,7 +1575,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
 
   # ---------------------------------------------------------------------
-  # Program Assignments — bulk assign
+  # Program Assignments bulk assign
   # ---------------------------------------------------------------------
   /program-assignments/bulk:
     post:
@@ -1597,7 +1597,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
 
   # ---------------------------------------------------------------------
-  # Beneficiary Assignments — the Smart Assignment Engine + report export
+  # Beneficiary Assignments the Smart Assignment Engine + report export
   # ---------------------------------------------------------------------
   /beneficiary-assignments/auto-assign:
     post:
@@ -1610,7 +1610,7 @@ paths:
         shuffled and distributed into the given vehicles in order, each up
         to its own daily capacity; overflow after every vehicle is full is
         reported as `leftover` and simply carries into the next run of this
-        same endpoint — the same vehicle can "return for another trip" by
+        same endpoint the same vehicle can "return for another trip" by
         calling this again later. Returns 422 if the program has no active
         enumerator assigned yet.
       requestBody:
@@ -1620,7 +1620,7 @@ paths:
             schema: { $ref: '#/components/schemas/AutoAssignBeneficiariesRequest' }
       responses:
         '201':
-          description: Assignment run completed — full per-vehicle breakdown returned for immediate display
+          description: Assignment run completed full per-vehicle breakdown returned for immediate display
           content:
             application/json:
               schema:
@@ -1775,7 +1775,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
     post:
       tags: [Replacement Requests]
-      summary: Raise a replacement request — resolved automatically in the same call
+      summary: Raise a replacement request resolved automatically in the same call
       requestBody:
         required: true
         content:
@@ -1799,7 +1799,7 @@ paths:
     post:
       tags: [Replacement Requests]
       summary: Re-run the automatic search for a PENDING request
-      description: Only reachable when the request is still PENDING (i.e. nothing was available at creation time) — re-runs the same automatic geographic search, not a human approval step.
+      description: Only reachable when the request is still PENDING (i.e. nothing was available at creation time) re-runs the same automatic geographic search, not a human approval step.
       parameters:
         - name: id
           in: path
@@ -1870,7 +1870,7 @@ paths:
     post:
       tags: [Field Monitoring]
       summary: Check yourself in for field work
-      description: Any authenticated user can check themself in/out — this is a field action, not an admin one.
+      description: Any authenticated user can check themself in/out , this is a field action, not an admin one.
       requestBody:
         required: true
         content:
@@ -1888,7 +1888,7 @@ paths:
   /field-checkins/roster:
     get:
       tags: [Field Monitoring]
-      summary: Today's field roster — who's checked in, completion counts (requires monitoring:view)
+      summary: Today's field roster who's checked in, completion counts (requires monitoring:view)
       responses:
         '200':
           description: Daily roster retrieved successfully
@@ -1968,7 +1968,7 @@ paths:
           schema: { type: string, format: uuid }
       responses:
         '200':
-          description: Today's respondents retrieved successfully — { total, completed, respondents }
+          description: Today's respondents retrieved successfully { total, completed, respondents }
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -2061,7 +2061,7 @@ paths:
       summary: List every distinct province
       responses:
         '200':
-          description: Provinces retrieved successfully — array of strings
+          description: Provinces retrieved successfully array of strings
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -2078,7 +2078,7 @@ paths:
           schema: { type: string }
       responses:
         '200':
-          description: Districts retrieved successfully — array of strings
+          description: Districts retrieved successfully array of strings
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -2099,7 +2099,7 @@ paths:
           schema: { type: string }
       responses:
         '200':
-          description: Sectors retrieved successfully — array of strings
+          description: Sectors retrieved successfully array of strings
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -2120,7 +2120,7 @@ paths:
           schema: { type: string }
       responses:
         '200':
-          description: Cells retrieved successfully — array of strings
+          description: Cells retrieved successfully array of strings
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -2141,7 +2141,7 @@ paths:
           schema: { type: string }
       responses:
         '200':
-          description: Villages retrieved successfully — array of strings
+          description: Villages retrieved successfully array of strings
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -2156,7 +2156,7 @@ paths:
       summary: List activity logs
       description: >-
         Anyone can see their OWN activity with no special permission. Seeing
-        everyone else's in the tenant requires activity:view — without it,
+        everyone else's in the tenant requires activity:view without it,
         any userId filter you send is silently ignored and forced back to
         your own id (not an error).
       parameters:
@@ -2190,7 +2190,7 @@ paths:
       summary: List the caller's own notifications (most recent 50) plus unread count
       responses:
         '200':
-          description: Notifications retrieved successfully — { notifications, unreadCount }
+          description: Notifications retrieved successfully { notifications, unreadCount }
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
@@ -2251,7 +2251,7 @@ paths:
     get:
       tags: [Dashboard]
       summary: Who's online right now, by name (powers the "online now" modal)
-      description: Tenant-scoped exactly like the summary's online count — a tenant user never sees another tenant's online users.
+      description: Tenant-scoped exactly like the summary's online count a tenant user never sees another tenant's online users.
       responses:
         '200':
           description: Online users retrieved successfully
@@ -2299,7 +2299,7 @@ paths:
   /meta/permissions:
     get:
       tags: [Meta]
-      summary: The full permission catalog, grouped — powers the Roles editor UI
+      summary: The full permission catalog, grouped powers the Roles editor UI
       responses:
         '200':
           description: Permission catalog retrieved successfully
@@ -2342,7 +2342,7 @@ paths:
     get:
       tags: [Tenants]
       summary: Read-only drill-down into one tenant (platform-admin only)
-      description: Strictly display-only — nothing on this response can be added, edited, or deleted through any endpoint that consumes it.
+      description: Strictly display-only nothing on this response can be added, edited, or deleted through any endpoint that consumes it.
       parameters:
         - name: id
           in: path
