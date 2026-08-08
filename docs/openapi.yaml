@@ -16,6 +16,14 @@ tags:
   - name: Beneficiaries
   - name: Program Assignments
   - name: Beneficiary Assignments
+  - name: Vehicles
+  - name: Replacement Requests
+  - name: Field Monitoring
+  - name: Geo
+  - name: Activity Logs
+  - name: Notifications
+  - name: Dashboard
+  - name: Meta
 
 components:
   securitySchemes:
@@ -78,10 +86,15 @@ components:
         id: { type: string, format: uuid }
         email: { type: string, format: email }
         name: { type: string, nullable: true }
+        firstName: { type: string, nullable: true }
+        lastName: { type: string, nullable: true }
+        avatarUrl: { type: string, nullable: true }
         telephone: { type: string, nullable: true }
         province: { type: string, nullable: true }
         district: { type: string, nullable: true }
         sector: { type: string, nullable: true }
+        cell: { type: string, nullable: true }
+        village: { type: string, nullable: true }
         gender: { $ref: '#/components/schemas/Gender' }
         dateOfBirth: { type: string, format: date-time, nullable: true }
         status: { $ref: '#/components/schemas/UserStatus' }
@@ -89,6 +102,7 @@ components:
         roleId: { type: string, format: uuid }
         role: { $ref: '#/components/schemas/RoleSummary' }
         tenantId: { type: string, format: uuid }
+        lastSeenAt: { type: string, format: date-time, nullable: true }
         createdAt: { type: string, format: date-time }
         updatedAt: { type: string, format: date-time }
 
@@ -104,10 +118,14 @@ components:
       type: object
       properties:
         name: { type: string }
+        firstName: { type: string }
+        lastName: { type: string }
         telephone: { type: string }
         province: { type: string }
         district: { type: string }
         sector: { type: string }
+        cell: { type: string }
+        village: { type: string }
         gender: { $ref: '#/components/schemas/Gender' }
         dateOfBirth: { type: string, format: date }
         status: { $ref: '#/components/schemas/UserStatus' }
@@ -216,8 +234,13 @@ components:
         province: { type: string, nullable: true }
         district: { type: string, nullable: true }
         sector: { type: string, nullable: true }
+        cell: { type: string, nullable: true }
+        village: { type: string, nullable: true }
         nationalId: { type: string, nullable: true }
         householdSize: { type: integer, nullable: true }
+        consentGiven: { type: boolean }
+        consentAt: { type: string, format: date-time, nullable: true }
+        outcome: { $ref: '#/components/schemas/ResponseOutcome' }
         tenantId: { type: string, format: uuid }
         programs:
           type: array
@@ -233,6 +256,8 @@ components:
         province: { type: string }
         district: { type: string }
         sector: { type: string }
+        cell: { type: string }
+        village: { type: string }
         gender: { $ref: '#/components/schemas/Gender' }
         dateOfBirth: { type: string, format: date }
         status: { $ref: '#/components/schemas/UserStatus' }
@@ -241,6 +266,9 @@ components:
         programIds:
           type: array
           items: { type: string, format: uuid }
+        consentGiven: { type: boolean }
+        consentAt: { type: string, format: date }
+        outcome: { $ref: '#/components/schemas/ResponseOutcome' }
 
     CreateBeneficiaryRequest:
       allOf:
@@ -308,6 +336,484 @@ components:
       properties:
         beneficiaryId: { type: string, format: uuid }
         userId: { type: string, format: uuid }
+
+    BulkProgramAssignmentRequest:
+      type: object
+      required: [programId, userIds]
+      properties:
+        programId: { type: string, format: uuid }
+        userIds:
+          type: array
+          items: { type: string, format: uuid }
+          minItems: 1
+
+    AutoAssignBeneficiariesRequest:
+      type: object
+      required: [programId, vehicleIds]
+      description: >-
+        The Smart Assignment Engine ("Random Top-Up"). Enumerators are
+        auto-detected from active ProgramAssignments for this program — they
+        are never listed manually here. Returns 422 if the program has no
+        active enumerator yet.
+      properties:
+        programId: { type: string, format: uuid }
+        vehicleIds:
+          type: array
+          items: { type: string, format: uuid }
+          minItems: 1
+
+    AssignmentEngineVehicleResult:
+      type: object
+      properties:
+        vehicleId: { type: string, format: uuid }
+        name: { type: string }
+        type: { $ref: '#/components/schemas/VehicleType' }
+        driverName: { type: string, nullable: true }
+        capacityPerDay: { type: integer, nullable: true }
+        assigned:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string, format: uuid }
+              code: { type: string }
+              name: { type: string }
+              userId: { type: string, format: uuid }
+              userName: { type: string }
+
+    AutoAssignBeneficiariesResponse:
+      type: object
+      properties:
+        program: { $ref: '#/components/schemas/ProgramSummary' }
+        enumerators:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string, format: uuid }
+              name: { type: string }
+        vehicles:
+          type: array
+          items: { $ref: '#/components/schemas/AssignmentEngineVehicleResult' }
+        totalCandidates: { type: integer }
+        totalAssigned: { type: integer }
+        leftover:
+          type: integer
+          description: Eligible respondents not placed this run because every selected vehicle reached capacity — carries into the next run automatically.
+
+    VehicleType:
+      type: string
+      enum: [VEHICLE, MOTORCYCLE]
+
+    Vehicle:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        type: { $ref: '#/components/schemas/VehicleType' }
+        driverName: { type: string, nullable: true }
+        capacityPerDay: { type: integer, nullable: true }
+        active: { type: boolean }
+        tenantId: { type: string, format: uuid }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    CreateVehicleRequest:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        type: { $ref: '#/components/schemas/VehicleType' }
+        driverName: { type: string }
+        capacityPerDay: { type: integer, minimum: 1 }
+        active: { type: boolean, default: true }
+
+    UpdateVehicleRequest:
+      type: object
+      properties:
+        name: { type: string }
+        type: { $ref: '#/components/schemas/VehicleType' }
+        driverName: { type: string }
+        capacityPerDay: { type: integer, minimum: 1, nullable: true }
+        active: { type: boolean }
+
+    GeoMatchLevel:
+      type: string
+      nullable: true
+      enum: [VILLAGE, CELL, SECTOR, DISTRICT, PROVINCE]
+      description: Null means no geographic overlap was found anywhere — a random respondent was used instead.
+
+    ReplacementStatus:
+      type: string
+      enum: [PENDING, APPROVED, REJECTED]
+
+    ReplacementRequest:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        reason: { type: string }
+        status: { $ref: '#/components/schemas/ReplacementStatus' }
+        matchLevel: { $ref: '#/components/schemas/GeoMatchLevel' }
+        createdAt: { type: string, format: date-time }
+        decidedAt: { type: string, format: date-time, nullable: true }
+        originalRespondentId: { type: string, format: uuid }
+        originalRespondent: { $ref: '#/components/schemas/BeneficiarySummary' }
+        candidateRespondentId: { type: string, format: uuid, nullable: true }
+        candidateRespondent:
+          allOf:
+            - $ref: '#/components/schemas/BeneficiarySummary'
+          nullable: true
+        requestedByUserId: { type: string, format: uuid }
+        requestedBy: { $ref: '#/components/schemas/UserSummary' }
+        decidedByUserId: { type: string, format: uuid, nullable: true }
+        decidedBy:
+          allOf:
+            - $ref: '#/components/schemas/UserSummary'
+          nullable: true
+
+    CreateReplacementRequestRequest:
+      type: object
+      required: [originalRespondentId, reason]
+      description: >-
+        Fully automatic — no approval step. The system searches village ->
+        cell -> sector -> district -> province for a candidate and finalizes
+        the replacement in this same request. If several respondents share
+        the closest matching tier, one is picked at random among them; if
+        none match anywhere, a random respondent elsewhere in the tenant is
+        used. Only falls back to PENDING (status) if literally no other
+        respondent exists yet — use the /retry endpoint once one does.
+      properties:
+        originalRespondentId: { type: string, format: uuid }
+        reason: { type: string, minLength: 1 }
+
+    ResponseOutcome:
+      type: string
+      enum: [PENDING, COMPLETED, REFUSED, NOT_FOUND, RELOCATED, DECEASED, REPLACED]
+
+    FieldCheckIn:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        checkInAt: { type: string, format: date-time }
+        checkOutAt: { type: string, format: date-time, nullable: true }
+        gpsLat: { type: number, nullable: true }
+        gpsLng: { type: number, nullable: true }
+        note: { type: string, nullable: true }
+        currentGpsLat: { type: number, nullable: true }
+        currentGpsLng: { type: number, nullable: true }
+        currentGpsAt: { type: string, format: date-time, nullable: true }
+        currentGpsNote: { type: string, nullable: true }
+        userId: { type: string, format: uuid }
+        user: { $ref: '#/components/schemas/UserSummary' }
+        projectId: { type: string, format: uuid, nullable: true }
+        project: { $ref: '#/components/schemas/ProgramSummary' }
+        tenantId: { type: string, format: uuid }
+
+    CreateFieldCheckInRequest:
+      type: object
+      properties:
+        projectId: { type: string, format: uuid }
+        gpsLat: { type: number }
+        gpsLng: { type: number }
+        note: { type: string }
+
+    CheckoutRequest:
+      type: object
+      properties:
+        overrideReason: { type: string }
+
+    PingGpsRequest:
+      type: object
+      required: [gpsLat, gpsLng]
+      properties:
+        gpsLat: { type: number }
+        gpsLng: { type: number }
+        note: { type: string }
+
+    RecordVisitOutcomeRequest:
+      type: object
+      required: [outcome]
+      properties:
+        outcome: { $ref: '#/components/schemas/ResponseOutcome' }
+        note: { type: string }
+
+    FieldVisit:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        checkInId: { type: string, format: uuid }
+        beneficiaryId: { type: string, format: uuid }
+        outcome: { $ref: '#/components/schemas/ResponseOutcome' }
+        note: { type: string, nullable: true }
+        recordedAt: { type: string, format: date-time }
+
+    AddFieldNoteRequest:
+      type: object
+      required: [note]
+      properties:
+        note: { type: string, minLength: 1 }
+
+    FieldNote:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        checkInId: { type: string, format: uuid }
+        note: { type: string }
+        createdAt: { type: string, format: date-time }
+
+    TodayRespondent:
+      type: object
+      properties:
+        assignmentId: { type: string, format: uuid }
+        beneficiary:
+          type: object
+          properties:
+            id: { type: string, format: uuid }
+            code: { type: string }
+            name: { type: string }
+            province: { type: string, nullable: true }
+            district: { type: string, nullable: true }
+            sector: { type: string, nullable: true }
+            cell: { type: string, nullable: true }
+            village: { type: string, nullable: true }
+            outcome: { $ref: '#/components/schemas/ResponseOutcome' }
+        visit:
+          type: object
+          nullable: true
+          properties:
+            outcome: { $ref: '#/components/schemas/ResponseOutcome' }
+            note: { type: string, nullable: true }
+            recordedAt: { type: string, format: date-time }
+
+    ForgotPasswordRequest:
+      type: object
+      required: [email]
+      properties:
+        email: { type: string, format: email }
+
+    VerifyResetCodeRequest:
+      type: object
+      required: [email, code]
+      properties:
+        email: { type: string, format: email }
+        code:
+          type: string
+          minLength: 6
+          maxLength: 6
+          example: "482913"
+
+    ResetPasswordRequest:
+      type: object
+      required: [resetToken, newPassword]
+      properties:
+        resetToken:
+          type: string
+          description: Returned by POST /auth/verify-reset-code. Valid for 10 minutes and single-use.
+        newPassword: { type: string, minLength: 8 }
+
+    UpdateMyProfileRequest:
+      type: object
+      description: Self-service profile update — anyone can edit their own firstName/lastName/telephone/address, regardless of role/permissions. Role and status are not editable here.
+      properties:
+        firstName: { type: string }
+        lastName: { type: string }
+        telephone: { type: string }
+        province: { type: string }
+        district: { type: string }
+        sector: { type: string }
+        cell: { type: string }
+        village: { type: string }
+        gender: { $ref: '#/components/schemas/Gender' }
+        dateOfBirth: { type: string, format: date }
+
+    PermissionGroup:
+      type: object
+      properties:
+        label: { type: string, example: "Beneficiaries" }
+        permissions:
+          type: array
+          items: { type: string, example: "beneficiaries:edit" }
+
+    AdminLocationRow:
+      type: string
+      description: A single administrative unit name at the requested tier (province/district/sector/cell/village).
+
+    ActivityLog:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        action: { type: string, example: "created" }
+        entityType: { type: string, example: "Beneficiary" }
+        entityId: { type: string, format: uuid, nullable: true }
+        metadata: { type: object, nullable: true }
+        createdAt: { type: string, format: date-time }
+        tenantId: { type: string, format: uuid, nullable: true }
+        userId: { type: string, format: uuid, nullable: true }
+        user:
+          allOf:
+            - $ref: '#/components/schemas/UserSummary'
+          nullable: true
+
+    NotificationType:
+      type: string
+      enum: [ASSIGNMENT_PROGRAM, ASSIGNMENT_BENEFICIARY, REPLACEMENT_REQUESTED, REPLACEMENT_DECIDED, SYSTEM]
+
+    Notification:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        type: { $ref: '#/components/schemas/NotificationType' }
+        message: { type: string }
+        read: { type: boolean }
+        entityType: { type: string, nullable: true }
+        entityId: { type: string, nullable: true }
+        createdAt: { type: string, format: date-time }
+        userId: { type: string, format: uuid }
+        tenantId: { type: string, format: uuid, nullable: true }
+
+    DashboardCounts:
+      type: object
+      properties:
+        users: { type: integer }
+        roles: { type: integer }
+        programs: { type: integer }
+        beneficiaries: { type: integer }
+        tenants: { type: integer, description: Only populated for platform admins }
+        pendingReplacements: { type: integer }
+        activeCheckIns: { type: integer }
+        onlineUsers: { type: integer }
+
+    DashboardSummary:
+      type: object
+      properties:
+        counts: { $ref: '#/components/schemas/DashboardCounts' }
+        beneficiariesByOutcome:
+          type: array
+          items:
+            type: object
+            properties:
+              outcome: { $ref: '#/components/schemas/ResponseOutcome' }
+              count: { type: integer }
+        programsByStatus:
+          type: array
+          items:
+            type: object
+            properties:
+              status: { type: string }
+              count: { type: integer }
+        checkInSeries:
+          type: array
+          items:
+            type: object
+            properties:
+              day: { type: string, example: "Mon" }
+              checkIns: { type: integer }
+
+    DashboardChartResponse:
+      type: object
+      properties:
+        metric: { type: string, enum: [checkins, online-users, beneficiary-attendance] }
+        period: { type: string, enum: [week, month, year, lifetime] }
+        title: { type: string, example: "Field check-ins, last 7 days" }
+        subtitle: { type: string, example: "Duty-of-care activity across the whole tenant" }
+        series:
+          type: array
+          items:
+            type: object
+            properties:
+              label: { type: string }
+              count: { type: integer }
+
+    OnlineUser:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string, nullable: true }
+        email: { type: string, format: email }
+        avatarUrl: { type: string, nullable: true }
+        role:
+          type: object
+          nullable: true
+          properties:
+            name: { type: string }
+        tenant:
+          type: object
+          nullable: true
+          properties:
+            name: { type: string }
+
+    TenantAdmin:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string, nullable: true }
+        email: { type: string, format: email }
+        avatarUrl: { type: string, nullable: true }
+        lastSeenAt: { type: string, format: date-time, nullable: true }
+        status: { $ref: '#/components/schemas/UserStatus' }
+        tenant:
+          type: object
+          properties:
+            id: { type: string, format: uuid }
+            name: { type: string }
+            createdAt: { type: string, format: date-time }
+
+    TenantOverview:
+      type: object
+      description: Platform-admin only, strictly read-only — nothing on this response is editable through any endpoint that consumes it.
+      properties:
+        tenant: { $ref: '#/components/schemas/Tenant' }
+        counts:
+          type: object
+          properties:
+            users: { type: integer }
+            roles: { type: integer }
+            programs: { type: integer }
+            beneficiaries: { type: integer }
+            online: { type: integer }
+        users:
+          type: array
+          items: { $ref: '#/components/schemas/User' }
+        roles:
+          type: array
+          items: { $ref: '#/components/schemas/Role' }
+        programs:
+          type: array
+          items: { $ref: '#/components/schemas/Program' }
+        beneficiaries:
+          type: array
+          items: { $ref: '#/components/schemas/Beneficiary' }
+        activityLogs:
+          type: array
+          items: { $ref: '#/components/schemas/ActivityLog' }
+
+    ImportBeneficiariesResponse:
+      type: object
+      properties:
+        createdCount: { type: integer }
+        totalRows: { type: integer }
+        created:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string, format: uuid }
+              code: { type: string }
+              name: { type: string }
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              row: { type: integer }
+              message: { type: string }
+        warnings:
+          type: array
+          items:
+            type: object
+            properties:
+              row: { type: integer }
+              message: { type: string }
 
   responses:
     Unauthorized:
@@ -911,4 +1417,948 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ApiResponse' }
         '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  # ---------------------------------------------------------------------
+  # Auth — forgot password (email -> 6-digit code -> reset), self-profile
+  # ---------------------------------------------------------------------
+  /auth/forgot-password:
+    post:
+      tags: [Auth]
+      summary: Request a 6-digit password reset code by email
+      description: >-
+        Always responds the same way whether or not the email is registered
+        (prevents account enumeration). If it exists, a 6-digit code valid
+        for 15 minutes is emailed (or printed to the server console if SMTP
+        isn't configured). Works identically for platform admins, tenant
+        admins, and regular users.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ForgotPasswordRequest' }
+      responses:
+        '200':
+          description: Generic confirmation message (does not reveal whether the email exists)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+
+  /auth/verify-reset-code:
+    post:
+      tags: [Auth]
+      summary: Verify a 6-digit reset code and obtain a short-lived reset token
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/VerifyResetCodeRequest' }
+      responses:
+        '200':
+          description: Code verified — returns { resetToken } valid for 10 minutes, single-use
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '400':
+          description: Code is invalid, expired, or already used
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+
+  /auth/reset-password:
+    post:
+      tags: [Auth]
+      summary: Set a new password using a verified reset token
+      description: On success, bumps tokenVersion — every other device/session for this account is logged out.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ResetPasswordRequest' }
+      responses:
+        '200':
+          description: Password reset successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '400':
+          description: Reset token expired/invalid, or the code was already used
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+
+  # ---------------------------------------------------------------------
+  # Users — self-service avatar upload
+  # ---------------------------------------------------------------------
+  /users/me/avatar:
+    post:
+      tags: [Users]
+      summary: Upload/replace the caller's own profile photo
+      description: Always affects the caller's own account — there's no endpoint to set someone else's avatar.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [avatar]
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+                  description: JPEG, PNG, WEBP, or GIF, up to 4MB
+      responses:
+        '200':
+          description: Profile photo updated successfully — returns the updated User
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '400':
+          description: No file uploaded, or unsupported image type
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  # ---------------------------------------------------------------------
+  # Beneficiaries — bulk Excel import
+  # ---------------------------------------------------------------------
+  /beneficiaries/import/template:
+    get:
+      tags: [Beneficiaries]
+      summary: Download a blank Excel template for bulk-importing respondents
+      responses:
+        '200':
+          description: An .xlsx file with the expected columns and one example row
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema: { type: string, format: binary }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /beneficiaries/import:
+    post:
+      tags: [Beneficiaries]
+      summary: Bulk-import respondents from an Excel file
+      description: >-
+        Programs are matched by exact name (case-insensitive) against the
+        "programs" column (comma-separated) — a program that doesn't already
+        exist in the tenant is reported as a warning, not auto-created;
+        that row still imports without the program link.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: .xlsx file matching the template's columns
+      responses:
+        '201':
+          description: Import completed (may include per-row errors/warnings alongside successes)
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data: { $ref: '#/components/schemas/ImportBeneficiariesResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  # ---------------------------------------------------------------------
+  # Program Assignments — bulk assign
+  # ---------------------------------------------------------------------
+  /program-assignments/bulk:
+    post:
+      tags: [Program Assignments]
+      summary: Assign multiple users to one program in a single call
+      description: Users already actively assigned are silently skipped, not duplicated.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BulkProgramAssignmentRequest' }
+      responses:
+        '201':
+          description: Created assignments for whichever users weren't already active on this program
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  # ---------------------------------------------------------------------
+  # Beneficiary Assignments — the Smart Assignment Engine + report export
+  # ---------------------------------------------------------------------
+  /beneficiary-assignments/auto-assign:
+    post:
+      tags: [Beneficiary Assignments]
+      summary: Run the Smart Assignment Engine ("Random Top-Up")
+      description: >-
+        Enumerators are auto-detected from active ProgramAssignments for the
+        given program (never supplied manually). Eligible respondents
+        (enrolled in the program, not REPLACED, no active caseworker) are
+        shuffled and distributed into the given vehicles in order, each up
+        to its own daily capacity; overflow after every vehicle is full is
+        reported as `leftover` and simply carries into the next run of this
+        same endpoint — the same vehicle can "return for another trip" by
+        calling this again later. Returns 422 if the program has no active
+        enumerator assigned yet.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AutoAssignBeneficiariesRequest' }
+      responses:
+        '201':
+          description: Assignment run completed — full per-vehicle breakdown returned for immediate display
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data: { $ref: '#/components/schemas/AutoAssignBeneficiariesResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '422':
+          description: The program has no active enumerator assigned yet
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+
+  /beneficiary-assignments/report:
+    get:
+      tags: [Beneficiary Assignments]
+      summary: Download a report of a program's current assignment run
+      parameters:
+        - name: programId
+          in: query
+          required: true
+          schema: { type: string, format: uuid }
+        - name: vehicleId
+          in: query
+          required: false
+          description: Narrow the report to one vehicle's respondents
+          schema: { type: string, format: uuid }
+        - name: format
+          in: query
+          required: false
+          schema: { type: string, enum: [xlsx, csv, pdf], default: xlsx }
+      responses:
+        '200':
+          description: The report file, in the requested format
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema: { type: string, format: binary }
+            text/csv:
+              schema: { type: string, format: binary }
+            application/pdf:
+              schema: { type: string, format: binary }
+        '400':
+          description: programId query parameter is required
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  # ---------------------------------------------------------------------
+  # Vehicles
+  # ---------------------------------------------------------------------
+  /vehicles:
+    get:
+      tags: [Vehicles]
+      summary: List vehicles in the caller's tenant
+      parameters:
+        - name: active
+          in: query
+          required: false
+          schema: { type: string, enum: ["true", "false"] }
+      responses:
+        '200':
+          description: Vehicles retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Vehicles]
+      summary: Register a new vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateVehicleRequest' }
+      responses:
+        '201':
+          description: Vehicle created successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+
+  /vehicles/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, format: uuid }
+    get:
+      tags: [Vehicles]
+      summary: Get a vehicle by id
+      responses:
+        '200':
+          description: Vehicle retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      tags: [Vehicles]
+      summary: Update a vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateVehicleRequest' }
+      responses:
+        '200':
+          description: Vehicle updated successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    delete:
+      tags: [Vehicles]
+      summary: Delete a vehicle
+      responses:
+        '200':
+          description: Vehicle deleted successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  # ---------------------------------------------------------------------
+  # Replacement Requests — fully automatic, no approval step
+  # ---------------------------------------------------------------------
+  /replacement-requests:
+    get:
+      tags: [Replacement Requests]
+      summary: List replacement requests in the caller's tenant
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { $ref: '#/components/schemas/ReplacementStatus' }
+      responses:
+        '200':
+          description: Replacement requests retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Replacement Requests]
+      summary: Raise a replacement request — resolved automatically in the same call
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateReplacementRequestRequest' }
+      responses:
+        '201':
+          description: Replacement found and applied automatically, or queued as PENDING if nothing was available yet
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '409':
+          description: This respondent has already been replaced
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+
+  /replacement-requests/{id}/retry:
+    post:
+      tags: [Replacement Requests]
+      summary: Re-run the automatic search for a PENDING request
+      description: Only reachable when the request is still PENDING (i.e. nothing was available at creation time) — re-runs the same automatic geographic search, not a human approval step.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Replacement resolved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409':
+          description: Already resolved, or still nothing eligible to suggest
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+
+  /replacement-requests/{id}:
+    delete:
+      tags: [Replacement Requests]
+      summary: Permanently delete a replacement request record
+      description: Requires replacements:delete. Does not undo a replacement that already happened.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Replacement request deleted successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  # ---------------------------------------------------------------------
+  # Field Monitoring — check-ins, GPS pings, today's respondents, notes
+  # ---------------------------------------------------------------------
+  /field-checkins:
+    get:
+      tags: [Field Monitoring]
+      summary: List field check-ins (requires monitoring:view)
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema: { type: string, format: uuid }
+        - name: projectId
+          in: query
+          required: false
+          schema: { type: string, format: uuid }
+        - name: active
+          in: query
+          required: false
+          description: If "true", only currently-active (not checked out) check-ins
+          schema: { type: string, enum: ["true"] }
+      responses:
+        '200':
+          description: Field check-ins retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+    post:
+      tags: [Field Monitoring]
+      summary: Check yourself in for field work
+      description: Any authenticated user can check themself in/out — this is a field action, not an admin one.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateFieldCheckInRequest' }
+      responses:
+        '201':
+          description: Checked in successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /field-checkins/roster:
+    get:
+      tags: [Field Monitoring]
+      summary: Today's field roster — who's checked in, completion counts (requires monitoring:view)
+      responses:
+        '200':
+          description: Daily roster retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /field-checkins/export:
+    get:
+      tags: [Field Monitoring]
+      summary: Download today's field report as an Excel workbook (requires monitoring:view)
+      responses:
+        '200':
+          description: An .xlsx file
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema: { type: string, format: binary }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /field-checkins/{id}/end:
+    post:
+      tags: [Field Monitoring]
+      summary: Check yourself out
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CheckoutRequest' }
+      responses:
+        '200':
+          description: Checked out successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /field-checkins/{id}/gps:
+    post:
+      tags: [Field Monitoring]
+      summary: Report the checked-in user's current live location
+      description: Only the owner of the check-in may update its location.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PingGpsRequest' }
+      responses:
+        '200':
+          description: Location updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /field-checkins/{id}/respondents:
+    get:
+      tags: [Field Monitoring]
+      summary: This check-in's assigned respondents, with any outcome already recorded
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Today's respondents retrieved successfully — { total, completed, respondents }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /field-checkins/{id}/respondents/{beneficiaryId}:
+    put:
+      tags: [Field Monitoring]
+      summary: Record (or update) one respondent's field outcome for this check-in
+      description: Also updates the respondent's global `outcome` field to match. Only the check-in's own owner may record outcomes on it, and only while it's still active (not checked out).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: beneficiaryId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RecordVisitOutcomeRequest' }
+      responses:
+        '200':
+          description: Outcome recorded successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409':
+          description: This check-in has already ended
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+
+  /field-checkins/{id}/notes:
+    get:
+      tags: [Field Monitoring]
+      summary: List free-text field notes for a check-in
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Field notes retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    post:
+      tags: [Field Monitoring]
+      summary: Add a free-text field note to a check-in
+      description: Only the check-in's own owner may add notes to it.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AddFieldNoteRequest' }
+      responses:
+        '201':
+          description: Note added successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  # ---------------------------------------------------------------------
+  # Geo — cascading province -> district -> sector -> cell -> village
+  # ---------------------------------------------------------------------
+  /geo/provinces:
+    get:
+      tags: [Geo]
+      summary: List every distinct province
+      responses:
+        '200':
+          description: Provinces retrieved successfully — array of strings
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /geo/districts:
+    get:
+      tags: [Geo]
+      summary: List districts within a province
+      parameters:
+        - name: province
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Districts retrieved successfully — array of strings
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /geo/sectors:
+    get:
+      tags: [Geo]
+      summary: List sectors within a district
+      parameters:
+        - name: district
+          in: query
+          required: true
+          schema: { type: string }
+        - name: province
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: Sectors retrieved successfully — array of strings
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /geo/cells:
+    get:
+      tags: [Geo]
+      summary: List cells within a sector
+      parameters:
+        - name: sector
+          in: query
+          required: true
+          schema: { type: string }
+        - name: district
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: Cells retrieved successfully — array of strings
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /geo/villages:
+    get:
+      tags: [Geo]
+      summary: List villages within a cell
+      parameters:
+        - name: cell
+          in: query
+          required: true
+          schema: { type: string }
+        - name: sector
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: Villages retrieved successfully — array of strings
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  # ---------------------------------------------------------------------
+  # Activity Logs
+  # ---------------------------------------------------------------------
+  /activity-logs:
+    get:
+      tags: [Activity Logs]
+      summary: List activity logs
+      description: >-
+        Anyone can see their OWN activity with no special permission. Seeing
+        everyone else's in the tenant requires activity:view — without it,
+        any userId filter you send is silently ignored and forced back to
+        your own id (not an error).
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          description: Ignored (forced to your own id) unless you hold activity:view
+          schema: { type: string, format: uuid }
+        - name: entityType
+          in: query
+          required: false
+          schema: { type: string, example: "Beneficiary" }
+        - name: limit
+          in: query
+          required: false
+          schema: { type: integer, default: 100, maximum: 200 }
+      responses:
+        '200':
+          description: Activity logs retrieved successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  # ---------------------------------------------------------------------
+  # Notifications
+  # ---------------------------------------------------------------------
+  /notifications:
+    get:
+      tags: [Notifications]
+      summary: List the caller's own notifications (most recent 50) plus unread count
+      responses:
+        '200':
+          description: Notifications retrieved successfully — { notifications, unreadCount }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /notifications/read-all:
+    post:
+      tags: [Notifications]
+      summary: Mark all of the caller's notifications as read
+      responses:
+        '200':
+          description: All notifications marked as read
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /notifications/{id}/read:
+    post:
+      tags: [Notifications]
+      summary: Mark a single notification as read
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Notification marked as read
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  # ---------------------------------------------------------------------
+  # Dashboard
+  # ---------------------------------------------------------------------
+  /dashboard/summary:
+    get:
+      tags: [Dashboard]
+      summary: Aggregate counts and a 7-day check-in series for the dashboard
+      description: Platform admins see system-wide numbers; tenant users see only their own tenant's, including their own tenant's online-user count (never another tenant's).
+      responses:
+        '200':
+          description: Dashboard summary retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data: { $ref: '#/components/schemas/DashboardSummary' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /dashboard/online-users:
+    get:
+      tags: [Dashboard]
+      summary: Who's online right now, by name (powers the "online now" modal)
+      description: Tenant-scoped exactly like the summary's online count — a tenant user never sees another tenant's online users.
+      responses:
+        '200':
+          description: Online users retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items: { $ref: '#/components/schemas/OnlineUser' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /dashboard/chart:
+    get:
+      tags: [Dashboard]
+      summary: Configurable metric/period chart data, with a ready-to-render title
+      parameters:
+        - name: metric
+          in: query
+          required: false
+          schema: { type: string, enum: [checkins, online-users, beneficiary-attendance], default: checkins }
+        - name: period
+          in: query
+          required: false
+          schema: { type: string, enum: [week, month, year, lifetime], default: week }
+      responses:
+        '200':
+          description: Dashboard chart retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data: { $ref: '#/components/schemas/DashboardChartResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  # ---------------------------------------------------------------------
+  # Meta
+  # ---------------------------------------------------------------------
+  /meta/permissions:
+    get:
+      tags: [Meta]
+      summary: The full permission catalog, grouped — powers the Roles editor UI
+      responses:
+        '200':
+          description: Permission catalog retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items: { $ref: '#/components/schemas/PermissionGroup' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  # ---------------------------------------------------------------------
+  # Tenants — platform-admin only: tenant admins list + read-only drill-down
+  # ---------------------------------------------------------------------
+  /tenants/admins:
+    get:
+      tags: [Tenants]
+      summary: List every tenant's admin user, across the whole platform (platform-admin only)
+      responses:
+        '200':
+          description: Tenant administrators retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items: { $ref: '#/components/schemas/TenantAdmin' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+
+  /tenants/{id}/overview:
+    get:
+      tags: [Tenants]
+      summary: Read-only drill-down into one tenant (platform-admin only)
+      description: Strictly display-only — nothing on this response can be added, edited, or deleted through any endpoint that consumes it.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Tenant overview retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data: { $ref: '#/components/schemas/TenantOverview' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
         '404': { $ref: '#/components/responses/NotFound' }
