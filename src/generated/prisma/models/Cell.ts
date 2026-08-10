@@ -345,6 +345,11 @@ export type CellUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+export type CellNullableScalarRelationFilter = {
+  is?: Prisma.CellWhereInput | null
+  isNot?: Prisma.CellWhereInput | null
+}
+
 export type CellListRelationFilter = {
   every?: Prisma.CellWhereInput
   some?: Prisma.CellWhereInput
@@ -400,9 +405,20 @@ export type CellScalarRelationFilter = {
   isNot?: Prisma.CellWhereInput
 }
 
-export type CellNullableScalarRelationFilter = {
-  is?: Prisma.CellWhereInput | null
-  isNot?: Prisma.CellWhereInput | null
+export type CellCreateNestedOneWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.CellCreateWithoutUsersInput, Prisma.CellUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.CellCreateOrConnectWithoutUsersInput
+  connect?: Prisma.CellWhereUniqueInput
+}
+
+export type CellUpdateOneWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.CellCreateWithoutUsersInput, Prisma.CellUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.CellCreateOrConnectWithoutUsersInput
+  upsert?: Prisma.CellUpsertWithoutUsersInput
+  disconnect?: Prisma.CellWhereInput | boolean
+  delete?: Prisma.CellWhereInput | boolean
+  connect?: Prisma.CellWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CellUpdateToOneWithWhereWithoutUsersInput, Prisma.CellUpdateWithoutUsersInput>, Prisma.CellUncheckedUpdateWithoutUsersInput>
 }
 
 export type CellCreateNestedManyWithoutSectorInput = {
@@ -461,22 +477,6 @@ export type CellUpdateOneRequiredWithoutVillagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CellUpdateToOneWithWhereWithoutVillagesInput, Prisma.CellUpdateWithoutVillagesInput>, Prisma.CellUncheckedUpdateWithoutVillagesInput>
 }
 
-export type CellCreateNestedOneWithoutUsersInput = {
-  create?: Prisma.XOR<Prisma.CellCreateWithoutUsersInput, Prisma.CellUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.CellCreateOrConnectWithoutUsersInput
-  connect?: Prisma.CellWhereUniqueInput
-}
-
-export type CellUpdateOneWithoutUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.CellCreateWithoutUsersInput, Prisma.CellUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.CellCreateOrConnectWithoutUsersInput
-  upsert?: Prisma.CellUpsertWithoutUsersInput
-  disconnect?: Prisma.CellWhereInput | boolean
-  delete?: Prisma.CellWhereInput | boolean
-  connect?: Prisma.CellWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CellUpdateToOneWithWhereWithoutUsersInput, Prisma.CellUpdateWithoutUsersInput>, Prisma.CellUncheckedUpdateWithoutUsersInput>
-}
-
 export type CellCreateNestedOneWithoutBeneficiariesInput = {
   create?: Prisma.XOR<Prisma.CellCreateWithoutBeneficiariesInput, Prisma.CellUncheckedCreateWithoutBeneficiariesInput>
   connectOrCreate?: Prisma.CellCreateOrConnectWithoutBeneficiariesInput
@@ -491,6 +491,62 @@ export type CellUpdateOneWithoutBeneficiariesNestedInput = {
   delete?: Prisma.CellWhereInput | boolean
   connect?: Prisma.CellWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CellUpdateToOneWithWhereWithoutBeneficiariesInput, Prisma.CellUpdateWithoutBeneficiariesInput>, Prisma.CellUncheckedUpdateWithoutBeneficiariesInput>
+}
+
+export type CellCreateWithoutUsersInput = {
+  id: number
+  name: string
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  sector: Prisma.SectorCreateNestedOneWithoutCellsInput
+  villages?: Prisma.VillageCreateNestedManyWithoutCellInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutCellInput
+}
+
+export type CellUncheckedCreateWithoutUsersInput = {
+  id: number
+  name: string
+  sectorId: number
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  villages?: Prisma.VillageUncheckedCreateNestedManyWithoutCellInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutCellInput
+}
+
+export type CellCreateOrConnectWithoutUsersInput = {
+  where: Prisma.CellWhereUniqueInput
+  create: Prisma.XOR<Prisma.CellCreateWithoutUsersInput, Prisma.CellUncheckedCreateWithoutUsersInput>
+}
+
+export type CellUpsertWithoutUsersInput = {
+  update: Prisma.XOR<Prisma.CellUpdateWithoutUsersInput, Prisma.CellUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.CellCreateWithoutUsersInput, Prisma.CellUncheckedCreateWithoutUsersInput>
+  where?: Prisma.CellWhereInput
+}
+
+export type CellUpdateToOneWithWhereWithoutUsersInput = {
+  where?: Prisma.CellWhereInput
+  data: Prisma.XOR<Prisma.CellUpdateWithoutUsersInput, Prisma.CellUncheckedUpdateWithoutUsersInput>
+}
+
+export type CellUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sector?: Prisma.SectorUpdateOneRequiredWithoutCellsNestedInput
+  villages?: Prisma.VillageUpdateManyWithoutCellNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutCellNestedInput
+}
+
+export type CellUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  sectorId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  villages?: Prisma.VillageUncheckedUpdateManyWithoutCellNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutCellNestedInput
 }
 
 export type CellCreateWithoutSectorInput = {
@@ -603,62 +659,6 @@ export type CellUncheckedUpdateWithoutVillagesInput = {
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   users?: Prisma.UserUncheckedUpdateManyWithoutCellNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutCellNestedInput
-}
-
-export type CellCreateWithoutUsersInput = {
-  id: number
-  name: string
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  sector: Prisma.SectorCreateNestedOneWithoutCellsInput
-  villages?: Prisma.VillageCreateNestedManyWithoutCellInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutCellInput
-}
-
-export type CellUncheckedCreateWithoutUsersInput = {
-  id: number
-  name: string
-  sectorId: number
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  villages?: Prisma.VillageUncheckedCreateNestedManyWithoutCellInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutCellInput
-}
-
-export type CellCreateOrConnectWithoutUsersInput = {
-  where: Prisma.CellWhereUniqueInput
-  create: Prisma.XOR<Prisma.CellCreateWithoutUsersInput, Prisma.CellUncheckedCreateWithoutUsersInput>
-}
-
-export type CellUpsertWithoutUsersInput = {
-  update: Prisma.XOR<Prisma.CellUpdateWithoutUsersInput, Prisma.CellUncheckedUpdateWithoutUsersInput>
-  create: Prisma.XOR<Prisma.CellCreateWithoutUsersInput, Prisma.CellUncheckedCreateWithoutUsersInput>
-  where?: Prisma.CellWhereInput
-}
-
-export type CellUpdateToOneWithWhereWithoutUsersInput = {
-  where?: Prisma.CellWhereInput
-  data: Prisma.XOR<Prisma.CellUpdateWithoutUsersInput, Prisma.CellUncheckedUpdateWithoutUsersInput>
-}
-
-export type CellUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sector?: Prisma.SectorUpdateOneRequiredWithoutCellsNestedInput
-  villages?: Prisma.VillageUpdateManyWithoutCellNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutCellNestedInput
-}
-
-export type CellUncheckedUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  sectorId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  villages?: Prisma.VillageUncheckedUpdateManyWithoutCellNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutCellNestedInput
 }
 

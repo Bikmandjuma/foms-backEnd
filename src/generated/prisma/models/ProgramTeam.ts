@@ -273,7 +273,7 @@ export type ProgramTeamCreateInput = {
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramTeamsInput
-  leader?: Prisma.UserCreateNestedOneWithoutProgramTeamsLedInput
+  leader?: Prisma.UserCreateNestedOneWithoutTeamsLedInput
   members?: Prisma.ProgramTeamMemberCreateNestedManyWithoutTeamInput
   vehicles?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutTeamInput
 }
@@ -297,7 +297,7 @@ export type ProgramTeamUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramTeamsNestedInput
-  leader?: Prisma.UserUpdateOneWithoutProgramTeamsLedNestedInput
+  leader?: Prisma.UserUpdateOneWithoutTeamsLedNestedInput
   members?: Prisma.ProgramTeamMemberUpdateManyWithoutTeamNestedInput
   vehicles?: Prisma.ProgramTeamVehicleUpdateManyWithoutTeamNestedInput
 }
@@ -523,20 +523,6 @@ export type ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput = {
   deleteMany?: Prisma.ProgramTeamScalarWhereInput | Prisma.ProgramTeamScalarWhereInput[]
 }
 
-export type ProgramTeamCreateNestedOneWithoutMembersInput = {
-  create?: Prisma.XOR<Prisma.ProgramTeamCreateWithoutMembersInput, Prisma.ProgramTeamUncheckedCreateWithoutMembersInput>
-  connectOrCreate?: Prisma.ProgramTeamCreateOrConnectWithoutMembersInput
-  connect?: Prisma.ProgramTeamWhereUniqueInput
-}
-
-export type ProgramTeamUpdateOneRequiredWithoutMembersNestedInput = {
-  create?: Prisma.XOR<Prisma.ProgramTeamCreateWithoutMembersInput, Prisma.ProgramTeamUncheckedCreateWithoutMembersInput>
-  connectOrCreate?: Prisma.ProgramTeamCreateOrConnectWithoutMembersInput
-  upsert?: Prisma.ProgramTeamUpsertWithoutMembersInput
-  connect?: Prisma.ProgramTeamWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramTeamUpdateToOneWithWhereWithoutMembersInput, Prisma.ProgramTeamUpdateWithoutMembersInput>, Prisma.ProgramTeamUncheckedUpdateWithoutMembersInput>
-}
-
 export type ProgramTeamCreateNestedOneWithoutVehiclesInput = {
   create?: Prisma.XOR<Prisma.ProgramTeamCreateWithoutVehiclesInput, Prisma.ProgramTeamUncheckedCreateWithoutVehiclesInput>
   connectOrCreate?: Prisma.ProgramTeamCreateOrConnectWithoutVehiclesInput
@@ -551,13 +537,27 @@ export type ProgramTeamUpdateOneRequiredWithoutVehiclesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramTeamUpdateToOneWithWhereWithoutVehiclesInput, Prisma.ProgramTeamUpdateWithoutVehiclesInput>, Prisma.ProgramTeamUncheckedUpdateWithoutVehiclesInput>
 }
 
+export type ProgramTeamCreateNestedOneWithoutMembersInput = {
+  create?: Prisma.XOR<Prisma.ProgramTeamCreateWithoutMembersInput, Prisma.ProgramTeamUncheckedCreateWithoutMembersInput>
+  connectOrCreate?: Prisma.ProgramTeamCreateOrConnectWithoutMembersInput
+  connect?: Prisma.ProgramTeamWhereUniqueInput
+}
+
+export type ProgramTeamUpdateOneRequiredWithoutMembersNestedInput = {
+  create?: Prisma.XOR<Prisma.ProgramTeamCreateWithoutMembersInput, Prisma.ProgramTeamUncheckedCreateWithoutMembersInput>
+  connectOrCreate?: Prisma.ProgramTeamCreateOrConnectWithoutMembersInput
+  upsert?: Prisma.ProgramTeamUpsertWithoutMembersInput
+  connect?: Prisma.ProgramTeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramTeamUpdateToOneWithWhereWithoutMembersInput, Prisma.ProgramTeamUpdateWithoutMembersInput>, Prisma.ProgramTeamUncheckedUpdateWithoutMembersInput>
+}
+
 export type ProgramTeamCreateWithoutTenantInput = {
   id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
-  leader?: Prisma.UserCreateNestedOneWithoutProgramTeamsLedInput
+  leader?: Prisma.UserCreateNestedOneWithoutTeamsLedInput
   members?: Prisma.ProgramTeamMemberCreateNestedManyWithoutTeamInput
   vehicles?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutTeamInput
 }
@@ -666,7 +666,7 @@ export type ProgramTeamCreateWithoutProgramInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutProgramTeamsInput
-  leader?: Prisma.UserCreateNestedOneWithoutProgramTeamsLedInput
+  leader?: Prisma.UserCreateNestedOneWithoutTeamsLedInput
   members?: Prisma.ProgramTeamMemberCreateNestedManyWithoutTeamInput
   vehicles?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutTeamInput
 }
@@ -708,66 +708,6 @@ export type ProgramTeamUpdateManyWithWhereWithoutProgramInput = {
   data: Prisma.XOR<Prisma.ProgramTeamUpdateManyMutationInput, Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramInput>
 }
 
-export type ProgramTeamCreateWithoutMembersInput = {
-  id?: string
-  name: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
-  tenant: Prisma.TenantCreateNestedOneWithoutProgramTeamsInput
-  leader?: Prisma.UserCreateNestedOneWithoutProgramTeamsLedInput
-  vehicles?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutTeamInput
-}
-
-export type ProgramTeamUncheckedCreateWithoutMembersInput = {
-  id?: string
-  programId: string
-  tenantId: string
-  name: string
-  leaderId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  vehicles?: Prisma.ProgramTeamVehicleUncheckedCreateNestedManyWithoutTeamInput
-}
-
-export type ProgramTeamCreateOrConnectWithoutMembersInput = {
-  where: Prisma.ProgramTeamWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProgramTeamCreateWithoutMembersInput, Prisma.ProgramTeamUncheckedCreateWithoutMembersInput>
-}
-
-export type ProgramTeamUpsertWithoutMembersInput = {
-  update: Prisma.XOR<Prisma.ProgramTeamUpdateWithoutMembersInput, Prisma.ProgramTeamUncheckedUpdateWithoutMembersInput>
-  create: Prisma.XOR<Prisma.ProgramTeamCreateWithoutMembersInput, Prisma.ProgramTeamUncheckedCreateWithoutMembersInput>
-  where?: Prisma.ProgramTeamWhereInput
-}
-
-export type ProgramTeamUpdateToOneWithWhereWithoutMembersInput = {
-  where?: Prisma.ProgramTeamWhereInput
-  data: Prisma.XOR<Prisma.ProgramTeamUpdateWithoutMembersInput, Prisma.ProgramTeamUncheckedUpdateWithoutMembersInput>
-}
-
-export type ProgramTeamUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
-  tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramTeamsNestedInput
-  leader?: Prisma.UserUpdateOneWithoutProgramTeamsLedNestedInput
-  vehicles?: Prisma.ProgramTeamVehicleUpdateManyWithoutTeamNestedInput
-}
-
-export type ProgramTeamUncheckedUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vehicles?: Prisma.ProgramTeamVehicleUncheckedUpdateManyWithoutTeamNestedInput
-}
-
 export type ProgramTeamCreateWithoutVehiclesInput = {
   id?: string
   name: string
@@ -775,7 +715,7 @@ export type ProgramTeamCreateWithoutVehiclesInput = {
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramTeamsInput
-  leader?: Prisma.UserCreateNestedOneWithoutProgramTeamsLedInput
+  leader?: Prisma.UserCreateNestedOneWithoutTeamsLedInput
   members?: Prisma.ProgramTeamMemberCreateNestedManyWithoutTeamInput
 }
 
@@ -813,7 +753,7 @@ export type ProgramTeamUpdateWithoutVehiclesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramTeamsNestedInput
-  leader?: Prisma.UserUpdateOneWithoutProgramTeamsLedNestedInput
+  leader?: Prisma.UserUpdateOneWithoutTeamsLedNestedInput
   members?: Prisma.ProgramTeamMemberUpdateManyWithoutTeamNestedInput
 }
 
@@ -826,6 +766,66 @@ export type ProgramTeamUncheckedUpdateWithoutVehiclesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutTeamNestedInput
+}
+
+export type ProgramTeamCreateWithoutMembersInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
+  tenant: Prisma.TenantCreateNestedOneWithoutProgramTeamsInput
+  leader?: Prisma.UserCreateNestedOneWithoutTeamsLedInput
+  vehicles?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutTeamInput
+}
+
+export type ProgramTeamUncheckedCreateWithoutMembersInput = {
+  id?: string
+  programId: string
+  tenantId: string
+  name: string
+  leaderId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vehicles?: Prisma.ProgramTeamVehicleUncheckedCreateNestedManyWithoutTeamInput
+}
+
+export type ProgramTeamCreateOrConnectWithoutMembersInput = {
+  where: Prisma.ProgramTeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProgramTeamCreateWithoutMembersInput, Prisma.ProgramTeamUncheckedCreateWithoutMembersInput>
+}
+
+export type ProgramTeamUpsertWithoutMembersInput = {
+  update: Prisma.XOR<Prisma.ProgramTeamUpdateWithoutMembersInput, Prisma.ProgramTeamUncheckedUpdateWithoutMembersInput>
+  create: Prisma.XOR<Prisma.ProgramTeamCreateWithoutMembersInput, Prisma.ProgramTeamUncheckedCreateWithoutMembersInput>
+  where?: Prisma.ProgramTeamWhereInput
+}
+
+export type ProgramTeamUpdateToOneWithWhereWithoutMembersInput = {
+  where?: Prisma.ProgramTeamWhereInput
+  data: Prisma.XOR<Prisma.ProgramTeamUpdateWithoutMembersInput, Prisma.ProgramTeamUncheckedUpdateWithoutMembersInput>
+}
+
+export type ProgramTeamUpdateWithoutMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramTeamsNestedInput
+  leader?: Prisma.UserUpdateOneWithoutTeamsLedNestedInput
+  vehicles?: Prisma.ProgramTeamVehicleUpdateManyWithoutTeamNestedInput
+}
+
+export type ProgramTeamUncheckedUpdateWithoutMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vehicles?: Prisma.ProgramTeamVehicleUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type ProgramTeamCreateManyTenantInput = {
@@ -843,7 +843,7 @@ export type ProgramTeamUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
-  leader?: Prisma.UserUpdateOneWithoutProgramTeamsLedNestedInput
+  leader?: Prisma.UserUpdateOneWithoutTeamsLedNestedInput
   members?: Prisma.ProgramTeamMemberUpdateManyWithoutTeamNestedInput
   vehicles?: Prisma.ProgramTeamVehicleUpdateManyWithoutTeamNestedInput
 }
@@ -923,7 +923,7 @@ export type ProgramTeamUpdateWithoutProgramInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramTeamsNestedInput
-  leader?: Prisma.UserUpdateOneWithoutProgramTeamsLedNestedInput
+  leader?: Prisma.UserUpdateOneWithoutTeamsLedNestedInput
   members?: Prisma.ProgramTeamMemberUpdateManyWithoutTeamNestedInput
   vehicles?: Prisma.ProgramTeamVehicleUpdateManyWithoutTeamNestedInput
 }

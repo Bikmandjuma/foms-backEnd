@@ -338,6 +338,11 @@ export type VillageUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+export type VillageNullableScalarRelationFilter = {
+  is?: Prisma.VillageWhereInput | null
+  isNot?: Prisma.VillageWhereInput | null
+}
+
 export type VillageListRelationFilter = {
   every?: Prisma.VillageWhereInput
   some?: Prisma.VillageWhereInput
@@ -388,9 +393,20 @@ export type VillageSumOrderByAggregateInput = {
   cellId?: Prisma.SortOrder
 }
 
-export type VillageNullableScalarRelationFilter = {
-  is?: Prisma.VillageWhereInput | null
-  isNot?: Prisma.VillageWhereInput | null
+export type VillageCreateNestedOneWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.VillageCreateWithoutUsersInput, Prisma.VillageUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.VillageCreateOrConnectWithoutUsersInput
+  connect?: Prisma.VillageWhereUniqueInput
+}
+
+export type VillageUpdateOneWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.VillageCreateWithoutUsersInput, Prisma.VillageUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.VillageCreateOrConnectWithoutUsersInput
+  upsert?: Prisma.VillageUpsertWithoutUsersInput
+  disconnect?: Prisma.VillageWhereInput | boolean
+  delete?: Prisma.VillageWhereInput | boolean
+  connect?: Prisma.VillageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VillageUpdateToOneWithWhereWithoutUsersInput, Prisma.VillageUpdateWithoutUsersInput>, Prisma.VillageUncheckedUpdateWithoutUsersInput>
 }
 
 export type VillageCreateNestedManyWithoutCellInput = {
@@ -435,22 +451,6 @@ export type VillageUncheckedUpdateManyWithoutCellNestedInput = {
   deleteMany?: Prisma.VillageScalarWhereInput | Prisma.VillageScalarWhereInput[]
 }
 
-export type VillageCreateNestedOneWithoutUsersInput = {
-  create?: Prisma.XOR<Prisma.VillageCreateWithoutUsersInput, Prisma.VillageUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.VillageCreateOrConnectWithoutUsersInput
-  connect?: Prisma.VillageWhereUniqueInput
-}
-
-export type VillageUpdateOneWithoutUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.VillageCreateWithoutUsersInput, Prisma.VillageUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.VillageCreateOrConnectWithoutUsersInput
-  upsert?: Prisma.VillageUpsertWithoutUsersInput
-  disconnect?: Prisma.VillageWhereInput | boolean
-  delete?: Prisma.VillageWhereInput | boolean
-  connect?: Prisma.VillageWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.VillageUpdateToOneWithWhereWithoutUsersInput, Prisma.VillageUpdateWithoutUsersInput>, Prisma.VillageUncheckedUpdateWithoutUsersInput>
-}
-
 export type VillageCreateNestedOneWithoutBeneficiariesInput = {
   create?: Prisma.XOR<Prisma.VillageCreateWithoutBeneficiariesInput, Prisma.VillageUncheckedCreateWithoutBeneficiariesInput>
   connectOrCreate?: Prisma.VillageCreateOrConnectWithoutBeneficiariesInput
@@ -465,6 +465,58 @@ export type VillageUpdateOneWithoutBeneficiariesNestedInput = {
   delete?: Prisma.VillageWhereInput | boolean
   connect?: Prisma.VillageWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VillageUpdateToOneWithWhereWithoutBeneficiariesInput, Prisma.VillageUpdateWithoutBeneficiariesInput>, Prisma.VillageUncheckedUpdateWithoutBeneficiariesInput>
+}
+
+export type VillageCreateWithoutUsersInput = {
+  id: number
+  name: string
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  cell: Prisma.CellCreateNestedOneWithoutVillagesInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutVillageInput
+}
+
+export type VillageUncheckedCreateWithoutUsersInput = {
+  id: number
+  name: string
+  cellId: number
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutVillageInput
+}
+
+export type VillageCreateOrConnectWithoutUsersInput = {
+  where: Prisma.VillageWhereUniqueInput
+  create: Prisma.XOR<Prisma.VillageCreateWithoutUsersInput, Prisma.VillageUncheckedCreateWithoutUsersInput>
+}
+
+export type VillageUpsertWithoutUsersInput = {
+  update: Prisma.XOR<Prisma.VillageUpdateWithoutUsersInput, Prisma.VillageUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.VillageCreateWithoutUsersInput, Prisma.VillageUncheckedCreateWithoutUsersInput>
+  where?: Prisma.VillageWhereInput
+}
+
+export type VillageUpdateToOneWithWhereWithoutUsersInput = {
+  where?: Prisma.VillageWhereInput
+  data: Prisma.XOR<Prisma.VillageUpdateWithoutUsersInput, Prisma.VillageUncheckedUpdateWithoutUsersInput>
+}
+
+export type VillageUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cell?: Prisma.CellUpdateOneRequiredWithoutVillagesNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutVillageNestedInput
+}
+
+export type VillageUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  cellId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutVillageNestedInput
 }
 
 export type VillageCreateWithoutCellInput = {
@@ -520,58 +572,6 @@ export type VillageScalarWhereInput = {
   cellId?: Prisma.IntFilter<"Village"> | number
   createdAt?: Prisma.DateTimeNullableFilter<"Village"> | Date | string | null
   updatedAt?: Prisma.DateTimeNullableFilter<"Village"> | Date | string | null
-}
-
-export type VillageCreateWithoutUsersInput = {
-  id: number
-  name: string
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  cell: Prisma.CellCreateNestedOneWithoutVillagesInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutVillageInput
-}
-
-export type VillageUncheckedCreateWithoutUsersInput = {
-  id: number
-  name: string
-  cellId: number
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutVillageInput
-}
-
-export type VillageCreateOrConnectWithoutUsersInput = {
-  where: Prisma.VillageWhereUniqueInput
-  create: Prisma.XOR<Prisma.VillageCreateWithoutUsersInput, Prisma.VillageUncheckedCreateWithoutUsersInput>
-}
-
-export type VillageUpsertWithoutUsersInput = {
-  update: Prisma.XOR<Prisma.VillageUpdateWithoutUsersInput, Prisma.VillageUncheckedUpdateWithoutUsersInput>
-  create: Prisma.XOR<Prisma.VillageCreateWithoutUsersInput, Prisma.VillageUncheckedCreateWithoutUsersInput>
-  where?: Prisma.VillageWhereInput
-}
-
-export type VillageUpdateToOneWithWhereWithoutUsersInput = {
-  where?: Prisma.VillageWhereInput
-  data: Prisma.XOR<Prisma.VillageUpdateWithoutUsersInput, Prisma.VillageUncheckedUpdateWithoutUsersInput>
-}
-
-export type VillageUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.CellUpdateOneRequiredWithoutVillagesNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutVillageNestedInput
-}
-
-export type VillageUncheckedUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  cellId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutVillageNestedInput
 }
 
 export type VillageCreateWithoutBeneficiariesInput = {

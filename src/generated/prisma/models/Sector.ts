@@ -345,6 +345,11 @@ export type SectorUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+export type SectorNullableScalarRelationFilter = {
+  is?: Prisma.SectorWhereInput | null
+  isNot?: Prisma.SectorWhereInput | null
+}
+
 export type SectorListRelationFilter = {
   every?: Prisma.SectorWhereInput
   some?: Prisma.SectorWhereInput
@@ -400,9 +405,20 @@ export type SectorScalarRelationFilter = {
   isNot?: Prisma.SectorWhereInput
 }
 
-export type SectorNullableScalarRelationFilter = {
-  is?: Prisma.SectorWhereInput | null
-  isNot?: Prisma.SectorWhereInput | null
+export type SectorCreateNestedOneWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.SectorCreateWithoutUsersInput, Prisma.SectorUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.SectorCreateOrConnectWithoutUsersInput
+  connect?: Prisma.SectorWhereUniqueInput
+}
+
+export type SectorUpdateOneWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.SectorCreateWithoutUsersInput, Prisma.SectorUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.SectorCreateOrConnectWithoutUsersInput
+  upsert?: Prisma.SectorUpsertWithoutUsersInput
+  disconnect?: Prisma.SectorWhereInput | boolean
+  delete?: Prisma.SectorWhereInput | boolean
+  connect?: Prisma.SectorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SectorUpdateToOneWithWhereWithoutUsersInput, Prisma.SectorUpdateWithoutUsersInput>, Prisma.SectorUncheckedUpdateWithoutUsersInput>
 }
 
 export type SectorCreateNestedManyWithoutDistrictInput = {
@@ -461,22 +477,6 @@ export type SectorUpdateOneRequiredWithoutCellsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SectorUpdateToOneWithWhereWithoutCellsInput, Prisma.SectorUpdateWithoutCellsInput>, Prisma.SectorUncheckedUpdateWithoutCellsInput>
 }
 
-export type SectorCreateNestedOneWithoutUsersInput = {
-  create?: Prisma.XOR<Prisma.SectorCreateWithoutUsersInput, Prisma.SectorUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.SectorCreateOrConnectWithoutUsersInput
-  connect?: Prisma.SectorWhereUniqueInput
-}
-
-export type SectorUpdateOneWithoutUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.SectorCreateWithoutUsersInput, Prisma.SectorUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.SectorCreateOrConnectWithoutUsersInput
-  upsert?: Prisma.SectorUpsertWithoutUsersInput
-  disconnect?: Prisma.SectorWhereInput | boolean
-  delete?: Prisma.SectorWhereInput | boolean
-  connect?: Prisma.SectorWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SectorUpdateToOneWithWhereWithoutUsersInput, Prisma.SectorUpdateWithoutUsersInput>, Prisma.SectorUncheckedUpdateWithoutUsersInput>
-}
-
 export type SectorCreateNestedOneWithoutBeneficiariesInput = {
   create?: Prisma.XOR<Prisma.SectorCreateWithoutBeneficiariesInput, Prisma.SectorUncheckedCreateWithoutBeneficiariesInput>
   connectOrCreate?: Prisma.SectorCreateOrConnectWithoutBeneficiariesInput
@@ -491,6 +491,62 @@ export type SectorUpdateOneWithoutBeneficiariesNestedInput = {
   delete?: Prisma.SectorWhereInput | boolean
   connect?: Prisma.SectorWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.SectorUpdateToOneWithWhereWithoutBeneficiariesInput, Prisma.SectorUpdateWithoutBeneficiariesInput>, Prisma.SectorUncheckedUpdateWithoutBeneficiariesInput>
+}
+
+export type SectorCreateWithoutUsersInput = {
+  id: number
+  name: string
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  district: Prisma.DistrictCreateNestedOneWithoutSectorsInput
+  cells?: Prisma.CellCreateNestedManyWithoutSectorInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSectorInput
+}
+
+export type SectorUncheckedCreateWithoutUsersInput = {
+  id: number
+  name: string
+  districtId: number
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  cells?: Prisma.CellUncheckedCreateNestedManyWithoutSectorInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSectorInput
+}
+
+export type SectorCreateOrConnectWithoutUsersInput = {
+  where: Prisma.SectorWhereUniqueInput
+  create: Prisma.XOR<Prisma.SectorCreateWithoutUsersInput, Prisma.SectorUncheckedCreateWithoutUsersInput>
+}
+
+export type SectorUpsertWithoutUsersInput = {
+  update: Prisma.XOR<Prisma.SectorUpdateWithoutUsersInput, Prisma.SectorUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.SectorCreateWithoutUsersInput, Prisma.SectorUncheckedCreateWithoutUsersInput>
+  where?: Prisma.SectorWhereInput
+}
+
+export type SectorUpdateToOneWithWhereWithoutUsersInput = {
+  where?: Prisma.SectorWhereInput
+  data: Prisma.XOR<Prisma.SectorUpdateWithoutUsersInput, Prisma.SectorUncheckedUpdateWithoutUsersInput>
+}
+
+export type SectorUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  district?: Prisma.DistrictUpdateOneRequiredWithoutSectorsNestedInput
+  cells?: Prisma.CellUpdateManyWithoutSectorNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSectorNestedInput
+}
+
+export type SectorUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  districtId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cells?: Prisma.CellUncheckedUpdateManyWithoutSectorNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSectorNestedInput
 }
 
 export type SectorCreateWithoutDistrictInput = {
@@ -603,62 +659,6 @@ export type SectorUncheckedUpdateWithoutCellsInput = {
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   users?: Prisma.UserUncheckedUpdateManyWithoutSectorNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSectorNestedInput
-}
-
-export type SectorCreateWithoutUsersInput = {
-  id: number
-  name: string
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  district: Prisma.DistrictCreateNestedOneWithoutSectorsInput
-  cells?: Prisma.CellCreateNestedManyWithoutSectorInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSectorInput
-}
-
-export type SectorUncheckedCreateWithoutUsersInput = {
-  id: number
-  name: string
-  districtId: number
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  cells?: Prisma.CellUncheckedCreateNestedManyWithoutSectorInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSectorInput
-}
-
-export type SectorCreateOrConnectWithoutUsersInput = {
-  where: Prisma.SectorWhereUniqueInput
-  create: Prisma.XOR<Prisma.SectorCreateWithoutUsersInput, Prisma.SectorUncheckedCreateWithoutUsersInput>
-}
-
-export type SectorUpsertWithoutUsersInput = {
-  update: Prisma.XOR<Prisma.SectorUpdateWithoutUsersInput, Prisma.SectorUncheckedUpdateWithoutUsersInput>
-  create: Prisma.XOR<Prisma.SectorCreateWithoutUsersInput, Prisma.SectorUncheckedCreateWithoutUsersInput>
-  where?: Prisma.SectorWhereInput
-}
-
-export type SectorUpdateToOneWithWhereWithoutUsersInput = {
-  where?: Prisma.SectorWhereInput
-  data: Prisma.XOR<Prisma.SectorUpdateWithoutUsersInput, Prisma.SectorUncheckedUpdateWithoutUsersInput>
-}
-
-export type SectorUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  district?: Prisma.DistrictUpdateOneRequiredWithoutSectorsNestedInput
-  cells?: Prisma.CellUpdateManyWithoutSectorNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSectorNestedInput
-}
-
-export type SectorUncheckedUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  districtId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cells?: Prisma.CellUncheckedUpdateManyWithoutSectorNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSectorNestedInput
 }
 

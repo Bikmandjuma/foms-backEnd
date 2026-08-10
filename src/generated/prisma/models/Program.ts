@@ -312,15 +312,15 @@ export type ProgramWhereInput = {
   teamLeaderRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   teamMemberRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   checkerRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
-  teamLeaderRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
-  teamMemberRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
-  checkerRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
   fieldCheckIns?: Prisma.FieldCheckInListRelationFilter
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   assignments?: Prisma.ProgramAssignmentListRelationFilter
+  beneficiaries?: Prisma.BeneficiaryListRelationFilter
+  teamLeaderRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
+  teamMemberRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
+  checkerRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
   teams?: Prisma.ProgramTeamListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
-  beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }
 
 export type ProgramOrderByWithRelationInput = {
@@ -340,15 +340,15 @@ export type ProgramOrderByWithRelationInput = {
   teamLeaderRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   teamMemberRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   checkerRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
-  teamLeaderRole?: Prisma.RoleOrderByWithRelationInput
-  teamMemberRole?: Prisma.RoleOrderByWithRelationInput
-  checkerRole?: Prisma.RoleOrderByWithRelationInput
   fieldCheckIns?: Prisma.FieldCheckInOrderByRelationAggregateInput
   tenant?: Prisma.TenantOrderByWithRelationInput
   assignments?: Prisma.ProgramAssignmentOrderByRelationAggregateInput
+  beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
+  teamLeaderRole?: Prisma.RoleOrderByWithRelationInput
+  teamMemberRole?: Prisma.RoleOrderByWithRelationInput
+  checkerRole?: Prisma.RoleOrderByWithRelationInput
   teams?: Prisma.ProgramTeamOrderByRelationAggregateInput
   availabilityChecks?: Prisma.AvailabilityCheckOrderByRelationAggregateInput
-  beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
   _relevance?: Prisma.ProgramOrderByRelevanceInput
 }
 
@@ -373,15 +373,15 @@ export type ProgramWhereUniqueInput = Prisma.AtLeast<{
   teamLeaderRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   teamMemberRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   checkerRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
-  teamLeaderRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
-  teamMemberRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
-  checkerRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
   fieldCheckIns?: Prisma.FieldCheckInListRelationFilter
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   assignments?: Prisma.ProgramAssignmentListRelationFilter
+  beneficiaries?: Prisma.BeneficiaryListRelationFilter
+  teamLeaderRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
+  teamMemberRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
+  checkerRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
   teams?: Prisma.ProgramTeamListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
-  beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }, "id" | "tenantId_name">
 
 export type ProgramOrderByWithAggregationInput = {
@@ -443,15 +443,15 @@ export type ProgramCreateInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
-  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
-  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
-  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateInput = {
@@ -473,9 +473,9 @@ export type ProgramUncheckedCreateInput = {
   checkerRoleId?: string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUpdateInput = {
@@ -491,15 +491,15 @@ export type ProgramUpdateInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
-  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
-  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateInput = {
@@ -521,9 +521,9 @@ export type ProgramUncheckedUpdateInput = {
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramCreateManyInput = {
@@ -855,20 +855,6 @@ export type EnumProjectStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProjectStatus
 }
 
-export type ProgramCreateNestedOneWithoutTeamsInput = {
-  create?: Prisma.XOR<Prisma.ProgramCreateWithoutTeamsInput, Prisma.ProgramUncheckedCreateWithoutTeamsInput>
-  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutTeamsInput
-  connect?: Prisma.ProgramWhereUniqueInput
-}
-
-export type ProgramUpdateOneRequiredWithoutTeamsNestedInput = {
-  create?: Prisma.XOR<Prisma.ProgramCreateWithoutTeamsInput, Prisma.ProgramUncheckedCreateWithoutTeamsInput>
-  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutTeamsInput
-  upsert?: Prisma.ProgramUpsertWithoutTeamsInput
-  connect?: Prisma.ProgramWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutTeamsInput, Prisma.ProgramUpdateWithoutTeamsInput>, Prisma.ProgramUncheckedUpdateWithoutTeamsInput>
-}
-
 export type ProgramCreateNestedOneWithoutAvailabilityChecksInput = {
   create?: Prisma.XOR<Prisma.ProgramCreateWithoutAvailabilityChecksInput, Prisma.ProgramUncheckedCreateWithoutAvailabilityChecksInput>
   connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutAvailabilityChecksInput
@@ -935,6 +921,20 @@ export type ProgramUpdateOneRequiredWithoutAssignmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutAssignmentsInput, Prisma.ProgramUpdateWithoutAssignmentsInput>, Prisma.ProgramUncheckedUpdateWithoutAssignmentsInput>
 }
 
+export type ProgramCreateNestedOneWithoutTeamsInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutTeamsInput, Prisma.ProgramUncheckedCreateWithoutTeamsInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutTeamsInput
+  connect?: Prisma.ProgramWhereUniqueInput
+}
+
+export type ProgramUpdateOneRequiredWithoutTeamsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutTeamsInput, Prisma.ProgramUncheckedCreateWithoutTeamsInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutTeamsInput
+  upsert?: Prisma.ProgramUpsertWithoutTeamsInput
+  connect?: Prisma.ProgramWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutTeamsInput, Prisma.ProgramUpdateWithoutTeamsInput>, Prisma.ProgramUncheckedUpdateWithoutTeamsInput>
+}
+
 export type ProgramCreateNestedOneWithoutFieldCheckInsInput = {
   create?: Prisma.XOR<Prisma.ProgramCreateWithoutFieldCheckInsInput, Prisma.ProgramUncheckedCreateWithoutFieldCheckInsInput>
   connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutFieldCheckInsInput
@@ -964,14 +964,14 @@ export type ProgramCreateWithoutTenantInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
-  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
-  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
-  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateWithoutTenantInput = {
@@ -992,9 +992,9 @@ export type ProgramUncheckedCreateWithoutTenantInput = {
   checkerRoleId?: string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramCreateOrConnectWithoutTenantInput = {
@@ -1058,14 +1058,14 @@ export type ProgramCreateWithoutTeamLeaderRoleInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
-  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
-  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateWithoutTeamLeaderRoleInput = {
@@ -1086,9 +1086,9 @@ export type ProgramUncheckedCreateWithoutTeamLeaderRoleInput = {
   checkerRoleId?: string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramCreateOrConnectWithoutTeamLeaderRoleInput = {
@@ -1114,14 +1114,14 @@ export type ProgramCreateWithoutTeamMemberRoleInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
-  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
-  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateWithoutTeamMemberRoleInput = {
@@ -1142,9 +1142,9 @@ export type ProgramUncheckedCreateWithoutTeamMemberRoleInput = {
   checkerRoleId?: string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramCreateOrConnectWithoutTeamMemberRoleInput = {
@@ -1170,14 +1170,14 @@ export type ProgramCreateWithoutCheckerRoleInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
-  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
-  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateWithoutCheckerRoleInput = {
@@ -1198,9 +1198,9 @@ export type ProgramUncheckedCreateWithoutCheckerRoleInput = {
   teamMemberRoleId?: string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramCreateOrConnectWithoutCheckerRoleInput = {
@@ -1261,114 +1261,6 @@ export type ProgramUpdateManyWithWhereWithoutCheckerRoleInput = {
   data: Prisma.XOR<Prisma.ProgramUpdateManyMutationInput, Prisma.ProgramUncheckedUpdateManyWithoutCheckerRoleInput>
 }
 
-export type ProgramCreateWithoutTeamsInput = {
-  id?: string
-  name: string
-  description?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  endDate?: Date | string | null
-  scenarioType?: $Enums.ScenarioType | null
-  startDate?: Date | string | null
-  status?: $Enums.ProjectStatus
-  targetSampleSize?: number | null
-  teamCount?: number | null
-  membersPerTeam?: number | null
-  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
-  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
-  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
-  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
-  tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
-  assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
-  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
-}
-
-export type ProgramUncheckedCreateWithoutTeamsInput = {
-  id?: string
-  name: string
-  description?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  tenantId: string
-  endDate?: Date | string | null
-  scenarioType?: $Enums.ScenarioType | null
-  startDate?: Date | string | null
-  status?: $Enums.ProjectStatus
-  targetSampleSize?: number | null
-  teamCount?: number | null
-  membersPerTeam?: number | null
-  teamLeaderRoleId?: string | null
-  teamMemberRoleId?: string | null
-  checkerRoleId?: string | null
-  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
-  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
-  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
-}
-
-export type ProgramCreateOrConnectWithoutTeamsInput = {
-  where: Prisma.ProgramWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProgramCreateWithoutTeamsInput, Prisma.ProgramUncheckedCreateWithoutTeamsInput>
-}
-
-export type ProgramUpsertWithoutTeamsInput = {
-  update: Prisma.XOR<Prisma.ProgramUpdateWithoutTeamsInput, Prisma.ProgramUncheckedUpdateWithoutTeamsInput>
-  create: Prisma.XOR<Prisma.ProgramCreateWithoutTeamsInput, Prisma.ProgramUncheckedCreateWithoutTeamsInput>
-  where?: Prisma.ProgramWhereInput
-}
-
-export type ProgramUpdateToOneWithWhereWithoutTeamsInput = {
-  where?: Prisma.ProgramWhereInput
-  data: Prisma.XOR<Prisma.ProgramUpdateWithoutTeamsInput, Prisma.ProgramUncheckedUpdateWithoutTeamsInput>
-}
-
-export type ProgramUpdateWithoutTeamsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
-  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
-  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
-  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
-  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
-  tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
-  assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
-  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
-}
-
-export type ProgramUncheckedUpdateWithoutTeamsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
-  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
-  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
-  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
-}
-
 export type ProgramCreateWithoutAvailabilityChecksInput = {
   id?: string
   name: string
@@ -1382,14 +1274,14 @@ export type ProgramCreateWithoutAvailabilityChecksInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
-  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
-  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
-  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
-  teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
+  teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutAvailabilityChecksInput = {
@@ -1411,8 +1303,8 @@ export type ProgramUncheckedCreateWithoutAvailabilityChecksInput = {
   checkerRoleId?: string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
-  teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
+  teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutAvailabilityChecksInput = {
@@ -1444,14 +1336,14 @@ export type ProgramUpdateWithoutAvailabilityChecksInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
-  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
-  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
-  teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
+  teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutAvailabilityChecksInput = {
@@ -1473,8 +1365,8 @@ export type ProgramUncheckedUpdateWithoutAvailabilityChecksInput = {
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
-  teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
+  teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramCreateWithoutBeneficiariesInput = {
@@ -1490,12 +1382,12 @@ export type ProgramCreateWithoutBeneficiariesInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
-  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
-  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
-  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
 }
@@ -1557,14 +1449,14 @@ export type ProgramCreateWithoutAssignmentsInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
-  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
-  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
-  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateWithoutAssignmentsInput = {
@@ -1585,9 +1477,9 @@ export type ProgramUncheckedCreateWithoutAssignmentsInput = {
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramCreateOrConnectWithoutAssignmentsInput = {
@@ -1619,14 +1511,14 @@ export type ProgramUpdateWithoutAssignmentsInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
-  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
-  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutAssignmentsInput = {
@@ -1647,9 +1539,117 @@ export type ProgramUncheckedUpdateWithoutAssignmentsInput = {
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+}
+
+export type ProgramCreateWithoutTeamsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  endDate?: Date | string | null
+  scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
+  status?: $Enums.ProjectStatus
+  targetSampleSize?: number | null
+  teamCount?: number | null
+  membersPerTeam?: number | null
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
+  assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+}
+
+export type ProgramUncheckedCreateWithoutTeamsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenantId: string
+  endDate?: Date | string | null
+  scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
+  status?: $Enums.ProjectStatus
+  targetSampleSize?: number | null
+  teamCount?: number | null
+  membersPerTeam?: number | null
+  teamLeaderRoleId?: string | null
+  teamMemberRoleId?: string | null
+  checkerRoleId?: string | null
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+}
+
+export type ProgramCreateOrConnectWithoutTeamsInput = {
+  where: Prisma.ProgramWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutTeamsInput, Prisma.ProgramUncheckedCreateWithoutTeamsInput>
+}
+
+export type ProgramUpsertWithoutTeamsInput = {
+  update: Prisma.XOR<Prisma.ProgramUpdateWithoutTeamsInput, Prisma.ProgramUncheckedUpdateWithoutTeamsInput>
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutTeamsInput, Prisma.ProgramUncheckedCreateWithoutTeamsInput>
+  where?: Prisma.ProgramWhereInput
+}
+
+export type ProgramUpdateToOneWithWhereWithoutTeamsInput = {
+  where?: Prisma.ProgramWhereInput
+  data: Prisma.XOR<Prisma.ProgramUpdateWithoutTeamsInput, Prisma.ProgramUncheckedUpdateWithoutTeamsInput>
+}
+
+export type ProgramUpdateWithoutTeamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
+  assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+}
+
+export type ProgramUncheckedUpdateWithoutTeamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramCreateWithoutFieldCheckInsInput = {
@@ -1665,14 +1665,14 @@ export type ProgramCreateWithoutFieldCheckInsInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
-  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
-  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
-  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramUncheckedCreateWithoutFieldCheckInsInput = {
@@ -1693,9 +1693,9 @@ export type ProgramUncheckedCreateWithoutFieldCheckInsInput = {
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
 export type ProgramCreateOrConnectWithoutFieldCheckInsInput = {
@@ -1727,14 +1727,14 @@ export type ProgramUpdateWithoutFieldCheckInsInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
-  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
-  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutFieldCheckInsInput = {
@@ -1755,9 +1755,9 @@ export type ProgramUncheckedUpdateWithoutFieldCheckInsInput = {
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramCreateManyTenantInput = {
@@ -1791,14 +1791,14 @@ export type ProgramUpdateWithoutTenantInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
-  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
-  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutTenantInput = {
@@ -1819,9 +1819,9 @@ export type ProgramUncheckedUpdateWithoutTenantInput = {
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutTenantInput = {
@@ -1909,14 +1909,14 @@ export type ProgramUpdateWithoutTeamLeaderRoleInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
-  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutTeamLeaderRoleInput = {
@@ -1937,9 +1937,9 @@ export type ProgramUncheckedUpdateWithoutTeamLeaderRoleInput = {
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutTeamLeaderRoleInput = {
@@ -1973,14 +1973,14 @@ export type ProgramUpdateWithoutTeamMemberRoleInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
-  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutTeamMemberRoleInput = {
@@ -2001,9 +2001,9 @@ export type ProgramUncheckedUpdateWithoutTeamMemberRoleInput = {
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutTeamMemberRoleInput = {
@@ -2037,14 +2037,14 @@ export type ProgramUpdateWithoutCheckerRoleInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
-  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutCheckerRoleInput = {
@@ -2065,9 +2065,9 @@ export type ProgramUncheckedUpdateWithoutCheckerRoleInput = {
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutCheckerRoleInput = {
@@ -2101,12 +2101,12 @@ export type ProgramUpdateWithoutBeneficiariesInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
-  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
-  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
 }
@@ -2161,17 +2161,17 @@ export type ProgramUncheckedUpdateManyWithoutBeneficiariesInput = {
 export type ProgramCountOutputType = {
   fieldCheckIns: number
   assignments: number
+  beneficiaries: number
   teams: number
   availabilityChecks: number
-  beneficiaries: number
 }
 
 export type ProgramCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fieldCheckIns?: boolean | ProgramCountOutputTypeCountFieldCheckInsArgs
   assignments?: boolean | ProgramCountOutputTypeCountAssignmentsArgs
+  beneficiaries?: boolean | ProgramCountOutputTypeCountBeneficiariesArgs
   teams?: boolean | ProgramCountOutputTypeCountTeamsArgs
   availabilityChecks?: boolean | ProgramCountOutputTypeCountAvailabilityChecksArgs
-  beneficiaries?: boolean | ProgramCountOutputTypeCountBeneficiariesArgs
 }
 
 /**
@@ -2201,6 +2201,13 @@ export type ProgramCountOutputTypeCountAssignmentsArgs<ExtArgs extends runtime.T
 /**
  * ProgramCountOutputType without action
  */
+export type ProgramCountOutputTypeCountBeneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BeneficiaryWhereInput
+}
+
+/**
+ * ProgramCountOutputType without action
+ */
 export type ProgramCountOutputTypeCountTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProgramTeamWhereInput
 }
@@ -2210,13 +2217,6 @@ export type ProgramCountOutputTypeCountTeamsArgs<ExtArgs extends runtime.Types.E
  */
 export type ProgramCountOutputTypeCountAvailabilityChecksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AvailabilityCheckWhereInput
-}
-
-/**
- * ProgramCountOutputType without action
- */
-export type ProgramCountOutputTypeCountBeneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BeneficiaryWhereInput
 }
 
 
@@ -2237,15 +2237,15 @@ export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   teamLeaderRoleId?: boolean
   teamMemberRoleId?: boolean
   checkerRoleId?: boolean
-  teamLeaderRole?: boolean | Prisma.Program$teamLeaderRoleArgs<ExtArgs>
-  teamMemberRole?: boolean | Prisma.Program$teamMemberRoleArgs<ExtArgs>
-  checkerRole?: boolean | Prisma.Program$checkerRoleArgs<ExtArgs>
   fieldCheckIns?: boolean | Prisma.Program$fieldCheckInsArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
+  beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
+  teamLeaderRole?: boolean | Prisma.Program$teamLeaderRoleArgs<ExtArgs>
+  teamMemberRole?: boolean | Prisma.Program$teamMemberRoleArgs<ExtArgs>
+  checkerRole?: boolean | Prisma.Program$checkerRoleArgs<ExtArgs>
   teams?: boolean | Prisma.Program$teamsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Program$availabilityChecksArgs<ExtArgs>
-  beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["program"]>
 
@@ -2272,30 +2272,30 @@ export type ProgramSelectScalar = {
 
 export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "tenantId" | "endDate" | "scenarioType" | "startDate" | "status" | "targetSampleSize" | "teamCount" | "membersPerTeam" | "teamLeaderRoleId" | "teamMemberRoleId" | "checkerRoleId", ExtArgs["result"]["program"]>
 export type ProgramInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  teamLeaderRole?: boolean | Prisma.Program$teamLeaderRoleArgs<ExtArgs>
-  teamMemberRole?: boolean | Prisma.Program$teamMemberRoleArgs<ExtArgs>
-  checkerRole?: boolean | Prisma.Program$checkerRoleArgs<ExtArgs>
   fieldCheckIns?: boolean | Prisma.Program$fieldCheckInsArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
+  beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
+  teamLeaderRole?: boolean | Prisma.Program$teamLeaderRoleArgs<ExtArgs>
+  teamMemberRole?: boolean | Prisma.Program$teamMemberRoleArgs<ExtArgs>
+  checkerRole?: boolean | Prisma.Program$checkerRoleArgs<ExtArgs>
   teams?: boolean | Prisma.Program$teamsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Program$availabilityChecksArgs<ExtArgs>
-  beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Program"
   objects: {
-    teamLeaderRole: Prisma.$RolePayload<ExtArgs> | null
-    teamMemberRole: Prisma.$RolePayload<ExtArgs> | null
-    checkerRole: Prisma.$RolePayload<ExtArgs> | null
     fieldCheckIns: Prisma.$FieldCheckInPayload<ExtArgs>[]
     tenant: Prisma.$TenantPayload<ExtArgs>
     assignments: Prisma.$ProgramAssignmentPayload<ExtArgs>[]
+    beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
+    teamLeaderRole: Prisma.$RolePayload<ExtArgs> | null
+    teamMemberRole: Prisma.$RolePayload<ExtArgs> | null
+    checkerRole: Prisma.$RolePayload<ExtArgs> | null
     teams: Prisma.$ProgramTeamPayload<ExtArgs>[]
     availabilityChecks: Prisma.$AvailabilityCheckPayload<ExtArgs>[]
-    beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2654,15 +2654,15 @@ readonly fields: ProgramFieldRefs;
  */
 export interface Prisma__ProgramClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  teamLeaderRole<T extends Prisma.Program$teamLeaderRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$teamLeaderRoleArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  teamMemberRole<T extends Prisma.Program$teamMemberRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$teamMemberRoleArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  checkerRole<T extends Prisma.Program$checkerRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$checkerRoleArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   fieldCheckIns<T extends Prisma.Program$fieldCheckInsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$fieldCheckInsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldCheckInPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assignments<T extends Prisma.Program$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  beneficiaries<T extends Prisma.Program$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teamLeaderRole<T extends Prisma.Program$teamLeaderRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$teamLeaderRoleArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  teamMemberRole<T extends Prisma.Program$teamMemberRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$teamMemberRoleArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  checkerRole<T extends Prisma.Program$checkerRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$checkerRoleArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   teams<T extends Prisma.Program$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   availabilityChecks<T extends Prisma.Program$availabilityChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$availabilityChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilityCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  beneficiaries<T extends Prisma.Program$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3056,6 +3056,78 @@ export type ProgramDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * Program.fieldCheckIns
+ */
+export type Program$fieldCheckInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FieldCheckIn
+   */
+  select?: Prisma.FieldCheckInSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FieldCheckIn
+   */
+  omit?: Prisma.FieldCheckInOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FieldCheckInInclude<ExtArgs> | null
+  where?: Prisma.FieldCheckInWhereInput
+  orderBy?: Prisma.FieldCheckInOrderByWithRelationInput | Prisma.FieldCheckInOrderByWithRelationInput[]
+  cursor?: Prisma.FieldCheckInWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FieldCheckInScalarFieldEnum | Prisma.FieldCheckInScalarFieldEnum[]
+}
+
+/**
+ * Program.assignments
+ */
+export type Program$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProgramAssignment
+   */
+  select?: Prisma.ProgramAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProgramAssignment
+   */
+  omit?: Prisma.ProgramAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramAssignmentInclude<ExtArgs> | null
+  where?: Prisma.ProgramAssignmentWhereInput
+  orderBy?: Prisma.ProgramAssignmentOrderByWithRelationInput | Prisma.ProgramAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgramAssignmentScalarFieldEnum | Prisma.ProgramAssignmentScalarFieldEnum[]
+}
+
+/**
+ * Program.beneficiaries
+ */
+export type Program$beneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Beneficiary
+   */
+  select?: Prisma.BeneficiarySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Beneficiary
+   */
+  omit?: Prisma.BeneficiaryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeneficiaryInclude<ExtArgs> | null
+  where?: Prisma.BeneficiaryWhereInput
+  orderBy?: Prisma.BeneficiaryOrderByWithRelationInput | Prisma.BeneficiaryOrderByWithRelationInput[]
+  cursor?: Prisma.BeneficiaryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BeneficiaryScalarFieldEnum | Prisma.BeneficiaryScalarFieldEnum[]
+}
+
+/**
  * Program.teamLeaderRole
  */
 export type Program$teamLeaderRoleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3113,54 +3185,6 @@ export type Program$checkerRoleArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Program.fieldCheckIns
- */
-export type Program$fieldCheckInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FieldCheckIn
-   */
-  select?: Prisma.FieldCheckInSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FieldCheckIn
-   */
-  omit?: Prisma.FieldCheckInOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FieldCheckInInclude<ExtArgs> | null
-  where?: Prisma.FieldCheckInWhereInput
-  orderBy?: Prisma.FieldCheckInOrderByWithRelationInput | Prisma.FieldCheckInOrderByWithRelationInput[]
-  cursor?: Prisma.FieldCheckInWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FieldCheckInScalarFieldEnum | Prisma.FieldCheckInScalarFieldEnum[]
-}
-
-/**
- * Program.assignments
- */
-export type Program$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProgramAssignment
-   */
-  select?: Prisma.ProgramAssignmentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProgramAssignment
-   */
-  omit?: Prisma.ProgramAssignmentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProgramAssignmentInclude<ExtArgs> | null
-  where?: Prisma.ProgramAssignmentWhereInput
-  orderBy?: Prisma.ProgramAssignmentOrderByWithRelationInput | Prisma.ProgramAssignmentOrderByWithRelationInput[]
-  cursor?: Prisma.ProgramAssignmentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProgramAssignmentScalarFieldEnum | Prisma.ProgramAssignmentScalarFieldEnum[]
-}
-
-/**
  * Program.teams
  */
 export type Program$teamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3206,30 +3230,6 @@ export type Program$availabilityChecksArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.AvailabilityCheckScalarFieldEnum | Prisma.AvailabilityCheckScalarFieldEnum[]
-}
-
-/**
- * Program.beneficiaries
- */
-export type Program$beneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Beneficiary
-   */
-  select?: Prisma.BeneficiarySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Beneficiary
-   */
-  omit?: Prisma.BeneficiaryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BeneficiaryInclude<ExtArgs> | null
-  where?: Prisma.BeneficiaryWhereInput
-  orderBy?: Prisma.BeneficiaryOrderByWithRelationInput | Prisma.BeneficiaryOrderByWithRelationInput[]
-  cursor?: Prisma.BeneficiaryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BeneficiaryScalarFieldEnum | Prisma.BeneficiaryScalarFieldEnum[]
 }
 
 /**

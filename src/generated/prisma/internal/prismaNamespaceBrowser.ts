@@ -51,23 +51,23 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Province: 'Province',
-  District: 'District',
-  Sector: 'Sector',
-  Cell: 'Cell',
-  Village: 'Village',
   Notification: 'Notification',
   Tenant: 'Tenant',
   Role: 'Role',
   User: 'User',
   PasswordResetCode: 'PasswordResetCode',
+  Province: 'Province',
+  District: 'District',
+  Sector: 'Sector',
+  Cell: 'Cell',
+  Village: 'Village',
   Program: 'Program',
-  ProgramTeam: 'ProgramTeam',
-  ProgramTeamMember: 'ProgramTeamMember',
-  ProgramTeamVehicle: 'ProgramTeamVehicle',
   AvailabilityCheck: 'AvailabilityCheck',
   Beneficiary: 'Beneficiary',
   ProgramAssignment: 'ProgramAssignment',
+  ProgramTeam: 'ProgramTeam',
+  ProgramTeamVehicle: 'ProgramTeamVehicle',
+  ProgramTeamMember: 'ProgramTeamMember',
   BeneficiaryAssignment: 'BeneficiaryAssignment',
   Vehicle: 'Vehicle',
   ReplacementRequest: 'ReplacementRequest',
@@ -91,6 +91,86 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  message: 'message',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  read: 'read',
+  createdAt: 'createdAt',
+  tenantId: 'tenantId',
+  userId: 'userId'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const TenantScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  tenantId: 'tenantId',
+  permissions: 'permissions'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  avatarUrl: 'avatarUrl',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  telephone: 'telephone',
+  gender: 'gender',
+  dateOfBirth: 'dateOfBirth',
+  status: 'status',
+  educationLevel: 'educationLevel',
+  isPlatformAdmin: 'isPlatformAdmin',
+  tokenVersion: 'tokenVersion',
+  roleId: 'roleId',
+  tenantId: 'tenantId',
+  lastSeenAt: 'lastSeenAt',
+  provinceId: 'provinceId',
+  districtId: 'districtId',
+  sectorId: 'sectorId',
+  cellId: 'cellId',
+  villageId: 'villageId'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PasswordResetCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type PasswordResetCodeScalarFieldEnum = (typeof PasswordResetCodeScalarFieldEnum)[keyof typeof PasswordResetCodeScalarFieldEnum]
 
 
 export const ProvinceScalarFieldEnum = {
@@ -148,86 +228,6 @@ export const VillageScalarFieldEnum = {
 export type VillageScalarFieldEnum = (typeof VillageScalarFieldEnum)[keyof typeof VillageScalarFieldEnum]
 
 
-export const NotificationScalarFieldEnum = {
-  id: 'id',
-  type: 'type',
-  message: 'message',
-  entityType: 'entityType',
-  entityId: 'entityId',
-  read: 'read',
-  createdAt: 'createdAt',
-  tenantId: 'tenantId',
-  userId: 'userId'
-} as const
-
-export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
-
-
-export const TenantScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
-
-
-export const RoleScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  tenantId: 'tenantId',
-  permissions: 'permissions'
-} as const
-
-export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
-
-
-export const UserScalarFieldEnum = {
-  id: 'id',
-  email: 'email',
-  name: 'name',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  avatarUrl: 'avatarUrl',
-  password: 'password',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  telephone: 'telephone',
-  provinceId: 'provinceId',
-  districtId: 'districtId',
-  sectorId: 'sectorId',
-  cellId: 'cellId',
-  villageId: 'villageId',
-  gender: 'gender',
-  dateOfBirth: 'dateOfBirth',
-  status: 'status',
-  educationLevel: 'educationLevel',
-  isPlatformAdmin: 'isPlatformAdmin',
-  tokenVersion: 'tokenVersion',
-  roleId: 'roleId',
-  tenantId: 'tenantId',
-  lastSeenAt: 'lastSeenAt'
-} as const
-
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const PasswordResetCodeScalarFieldEnum = {
-  id: 'id',
-  code: 'code',
-  expiresAt: 'expiresAt',
-  usedAt: 'usedAt',
-  createdAt: 'createdAt',
-  userId: 'userId'
-} as const
-
-export type PasswordResetCodeScalarFieldEnum = (typeof PasswordResetCodeScalarFieldEnum)[keyof typeof PasswordResetCodeScalarFieldEnum]
-
-
 export const ProgramScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -248,40 +248,6 @@ export const ProgramScalarFieldEnum = {
 } as const
 
 export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
-
-
-export const ProgramTeamScalarFieldEnum = {
-  id: 'id',
-  programId: 'programId',
-  tenantId: 'tenantId',
-  name: 'name',
-  leaderId: 'leaderId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ProgramTeamScalarFieldEnum = (typeof ProgramTeamScalarFieldEnum)[keyof typeof ProgramTeamScalarFieldEnum]
-
-
-export const ProgramTeamMemberScalarFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  programId: 'programId',
-  userId: 'userId',
-  createdAt: 'createdAt'
-} as const
-
-export type ProgramTeamMemberScalarFieldEnum = (typeof ProgramTeamMemberScalarFieldEnum)[keyof typeof ProgramTeamMemberScalarFieldEnum]
-
-
-export const ProgramTeamVehicleScalarFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  vehicleId: 'vehicleId',
-  createdAt: 'createdAt'
-} as const
-
-export type ProgramTeamVehicleScalarFieldEnum = (typeof ProgramTeamVehicleScalarFieldEnum)[keyof typeof ProgramTeamVehicleScalarFieldEnum]
 
 
 export const AvailabilityCheckScalarFieldEnum = {
@@ -309,11 +275,6 @@ export const BeneficiaryScalarFieldEnum = {
   gender: 'gender',
   dateOfBirth: 'dateOfBirth',
   status: 'status',
-  provinceId: 'provinceId',
-  districtId: 'districtId',
-  sectorId: 'sectorId',
-  cellId: 'cellId',
-  villageId: 'villageId',
   nationalId: 'nationalId',
   householdSize: 'householdSize',
   createdAt: 'createdAt',
@@ -321,7 +282,12 @@ export const BeneficiaryScalarFieldEnum = {
   tenantId: 'tenantId',
   consentAt: 'consentAt',
   consentGiven: 'consentGiven',
-  outcome: 'outcome'
+  outcome: 'outcome',
+  provinceId: 'provinceId',
+  districtId: 'districtId',
+  sectorId: 'sectorId',
+  cellId: 'cellId',
+  villageId: 'villageId'
 } as const
 
 export type BeneficiaryScalarFieldEnum = (typeof BeneficiaryScalarFieldEnum)[keyof typeof BeneficiaryScalarFieldEnum]
@@ -340,6 +306,40 @@ export const ProgramAssignmentScalarFieldEnum = {
 } as const
 
 export type ProgramAssignmentScalarFieldEnum = (typeof ProgramAssignmentScalarFieldEnum)[keyof typeof ProgramAssignmentScalarFieldEnum]
+
+
+export const ProgramTeamScalarFieldEnum = {
+  id: 'id',
+  programId: 'programId',
+  tenantId: 'tenantId',
+  name: 'name',
+  leaderId: 'leaderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramTeamScalarFieldEnum = (typeof ProgramTeamScalarFieldEnum)[keyof typeof ProgramTeamScalarFieldEnum]
+
+
+export const ProgramTeamVehicleScalarFieldEnum = {
+  id: 'id',
+  teamId: 'teamId',
+  vehicleId: 'vehicleId',
+  createdAt: 'createdAt'
+} as const
+
+export type ProgramTeamVehicleScalarFieldEnum = (typeof ProgramTeamVehicleScalarFieldEnum)[keyof typeof ProgramTeamVehicleScalarFieldEnum]
+
+
+export const ProgramTeamMemberScalarFieldEnum = {
+  id: 'id',
+  teamId: 'teamId',
+  programId: 'programId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type ProgramTeamMemberScalarFieldEnum = (typeof ProgramTeamMemberScalarFieldEnum)[keyof typeof ProgramTeamMemberScalarFieldEnum]
 
 
 export const BeneficiaryAssignmentScalarFieldEnum = {
@@ -472,42 +472,6 @@ export const NullsOrder = {
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
-export const ProvinceOrderByRelevanceFieldEnum = {
-  name: 'name',
-  izina: 'izina'
-} as const
-
-export type ProvinceOrderByRelevanceFieldEnum = (typeof ProvinceOrderByRelevanceFieldEnum)[keyof typeof ProvinceOrderByRelevanceFieldEnum]
-
-
-export const DistrictOrderByRelevanceFieldEnum = {
-  name: 'name'
-} as const
-
-export type DistrictOrderByRelevanceFieldEnum = (typeof DistrictOrderByRelevanceFieldEnum)[keyof typeof DistrictOrderByRelevanceFieldEnum]
-
-
-export const SectorOrderByRelevanceFieldEnum = {
-  name: 'name'
-} as const
-
-export type SectorOrderByRelevanceFieldEnum = (typeof SectorOrderByRelevanceFieldEnum)[keyof typeof SectorOrderByRelevanceFieldEnum]
-
-
-export const CellOrderByRelevanceFieldEnum = {
-  name: 'name'
-} as const
-
-export type CellOrderByRelevanceFieldEnum = (typeof CellOrderByRelevanceFieldEnum)[keyof typeof CellOrderByRelevanceFieldEnum]
-
-
-export const VillageOrderByRelevanceFieldEnum = {
-  name: 'name'
-} as const
-
-export type VillageOrderByRelevanceFieldEnum = (typeof VillageOrderByRelevanceFieldEnum)[keyof typeof VillageOrderByRelevanceFieldEnum]
-
-
 export const NotificationOrderByRelevanceFieldEnum = {
   id: 'id',
   message: 'message',
@@ -580,6 +544,42 @@ export const PasswordResetCodeOrderByRelevanceFieldEnum = {
 export type PasswordResetCodeOrderByRelevanceFieldEnum = (typeof PasswordResetCodeOrderByRelevanceFieldEnum)[keyof typeof PasswordResetCodeOrderByRelevanceFieldEnum]
 
 
+export const ProvinceOrderByRelevanceFieldEnum = {
+  name: 'name',
+  izina: 'izina'
+} as const
+
+export type ProvinceOrderByRelevanceFieldEnum = (typeof ProvinceOrderByRelevanceFieldEnum)[keyof typeof ProvinceOrderByRelevanceFieldEnum]
+
+
+export const DistrictOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type DistrictOrderByRelevanceFieldEnum = (typeof DistrictOrderByRelevanceFieldEnum)[keyof typeof DistrictOrderByRelevanceFieldEnum]
+
+
+export const SectorOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type SectorOrderByRelevanceFieldEnum = (typeof SectorOrderByRelevanceFieldEnum)[keyof typeof SectorOrderByRelevanceFieldEnum]
+
+
+export const CellOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type CellOrderByRelevanceFieldEnum = (typeof CellOrderByRelevanceFieldEnum)[keyof typeof CellOrderByRelevanceFieldEnum]
+
+
+export const VillageOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type VillageOrderByRelevanceFieldEnum = (typeof VillageOrderByRelevanceFieldEnum)[keyof typeof VillageOrderByRelevanceFieldEnum]
+
+
 export const ProgramOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
@@ -591,36 +591,6 @@ export const ProgramOrderByRelevanceFieldEnum = {
 } as const
 
 export type ProgramOrderByRelevanceFieldEnum = (typeof ProgramOrderByRelevanceFieldEnum)[keyof typeof ProgramOrderByRelevanceFieldEnum]
-
-
-export const ProgramTeamOrderByRelevanceFieldEnum = {
-  id: 'id',
-  programId: 'programId',
-  tenantId: 'tenantId',
-  name: 'name',
-  leaderId: 'leaderId'
-} as const
-
-export type ProgramTeamOrderByRelevanceFieldEnum = (typeof ProgramTeamOrderByRelevanceFieldEnum)[keyof typeof ProgramTeamOrderByRelevanceFieldEnum]
-
-
-export const ProgramTeamMemberOrderByRelevanceFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  programId: 'programId',
-  userId: 'userId'
-} as const
-
-export type ProgramTeamMemberOrderByRelevanceFieldEnum = (typeof ProgramTeamMemberOrderByRelevanceFieldEnum)[keyof typeof ProgramTeamMemberOrderByRelevanceFieldEnum]
-
-
-export const ProgramTeamVehicleOrderByRelevanceFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  vehicleId: 'vehicleId'
-} as const
-
-export type ProgramTeamVehicleOrderByRelevanceFieldEnum = (typeof ProgramTeamVehicleOrderByRelevanceFieldEnum)[keyof typeof ProgramTeamVehicleOrderByRelevanceFieldEnum]
 
 
 export const AvailabilityCheckOrderByRelevanceFieldEnum = {
@@ -655,6 +625,36 @@ export const ProgramAssignmentOrderByRelevanceFieldEnum = {
 } as const
 
 export type ProgramAssignmentOrderByRelevanceFieldEnum = (typeof ProgramAssignmentOrderByRelevanceFieldEnum)[keyof typeof ProgramAssignmentOrderByRelevanceFieldEnum]
+
+
+export const ProgramTeamOrderByRelevanceFieldEnum = {
+  id: 'id',
+  programId: 'programId',
+  tenantId: 'tenantId',
+  name: 'name',
+  leaderId: 'leaderId'
+} as const
+
+export type ProgramTeamOrderByRelevanceFieldEnum = (typeof ProgramTeamOrderByRelevanceFieldEnum)[keyof typeof ProgramTeamOrderByRelevanceFieldEnum]
+
+
+export const ProgramTeamVehicleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  teamId: 'teamId',
+  vehicleId: 'vehicleId'
+} as const
+
+export type ProgramTeamVehicleOrderByRelevanceFieldEnum = (typeof ProgramTeamVehicleOrderByRelevanceFieldEnum)[keyof typeof ProgramTeamVehicleOrderByRelevanceFieldEnum]
+
+
+export const ProgramTeamMemberOrderByRelevanceFieldEnum = {
+  id: 'id',
+  teamId: 'teamId',
+  programId: 'programId',
+  userId: 'userId'
+} as const
+
+export type ProgramTeamMemberOrderByRelevanceFieldEnum = (typeof ProgramTeamMemberOrderByRelevanceFieldEnum)[keyof typeof ProgramTeamMemberOrderByRelevanceFieldEnum]
 
 
 export const BeneficiaryAssignmentOrderByRelevanceFieldEnum = {

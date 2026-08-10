@@ -249,7 +249,7 @@ export type VehicleWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Vehicle"> | Date | string
   tenantId?: Prisma.StringFilter<"Vehicle"> | string
   assignments?: Prisma.BeneficiaryAssignmentListRelationFilter
-  teams?: Prisma.ProgramTeamVehicleListRelationFilter
+  teamAssignments?: Prisma.ProgramTeamVehicleListRelationFilter
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
 }
 
@@ -264,7 +264,7 @@ export type VehicleOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   assignments?: Prisma.BeneficiaryAssignmentOrderByRelationAggregateInput
-  teams?: Prisma.ProgramTeamVehicleOrderByRelationAggregateInput
+  teamAssignments?: Prisma.ProgramTeamVehicleOrderByRelationAggregateInput
   tenant?: Prisma.TenantOrderByWithRelationInput
   _relevance?: Prisma.VehicleOrderByRelevanceInput
 }
@@ -283,7 +283,7 @@ export type VehicleWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Vehicle"> | Date | string
   tenantId?: Prisma.StringFilter<"Vehicle"> | string
   assignments?: Prisma.BeneficiaryAssignmentListRelationFilter
-  teams?: Prisma.ProgramTeamVehicleListRelationFilter
+  teamAssignments?: Prisma.ProgramTeamVehicleListRelationFilter
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
 }, "id">
 
@@ -329,7 +329,7 @@ export type VehicleCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutVehicleInput
-  teams?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutVehicleInput
+  teamAssignments?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutVehicleInput
   tenant: Prisma.TenantCreateNestedOneWithoutVehiclesInput
 }
 
@@ -344,7 +344,7 @@ export type VehicleUncheckedCreateInput = {
   updatedAt?: Date | string
   tenantId: string
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutVehicleInput
-  teams?: Prisma.ProgramTeamVehicleUncheckedCreateNestedManyWithoutVehicleInput
+  teamAssignments?: Prisma.ProgramTeamVehicleUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUpdateInput = {
@@ -357,7 +357,7 @@ export type VehicleUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutVehicleNestedInput
-  teams?: Prisma.ProgramTeamVehicleUpdateManyWithoutVehicleNestedInput
+  teamAssignments?: Prisma.ProgramTeamVehicleUpdateManyWithoutVehicleNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutVehiclesNestedInput
 }
 
@@ -372,7 +372,7 @@ export type VehicleUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutVehicleNestedInput
-  teams?: Prisma.ProgramTeamVehicleUncheckedUpdateManyWithoutVehicleNestedInput
+  teamAssignments?: Prisma.ProgramTeamVehicleUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleCreateManyInput = {
@@ -522,18 +522,18 @@ export type VehicleUncheckedUpdateManyWithoutTenantNestedInput = {
   deleteMany?: Prisma.VehicleScalarWhereInput | Prisma.VehicleScalarWhereInput[]
 }
 
-export type VehicleCreateNestedOneWithoutTeamsInput = {
-  create?: Prisma.XOR<Prisma.VehicleCreateWithoutTeamsInput, Prisma.VehicleUncheckedCreateWithoutTeamsInput>
-  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutTeamsInput
+export type VehicleCreateNestedOneWithoutTeamAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutTeamAssignmentsInput, Prisma.VehicleUncheckedCreateWithoutTeamAssignmentsInput>
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutTeamAssignmentsInput
   connect?: Prisma.VehicleWhereUniqueInput
 }
 
-export type VehicleUpdateOneRequiredWithoutTeamsNestedInput = {
-  create?: Prisma.XOR<Prisma.VehicleCreateWithoutTeamsInput, Prisma.VehicleUncheckedCreateWithoutTeamsInput>
-  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutTeamsInput
-  upsert?: Prisma.VehicleUpsertWithoutTeamsInput
+export type VehicleUpdateOneRequiredWithoutTeamAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutTeamAssignmentsInput, Prisma.VehicleUncheckedCreateWithoutTeamAssignmentsInput>
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutTeamAssignmentsInput
+  upsert?: Prisma.VehicleUpsertWithoutTeamAssignmentsInput
   connect?: Prisma.VehicleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.VehicleUpdateToOneWithWhereWithoutTeamsInput, Prisma.VehicleUpdateWithoutTeamsInput>, Prisma.VehicleUncheckedUpdateWithoutTeamsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VehicleUpdateToOneWithWhereWithoutTeamAssignmentsInput, Prisma.VehicleUpdateWithoutTeamAssignmentsInput>, Prisma.VehicleUncheckedUpdateWithoutTeamAssignmentsInput>
 }
 
 export type VehicleCreateNestedOneWithoutAssignmentsInput = {
@@ -566,7 +566,7 @@ export type VehicleCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutVehicleInput
-  teams?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutVehicleInput
+  teamAssignments?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateWithoutTenantInput = {
@@ -579,7 +579,7 @@ export type VehicleUncheckedCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutVehicleInput
-  teams?: Prisma.ProgramTeamVehicleUncheckedCreateNestedManyWithoutVehicleInput
+  teamAssignments?: Prisma.ProgramTeamVehicleUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleCreateOrConnectWithoutTenantInput = {
@@ -623,7 +623,7 @@ export type VehicleScalarWhereInput = {
   tenantId?: Prisma.StringFilter<"Vehicle"> | string
 }
 
-export type VehicleCreateWithoutTeamsInput = {
+export type VehicleCreateWithoutTeamAssignmentsInput = {
   id?: string
   name: string
   type?: $Enums.VehicleType
@@ -636,7 +636,7 @@ export type VehicleCreateWithoutTeamsInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutVehiclesInput
 }
 
-export type VehicleUncheckedCreateWithoutTeamsInput = {
+export type VehicleUncheckedCreateWithoutTeamAssignmentsInput = {
   id?: string
   name: string
   type?: $Enums.VehicleType
@@ -649,23 +649,23 @@ export type VehicleUncheckedCreateWithoutTeamsInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutVehicleInput
 }
 
-export type VehicleCreateOrConnectWithoutTeamsInput = {
+export type VehicleCreateOrConnectWithoutTeamAssignmentsInput = {
   where: Prisma.VehicleWhereUniqueInput
-  create: Prisma.XOR<Prisma.VehicleCreateWithoutTeamsInput, Prisma.VehicleUncheckedCreateWithoutTeamsInput>
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutTeamAssignmentsInput, Prisma.VehicleUncheckedCreateWithoutTeamAssignmentsInput>
 }
 
-export type VehicleUpsertWithoutTeamsInput = {
-  update: Prisma.XOR<Prisma.VehicleUpdateWithoutTeamsInput, Prisma.VehicleUncheckedUpdateWithoutTeamsInput>
-  create: Prisma.XOR<Prisma.VehicleCreateWithoutTeamsInput, Prisma.VehicleUncheckedCreateWithoutTeamsInput>
+export type VehicleUpsertWithoutTeamAssignmentsInput = {
+  update: Prisma.XOR<Prisma.VehicleUpdateWithoutTeamAssignmentsInput, Prisma.VehicleUncheckedUpdateWithoutTeamAssignmentsInput>
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutTeamAssignmentsInput, Prisma.VehicleUncheckedCreateWithoutTeamAssignmentsInput>
   where?: Prisma.VehicleWhereInput
 }
 
-export type VehicleUpdateToOneWithWhereWithoutTeamsInput = {
+export type VehicleUpdateToOneWithWhereWithoutTeamAssignmentsInput = {
   where?: Prisma.VehicleWhereInput
-  data: Prisma.XOR<Prisma.VehicleUpdateWithoutTeamsInput, Prisma.VehicleUncheckedUpdateWithoutTeamsInput>
+  data: Prisma.XOR<Prisma.VehicleUpdateWithoutTeamAssignmentsInput, Prisma.VehicleUncheckedUpdateWithoutTeamAssignmentsInput>
 }
 
-export type VehicleUpdateWithoutTeamsInput = {
+export type VehicleUpdateWithoutTeamAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumVehicleTypeFieldUpdateOperationsInput | $Enums.VehicleType
@@ -678,7 +678,7 @@ export type VehicleUpdateWithoutTeamsInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutVehiclesNestedInput
 }
 
-export type VehicleUncheckedUpdateWithoutTeamsInput = {
+export type VehicleUncheckedUpdateWithoutTeamAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumVehicleTypeFieldUpdateOperationsInput | $Enums.VehicleType
@@ -700,7 +700,7 @@ export type VehicleCreateWithoutAssignmentsInput = {
   active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  teams?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutVehicleInput
+  teamAssignments?: Prisma.ProgramTeamVehicleCreateNestedManyWithoutVehicleInput
   tenant: Prisma.TenantCreateNestedOneWithoutVehiclesInput
 }
 
@@ -714,7 +714,7 @@ export type VehicleUncheckedCreateWithoutAssignmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
-  teams?: Prisma.ProgramTeamVehicleUncheckedCreateNestedManyWithoutVehicleInput
+  teamAssignments?: Prisma.ProgramTeamVehicleUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleCreateOrConnectWithoutAssignmentsInput = {
@@ -742,7 +742,7 @@ export type VehicleUpdateWithoutAssignmentsInput = {
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teams?: Prisma.ProgramTeamVehicleUpdateManyWithoutVehicleNestedInput
+  teamAssignments?: Prisma.ProgramTeamVehicleUpdateManyWithoutVehicleNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutVehiclesNestedInput
 }
 
@@ -756,7 +756,7 @@ export type VehicleUncheckedUpdateWithoutAssignmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  teams?: Prisma.ProgramTeamVehicleUncheckedUpdateManyWithoutVehicleNestedInput
+  teamAssignments?: Prisma.ProgramTeamVehicleUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleCreateManyTenantInput = {
@@ -780,7 +780,7 @@ export type VehicleUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutVehicleNestedInput
-  teams?: Prisma.ProgramTeamVehicleUpdateManyWithoutVehicleNestedInput
+  teamAssignments?: Prisma.ProgramTeamVehicleUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateWithoutTenantInput = {
@@ -793,7 +793,7 @@ export type VehicleUncheckedUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutVehicleNestedInput
-  teams?: Prisma.ProgramTeamVehicleUncheckedUpdateManyWithoutVehicleNestedInput
+  teamAssignments?: Prisma.ProgramTeamVehicleUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateManyWithoutTenantInput = {
@@ -814,12 +814,12 @@ export type VehicleUncheckedUpdateManyWithoutTenantInput = {
 
 export type VehicleCountOutputType = {
   assignments: number
-  teams: number
+  teamAssignments: number
 }
 
 export type VehicleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignments?: boolean | VehicleCountOutputTypeCountAssignmentsArgs
-  teams?: boolean | VehicleCountOutputTypeCountTeamsArgs
+  teamAssignments?: boolean | VehicleCountOutputTypeCountTeamAssignmentsArgs
 }
 
 /**
@@ -842,7 +842,7 @@ export type VehicleCountOutputTypeCountAssignmentsArgs<ExtArgs extends runtime.T
 /**
  * VehicleCountOutputType without action
  */
-export type VehicleCountOutputTypeCountTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type VehicleCountOutputTypeCountTeamAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProgramTeamVehicleWhereInput
 }
 
@@ -858,7 +858,7 @@ export type VehicleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   tenantId?: boolean
   assignments?: boolean | Prisma.Vehicle$assignmentsArgs<ExtArgs>
-  teams?: boolean | Prisma.Vehicle$teamsArgs<ExtArgs>
+  teamAssignments?: boolean | Prisma.Vehicle$teamAssignmentsArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.VehicleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vehicle"]>
@@ -880,7 +880,7 @@ export type VehicleSelectScalar = {
 export type VehicleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "type" | "driverName" | "capacityPerDay" | "active" | "createdAt" | "updatedAt" | "tenantId", ExtArgs["result"]["vehicle"]>
 export type VehicleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignments?: boolean | Prisma.Vehicle$assignmentsArgs<ExtArgs>
-  teams?: boolean | Prisma.Vehicle$teamsArgs<ExtArgs>
+  teamAssignments?: boolean | Prisma.Vehicle$teamAssignmentsArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.VehicleCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -889,7 +889,7 @@ export type $VehiclePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Vehicle"
   objects: {
     assignments: Prisma.$BeneficiaryAssignmentPayload<ExtArgs>[]
-    teams: Prisma.$ProgramTeamVehiclePayload<ExtArgs>[]
+    teamAssignments: Prisma.$ProgramTeamVehiclePayload<ExtArgs>[]
     tenant: Prisma.$TenantPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1243,7 +1243,7 @@ readonly fields: VehicleFieldRefs;
 export interface Prisma__VehicleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   assignments<T extends Prisma.Vehicle$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  teams<T extends Prisma.Vehicle$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramTeamVehiclePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teamAssignments<T extends Prisma.Vehicle$teamAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$teamAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramTeamVehiclePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1655,9 +1655,9 @@ export type Vehicle$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Vehicle.teams
+ * Vehicle.teamAssignments
  */
-export type Vehicle$teamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Vehicle$teamAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ProgramTeamVehicle
    */

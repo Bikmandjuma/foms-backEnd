@@ -345,6 +345,11 @@ export type DistrictUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+export type DistrictNullableScalarRelationFilter = {
+  is?: Prisma.DistrictWhereInput | null
+  isNot?: Prisma.DistrictWhereInput | null
+}
+
 export type DistrictListRelationFilter = {
   every?: Prisma.DistrictWhereInput
   some?: Prisma.DistrictWhereInput
@@ -400,9 +405,20 @@ export type DistrictScalarRelationFilter = {
   isNot?: Prisma.DistrictWhereInput
 }
 
-export type DistrictNullableScalarRelationFilter = {
-  is?: Prisma.DistrictWhereInput | null
-  isNot?: Prisma.DistrictWhereInput | null
+export type DistrictCreateNestedOneWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.DistrictCreateWithoutUsersInput, Prisma.DistrictUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutUsersInput
+  connect?: Prisma.DistrictWhereUniqueInput
+}
+
+export type DistrictUpdateOneWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.DistrictCreateWithoutUsersInput, Prisma.DistrictUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutUsersInput
+  upsert?: Prisma.DistrictUpsertWithoutUsersInput
+  disconnect?: Prisma.DistrictWhereInput | boolean
+  delete?: Prisma.DistrictWhereInput | boolean
+  connect?: Prisma.DistrictWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DistrictUpdateToOneWithWhereWithoutUsersInput, Prisma.DistrictUpdateWithoutUsersInput>, Prisma.DistrictUncheckedUpdateWithoutUsersInput>
 }
 
 export type DistrictCreateNestedManyWithoutProvinceInput = {
@@ -461,22 +477,6 @@ export type DistrictUpdateOneRequiredWithoutSectorsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DistrictUpdateToOneWithWhereWithoutSectorsInput, Prisma.DistrictUpdateWithoutSectorsInput>, Prisma.DistrictUncheckedUpdateWithoutSectorsInput>
 }
 
-export type DistrictCreateNestedOneWithoutUsersInput = {
-  create?: Prisma.XOR<Prisma.DistrictCreateWithoutUsersInput, Prisma.DistrictUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutUsersInput
-  connect?: Prisma.DistrictWhereUniqueInput
-}
-
-export type DistrictUpdateOneWithoutUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.DistrictCreateWithoutUsersInput, Prisma.DistrictUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutUsersInput
-  upsert?: Prisma.DistrictUpsertWithoutUsersInput
-  disconnect?: Prisma.DistrictWhereInput | boolean
-  delete?: Prisma.DistrictWhereInput | boolean
-  connect?: Prisma.DistrictWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.DistrictUpdateToOneWithWhereWithoutUsersInput, Prisma.DistrictUpdateWithoutUsersInput>, Prisma.DistrictUncheckedUpdateWithoutUsersInput>
-}
-
 export type DistrictCreateNestedOneWithoutBeneficiariesInput = {
   create?: Prisma.XOR<Prisma.DistrictCreateWithoutBeneficiariesInput, Prisma.DistrictUncheckedCreateWithoutBeneficiariesInput>
   connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutBeneficiariesInput
@@ -491,6 +491,62 @@ export type DistrictUpdateOneWithoutBeneficiariesNestedInput = {
   delete?: Prisma.DistrictWhereInput | boolean
   connect?: Prisma.DistrictWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.DistrictUpdateToOneWithWhereWithoutBeneficiariesInput, Prisma.DistrictUpdateWithoutBeneficiariesInput>, Prisma.DistrictUncheckedUpdateWithoutBeneficiariesInput>
+}
+
+export type DistrictCreateWithoutUsersInput = {
+  id: number
+  name: string
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  province: Prisma.ProvinceCreateNestedOneWithoutDistrictsInput
+  sectors?: Prisma.SectorCreateNestedManyWithoutDistrictInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutDistrictInput
+}
+
+export type DistrictUncheckedCreateWithoutUsersInput = {
+  id: number
+  name: string
+  provinceId: number
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  sectors?: Prisma.SectorUncheckedCreateNestedManyWithoutDistrictInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutDistrictInput
+}
+
+export type DistrictCreateOrConnectWithoutUsersInput = {
+  where: Prisma.DistrictWhereUniqueInput
+  create: Prisma.XOR<Prisma.DistrictCreateWithoutUsersInput, Prisma.DistrictUncheckedCreateWithoutUsersInput>
+}
+
+export type DistrictUpsertWithoutUsersInput = {
+  update: Prisma.XOR<Prisma.DistrictUpdateWithoutUsersInput, Prisma.DistrictUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.DistrictCreateWithoutUsersInput, Prisma.DistrictUncheckedCreateWithoutUsersInput>
+  where?: Prisma.DistrictWhereInput
+}
+
+export type DistrictUpdateToOneWithWhereWithoutUsersInput = {
+  where?: Prisma.DistrictWhereInput
+  data: Prisma.XOR<Prisma.DistrictUpdateWithoutUsersInput, Prisma.DistrictUncheckedUpdateWithoutUsersInput>
+}
+
+export type DistrictUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  province?: Prisma.ProvinceUpdateOneRequiredWithoutDistrictsNestedInput
+  sectors?: Prisma.SectorUpdateManyWithoutDistrictNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutDistrictNestedInput
+}
+
+export type DistrictUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sectors?: Prisma.SectorUncheckedUpdateManyWithoutDistrictNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictCreateWithoutProvinceInput = {
@@ -603,62 +659,6 @@ export type DistrictUncheckedUpdateWithoutSectorsInput = {
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   users?: Prisma.UserUncheckedUpdateManyWithoutDistrictNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutDistrictNestedInput
-}
-
-export type DistrictCreateWithoutUsersInput = {
-  id: number
-  name: string
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  province: Prisma.ProvinceCreateNestedOneWithoutDistrictsInput
-  sectors?: Prisma.SectorCreateNestedManyWithoutDistrictInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutDistrictInput
-}
-
-export type DistrictUncheckedCreateWithoutUsersInput = {
-  id: number
-  name: string
-  provinceId: number
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  sectors?: Prisma.SectorUncheckedCreateNestedManyWithoutDistrictInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutDistrictInput
-}
-
-export type DistrictCreateOrConnectWithoutUsersInput = {
-  where: Prisma.DistrictWhereUniqueInput
-  create: Prisma.XOR<Prisma.DistrictCreateWithoutUsersInput, Prisma.DistrictUncheckedCreateWithoutUsersInput>
-}
-
-export type DistrictUpsertWithoutUsersInput = {
-  update: Prisma.XOR<Prisma.DistrictUpdateWithoutUsersInput, Prisma.DistrictUncheckedUpdateWithoutUsersInput>
-  create: Prisma.XOR<Prisma.DistrictCreateWithoutUsersInput, Prisma.DistrictUncheckedCreateWithoutUsersInput>
-  where?: Prisma.DistrictWhereInput
-}
-
-export type DistrictUpdateToOneWithWhereWithoutUsersInput = {
-  where?: Prisma.DistrictWhereInput
-  data: Prisma.XOR<Prisma.DistrictUpdateWithoutUsersInput, Prisma.DistrictUncheckedUpdateWithoutUsersInput>
-}
-
-export type DistrictUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  province?: Prisma.ProvinceUpdateOneRequiredWithoutDistrictsNestedInput
-  sectors?: Prisma.SectorUpdateManyWithoutDistrictNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutDistrictNestedInput
-}
-
-export type DistrictUncheckedUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  provinceId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sectors?: Prisma.SectorUncheckedUpdateManyWithoutDistrictNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutDistrictNestedInput
 }
 

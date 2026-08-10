@@ -339,6 +339,11 @@ export type ProvinceUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+export type ProvinceNullableScalarRelationFilter = {
+  is?: Prisma.ProvinceWhereInput | null
+  isNot?: Prisma.ProvinceWhereInput | null
+}
+
 export type ProvinceOrderByRelevanceInput = {
   fields: Prisma.ProvinceOrderByRelevanceFieldEnum | Prisma.ProvinceOrderByRelevanceFieldEnum[]
   sort: Prisma.SortOrder
@@ -382,41 +387,6 @@ export type ProvinceScalarRelationFilter = {
   isNot?: Prisma.ProvinceWhereInput
 }
 
-export type ProvinceNullableScalarRelationFilter = {
-  is?: Prisma.ProvinceWhereInput | null
-  isNot?: Prisma.ProvinceWhereInput | null
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
-export type ProvinceCreateNestedOneWithoutDistrictsInput = {
-  create?: Prisma.XOR<Prisma.ProvinceCreateWithoutDistrictsInput, Prisma.ProvinceUncheckedCreateWithoutDistrictsInput>
-  connectOrCreate?: Prisma.ProvinceCreateOrConnectWithoutDistrictsInput
-  connect?: Prisma.ProvinceWhereUniqueInput
-}
-
-export type ProvinceUpdateOneRequiredWithoutDistrictsNestedInput = {
-  create?: Prisma.XOR<Prisma.ProvinceCreateWithoutDistrictsInput, Prisma.ProvinceUncheckedCreateWithoutDistrictsInput>
-  connectOrCreate?: Prisma.ProvinceCreateOrConnectWithoutDistrictsInput
-  upsert?: Prisma.ProvinceUpsertWithoutDistrictsInput
-  connect?: Prisma.ProvinceWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProvinceUpdateToOneWithWhereWithoutDistrictsInput, Prisma.ProvinceUpdateWithoutDistrictsInput>, Prisma.ProvinceUncheckedUpdateWithoutDistrictsInput>
-}
-
 export type ProvinceCreateNestedOneWithoutUsersInput = {
   create?: Prisma.XOR<Prisma.ProvinceCreateWithoutUsersInput, Prisma.ProvinceUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.ProvinceCreateOrConnectWithoutUsersInput
@@ -433,6 +403,20 @@ export type ProvinceUpdateOneWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProvinceUpdateToOneWithWhereWithoutUsersInput, Prisma.ProvinceUpdateWithoutUsersInput>, Prisma.ProvinceUncheckedUpdateWithoutUsersInput>
 }
 
+export type ProvinceCreateNestedOneWithoutDistrictsInput = {
+  create?: Prisma.XOR<Prisma.ProvinceCreateWithoutDistrictsInput, Prisma.ProvinceUncheckedCreateWithoutDistrictsInput>
+  connectOrCreate?: Prisma.ProvinceCreateOrConnectWithoutDistrictsInput
+  connect?: Prisma.ProvinceWhereUniqueInput
+}
+
+export type ProvinceUpdateOneRequiredWithoutDistrictsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProvinceCreateWithoutDistrictsInput, Prisma.ProvinceUncheckedCreateWithoutDistrictsInput>
+  connectOrCreate?: Prisma.ProvinceCreateOrConnectWithoutDistrictsInput
+  upsert?: Prisma.ProvinceUpsertWithoutDistrictsInput
+  connect?: Prisma.ProvinceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProvinceUpdateToOneWithWhereWithoutDistrictsInput, Prisma.ProvinceUpdateWithoutDistrictsInput>, Prisma.ProvinceUncheckedUpdateWithoutDistrictsInput>
+}
+
 export type ProvinceCreateNestedOneWithoutBeneficiariesInput = {
   create?: Prisma.XOR<Prisma.ProvinceCreateWithoutBeneficiariesInput, Prisma.ProvinceUncheckedCreateWithoutBeneficiariesInput>
   connectOrCreate?: Prisma.ProvinceCreateOrConnectWithoutBeneficiariesInput
@@ -447,62 +431,6 @@ export type ProvinceUpdateOneWithoutBeneficiariesNestedInput = {
   delete?: Prisma.ProvinceWhereInput | boolean
   connect?: Prisma.ProvinceWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProvinceUpdateToOneWithWhereWithoutBeneficiariesInput, Prisma.ProvinceUpdateWithoutBeneficiariesInput>, Prisma.ProvinceUncheckedUpdateWithoutBeneficiariesInput>
-}
-
-export type ProvinceCreateWithoutDistrictsInput = {
-  id: number
-  name: string
-  izina: string
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  users?: Prisma.UserCreateNestedManyWithoutProvinceInput
-  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProvinceInput
-}
-
-export type ProvinceUncheckedCreateWithoutDistrictsInput = {
-  id: number
-  name: string
-  izina: string
-  createdAt?: Date | string | null
-  updatedAt?: Date | string | null
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutProvinceInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProvinceInput
-}
-
-export type ProvinceCreateOrConnectWithoutDistrictsInput = {
-  where: Prisma.ProvinceWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProvinceCreateWithoutDistrictsInput, Prisma.ProvinceUncheckedCreateWithoutDistrictsInput>
-}
-
-export type ProvinceUpsertWithoutDistrictsInput = {
-  update: Prisma.XOR<Prisma.ProvinceUpdateWithoutDistrictsInput, Prisma.ProvinceUncheckedUpdateWithoutDistrictsInput>
-  create: Prisma.XOR<Prisma.ProvinceCreateWithoutDistrictsInput, Prisma.ProvinceUncheckedCreateWithoutDistrictsInput>
-  where?: Prisma.ProvinceWhereInput
-}
-
-export type ProvinceUpdateToOneWithWhereWithoutDistrictsInput = {
-  where?: Prisma.ProvinceWhereInput
-  data: Prisma.XOR<Prisma.ProvinceUpdateWithoutDistrictsInput, Prisma.ProvinceUncheckedUpdateWithoutDistrictsInput>
-}
-
-export type ProvinceUpdateWithoutDistrictsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  izina?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  users?: Prisma.UserUpdateManyWithoutProvinceNestedInput
-  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProvinceNestedInput
-}
-
-export type ProvinceUncheckedUpdateWithoutDistrictsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  izina?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  users?: Prisma.UserUncheckedUpdateManyWithoutProvinceNestedInput
-  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProvinceNestedInput
 }
 
 export type ProvinceCreateWithoutUsersInput = {
@@ -558,6 +486,62 @@ export type ProvinceUncheckedUpdateWithoutUsersInput = {
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   districts?: Prisma.DistrictUncheckedUpdateManyWithoutProvinceNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProvinceNestedInput
+}
+
+export type ProvinceCreateWithoutDistrictsInput = {
+  id: number
+  name: string
+  izina: string
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  users?: Prisma.UserCreateNestedManyWithoutProvinceInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProvinceInput
+}
+
+export type ProvinceUncheckedCreateWithoutDistrictsInput = {
+  id: number
+  name: string
+  izina: string
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutProvinceInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProvinceInput
+}
+
+export type ProvinceCreateOrConnectWithoutDistrictsInput = {
+  where: Prisma.ProvinceWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProvinceCreateWithoutDistrictsInput, Prisma.ProvinceUncheckedCreateWithoutDistrictsInput>
+}
+
+export type ProvinceUpsertWithoutDistrictsInput = {
+  update: Prisma.XOR<Prisma.ProvinceUpdateWithoutDistrictsInput, Prisma.ProvinceUncheckedUpdateWithoutDistrictsInput>
+  create: Prisma.XOR<Prisma.ProvinceCreateWithoutDistrictsInput, Prisma.ProvinceUncheckedCreateWithoutDistrictsInput>
+  where?: Prisma.ProvinceWhereInput
+}
+
+export type ProvinceUpdateToOneWithWhereWithoutDistrictsInput = {
+  where?: Prisma.ProvinceWhereInput
+  data: Prisma.XOR<Prisma.ProvinceUpdateWithoutDistrictsInput, Prisma.ProvinceUncheckedUpdateWithoutDistrictsInput>
+}
+
+export type ProvinceUpdateWithoutDistrictsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  izina?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  users?: Prisma.UserUpdateManyWithoutProvinceNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProvinceNestedInput
+}
+
+export type ProvinceUncheckedUpdateWithoutDistrictsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  izina?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  users?: Prisma.UserUncheckedUpdateManyWithoutProvinceNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProvinceNestedInput
 }
 

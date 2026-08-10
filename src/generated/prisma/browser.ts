@@ -18,31 +18,6 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
- * Model Province
- * 
- */
-export type Province = Prisma.ProvinceModel
-/**
- * Model District
- * 
- */
-export type District = Prisma.DistrictModel
-/**
- * Model Sector
- * 
- */
-export type Sector = Prisma.SectorModel
-/**
- * Model Cell
- * 
- */
-export type Cell = Prisma.CellModel
-/**
- * Model Village
- * 
- */
-export type Village = Prisma.VillageModel
-/**
  * Model Notification
  * 
  */
@@ -68,28 +43,44 @@ export type User = Prisma.UserModel
  */
 export type PasswordResetCode = Prisma.PasswordResetCodeModel
 /**
+ * Model Province
+ * 
+ */
+export type Province = Prisma.ProvinceModel
+/**
+ * Model District
+ * 
+ */
+export type District = Prisma.DistrictModel
+/**
+ * Model Sector
+ * 
+ */
+export type Sector = Prisma.SectorModel
+/**
+ * Model Cell
+ * 
+ */
+export type Cell = Prisma.CellModel
+/**
+ * Model Village
+ * 
+ */
+export type Village = Prisma.VillageModel
+/**
  * Model Program
  * 
  */
 export type Program = Prisma.ProgramModel
 /**
- * Model ProgramTeam
- * 
- */
-export type ProgramTeam = Prisma.ProgramTeamModel
-/**
- * Model ProgramTeamMember
- * 
- */
-export type ProgramTeamMember = Prisma.ProgramTeamMemberModel
-/**
- * Model ProgramTeamVehicle
- * 
- */
-export type ProgramTeamVehicle = Prisma.ProgramTeamVehicleModel
-/**
  * Model AvailabilityCheck
- * 
+ * *
+ *  * "Confirm availability" — an independent workflow from the geo-assignment
+ *  * engine (ProgramAssignment/BeneficiaryAssignment). A program picks one
+ *  * "checker" role; every respondent enrolled in the program gets handed to
+ *  * an active user holding that role, whose job is to confirm the respondent
+ *  * is actually reachable/available. Starts PENDING; the checker (mobile app)
+ *  * later submits one of the other statuses plus an optional free-text note.
  */
 export type AvailabilityCheck = Prisma.AvailabilityCheckModel
 /**
@@ -102,6 +93,21 @@ export type Beneficiary = Prisma.BeneficiaryModel
  * 
  */
 export type ProgramAssignment = Prisma.ProgramAssignmentModel
+/**
+ * Model ProgramTeam
+ * 
+ */
+export type ProgramTeam = Prisma.ProgramTeamModel
+/**
+ * Model ProgramTeamVehicle
+ * 
+ */
+export type ProgramTeamVehicle = Prisma.ProgramTeamVehicleModel
+/**
+ * Model ProgramTeamMember
+ * 
+ */
+export type ProgramTeamMember = Prisma.ProgramTeamMemberModel
 /**
  * Model BeneficiaryAssignment
  * 

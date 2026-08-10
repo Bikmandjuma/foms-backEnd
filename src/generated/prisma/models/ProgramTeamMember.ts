@@ -238,7 +238,7 @@ export type ProgramTeamMemberCreateInput = {
   programId: string
   createdAt?: Date | string
   team: Prisma.ProgramTeamCreateNestedOneWithoutMembersInput
-  user: Prisma.UserCreateNestedOneWithoutProgramTeamMembershipsInput
+  user: Prisma.UserCreateNestedOneWithoutTeamMembershipsInput
 }
 
 export type ProgramTeamMemberUncheckedCreateInput = {
@@ -254,7 +254,7 @@ export type ProgramTeamMemberUpdateInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   team?: Prisma.ProgramTeamUpdateOneRequiredWithoutMembersNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutProgramTeamMembershipsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutTeamMembershipsNestedInput
 }
 
 export type ProgramTeamMemberUncheckedUpdateInput = {
@@ -471,7 +471,7 @@ export type ProgramTeamMemberCreateWithoutTeamInput = {
   id?: string
   programId: string
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutProgramTeamMembershipsInput
+  user: Prisma.UserCreateNestedOneWithoutTeamMembershipsInput
 }
 
 export type ProgramTeamMemberUncheckedCreateWithoutTeamInput = {
@@ -546,7 +546,7 @@ export type ProgramTeamMemberUpdateWithoutTeamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutProgramTeamMembershipsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutTeamMembershipsNestedInput
 }
 
 export type ProgramTeamMemberUncheckedUpdateWithoutTeamInput = {

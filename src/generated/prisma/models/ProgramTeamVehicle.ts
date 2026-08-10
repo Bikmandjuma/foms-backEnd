@@ -225,7 +225,7 @@ export type ProgramTeamVehicleCreateInput = {
   id?: string
   createdAt?: Date | string
   team: Prisma.ProgramTeamCreateNestedOneWithoutVehiclesInput
-  vehicle: Prisma.VehicleCreateNestedOneWithoutTeamsInput
+  vehicle: Prisma.VehicleCreateNestedOneWithoutTeamAssignmentsInput
 }
 
 export type ProgramTeamVehicleUncheckedCreateInput = {
@@ -239,7 +239,7 @@ export type ProgramTeamVehicleUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   team?: Prisma.ProgramTeamUpdateOneRequiredWithoutVehiclesNestedInput
-  vehicle?: Prisma.VehicleUpdateOneRequiredWithoutTeamsNestedInput
+  vehicle?: Prisma.VehicleUpdateOneRequiredWithoutTeamAssignmentsNestedInput
 }
 
 export type ProgramTeamVehicleUncheckedUpdateInput = {
@@ -397,7 +397,7 @@ export type ProgramTeamVehicleUncheckedUpdateManyWithoutVehicleNestedInput = {
 export type ProgramTeamVehicleCreateWithoutTeamInput = {
   id?: string
   createdAt?: Date | string
-  vehicle: Prisma.VehicleCreateNestedOneWithoutTeamsInput
+  vehicle: Prisma.VehicleCreateNestedOneWithoutTeamAssignmentsInput
 }
 
 export type ProgramTeamVehicleUncheckedCreateWithoutTeamInput = {
@@ -489,7 +489,7 @@ export type ProgramTeamVehicleCreateManyTeamInput = {
 export type ProgramTeamVehicleUpdateWithoutTeamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vehicle?: Prisma.VehicleUpdateOneRequiredWithoutTeamsNestedInput
+  vehicle?: Prisma.VehicleUpdateOneRequiredWithoutTeamAssignmentsNestedInput
 }
 
 export type ProgramTeamVehicleUncheckedUpdateWithoutTeamInput = {

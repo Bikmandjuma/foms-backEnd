@@ -14,7 +14,13 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model AvailabilityCheck
- * 
+ * *
+ *  * "Confirm availability" — an independent workflow from the geo-assignment
+ *  * engine (ProgramAssignment/BeneficiaryAssignment). A program picks one
+ *  * "checker" role; every respondent enrolled in the program gets handed to
+ *  * an active user holding that role, whose job is to confirm the respondent
+ *  * is actually reachable/available. Starts PENDING; the checker (mobile app)
+ *  * later submits one of the other statuses plus an optional free-text note.
  */
 export type AvailabilityCheckModel = runtime.Types.Result.DefaultSelection<Prisma.$AvailabilityCheckPayload>
 

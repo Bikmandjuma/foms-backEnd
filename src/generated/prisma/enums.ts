@@ -9,6 +9,18 @@
 * 🟢 You can import this file directly.
 */
 
+export const AvailabilityCheckStatus = {
+  PENDING: 'PENDING',
+  AVAILABLE: 'AVAILABLE',
+  REFUSED: 'REFUSED',
+  NOT_FOUND: 'NOT_FOUND',
+  RELOCATED: 'RELOCATED',
+  DECEASED: 'DECEASED'
+} as const
+
+export type AvailabilityCheckStatus = (typeof AvailabilityCheckStatus)[keyof typeof AvailabilityCheckStatus]
+
+
 export const Gender = {
   MALE: 'MALE',
   FEMALE: 'FEMALE',
