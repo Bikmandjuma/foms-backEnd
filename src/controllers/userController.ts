@@ -18,11 +18,11 @@ const userSelect = {
   lastName: true,
   avatarUrl: true,
   telephone: true,
-  province: true,
-  district: true,
-  sector: true,
-  cell: true,
-  village: true,
+  province: { select: { id: true, name: true } },
+  district: { select: { id: true, name: true } },
+  sector: { select: { id: true, name: true } },
+  cell: { select: { id: true, name: true } },
+  village: { select: { id: true, name: true } },
   gender: true,
   dateOfBirth: true,
   status: true,
@@ -67,8 +67,9 @@ async function actorHasManagePermission(req: Request): Promise<boolean> {
 }
 
 export async function listUsers(req: Request, res: Response): Promise<void> {
+  const { roleId } = req.query;
   const users = await prisma.user.findMany({
-    where: { tenantId: requireTenantId(req) },
+    where: { tenantId: requireTenantId(req), ...(typeof roleId === "string" && roleId ? { roleId } : {}) },
     select: userSelect,
     orderBy: { createdAt: "desc" },
   });

@@ -11,11 +11,14 @@ function idParam(req: Request): string {
 }
 
 export async function listVehicles(req: Request, res: Response): Promise<void> {
-  const { active } = req.query;
+  const { active, available } = req.query;
   const vehicles = await prisma.vehicle.findMany({
     where: {
       tenantId: requireTenantId(req),
       ...(active === "true" ? { active: true } : active === "false" ? { active: false } : {}),
+      // "available" = not currently the ride for any group — a vehicle
+      // can only physically serve one team assignment at a time.
+      ...(available === "true" ? { teamAssignments: { none: {} } } : {}),
     },
     orderBy: { createdAt: "desc" },
   });

@@ -1,0 +1,33 @@
+import { Router } from "express";
+import {
+  addProgramTeamMember,
+  addProgramTeamVehicle,
+  autoAssignProgramTeamVehicles,
+  clearProgramTeamLeader,
+  getProgramTeams,
+  removeProgramTeamMember,
+  removeProgramTeamVehicle,
+  runProgramAssignment,
+  setProgramTeamLeader,
+  updateProgramTeamConfig,
+} from "../controllers/programTeamController.js";
+import { asyncHandler } from "../middleware/asyncHandler.js";
+import { authenticate } from "../middleware/auth.js";
+import { requirePermission } from "../middleware/permissions.js";
+
+const router = Router();
+
+router.use(authenticate);
+
+router.get("/", requirePermission("teams:view"), asyncHandler(getProgramTeams));
+router.put("/config", requirePermission("teams:create"), asyncHandler(updateProgramTeamConfig));
+router.post("/run", requirePermission("teams:create"), asyncHandler(runProgramAssignment));
+router.post("/:teamId/leader", requirePermission("teams:edit"), asyncHandler(setProgramTeamLeader));
+router.delete("/:teamId/leader", requirePermission("teams:edit"), asyncHandler(clearProgramTeamLeader));
+router.post("/:teamId/members", requirePermission("teams:edit"), asyncHandler(addProgramTeamMember));
+router.delete("/:teamId/members/:userId", requirePermission("teams:delete"), asyncHandler(removeProgramTeamMember));
+router.post("/auto-assign-vehicles", requirePermission("teams:edit"), asyncHandler(autoAssignProgramTeamVehicles));
+router.post("/:teamId/vehicles", requirePermission("teams:edit"), asyncHandler(addProgramTeamVehicle));
+router.delete("/:teamId/vehicles/:vehicleId", requirePermission("teams:delete"), asyncHandler(removeProgramTeamVehicle));
+
+export default router;

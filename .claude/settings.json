@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/maicoltd/Desktop/Person/HUska/foms-backEnd/prisma/migrations/20260809120000_restore_user_beneficiary_geo_strings)",
+      "Bash(pkill -f \"node dist/server.js\")",
+      "Bash(curl -s -X POST http://localhost:4000/api/auth/login -H \"Content-Type: application/json\" -d '{\"email\":\"admin@huska.rw\",\"password\":\"wrongpassword\"}' -w \"\\\\nHTTP_STATUS:%{http_code}\\\\n\")",
+      "Bash(npx tsx *)",
+      "Bash(curl -s -b /tmp/foms_cookies.txt \"http://localhost:4000/api/geo/districts?provinceId=1\")",
+      "Bash(curl -s -b /tmp/foms_cookies.txt \"http://localhost:4000/api/beneficiaries\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d['data'][0], indent=2\\)\\)\")",
+      "Bash(chromium-cli --help)",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(timeout 120 npx playwright install --with-deps chromium)",
+      "Bash(npx playwright *)",
+      "Bash(npm run *)",
+      "Bash(curl -s -c /tmp/foms_cookies_admin.txt -X POST http://localhost:4000/api/auth/login -H \"Content-Type: application/json\" -d '{\"email\":\"maico@gmail.com\",\"password\":\"password\"}')",
+      "Bash(curl -s -b /tmp/foms_cookies_admin.txt -X PUT http://localhost:4000/api/program-teams/config -H 'Content-Type: application/json' -d '{\"programId\":\"bf0b29b8-6ad3-4da2-b00c-24f44ec74c8d\",\"teamCount\":3,\"teamLeaderRoleId\":\"4b3f2c9d-89b3-4560-9c64-49872c543982\",\"teamMemberRoleId\":\"404abea1-b4bf-4618-937e-e448e4aefa99\",\"membersPerTeam\":5}')",
+      "Bash(curl -s -b /tmp/foms_cookies_admin.txt -X POST http://localhost:4000/api/program-teams/randomize-leaders -H 'Content-Type: application/json' -d '{\"programId\":\"bf0b29b8-6ad3-4da2-b00c-24f44ec74c8d\"}')",
+      "Bash(curl -s -b /tmp/foms_cookies_admin.txt -X POST http://localhost:4000/api/program-teams/auto-assign-members -H 'Content-Type: application/json' -d '{\"programId\":\"bf0b29b8-6ad3-4da2-b00c-24f44ec74c8d\"}')",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}\\\\n' -b /tmp/foms_cookies_admin.txt -X PUT http://localhost:4000/api/program-teams/config -H 'Content-Type: application/json' -d '{\"programId\":\"bf0b29b8-6ad3-4da2-b00c-24f44ec74c8d\",\"teamCount\":1,\"teamLeaderRoleId\":\"4b3f2c9d-89b3-4560-9c64-49872c543982\",\"teamMemberRoleId\":\"404abea1-b4bf-4618-937e-e448e4aefa99\",\"membersPerTeam\":5}')",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}\\\\n' -b /tmp/foms_cookies_admin.txt -X PUT http://localhost:4000/api/program-teams/config -H 'Content-Type: application/json' -d '{\"programId\":\"bf0b29b8-6ad3-4da2-b00c-24f44ec74c8d\",\"teamCount\":3,\"teamLeaderRoleId\":\"404abea1-b4bf-4618-937e-e448e4aefa99\",\"teamMemberRoleId\":\"404abea1-b4bf-4618-937e-e448e4aefa99\",\"membersPerTeam\":5}')",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}\\\\n' -b /tmp/foms_cookies_admin.txt -X DELETE http://localhost:4000/api/program-teams/__TRACKED_VAR__/leader)",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}\\\\n' -b /tmp/foms_cookies_admin.txt -X POST http://localhost:4000/api/program-teams/6bab6471-8161-4ae7-9ded-02599f0890d4/leader -H 'Content-Type: application/json' -d '{\"userId\":\"92389fb9-585e-4fff-a619-1e63998328ea\"}')",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}\\\\n' -b /tmp/foms_cookies_admin.txt -X DELETE http://localhost:4000/api/program-teams/6bab6471-8161-4ae7-9ded-02599f0890d4/members/__TRACKED_VAR__)",
+      "Bash(curl -s -b /tmp/foms_cookies_admin.txt \"http://localhost:4000/api/users?roleId=404abea1-b4bf-4618-937e-e448e4aefa99\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('count:', len\\(d['data']\\)\\); print\\('sample:', d['data'][0]['email']\\)\")"
+    ],
+    "additionalDirectories": [
+      "/Users/maicoltd/Desktop/Person/HUska/foms-backEnd/prisma/migrations"
+    ]
+  }
+}

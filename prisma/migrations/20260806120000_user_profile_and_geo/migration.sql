@@ -18,11 +18,11 @@ CREATE TABLE `PasswordResetCode` (
 -- CreateTable: Rwanda administrative hierarchy (cascading location selects)
 CREATE TABLE `AdminLocation` (
     `id` VARCHAR(191) NOT NULL,
-    `province` VARCHAR(191) NOT NULL,
-    `district` VARCHAR(191) NOT NULL,
-    `sector` VARCHAR(191) NOT NULL,
-    `cell` VARCHAR(191) NOT NULL,
-    `village` VARCHAR(191) NOT NULL,
+    `province` VARCHAR(100) NOT NULL,
+    `district` VARCHAR(100) NOT NULL,
+    `sector` VARCHAR(100) NOT NULL,
+    `cell` VARCHAR(100) NOT NULL,
+    `village` VARCHAR(100) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

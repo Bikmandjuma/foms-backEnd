@@ -34,6 +34,10 @@ export const PERMISSIONS = [
   "assignments:edit",
   "assignments:delete",
   "assignments:manage", // legacy
+  "teams:view",
+  "teams:create",
+  "teams:edit",
+  "teams:delete",
   "replacements:view",
   "replacements:create",
   "replacements:edit",
@@ -61,6 +65,7 @@ export const PERMISSION_GROUPS: { label: string; permissions: Permission[] }[] =
     permissions: ["beneficiaries:view", "beneficiaries:create", "beneficiaries:edit", "beneficiaries:delete"],
   },
   { label: "Assignments", permissions: ["assignments:view", "assignments:create", "assignments:edit", "assignments:delete"] },
+  { label: "Program teams", permissions: ["teams:view", "teams:create", "teams:edit", "teams:delete"] },
   {
     label: "Replacement requests",
     permissions: ["replacements:view", "replacements:create", "replacements:edit", "replacements:delete"],

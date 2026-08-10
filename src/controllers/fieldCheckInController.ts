@@ -29,6 +29,49 @@ function idParam(req: Request): string {
   return req.params.id as string;
 }
 
+function isPastDay(d: Date): boolean {
+  return d.toDateString() !== new Date().toDateString();
+}
+
+function endOfDay(d: Date): Date {
+  const end = new Date(d);
+  end.setHours(23, 59, 59, 999);
+  return end;
+}
+
+/**
+ * A check-in left open past the day it started can never be "properly"
+ * completed through the normal checkout flow (which requires every
+ * assigned respondent to have a recorded outcome for THAT session) — the
+ * day it was for is already over. Auto-closes it instead: checkout time is
+ * whichever respondent was recorded last, or if none were, the end of the
+ * day the check-in started.
+ */
+async function autoCloseStaleCheckIn(checkIn: { id: string; checkInAt: Date }) {
+  const lastVisit = await prisma.fieldVisit.findFirst({
+    where: { checkInId: checkIn.id },
+    orderBy: { recordedAt: "desc" },
+    select: { recordedAt: true },
+  });
+  const checkOutAt = lastVisit ? lastVisit.recordedAt : endOfDay(checkIn.checkInAt);
+
+  return prisma.fieldCheckIn.update({
+    where: { id: checkIn.id },
+    data: { checkOutAt, checkoutOverrideReason: "Auto-closed — left open past its day" },
+    include,
+  });
+}
+
+/** Sweeps a user's other still-open check-ins from past days before they start a new one. */
+async function closeStaleCheckIns(tenantId: string, userId: string): Promise<void> {
+  const stale = await prisma.fieldCheckIn.findMany({
+    where: { tenantId, userId, checkOutAt: null },
+    select: { id: true, checkInAt: true },
+  });
+  const pastStale = stale.filter((c) => isPastDay(c.checkInAt));
+  await Promise.all(pastStale.map((c) => autoCloseStaleCheckIn(c)));
+}
+
 export async function listCheckIns(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
   const { userId, projectId, active } = req.query;
@@ -49,6 +92,11 @@ export async function listCheckIns(req: Request, res: Response): Promise<void> {
 export async function createCheckIn(req: Request, res: Response): Promise<void> {
   const data = checkInSchema.parse(req.body);
   const tenantId = requireTenantId(req);
+
+  // A check-in from a previous day that was never closed (app closed,
+  // crashed, phone died) shouldn't block a fresh one — sweep it closed
+  // first rather than letting stale sessions pile up.
+  await closeStaleCheckIns(tenantId, req.user!.sub);
 
   if (data.projectId) {
     const project = await prisma.program.findFirst({ where: { id: data.projectId, tenantId } });
@@ -79,6 +127,24 @@ export async function endCheckIn(req: Request, res: Response): Promise<void> {
   if (existing.checkOutAt) throw new ApiError(409, "Already checked out");
 
   const isOwner = existing.userId === req.user!.sub;
+
+  // The day this session was for has already passed — "complete every
+  // respondent before checking out" no longer makes sense (that day is
+  // over), so auto-close it per the same stale-session rule used when
+  // starting a new check-in, instead of blocking on an unfinishable gate.
+  if (isOwner && isPastDay(existing.checkInAt)) {
+    const checkIn = await autoCloseStaleCheckIn(existing);
+    await recordActivity({
+      tenantId,
+      userId: req.user!.sub,
+      action: "checked out (auto-closed, past day)",
+      entityType: "FieldCheckIn",
+      entityId: checkIn.id,
+    });
+    sendResponse(res, 200, "Checked out successfully", checkIn);
+    return;
+  }
+
   // PRD FR-8: "If not all respondents are processed... complete them before
   // checking out... or allow supervisors to override with a reason." A
   // supervisor (monitoring:manage) can check someone else out — but only
@@ -158,7 +224,17 @@ export async function listTodayRespondents(req: Request, res: Response): Promise
     },
     include: {
       beneficiary: {
-        select: { id: true, code: true, name: true, province: true, district: true, sector: true, cell: true, village: true, outcome: true },
+        select: {
+          id: true,
+          code: true,
+          name: true,
+          province: { select: { id: true, name: true } },
+          district: { select: { id: true, name: true } },
+          sector: { select: { id: true, name: true } },
+          cell: { select: { id: true, name: true } },
+          village: { select: { id: true, name: true } },
+          outcome: true,
+        },
       },
     },
     orderBy: { assignedAt: "asc" },

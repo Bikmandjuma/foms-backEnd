@@ -1,11 +1,11 @@
 import type { GeoMatchLevel } from "../generated/prisma/enums.js";
 
 export interface GeoLocation {
-  province?: string | null;
-  district?: string | null;
-  sector?: string | null;
-  cell?: string | null;
-  village?: string | null;
+  provinceId?: number | null;
+  districtId?: number | null;
+  sectorId?: number | null;
+  cellId?: number | null;
+  villageId?: number | null;
 }
 
 /**
@@ -19,13 +19,11 @@ export interface GeoLocation {
  * caller treats as requiring a recorded administrator override.
  */
 export function computeMatchLevel(a: GeoLocation, b: GeoLocation): GeoMatchLevel | null {
-  const norm = (v?: string | null) => (v ? v.trim().toLowerCase() : "");
-
-  if (norm(a.village) && norm(a.village) === norm(b.village)) return "VILLAGE";
-  if (norm(a.cell) && norm(a.cell) === norm(b.cell)) return "CELL";
-  if (norm(a.sector) && norm(a.sector) === norm(b.sector)) return "SECTOR";
-  if (norm(a.district) && norm(a.district) === norm(b.district)) return "DISTRICT";
-  if (norm(a.province) && norm(a.province) === norm(b.province)) return "PROVINCE";
+  if (a.villageId != null && a.villageId === b.villageId) return "VILLAGE";
+  if (a.cellId != null && a.cellId === b.cellId) return "CELL";
+  if (a.sectorId != null && a.sectorId === b.sectorId) return "SECTOR";
+  if (a.districtId != null && a.districtId === b.districtId) return "DISTRICT";
+  if (a.provinceId != null && a.provinceId === b.provinceId) return "PROVINCE";
   return null;
 }
 
@@ -79,9 +77,7 @@ export function shuffle<T>(items: T[]): T[] {
 export function clusterByGeography<T extends GeoLocation>(items: T[]): T[] {
   const groups = new Map<string, T[]>();
   for (const item of items) {
-    const key = [item.province, item.district, item.sector, item.cell, item.village]
-      .map((v) => (v ? v.trim().toLowerCase() : ""))
-      .join("|");
+    const key = [item.provinceId, item.districtId, item.sectorId, item.cellId, item.villageId].join("|");
     const group = groups.get(key);
     if (group) group.push(item);
     else groups.set(key, [item]);
