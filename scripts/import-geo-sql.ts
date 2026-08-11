@@ -1,4 +1,6 @@
-// Imports Rwanda administrative hierarchy into AdminLocation
+// Imports Rwanda administrative hierarchy into the normalized
+// Province -> District -> Sector -> Cell -> Village tables.
+//
 // Usage:
 //   npx tsx scripts/import-geo-sql.ts
 //   npx tsx scripts/import-geo-sql.ts path/to/file.sql
@@ -21,20 +23,17 @@ const adapter = new PrismaMariaDb({
 
 const prisma = new PrismaClient({ adapter });
 
-
 interface Row {
   id: number;
   name: string;
   parent: number | null;
 }
 
-
 function parseTable(
   sql: string,
   table: string,
   hasParent: boolean
 ): Row[] {
-
   const rows: Row[] = [];
 
   const insertRegex = new RegExp(
@@ -44,41 +43,30 @@ function parseTable(
 
   const inserts = sql.match(insertRegex) ?? [];
 
-
   for (const insert of inserts) {
-
     const valuesPart = insert.split(/VALUES/i)[1];
 
     if (!valuesPart) continue;
-
 
     const tupleRegex = hasParent
       ? /\((\d+),\s*'((?:[^'\\]|\\.)*)',\s*(\d+),/g
       : /\((\d+),\s*'((?:[^'\\]|\\.)*)',/g;
 
-
     let match: RegExpExecArray | null;
 
-
     while ((match = tupleRegex.exec(valuesPart)) !== null) {
-
       rows.push({
         id: Number(match[1]),
         name: match[2]!.replace(/\\'/g, "'"),
         parent: hasParent ? Number(match[3]) : null,
       });
-
     }
   }
-
 
   return rows;
 }
 
-
-
 function chunk<T>(arr: T[], size: number): T[][] {
-
   const result: T[][] = [];
 
   for (let i = 0; i < arr.length; i += size) {
@@ -88,11 +76,7 @@ function chunk<T>(arr: T[], size: number): T[][] {
   return result;
 }
 
-
-
 async function main() {
-
-
   const filePath =
     process.argv[2] ||
     path.join(
@@ -101,24 +85,13 @@ async function main() {
       "rwanda-admin-boundaries.sql"
     );
 
-
   if (!fs.existsSync(filePath)) {
-
-    console.error(
-      `File not found: ${filePath}`
-    );
-
+    console.error(`File not found: ${filePath}`);
     process.exitCode = 1;
     return;
   }
 
-
-  const sql = fs.readFileSync(
-    filePath,
-    "utf8"
-  );
-
-
+  const sql = fs.readFileSync(filePath, "utf8");
 
   const provinces = parseTable(
     sql,
@@ -126,13 +99,11 @@ async function main() {
     false
   );
 
-
   const districts = parseTable(
     sql,
     "districts",
     true
   );
-
 
   const sectors = parseTable(
     sql,
@@ -140,21 +111,17 @@ async function main() {
     true
   );
 
-
   const cells = parseTable(
     sql,
     "cells",
     true
   );
 
-
   const villages = parseTable(
     sql,
     "villages",
     true
   );
-
-
 
   console.log(
     `Parsed:
@@ -165,193 +132,261 @@ ${cells.length} cells,
 ${villages.length} villages`
   );
 
+  /*
+   * ------------------------------------------------------------
+   * Validate the hierarchy before inserting anything.
+   * ------------------------------------------------------------
+   */
 
+  const provinceIds = new Set(
+    provinces.map((p) => p.id)
+  );
 
-  const provinceById =
-    new Map(
-      provinces.map(p => [
-        p.id,
-        p.name
-      ])
+  const districtIds = new Set(
+    districts.map((d) => d.id)
+  );
+
+  const sectorIds = new Set(
+    sectors.map((s) => s.id)
+  );
+
+  const cellIds = new Set(
+    cells.map((c) => c.id)
+  );
+
+  const invalidDistricts = districts.filter(
+    (d) =>
+      d.parent === null ||
+      !provinceIds.has(d.parent)
+  );
+
+  const invalidSectors = sectors.filter(
+    (s) =>
+      s.parent === null ||
+      !districtIds.has(s.parent)
+  );
+
+  const invalidCells = cells.filter(
+    (c) =>
+      c.parent === null ||
+      !sectorIds.has(c.parent)
+  );
+
+  const invalidVillages = villages.filter(
+    (v) =>
+      v.parent === null ||
+      !cellIds.has(v.parent)
+  );
+
+  if (
+    invalidDistricts.length > 0 ||
+    invalidSectors.length > 0 ||
+    invalidCells.length > 0 ||
+    invalidVillages.length > 0
+  ) {
+    console.error("Invalid geography hierarchy detected:");
+
+    console.error(
+      `Invalid districts: ${invalidDistricts.length}`
     );
 
-
-  const districtById =
-    new Map(
-      districts.map(d => [
-        d.id,
-        d
-      ])
+    console.error(
+      `Invalid sectors: ${invalidSectors.length}`
     );
 
-
-  const sectorById =
-    new Map(
-      sectors.map(s => [
-        s.id,
-        s
-      ])
+    console.error(
+      `Invalid cells: ${invalidCells.length}`
     );
 
-
-  const cellById =
-    new Map(
-      cells.map(c => [
-        c.id,
-        c
-      ])
+    console.error(
+      `Invalid villages: ${invalidVillages.length}`
     );
 
+    throw new Error(
+      "Geography hierarchy validation failed. Nothing was imported."
+    );
+  }
 
+  console.log("Geography hierarchy validation passed.");
 
-  const flatRows: {
-    province:string;
-    district:string;
-    sector:string;
-    cell:string;
-    village:string;
-  }[] = [];
+  /*
+   * ------------------------------------------------------------
+   * Provinces
+   * ------------------------------------------------------------
+   *
+   * The current Prisma schema requires:
+   *
+   *   id
+   *   name
+   *   izina
+   *
+   * The parser currently provides only name, so use name for
+   * izina as well unless the source SQL contains a separate
+   * Kinyarwanda field.
+   */
 
+  console.log("Importing provinces...");
 
+  const provinceData = provinces.map((province) => ({
+    id: province.id,
+    name: province.name,
+    izina: province.name,
+  }));
 
-  let skipped = 0;
+  let provinceImported = 0;
 
-
-
-  for (const village of villages) {
-
-
-    const cell =
-      cellById.get(
-        village.parent!
-      );
-
-
-    const sector =
-      cell
-        ? sectorById.get(cell.parent!)
-        : undefined;
-
-
-    const district =
-      sector
-        ? districtById.get(sector.parent!)
-        : undefined;
-
-
-    const province =
-      district
-        ? provinceById.get(district.parent!)
-        : undefined;
-
-
-
-    if (
-      !cell ||
-      !sector ||
-      !district ||
-      !province
-    ) {
-
-      skipped++;
-      continue;
-
-    }
-
-
-
-    flatRows.push({
-
-      province,
-
-      district:
-        district.name,
-
-      sector:
-        sector.name,
-
-      cell:
-        cell.name,
-
-      village:
-        village.name
-
+  for (const batch of chunk(provinceData, 500)) {
+    const result = await prisma.province.createMany({
+      data: batch,
+      skipDuplicates: true,
     });
 
-
+    provinceImported += result.count;
   }
-
-
-
-  if (skipped > 0) {
-
-    console.warn(
-      `Skipped ${skipped} villages with broken parents`
-    );
-
-  }
-
-
 
   console.log(
-    `Flattened ${flatRows.length} rows. Importing...`
+    `Provinces imported: ${provinceImported}/${provinceData.length}`
   );
 
+  /*
+   * ------------------------------------------------------------
+   * Districts
+   * ------------------------------------------------------------
+   */
 
+  console.log("Importing districts...");
 
-  let imported = 0;
+  const districtData = districts.map((district) => ({
+    id: district.id,
+    name: district.name,
+    provinceId: district.parent!,
+  }));
 
+  let districtImported = 0;
 
+  for (const batch of chunk(districtData, 500)) {
+    const result = await prisma.district.createMany({
+      data: batch,
+      skipDuplicates: true,
+    });
 
-  for (const batch of chunk(
-    flatRows,
-    500
-  )) {
-
-
-    const result =
-      await prisma.adminLocation.createMany({
-
-        data: batch,
-
-        skipDuplicates: true
-
-      });
-
-
-
-    imported += result.count;
-
-
-    console.log(
-      `Imported ${imported}/${flatRows.length}`
-    );
-
-
+    districtImported += result.count;
   }
 
-
-
   console.log(
-    `Done. Imported ${imported} locations`
+    `Districts imported: ${districtImported}/${districtData.length}`
   );
 
+  /*
+   * ------------------------------------------------------------
+   * Sectors
+   * ------------------------------------------------------------
+   */
+
+  console.log("Importing sectors...");
+
+  const sectorData = sectors.map((sector) => ({
+    id: sector.id,
+    name: sector.name,
+    districtId: sector.parent!,
+  }));
+
+  let sectorImported = 0;
+
+  for (const batch of chunk(sectorData, 500)) {
+    const result = await prisma.sector.createMany({
+      data: batch,
+      skipDuplicates: true,
+    });
+
+    sectorImported += result.count;
+  }
+
+  console.log(
+    `Sectors imported: ${sectorImported}/${sectorData.length}`
+  );
+
+  /*
+   * ------------------------------------------------------------
+   * Cells
+   * ------------------------------------------------------------
+   */
+
+  console.log("Importing cells...");
+
+  const cellData = cells.map((cell) => ({
+    id: cell.id,
+    name: cell.name,
+    sectorId: cell.parent!,
+  }));
+
+  let cellImported = 0;
+
+  for (const batch of chunk(cellData, 500)) {
+    const result = await prisma.cell.createMany({
+      data: batch,
+      skipDuplicates: true,
+    });
+
+    cellImported += result.count;
+  }
+
+  console.log(
+    `Cells imported: ${cellImported}/${cellData.length}`
+  );
+
+  /*
+   * ------------------------------------------------------------
+   * Villages
+   * ------------------------------------------------------------
+   */
+
+  console.log("Importing villages...");
+
+  const villageData = villages.map((village) => ({
+    id: village.id,
+    name: village.name,
+    cellId: village.parent!,
+  }));
+
+  let villageImported = 0;
+
+  for (const batch of chunk(villageData, 500)) {
+    const result = await prisma.village.createMany({
+      data: batch,
+      skipDuplicates: true,
+    });
+
+    villageImported += result.count;
+  }
+
+  console.log(
+    `Villages imported: ${villageImported}/${villageData.length}`
+  );
+
+  /*
+   * ------------------------------------------------------------
+   * Done
+   * ------------------------------------------------------------
+   */
+
+  console.log("");
+  console.log("========================================");
+  console.log("Rwanda geography import completed.");
+  console.log("========================================");
+  console.log(`Provinces: ${provinceData.length}`);
+  console.log(`Districts: ${districtData.length}`);
+  console.log(`Sectors:   ${sectorData.length}`);
+  console.log(`Cells:     ${cellData.length}`);
+  console.log(`Villages:  ${villageData.length}`);
+  console.log("========================================");
 }
 
-
-
 main()
-
-.catch(err => {
-
-  console.error(err);
-
-  process.exitCode = 1;
-
-})
-
-.finally(async () => {
-
-  await prisma.$disconnect();
-
-});
+  .catch((err) => {
+    console.error(err);
+    process.exitCode = 1;
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
