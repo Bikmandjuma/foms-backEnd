@@ -6,36 +6,40 @@
 -- IF NOT EXISTS makes this safe if some columns were created
 -- during an earlier partial migration attempt.
 
-ALTER TABLE `User`
-    ADD COLUMN IF NOT EXISTS `provinceId` INT NULL;
+-- ============================================================
+-- Normalize User and Beneficiary geographic locations
+-- ============================================================
 
 ALTER TABLE `User`
-    ADD COLUMN IF NOT EXISTS `districtId` INT NULL;
+    ADD COLUMN `provinceId` INT NULL;
 
 ALTER TABLE `User`
-    ADD COLUMN IF NOT EXISTS `sectorId` INT NULL;
+    ADD COLUMN `districtId` INT NULL;
 
 ALTER TABLE `User`
-    ADD COLUMN IF NOT EXISTS `cellId` INT NULL;
+    ADD COLUMN `sectorId` INT NULL;
 
 ALTER TABLE `User`
-    ADD COLUMN IF NOT EXISTS `villageId` INT NULL;
+    ADD COLUMN `cellId` INT NULL;
+
+ALTER TABLE `User`
+    ADD COLUMN `villageId` INT NULL;
 
 
 ALTER TABLE `Beneficiary`
-    ADD COLUMN IF NOT EXISTS `provinceId` INT NULL;
+    ADD COLUMN `provinceId` INT NULL;
 
 ALTER TABLE `Beneficiary`
-    ADD COLUMN IF NOT EXISTS `districtId` INT NULL;
+    ADD COLUMN `districtId` INT NULL;
 
 ALTER TABLE `Beneficiary`
-    ADD COLUMN IF NOT EXISTS `sectorId` INT NULL;
+    ADD COLUMN `sectorId` INT NULL;
 
 ALTER TABLE `Beneficiary`
-    ADD COLUMN IF NOT EXISTS `cellId` INT NULL;
+    ADD COLUMN `cellId` INT NULL;
 
 ALTER TABLE `Beneficiary`
-    ADD COLUMN IF NOT EXISTS `villageId` INT NULL;
+    ADD COLUMN `villageId` INT NULL;
 
 
 -- ============================================================
