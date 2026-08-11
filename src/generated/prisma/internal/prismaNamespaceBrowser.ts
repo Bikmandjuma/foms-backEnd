@@ -74,7 +74,8 @@ export const ModelName = {
   FieldCheckIn: 'FieldCheckIn',
   FieldVisit: 'FieldVisit',
   FieldNote: 'FieldNote',
-  ActivityLog: 'ActivityLog'
+  ActivityLog: 'ActivityLog',
+  FieldExpense: 'FieldExpense'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -244,7 +245,8 @@ export const ProgramScalarFieldEnum = {
   membersPerTeam: 'membersPerTeam',
   teamLeaderRoleId: 'teamLeaderRoleId',
   teamMemberRoleId: 'teamMemberRoleId',
-  checkerRoleId: 'checkerRoleId'
+  checkerRoleId: 'checkerRoleId',
+  tracingRequired: 'tracingRequired'
 } as const
 
 export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
@@ -418,7 +420,11 @@ export const FieldVisitScalarFieldEnum = {
   note: 'note',
   recordedAt: 'recordedAt',
   checkInId: 'checkInId',
-  beneficiaryId: 'beneficiaryId'
+  beneficiaryId: 'beneficiaryId',
+  confirmationStatus: 'confirmationStatus',
+  confirmedById: 'confirmedById',
+  confirmedAt: 'confirmedAt',
+  rejectionReason: 'rejectionReason'
 } as const
 
 export type FieldVisitScalarFieldEnum = (typeof FieldVisitScalarFieldEnum)[keyof typeof FieldVisitScalarFieldEnum]
@@ -446,6 +452,26 @@ export const ActivityLogScalarFieldEnum = {
 } as const
 
 export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
+
+
+export const FieldExpenseScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  programId: 'programId',
+  description: 'description',
+  amount: 'amount',
+  documentUrl: 'documentUrl',
+  expenseDate: 'expenseDate',
+  status: 'status',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  reviewNotes: 'reviewNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FieldExpenseScalarFieldEnum = (typeof FieldExpenseScalarFieldEnum)[keyof typeof FieldExpenseScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -709,7 +735,9 @@ export const FieldVisitOrderByRelevanceFieldEnum = {
   id: 'id',
   note: 'note',
   checkInId: 'checkInId',
-  beneficiaryId: 'beneficiaryId'
+  beneficiaryId: 'beneficiaryId',
+  confirmedById: 'confirmedById',
+  rejectionReason: 'rejectionReason'
 } as const
 
 export type FieldVisitOrderByRelevanceFieldEnum = (typeof FieldVisitOrderByRelevanceFieldEnum)[keyof typeof FieldVisitOrderByRelevanceFieldEnum]
@@ -734,4 +762,18 @@ export const ActivityLogOrderByRelevanceFieldEnum = {
 } as const
 
 export type ActivityLogOrderByRelevanceFieldEnum = (typeof ActivityLogOrderByRelevanceFieldEnum)[keyof typeof ActivityLogOrderByRelevanceFieldEnum]
+
+
+export const FieldExpenseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  programId: 'programId',
+  description: 'description',
+  documentUrl: 'documentUrl',
+  reviewedById: 'reviewedById',
+  reviewNotes: 'reviewNotes'
+} as const
+
+export type FieldExpenseOrderByRelevanceFieldEnum = (typeof FieldExpenseOrderByRelevanceFieldEnum)[keyof typeof FieldExpenseOrderByRelevanceFieldEnum]
 

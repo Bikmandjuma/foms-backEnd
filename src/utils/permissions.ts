@@ -47,9 +47,15 @@ export const PERMISSIONS = [
   "vehicles:create",
   "vehicles:edit",
   "vehicles:delete",
+  "expenses:view",
+  "expenses:create",
+  "expenses:edit",
+  "expenses:delete",
   "monitoring:view",
   "monitoring:manage",
   "field-team-reports:view",
+  "outcomes:view",
+  "outcomes:confirm",
   "activity:view",
   "tenants:view",
   "tenants:manage",
@@ -72,11 +78,20 @@ export const PERMISSION_GROUPS: { label: string; permissions: Permission[] }[] =
     permissions: ["replacements:view", "replacements:create", "replacements:edit", "replacements:delete"],
   },
   { label: "Vehicles", permissions: ["vehicles:view", "vehicles:create", "vehicles:edit", "vehicles:delete"] },
+  {
+    label: "Field expenses",
+    permissions: ["expenses:view", "expenses:create", "expenses:edit", "expenses:delete"],
+  },
   // These two don't map cleanly onto create/edit/delete — monitoring is
   // about overriding an in-progress check-out, not CRUD — so they keep the
   // simpler view/manage shape.
   { label: "Field monitoring", permissions: ["monitoring:view", "monitoring:manage"] },
   { label: "Field team reports", permissions: ["field-team-reports:view"] },
+  // Supervisor sign-off on enumerator-recorded visit outcomes — separate
+  // from monitoring (which is about overriding checkouts), and from
+  // beneficiaries (which is about the respondent record itself, not the
+  // review of a specific visit).
+  { label: "Outcome confirmations", permissions: ["outcomes:view", "outcomes:confirm"] },
   { label: "Activity logs", permissions: ["activity:view"] },
 ];
 

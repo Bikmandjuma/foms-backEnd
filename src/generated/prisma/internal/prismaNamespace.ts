@@ -420,7 +420,8 @@ export const ModelName = {
   FieldCheckIn: 'FieldCheckIn',
   FieldVisit: 'FieldVisit',
   FieldNote: 'FieldNote',
-  ActivityLog: 'ActivityLog'
+  ActivityLog: 'ActivityLog',
+  FieldExpense: 'FieldExpense'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -436,7 +437,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "notification" | "tenant" | "role" | "user" | "passwordResetCode" | "province" | "district" | "sector" | "cell" | "village" | "program" | "availabilityCheck" | "beneficiary" | "programAssignment" | "programTeam" | "programTeamVehicle" | "programTeamMember" | "beneficiaryAssignment" | "vehicle" | "replacementRequest" | "fieldCheckIn" | "fieldVisit" | "fieldNote" | "activityLog"
+    modelProps: "notification" | "tenant" | "role" | "user" | "passwordResetCode" | "province" | "district" | "sector" | "cell" | "village" | "program" | "availabilityCheck" | "beneficiary" | "programAssignment" | "programTeam" | "programTeamVehicle" | "programTeamMember" | "beneficiaryAssignment" | "vehicle" | "replacementRequest" | "fieldCheckIn" | "fieldVisit" | "fieldNote" | "activityLog" | "fieldExpense"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2024,6 +2025,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FieldExpense: {
+      payload: Prisma.$FieldExpensePayload<ExtArgs>
+      fields: Prisma.FieldExpenseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FieldExpenseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FieldExpenseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        findFirst: {
+          args: Prisma.FieldExpenseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FieldExpenseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        findMany: {
+          args: Prisma.FieldExpenseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>[]
+        }
+        create: {
+          args: Prisma.FieldExpenseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        createMany: {
+          args: Prisma.FieldExpenseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FieldExpenseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        update: {
+          args: Prisma.FieldExpenseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        deleteMany: {
+          args: Prisma.FieldExpenseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FieldExpenseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FieldExpenseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        aggregate: {
+          args: Prisma.FieldExpenseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFieldExpense>
+        }
+        groupBy: {
+          args: Prisma.FieldExpenseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldExpenseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FieldExpenseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldExpenseCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2214,7 +2281,8 @@ export const ProgramScalarFieldEnum = {
   membersPerTeam: 'membersPerTeam',
   teamLeaderRoleId: 'teamLeaderRoleId',
   teamMemberRoleId: 'teamMemberRoleId',
-  checkerRoleId: 'checkerRoleId'
+  checkerRoleId: 'checkerRoleId',
+  tracingRequired: 'tracingRequired'
 } as const
 
 export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
@@ -2388,7 +2456,11 @@ export const FieldVisitScalarFieldEnum = {
   note: 'note',
   recordedAt: 'recordedAt',
   checkInId: 'checkInId',
-  beneficiaryId: 'beneficiaryId'
+  beneficiaryId: 'beneficiaryId',
+  confirmationStatus: 'confirmationStatus',
+  confirmedById: 'confirmedById',
+  confirmedAt: 'confirmedAt',
+  rejectionReason: 'rejectionReason'
 } as const
 
 export type FieldVisitScalarFieldEnum = (typeof FieldVisitScalarFieldEnum)[keyof typeof FieldVisitScalarFieldEnum]
@@ -2416,6 +2488,26 @@ export const ActivityLogScalarFieldEnum = {
 } as const
 
 export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
+
+
+export const FieldExpenseScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  programId: 'programId',
+  description: 'description',
+  amount: 'amount',
+  documentUrl: 'documentUrl',
+  expenseDate: 'expenseDate',
+  status: 'status',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  reviewNotes: 'reviewNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FieldExpenseScalarFieldEnum = (typeof FieldExpenseScalarFieldEnum)[keyof typeof FieldExpenseScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2679,7 +2771,9 @@ export const FieldVisitOrderByRelevanceFieldEnum = {
   id: 'id',
   note: 'note',
   checkInId: 'checkInId',
-  beneficiaryId: 'beneficiaryId'
+  beneficiaryId: 'beneficiaryId',
+  confirmedById: 'confirmedById',
+  rejectionReason: 'rejectionReason'
 } as const
 
 export type FieldVisitOrderByRelevanceFieldEnum = (typeof FieldVisitOrderByRelevanceFieldEnum)[keyof typeof FieldVisitOrderByRelevanceFieldEnum]
@@ -2704,6 +2798,20 @@ export const ActivityLogOrderByRelevanceFieldEnum = {
 } as const
 
 export type ActivityLogOrderByRelevanceFieldEnum = (typeof ActivityLogOrderByRelevanceFieldEnum)[keyof typeof ActivityLogOrderByRelevanceFieldEnum]
+
+
+export const FieldExpenseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  programId: 'programId',
+  description: 'description',
+  documentUrl: 'documentUrl',
+  reviewedById: 'reviewedById',
+  reviewNotes: 'reviewNotes'
+} as const
+
+export type FieldExpenseOrderByRelevanceFieldEnum = (typeof FieldExpenseOrderByRelevanceFieldEnum)[keyof typeof FieldExpenseOrderByRelevanceFieldEnum]
 
 
 
@@ -2849,6 +2957,20 @@ export type EnumGeoMatchLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'ConfirmationStatus'
+ */
+export type EnumConfirmationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConfirmationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ExpenseStatus'
+ */
+export type EnumExpenseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseStatus'>
     
 
 /**
@@ -3026,6 +3148,7 @@ export type GlobalOmitConfig = {
   fieldVisit?: Prisma.FieldVisitOmit
   fieldNote?: Prisma.FieldNoteOmit
   activityLog?: Prisma.ActivityLogOmit
+  fieldExpense?: Prisma.FieldExpenseOmit
 }
 
 /* Types for Logging */

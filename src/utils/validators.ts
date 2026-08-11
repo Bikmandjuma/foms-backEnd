@@ -94,6 +94,7 @@ export const createProgramSchema = z.object({
   targetSampleSize: z.number().int().nonnegative().optional(),
   startDate: z.coerce.date().optional(),
   endDate: z.coerce.date().optional(),
+  tracingRequired: z.boolean().optional(),
 });
 
 export const updateProgramSchema = z.object({
@@ -104,6 +105,7 @@ export const updateProgramSchema = z.object({
   targetSampleSize: z.number().int().nonnegative().optional(),
   startDate: z.coerce.date().optional(),
   endDate: z.coerce.date().optional(),
+  tracingRequired: z.boolean().optional(),
 });
 
 export const createBeneficiarySchema = z.object({
@@ -204,10 +206,41 @@ export const assignAvailabilityChecksSchema = z.object({
 export const submitAvailabilityCheckSchema = z.object({
   status: z.enum(["AVAILABLE", "REFUSED", "NOT_FOUND", "RELOCATED", "DECEASED"]),
   notes: z.string().optional(),
+  // Set together (from the "confirm/set new location" prompt on AVAILABLE)
+  // when the checker found the respondent somewhere new.
+  provinceId: z.number().int().optional(),
+  districtId: z.number().int().optional(),
+  sectorId: z.number().int().optional(),
+  cellId: z.number().int().optional(),
+  villageId: z.number().int().optional(),
 });
 
 export const programTeamProgramIdSchema = z.object({
   programId: z.string().uuid(),
+});
+
+// How respondents get enrolled onto a program: everyone eligible, a
+// hand-picked list, or a random subset of a given size (validated against
+// the eligible pool size in the controller, since that's DB-dependent).
+export const assignRespondentsToProgramSchema = z.object({
+  programId: z.string().uuid(),
+  mode: z.enum(["ALL", "SPECIFIC", "RANDOM"]),
+  beneficiaryIds: z.array(z.string().uuid()).optional(),
+  count: z.number().int().positive().optional(),
+});
+
+// Multipart submit (program/description/amount/date fields + a document
+// file) — text fields arrive as strings, hence the coercion.
+export const createFieldExpenseSchema = z.object({
+  programId: z.string().uuid(),
+  description: z.string().min(1),
+  amount: z.coerce.number().positive(),
+  expenseDate: z.coerce.date(),
+});
+
+export const reviewFieldExpenseSchema = z.object({
+  status: z.enum(["APPROVED", "REJECTED"]),
+  reviewNotes: z.string().optional(),
 });
 
 export const createVehicleSchema = z.object({
@@ -238,6 +271,14 @@ export const decideReplacementSchema = z.object({
 export const recordFieldVisitSchema = z.object({
   outcome: responseOutcomeSchema,
   note: z.string().optional(),
+});
+
+// The supervisor's review of a recorded outcome — CONFIRMED or REJECTED,
+// PENDING is the default-only "not reviewed yet" state and never a choice
+// here (mirrors submitAvailabilityCheckSchema/reviewFieldExpenseSchema).
+export const confirmFieldVisitOutcomeSchema = z.object({
+  status: z.enum(["CONFIRMED", "REJECTED"]),
+  reason: z.string().optional(),
 });
 
 export const checkoutSchema = z.object({

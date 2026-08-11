@@ -3,6 +3,7 @@ import {
   assignAvailabilityChecks,
   getAvailabilityChecks,
   getNextAvailabilityCheck,
+  listMyTracingPrograms,
   submitAvailabilityCheck,
   updateAvailabilityCheckConfig,
 } from "../controllers/availabilityCheckController.js";
@@ -19,6 +20,7 @@ router.put("/config", requirePermission("assignments:create"), asyncHandler(upda
 router.post("/assign", requirePermission("assignments:create"), asyncHandler(assignAvailabilityChecks));
 // Self-service, scoped to the caller — same convention as field-checkins
 // (see fieldCheckInRoutes.ts): no admin permission gate needed.
+router.get("/programs", asyncHandler(listMyTracingPrograms));
 router.get("/next", asyncHandler(getNextAvailabilityCheck));
 router.put("/:id", asyncHandler(submitAvailabilityCheck));
 

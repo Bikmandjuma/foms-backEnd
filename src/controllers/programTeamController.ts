@@ -6,6 +6,7 @@ import { prisma } from "../utils/prisma.js";
 import {
   addProgramTeamMemberSchema,
   addProgramTeamVehicleSchema,
+  assignRespondentsToProgramSchema,
   programTeamProgramIdSchema,
   setProgramTeamLeaderSchema,
   updateProgramTeamConfigSchema,
@@ -14,7 +15,7 @@ import { recordActivity } from "../utils/activityLog.js";
 import { notifyUser } from "../utils/notifications.js";
 import { computeMatchLevel, rankMatchLevel, shuffle, type GeoLocation } from "../utils/geo.js";
 
-const userBrief = { select: { id: true, name: true, email: true } } as const;
+const userBrief = { select: { id: true, name: true, email: true, telephone: true } } as const;
 const vehicleBrief = { select: { id: true, name: true, type: true, driverName: true, capacityPerDay: true } } as const;
 
 const teamInclude = {
@@ -109,6 +110,23 @@ async function loadProgramOrThrow(programId: string, tenantId: string) {
   return program;
 }
 
+/**
+ * Count of active beneficiaries enrolled in this program that don't yet have
+ * a non-pending tracing (AvailabilityCheck) result — i.e. never checked, or
+ * checked but still PENDING. Used to gate the assignment engine on programs
+ * where tracing is required.
+ */
+async function countPendingTracing(tenantId: string, programId: string): Promise<number> {
+  return prisma.beneficiary.count({
+    where: {
+      tenantId,
+      status: "ACTIVE",
+      programs: { some: { id: programId } },
+      NOT: { availabilityChecks: { some: { programId, status: { not: "PENDING" } } } },
+    },
+  });
+}
+
 export async function getProgramTeams(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
   const { programId } = req.query;
@@ -127,17 +145,100 @@ export async function getProgramTeams(req: Request, res: Response): Promise<void
       teamMemberRoleId: true,
       teamLeaderRole: { select: { id: true, name: true } },
       teamMemberRole: { select: { id: true, name: true } },
+      tracingRequired: true,
     },
   });
   if (!program) throw new ApiError(404, "Program not found");
 
-  const teams = await prisma.programTeam.findMany({
-    where: { programId },
+  const [teams, tracingPendingCount] = await Promise.all([
+    prisma.programTeam.findMany({
+      where: { programId },
+      include: teamInclude,
+      orderBy: { createdAt: "asc" },
+    }),
+    program.tracingRequired ? countPendingTracing(tenantId, programId) : Promise.resolve(0),
+  ]);
+
+  sendResponse(res, 200, "Program teams retrieved successfully", { program, teams, tracingPendingCount });
+}
+
+/**
+ * GET /program-teams/mine?programId= — self-service, scoped entirely to the
+ * caller (same convention as field-checkins / availability-checks: no admin
+ * permission gate). Returns the one group the caller belongs to for this
+ * program — as a member or as its leader — with who leads it, who's on it,
+ * and which vehicle(s) are assigned to it. Null if they're not on a group
+ * for this program (e.g. the assignment engine hasn't run yet, or they're
+ * an enumerator not yet placed into a team).
+ */
+export async function getMyProgramTeam(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const userId = req.user!.sub;
+  const { programId } = req.query;
+  if (typeof programId !== "string" || !programId) {
+    throw new ApiError(400, "programId query parameter is required");
+  }
+
+  const team = await prisma.programTeam.findFirst({
+    where: {
+      tenantId,
+      programId,
+      OR: [{ leaderId: userId }, { members: { some: { userId } } }],
+    },
     include: teamInclude,
+  });
+
+  sendResponse(res, 200, "Your group retrieved successfully", team);
+}
+
+/**
+ * GET /program-teams/led — every program this caller personally leads
+ * (leaderId only, not member), across the whole tenant. Self-service like
+ * getMyProgramTeam (no permission gate — it's the caller's own standing),
+ * but leader-only and program-scoped rather than one-program-at-a-time —
+ * this is what lets the mobile app's dashboard know which programs' rosters
+ * to pull for a "my supervised programs today" summary.
+ */
+export async function listMyLedPrograms(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const userId = req.user!.sub;
+
+  const teams = await prisma.programTeam.findMany({
+    where: { tenantId, leaderId: userId },
+    select: { id: true, name: true, program: { select: { id: true, name: true } } },
+    orderBy: { name: "asc" },
+  });
+
+  sendResponse(res, 200, "Your led programs retrieved successfully", teams);
+}
+
+/**
+ * GET /program-teams/for-user?userId= — admin view (User Profile page):
+ * every group this user belongs to, as leader or member, across every
+ * program — unlike getMyProgramTeam this deliberately isn't scoped to one
+ * program, since the point here is showing an admin the user's whole
+ * standing at a glance.
+ */
+export async function getProgramTeamsForUser(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const { userId } = req.query;
+  if (typeof userId !== "string" || !userId) {
+    throw new ApiError(400, "userId query parameter is required");
+  }
+
+  const teams = await prisma.programTeam.findMany({
+    where: {
+      tenantId,
+      OR: [{ leaderId: userId }, { members: { some: { userId } } }],
+    },
+    include: {
+      ...teamInclude,
+      program: { select: { id: true, name: true } },
+    },
     orderBy: { createdAt: "asc" },
   });
 
-  sendResponse(res, 200, "Program teams retrieved successfully", { program, teams });
+  sendResponse(res, 200, "Groups retrieved successfully", teams);
 }
 
 /**
@@ -468,31 +569,99 @@ export async function autoAssignProgramTeamVehicles(req: Request, res: Response)
   });
 }
 
+const eligibleRespondentSelect = {
+  id: true,
+  code: true,
+  name: true,
+  telephone: true,
+  province: { select: { id: true, name: true } },
+  district: { select: { id: true, name: true } },
+  sector: { select: { id: true, name: true } },
+  cell: { select: { id: true, name: true } },
+} as const;
+
 /**
- * Every ACTIVE, non-REPLACED respondent in the tenant belongs on the
- * program — same principle as pulling in every active enumerator/supervisor,
- * respondents aren't hand-picked onto a program either. Enrolls (connects)
- * whoever isn't already linked and returns how many that was, so re-running
- * this later only enrolls newly-active respondents rather than touching
- * anyone already on the program's list.
+ * Every ACTIVE, non-REPLACED respondent in the tenant not already on this
+ * program is a candidate for enrollment — the actual selection (all of
+ * them, a hand-picked list, or a random subset) is decided by the caller,
+ * see `getEligibleRespondents` / `assignRespondentsToProgram` below.
  */
-async function enrollAllActiveRespondents(tenantId: string, programId: string): Promise<number> {
-  const unenrolled = await prisma.beneficiary.findMany({
+async function getEligibleRespondentPool(tenantId: string, programId: string) {
+  return prisma.beneficiary.findMany({
     where: {
       tenantId,
       status: "ACTIVE",
       outcome: { not: "REPLACED" },
       programs: { none: { id: programId } },
     },
-    select: { id: true },
+    select: eligibleRespondentSelect,
+    orderBy: { name: "asc" },
   });
-  if (unenrolled.length === 0) return 0;
+}
 
-  await prisma.program.update({
-    where: { id: programId },
-    data: { beneficiaries: { connect: unenrolled.map((b) => ({ id: b.id })) } },
+/**
+ * GET /program-teams/eligible-respondents?programId= — active respondents
+ * not yet enrolled on this program, for the "assign respondents" picker
+ * (All / Specific list / Random number) ahead of running the assignment
+ * engine.
+ */
+export async function getEligibleRespondents(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const { programId } = req.query;
+  if (typeof programId !== "string" || !programId) {
+    throw new ApiError(400, "programId query parameter is required");
+  }
+  await loadProgramOrThrow(programId, tenantId);
+  const respondents = await getEligibleRespondentPool(tenantId, programId);
+  sendResponse(res, 200, "Eligible respondents retrieved successfully", { respondents });
+}
+
+/**
+ * POST /program-teams/enroll-respondents — enrolls respondents onto a
+ * program per the chosen mode: every eligible respondent, a hand-picked
+ * list of them, or a random subset (count must be <= the eligible pool).
+ * This is the one place respondents get enrolled onto a program; the
+ * geo-assignment engine (`runProgramAssignment`) only ever works with
+ * whoever is already enrolled — it no longer auto-enrolls everyone itself.
+ */
+export async function assignRespondentsToProgram(req: Request, res: Response): Promise<void> {
+  const data = assignRespondentsToProgramSchema.parse(req.body);
+  const tenantId = requireTenantId(req);
+  const program = await loadProgramOrThrow(data.programId, tenantId);
+  const pool = await getEligibleRespondentPool(tenantId, program.id);
+
+  let selectedIds: string[];
+  if (data.mode === "ALL") {
+    selectedIds = pool.map((b) => b.id);
+  } else if (data.mode === "SPECIFIC") {
+    const poolIds = new Set(pool.map((b) => b.id));
+    selectedIds = (data.beneficiaryIds ?? []).filter((id) => poolIds.has(id));
+    if (selectedIds.length === 0) throw new ApiError(422, "Select at least one eligible respondent");
+  } else {
+    if (!data.count) throw new ApiError(422, "Provide the number of respondents to assign");
+    if (data.count > pool.length) {
+      throw new ApiError(422, `Only ${pool.length} active respondent(s) available — choose ${pool.length} or fewer`);
+    }
+    selectedIds = shuffle(pool.map((b) => b.id)).slice(0, data.count);
+  }
+
+  if (selectedIds.length > 0) {
+    await prisma.program.update({
+      where: { id: program.id },
+      data: { beneficiaries: { connect: selectedIds.map((id) => ({ id })) } },
+    });
+  }
+
+  await recordActivity({
+    tenantId,
+    userId: req.user!.sub,
+    action: "assigned respondents to",
+    entityType: "Program",
+    entityId: program.id,
+    metadata: { program: program.name, mode: data.mode, assignedCount: selectedIds.length },
   });
-  return unenrolled.length;
+
+  sendResponse(res, 200, "Respondents assigned to program", { assignedCount: selectedIds.length, poolSize: pool.length });
 }
 
 /**
@@ -743,6 +912,15 @@ export async function runProgramAssignment(req: Request, res: Response): Promise
   if (!program.membersPerTeam) {
     throw new ApiError(422, "Configure the enumerators-per-group target for this program first");
   }
+  if (program.tracingRequired) {
+    const pending = await countPendingTracing(tenantId, program.id);
+    if (pending > 0) {
+      throw new ApiError(
+        422,
+        `Tracing is required for this program and is not complete — ${pending} respondent(s) still pending`,
+      );
+    }
+  }
 
   const [enumerators, supervisors] = await Promise.all([
     prisma.user.findMany({ where: { tenantId, roleId: program.teamMemberRoleId, status: "ACTIVE" }, select: geoUserSelect }),
@@ -757,7 +935,6 @@ export async function runProgramAssignment(req: Request, res: Response): Promise
     if (await ensureProgramAssignment(tenantId, u.id, program.id)) newlyOnProgram.add(u.id);
   }
 
-  const respondentsEnrolled = await enrollAllActiveRespondents(tenantId, program.id);
   const respondentResult = await assignRespondentsToEnumerators(tenantId, program.id, enumerators);
   const teamResult = await reconcileAndClusterTeams(tenantId, program.id, program.membersPerTeam, enumerators);
   const supervisorResult = await assignSupervisors(tenantId, program.id, supervisors);
@@ -772,7 +949,6 @@ export async function runProgramAssignment(req: Request, res: Response): Promise
       program: program.name,
       activeEnumerators: enumerators.length,
       activeSupervisors: supervisors.length,
-      respondentsEnrolled,
       respondentsAssigned: respondentResult.assignedCount,
       teamsCreated: teamResult.teamsCreated,
       membersPlaced: teamResult.membersPlaced,
@@ -824,7 +1000,6 @@ export async function runProgramAssignment(req: Request, res: Response): Promise
   sendResponse(res, 200, "Program assignment engine ran successfully", {
     activeEnumerators: enumerators.length,
     activeSupervisors: supervisors.length,
-    respondentsEnrolled,
     respondentsAssigned: respondentResult.assignedCount,
     respondentsEligible: respondentResult.eligibleCount,
     teamsCreated: teamResult.teamsCreated,

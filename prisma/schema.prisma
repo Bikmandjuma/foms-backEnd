@@ -34,6 +34,7 @@ model Tenant {
   beneficiaries          Beneficiary[]
   beneficiaryAssignments BeneficiaryAssignment[]
   fieldCheckIns          FieldCheckIn[]
+  fieldExpenses          FieldExpense[]
   notifications          Notification[]
   programs               Program[]
   programAssignments     ProgramAssignment[]
@@ -90,6 +91,8 @@ model User {
   availabilityChecks         AvailabilityCheck[]
   beneficiaryAssignments     BeneficiaryAssignment[]
   fieldCheckIns              FieldCheckIn[]
+  fieldExpensesSubmitted     FieldExpense[]          @relation("FieldExpenseSubmitter")
+  fieldExpensesReviewed      FieldExpense[]          @relation("FieldExpenseReviewer")
   notifications              Notification[]
   programAssignments         ProgramAssignment[]
   replacementRequestsDecided ReplacementRequest[]    @relation("DecidedBy")
@@ -104,6 +107,7 @@ model User {
   passwordResetCodes         PasswordResetCode[]
   teamsLed                   ProgramTeam[]           @relation("ProgramTeamLeader")
   teamMemberships            ProgramTeamMember[]     @relation("ProgramTeamMember")
+  fieldVisitsConfirmed       FieldVisit[]            @relation("FieldVisitConfirmedBy")
 
   @@index([roleId], map: "User_roleId_fkey")
   @@index([tenantId], map: "User_tenantId_fkey")
@@ -209,7 +213,9 @@ model Program {
   teamLeaderRoleId   String?
   teamMemberRoleId   String?
   checkerRoleId      String?
+  tracingRequired    Boolean             @default(false)
   fieldCheckIns      FieldCheckIn[]
+  fieldExpenses      FieldExpense[]
   tenant             Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   assignments        ProgramAssignment[]
   beneficiaries      Beneficiary[]       @relation("BeneficiaryToProgram")
@@ -468,17 +474,23 @@ model FieldCheckIn {
 }
 
 model FieldVisit {
-  id            String          @id @default(uuid())
-  outcome       ResponseOutcome @default(PENDING)
-  note          String?
-  recordedAt    DateTime        @default(now())
-  checkInId     String
-  beneficiaryId String
-  beneficiary   Beneficiary     @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
-  checkIn       FieldCheckIn    @relation(fields: [checkInId], references: [id], onDelete: Cascade)
+  id                 String             @id @default(uuid())
+  outcome            ResponseOutcome    @default(PENDING)
+  note               String?
+  recordedAt         DateTime           @default(now())
+  checkInId          String
+  beneficiaryId      String
+  confirmationStatus ConfirmationStatus @default(PENDING)
+  confirmedById      String?
+  confirmedAt        DateTime?
+  rejectionReason    String?
+  beneficiary        Beneficiary        @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
+  checkIn            FieldCheckIn       @relation(fields: [checkInId], references: [id], onDelete: Cascade)
+  confirmedBy        User?              @relation("FieldVisitConfirmedBy", fields: [confirmedById], references: [id])
 
   @@unique([checkInId, beneficiaryId])
   @@index([beneficiaryId], map: "FieldVisit_beneficiaryId_fkey")
+  @@index([confirmedById], map: "FieldVisit_confirmedById_fkey")
 }
 
 model FieldNote {
@@ -559,6 +571,17 @@ enum ResponseOutcome {
   REPLACED
 }
 
+// A supervisor's review of one FieldVisit's recorded outcome. Independent of
+// ResponseOutcome itself — the enumerator's finding (COMPLETED, REFUSED, ...)
+// stands as recorded either way; this only tracks whether a supervisor has
+// signed off on it. REJECTED flags it as disputed rather than reopening it
+// for the enumerator to re-record.
+enum ConfirmationStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
+}
+
 enum ReplacementStatus {
   PENDING
   APPROVED
@@ -592,5 +615,40 @@ enum NotificationType {
   ASSIGNMENT_BENEFICIARY
   REPLACEMENT_REQUESTED
   REPLACEMENT_DECIDED
+  EXPENSE_REVIEWED
+  OUTCOME_REVIEWED
   SYSTEM
+}
+
+enum ExpenseStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model FieldExpense {
+  id           String        @id @default(uuid())
+  tenantId     String
+  userId       String
+  programId    String
+  description  String
+  amount       Float
+  documentUrl  String?
+  expenseDate  DateTime
+  status       ExpenseStatus @default(PENDING)
+  reviewedById String?
+  reviewedAt   DateTime?
+  reviewNotes  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  tenant     Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user       User    @relation("FieldExpenseSubmitter", fields: [userId], references: [id], onDelete: Cascade)
+  program    Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+  reviewedBy User?   @relation("FieldExpenseReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  @@index([tenantId], map: "FieldExpense_tenantId_fkey")
+  @@index([userId], map: "FieldExpense_userId_fkey")
+  @@index([programId], map: "FieldExpense_programId_fkey")
+  @@index([reviewedById], map: "FieldExpense_reviewedById_fkey")
 }

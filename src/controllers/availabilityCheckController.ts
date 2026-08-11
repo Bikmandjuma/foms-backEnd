@@ -19,6 +19,7 @@ const programSelect = {
   name: true,
   checkerRoleId: true,
   checkerRole: { select: { id: true, name: true } },
+  tracingRequired: true,
 } as const;
 
 /**
@@ -197,27 +198,63 @@ const beneficiaryBrief = {
     name: true,
     telephone: true,
     programs: { select: { id: true, name: true } },
+    province: { select: { id: true, name: true } },
+    district: { select: { id: true, name: true } },
+    sector: { select: { id: true, name: true } },
+    cell: { select: { id: true, name: true } },
+    village: { select: { id: true, name: true } },
   },
 } as const;
 
 /**
- * GET /availability-checks/next — the checker's own daily loop, mirroring
- * the field-checkin roster's self-service shape: no admin permission gate,
- * scoped entirely to the caller. Returns their oldest still-PENDING check
- * (if any) plus how many are left, so the mobile app can work through them
- * one at a time.
+ * GET /availability-checks/programs — every program the caller has any
+ * tracing work in (regardless of status), with how many are still pending
+ * vs the total ever assigned. This is the mobile app's "pick a program"
+ * step: it lets the picker show "Resume — 4 left" vs "Start — 12 waiting"
+ * before the checker commits to one.
+ */
+export async function listMyTracingPrograms(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const userId = req.user!.sub;
+
+  const rows = await prisma.availabilityCheck.findMany({
+    where: { tenantId, userId },
+    select: { status: true, program: { select: { id: true, name: true } } },
+  });
+
+  const byProgram = new Map<string, { program: { id: string; name: string }; total: number; remaining: number }>();
+  for (const row of rows) {
+    const entry = byProgram.get(row.program.id) ?? { program: row.program, total: 0, remaining: 0 };
+    entry.total += 1;
+    if (row.status === "PENDING") entry.remaining += 1;
+    byProgram.set(row.program.id, entry);
+  }
+
+  sendResponse(res, 200, "Your tracing programs retrieved successfully", Array.from(byProgram.values()));
+}
+
+/**
+ * GET /availability-checks/next?programId= — the checker's own daily loop,
+ * mirroring the field-checkin roster's self-service shape: no admin
+ * permission gate, scoped entirely to the caller. Returns their oldest
+ * still-PENDING check (if any) plus how many are left, so the mobile app
+ * can work through them one at a time. programId scopes the queue to one
+ * program at a time — the mobile app picks a program first, then stays
+ * scoped to it for the rest of that tracing session.
  */
 export async function getNextAvailabilityCheck(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
   const userId = req.user!.sub;
+  const { programId } = req.query;
+  const programFilter = typeof programId === "string" && programId ? { programId } : {};
 
   const [check, remaining] = await Promise.all([
     prisma.availabilityCheck.findFirst({
-      where: { tenantId, userId, status: "PENDING" },
+      where: { tenantId, userId, status: "PENDING", ...programFilter },
       orderBy: { assignedAt: "asc" },
       select: { id: true, status: true, beneficiary: beneficiaryBrief },
     }),
-    prisma.availabilityCheck.count({ where: { tenantId, userId, status: "PENDING" } }),
+    prisma.availabilityCheck.count({ where: { tenantId, userId, status: "PENDING", ...programFilter } }),
   ]);
 
   sendResponse(res, 200, "Next availability check retrieved successfully", { check, remaining });
@@ -227,7 +264,10 @@ export async function getNextAvailabilityCheck(req: Request, res: Response): Pro
  * PUT /availability-checks/:id — the checker submits their finding for one
  * respondent. Self-service, ownership-scoped exactly like
  * fieldCheckInController's recordVisitOutcome (own checks only, unless
- * platform admin).
+ * platform admin). When confirming AVAILABLE, the checker may have found
+ * the respondent at a new location — if any location field is included,
+ * it's written straight onto the Beneficiary record (the same "current
+ * known location" every other view reads from), not just this check.
  */
 export async function submitAvailabilityCheck(req: Request, res: Response): Promise<void> {
   const data = submitAvailabilityCheckSchema.parse(req.body);
@@ -242,10 +282,23 @@ export async function submitAvailabilityCheck(req: Request, res: Response): Prom
     throw new ApiError(403, "You can only submit your own availability checks");
   }
 
-  const updated = await prisma.availabilityCheck.update({
-    where: { id: check.id },
-    data: { status: data.status, notes: data.notes, checkedAt: new Date() },
-  });
+  const { provinceId, districtId, sectorId, cellId, villageId, ...rest } = data;
+  const hasNewLocation = [provinceId, districtId, sectorId, cellId, villageId].some((v) => v !== undefined);
+
+  const [updated] = await prisma.$transaction([
+    prisma.availabilityCheck.update({
+      where: { id: check.id },
+      data: { status: rest.status, notes: rest.notes, checkedAt: new Date() },
+    }),
+    ...(hasNewLocation
+      ? [
+          prisma.beneficiary.update({
+            where: { id: check.beneficiaryId },
+            data: { provinceId, districtId, sectorId, cellId, villageId },
+          }),
+        ]
+      : []),
+  ]);
 
   await recordActivity({
     tenantId,

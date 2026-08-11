@@ -55,6 +55,7 @@ export type ProgramMinAggregateOutputType = {
   teamLeaderRoleId: string | null
   teamMemberRoleId: string | null
   checkerRoleId: string | null
+  tracingRequired: boolean | null
 }
 
 export type ProgramMaxAggregateOutputType = {
@@ -74,6 +75,7 @@ export type ProgramMaxAggregateOutputType = {
   teamLeaderRoleId: string | null
   teamMemberRoleId: string | null
   checkerRoleId: string | null
+  tracingRequired: boolean | null
 }
 
 export type ProgramCountAggregateOutputType = {
@@ -93,6 +95,7 @@ export type ProgramCountAggregateOutputType = {
   teamLeaderRoleId: number
   teamMemberRoleId: number
   checkerRoleId: number
+  tracingRequired: number
   _all: number
 }
 
@@ -126,6 +129,7 @@ export type ProgramMinAggregateInputType = {
   teamLeaderRoleId?: true
   teamMemberRoleId?: true
   checkerRoleId?: true
+  tracingRequired?: true
 }
 
 export type ProgramMaxAggregateInputType = {
@@ -145,6 +149,7 @@ export type ProgramMaxAggregateInputType = {
   teamLeaderRoleId?: true
   teamMemberRoleId?: true
   checkerRoleId?: true
+  tracingRequired?: true
 }
 
 export type ProgramCountAggregateInputType = {
@@ -164,6 +169,7 @@ export type ProgramCountAggregateInputType = {
   teamLeaderRoleId?: true
   teamMemberRoleId?: true
   checkerRoleId?: true
+  tracingRequired?: true
   _all?: true
 }
 
@@ -270,6 +276,7 @@ export type ProgramGroupByOutputType = {
   teamLeaderRoleId: string | null
   teamMemberRoleId: string | null
   checkerRoleId: string | null
+  tracingRequired: boolean
   _count: ProgramCountAggregateOutputType | null
   _avg: ProgramAvgAggregateOutputType | null
   _sum: ProgramSumAggregateOutputType | null
@@ -312,7 +319,9 @@ export type ProgramWhereInput = {
   teamLeaderRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   teamMemberRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   checkerRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
+  tracingRequired?: Prisma.BoolFilter<"Program"> | boolean
   fieldCheckIns?: Prisma.FieldCheckInListRelationFilter
+  fieldExpenses?: Prisma.FieldExpenseListRelationFilter
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   assignments?: Prisma.ProgramAssignmentListRelationFilter
   beneficiaries?: Prisma.BeneficiaryListRelationFilter
@@ -340,7 +349,9 @@ export type ProgramOrderByWithRelationInput = {
   teamLeaderRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   teamMemberRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   checkerRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
   fieldCheckIns?: Prisma.FieldCheckInOrderByRelationAggregateInput
+  fieldExpenses?: Prisma.FieldExpenseOrderByRelationAggregateInput
   tenant?: Prisma.TenantOrderByWithRelationInput
   assignments?: Prisma.ProgramAssignmentOrderByRelationAggregateInput
   beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
@@ -373,7 +384,9 @@ export type ProgramWhereUniqueInput = Prisma.AtLeast<{
   teamLeaderRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   teamMemberRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   checkerRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
+  tracingRequired?: Prisma.BoolFilter<"Program"> | boolean
   fieldCheckIns?: Prisma.FieldCheckInListRelationFilter
+  fieldExpenses?: Prisma.FieldExpenseListRelationFilter
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   assignments?: Prisma.ProgramAssignmentListRelationFilter
   beneficiaries?: Prisma.BeneficiaryListRelationFilter
@@ -401,6 +414,7 @@ export type ProgramOrderByWithAggregationInput = {
   teamLeaderRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   teamMemberRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   checkerRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
   _count?: Prisma.ProgramCountOrderByAggregateInput
   _avg?: Prisma.ProgramAvgOrderByAggregateInput
   _max?: Prisma.ProgramMaxOrderByAggregateInput
@@ -428,6 +442,7 @@ export type ProgramScalarWhereWithAggregatesInput = {
   teamLeaderRoleId?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
   teamMemberRoleId?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
   checkerRoleId?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
+  tracingRequired?: Prisma.BoolWithAggregatesFilter<"Program"> | boolean
 }
 
 export type ProgramCreateInput = {
@@ -443,7 +458,9 @@ export type ProgramCreateInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
@@ -471,7 +488,9 @@ export type ProgramUncheckedCreateInput = {
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
@@ -491,7 +510,9 @@ export type ProgramUpdateInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
@@ -519,7 +540,9 @@ export type ProgramUncheckedUpdateInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
@@ -543,6 +566,7 @@ export type ProgramCreateManyInput = {
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
 }
 
 export type ProgramUpdateManyMutationInput = {
@@ -558,6 +582,7 @@ export type ProgramUpdateManyMutationInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ProgramUncheckedUpdateManyInput = {
@@ -577,6 +602,7 @@ export type ProgramUncheckedUpdateManyInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ProgramListRelationFilter = {
@@ -617,6 +643,7 @@ export type ProgramCountOrderByAggregateInput = {
   teamLeaderRoleId?: Prisma.SortOrder
   teamMemberRoleId?: Prisma.SortOrder
   checkerRoleId?: Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
 }
 
 export type ProgramAvgOrderByAggregateInput = {
@@ -642,6 +669,7 @@ export type ProgramMaxOrderByAggregateInput = {
   teamLeaderRoleId?: Prisma.SortOrder
   teamMemberRoleId?: Prisma.SortOrder
   checkerRoleId?: Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
 }
 
 export type ProgramMinOrderByAggregateInput = {
@@ -661,6 +689,7 @@ export type ProgramMinOrderByAggregateInput = {
   teamLeaderRoleId?: Prisma.SortOrder
   teamMemberRoleId?: Prisma.SortOrder
   checkerRoleId?: Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
 }
 
 export type ProgramSumOrderByAggregateInput = {
@@ -951,6 +980,20 @@ export type ProgramUpdateOneWithoutFieldCheckInsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutFieldCheckInsInput, Prisma.ProgramUpdateWithoutFieldCheckInsInput>, Prisma.ProgramUncheckedUpdateWithoutFieldCheckInsInput>
 }
 
+export type ProgramCreateNestedOneWithoutFieldExpensesInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutFieldExpensesInput
+  connect?: Prisma.ProgramWhereUniqueInput
+}
+
+export type ProgramUpdateOneRequiredWithoutFieldExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutFieldExpensesInput
+  upsert?: Prisma.ProgramUpsertWithoutFieldExpensesInput
+  connect?: Prisma.ProgramWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutFieldExpensesInput, Prisma.ProgramUpdateWithoutFieldExpensesInput>, Prisma.ProgramUncheckedUpdateWithoutFieldExpensesInput>
+}
+
 export type ProgramCreateWithoutTenantInput = {
   id?: string
   name: string
@@ -964,7 +1007,9 @@ export type ProgramCreateWithoutTenantInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
@@ -990,7 +1035,9 @@ export type ProgramUncheckedCreateWithoutTenantInput = {
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
@@ -1043,6 +1090,7 @@ export type ProgramScalarWhereInput = {
   teamLeaderRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   teamMemberRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
   checkerRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
+  tracingRequired?: Prisma.BoolFilter<"Program"> | boolean
 }
 
 export type ProgramCreateWithoutTeamLeaderRoleInput = {
@@ -1058,7 +1106,9 @@ export type ProgramCreateWithoutTeamLeaderRoleInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
@@ -1084,7 +1134,9 @@ export type ProgramUncheckedCreateWithoutTeamLeaderRoleInput = {
   membersPerTeam?: number | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
@@ -1114,7 +1166,9 @@ export type ProgramCreateWithoutTeamMemberRoleInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
@@ -1140,7 +1194,9 @@ export type ProgramUncheckedCreateWithoutTeamMemberRoleInput = {
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
@@ -1170,7 +1226,9 @@ export type ProgramCreateWithoutCheckerRoleInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
@@ -1196,7 +1254,9 @@ export type ProgramUncheckedCreateWithoutCheckerRoleInput = {
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
@@ -1274,7 +1334,9 @@ export type ProgramCreateWithoutAvailabilityChecksInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
@@ -1301,7 +1363,9 @@ export type ProgramUncheckedCreateWithoutAvailabilityChecksInput = {
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
@@ -1336,7 +1400,9 @@ export type ProgramUpdateWithoutAvailabilityChecksInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
@@ -1363,7 +1429,9 @@ export type ProgramUncheckedUpdateWithoutAvailabilityChecksInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
@@ -1382,7 +1450,9 @@ export type ProgramCreateWithoutBeneficiariesInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
@@ -1409,7 +1479,9 @@ export type ProgramUncheckedCreateWithoutBeneficiariesInput = {
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
@@ -1449,7 +1521,9 @@ export type ProgramCreateWithoutAssignmentsInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
@@ -1476,7 +1550,9 @@ export type ProgramUncheckedCreateWithoutAssignmentsInput = {
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
@@ -1511,7 +1587,9 @@ export type ProgramUpdateWithoutAssignmentsInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
@@ -1538,7 +1616,9 @@ export type ProgramUncheckedUpdateWithoutAssignmentsInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
@@ -1557,7 +1637,9 @@ export type ProgramCreateWithoutTeamsInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
@@ -1584,7 +1666,9 @@ export type ProgramUncheckedCreateWithoutTeamsInput = {
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
@@ -1619,7 +1703,9 @@ export type ProgramUpdateWithoutTeamsInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
@@ -1646,7 +1732,9 @@ export type ProgramUncheckedUpdateWithoutTeamsInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
@@ -1665,6 +1753,8 @@ export type ProgramCreateWithoutFieldCheckInsInput = {
   targetSampleSize?: number | null
   teamCount?: number | null
   membersPerTeam?: number | null
+  tracingRequired?: boolean
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
@@ -1692,6 +1782,8 @@ export type ProgramUncheckedCreateWithoutFieldCheckInsInput = {
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
@@ -1727,6 +1819,8 @@ export type ProgramUpdateWithoutFieldCheckInsInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
@@ -1754,6 +1848,124 @@ export type ProgramUncheckedUpdateWithoutFieldCheckInsInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
+  teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+}
+
+export type ProgramCreateWithoutFieldExpensesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  endDate?: Date | string | null
+  scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
+  status?: $Enums.ProjectStatus
+  targetSampleSize?: number | null
+  teamCount?: number | null
+  membersPerTeam?: number | null
+  tracingRequired?: boolean
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
+  assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsUsingAsCheckerRoleInput
+  teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+}
+
+export type ProgramUncheckedCreateWithoutFieldExpensesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenantId: string
+  endDate?: Date | string | null
+  scenarioType?: $Enums.ScenarioType | null
+  startDate?: Date | string | null
+  status?: $Enums.ProjectStatus
+  targetSampleSize?: number | null
+  teamCount?: number | null
+  membersPerTeam?: number | null
+  teamLeaderRoleId?: string | null
+  teamMemberRoleId?: string | null
+  checkerRoleId?: string | null
+  tracingRequired?: boolean
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
+  teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+}
+
+export type ProgramCreateOrConnectWithoutFieldExpensesInput = {
+  where: Prisma.ProgramWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
+}
+
+export type ProgramUpsertWithoutFieldExpensesInput = {
+  update: Prisma.XOR<Prisma.ProgramUpdateWithoutFieldExpensesInput, Prisma.ProgramUncheckedUpdateWithoutFieldExpensesInput>
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
+  where?: Prisma.ProgramWhereInput
+}
+
+export type ProgramUpdateToOneWithWhereWithoutFieldExpensesInput = {
+  where?: Prisma.ProgramWhereInput
+  data: Prisma.XOR<Prisma.ProgramUpdateWithoutFieldExpensesInput, Prisma.ProgramUncheckedUpdateWithoutFieldExpensesInput>
+}
+
+export type ProgramUpdateWithoutFieldExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
+  assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsCheckerRoleNestedInput
+  teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+}
+
+export type ProgramUncheckedUpdateWithoutFieldExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
@@ -1776,6 +1988,7 @@ export type ProgramCreateManyTenantInput = {
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
 }
 
 export type ProgramUpdateWithoutTenantInput = {
@@ -1791,7 +2004,9 @@ export type ProgramUpdateWithoutTenantInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
@@ -1817,7 +2032,9 @@ export type ProgramUncheckedUpdateWithoutTenantInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
@@ -1840,6 +2057,7 @@ export type ProgramUncheckedUpdateManyWithoutTenantInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ProgramCreateManyTeamLeaderRoleInput = {
@@ -1858,6 +2076,7 @@ export type ProgramCreateManyTeamLeaderRoleInput = {
   membersPerTeam?: number | null
   teamMemberRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
 }
 
 export type ProgramCreateManyTeamMemberRoleInput = {
@@ -1876,6 +2095,7 @@ export type ProgramCreateManyTeamMemberRoleInput = {
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
   checkerRoleId?: string | null
+  tracingRequired?: boolean
 }
 
 export type ProgramCreateManyCheckerRoleInput = {
@@ -1894,6 +2114,7 @@ export type ProgramCreateManyCheckerRoleInput = {
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
   teamMemberRoleId?: string | null
+  tracingRequired?: boolean
 }
 
 export type ProgramUpdateWithoutTeamLeaderRoleInput = {
@@ -1909,7 +2130,9 @@ export type ProgramUpdateWithoutTeamLeaderRoleInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
@@ -1935,7 +2158,9 @@ export type ProgramUncheckedUpdateWithoutTeamLeaderRoleInput = {
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
@@ -1958,6 +2183,7 @@ export type ProgramUncheckedUpdateManyWithoutTeamLeaderRoleInput = {
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ProgramUpdateWithoutTeamMemberRoleInput = {
@@ -1973,7 +2199,9 @@ export type ProgramUpdateWithoutTeamMemberRoleInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
@@ -1999,7 +2227,9 @@ export type ProgramUncheckedUpdateWithoutTeamMemberRoleInput = {
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
@@ -2022,6 +2252,7 @@ export type ProgramUncheckedUpdateManyWithoutTeamMemberRoleInput = {
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ProgramUpdateWithoutCheckerRoleInput = {
@@ -2037,7 +2268,9 @@ export type ProgramUpdateWithoutCheckerRoleInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
@@ -2063,7 +2296,9 @@ export type ProgramUncheckedUpdateWithoutCheckerRoleInput = {
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
@@ -2086,6 +2321,7 @@ export type ProgramUncheckedUpdateManyWithoutCheckerRoleInput = {
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ProgramUpdateWithoutBeneficiariesInput = {
@@ -2101,7 +2337,9 @@ export type ProgramUpdateWithoutBeneficiariesInput = {
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsUsingAsLeaderRoleNestedInput
@@ -2128,7 +2366,9 @@ export type ProgramUncheckedUpdateWithoutBeneficiariesInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
@@ -2151,6 +2391,7 @@ export type ProgramUncheckedUpdateManyWithoutBeneficiariesInput = {
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -2160,6 +2401,7 @@ export type ProgramUncheckedUpdateManyWithoutBeneficiariesInput = {
 
 export type ProgramCountOutputType = {
   fieldCheckIns: number
+  fieldExpenses: number
   assignments: number
   beneficiaries: number
   teams: number
@@ -2168,6 +2410,7 @@ export type ProgramCountOutputType = {
 
 export type ProgramCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fieldCheckIns?: boolean | ProgramCountOutputTypeCountFieldCheckInsArgs
+  fieldExpenses?: boolean | ProgramCountOutputTypeCountFieldExpensesArgs
   assignments?: boolean | ProgramCountOutputTypeCountAssignmentsArgs
   beneficiaries?: boolean | ProgramCountOutputTypeCountBeneficiariesArgs
   teams?: boolean | ProgramCountOutputTypeCountTeamsArgs
@@ -2189,6 +2432,13 @@ export type ProgramCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
  */
 export type ProgramCountOutputTypeCountFieldCheckInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FieldCheckInWhereInput
+}
+
+/**
+ * ProgramCountOutputType without action
+ */
+export type ProgramCountOutputTypeCountFieldExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FieldExpenseWhereInput
 }
 
 /**
@@ -2237,7 +2487,9 @@ export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   teamLeaderRoleId?: boolean
   teamMemberRoleId?: boolean
   checkerRoleId?: boolean
+  tracingRequired?: boolean
   fieldCheckIns?: boolean | Prisma.Program$fieldCheckInsArgs<ExtArgs>
+  fieldExpenses?: boolean | Prisma.Program$fieldExpensesArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
   beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
@@ -2268,11 +2520,13 @@ export type ProgramSelectScalar = {
   teamLeaderRoleId?: boolean
   teamMemberRoleId?: boolean
   checkerRoleId?: boolean
+  tracingRequired?: boolean
 }
 
-export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "tenantId" | "endDate" | "scenarioType" | "startDate" | "status" | "targetSampleSize" | "teamCount" | "membersPerTeam" | "teamLeaderRoleId" | "teamMemberRoleId" | "checkerRoleId", ExtArgs["result"]["program"]>
+export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "tenantId" | "endDate" | "scenarioType" | "startDate" | "status" | "targetSampleSize" | "teamCount" | "membersPerTeam" | "teamLeaderRoleId" | "teamMemberRoleId" | "checkerRoleId" | "tracingRequired", ExtArgs["result"]["program"]>
 export type ProgramInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fieldCheckIns?: boolean | Prisma.Program$fieldCheckInsArgs<ExtArgs>
+  fieldExpenses?: boolean | Prisma.Program$fieldExpensesArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
   beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
@@ -2288,6 +2542,7 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Program"
   objects: {
     fieldCheckIns: Prisma.$FieldCheckInPayload<ExtArgs>[]
+    fieldExpenses: Prisma.$FieldExpensePayload<ExtArgs>[]
     tenant: Prisma.$TenantPayload<ExtArgs>
     assignments: Prisma.$ProgramAssignmentPayload<ExtArgs>[]
     beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
@@ -2314,6 +2569,7 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     teamLeaderRoleId: string | null
     teamMemberRoleId: string | null
     checkerRoleId: string | null
+    tracingRequired: boolean
   }, ExtArgs["result"]["program"]>
   composites: {}
 }
@@ -2655,6 +2911,7 @@ readonly fields: ProgramFieldRefs;
 export interface Prisma__ProgramClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   fieldCheckIns<T extends Prisma.Program$fieldCheckInsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$fieldCheckInsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldCheckInPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fieldExpenses<T extends Prisma.Program$fieldExpensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$fieldExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assignments<T extends Prisma.Program$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   beneficiaries<T extends Prisma.Program$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2708,6 +2965,7 @@ export interface ProgramFieldRefs {
   readonly teamLeaderRoleId: Prisma.FieldRef<"Program", 'String'>
   readonly teamMemberRoleId: Prisma.FieldRef<"Program", 'String'>
   readonly checkerRoleId: Prisma.FieldRef<"Program", 'String'>
+  readonly tracingRequired: Prisma.FieldRef<"Program", 'Boolean'>
 }
     
 
@@ -3077,6 +3335,30 @@ export type Program$fieldCheckInsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.FieldCheckInScalarFieldEnum | Prisma.FieldCheckInScalarFieldEnum[]
+}
+
+/**
+ * Program.fieldExpenses
+ */
+export type Program$fieldExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FieldExpense
+   */
+  select?: Prisma.FieldExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FieldExpense
+   */
+  omit?: Prisma.FieldExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FieldExpenseInclude<ExtArgs> | null
+  where?: Prisma.FieldExpenseWhereInput
+  orderBy?: Prisma.FieldExpenseOrderByWithRelationInput | Prisma.FieldExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.FieldExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FieldExpenseScalarFieldEnum | Prisma.FieldExpenseScalarFieldEnum[]
 }
 
 /**

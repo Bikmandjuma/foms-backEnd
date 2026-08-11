@@ -143,3 +143,8 @@ export type FieldNote = Prisma.FieldNoteModel
  * 
  */
 export type ActivityLog = Prisma.ActivityLogModel
+/**
+ * Model FieldExpense
+ * 
+ */
+export type FieldExpense = Prisma.FieldExpenseModel

@@ -12,6 +12,24 @@ import {
   recordFieldVisitSchema,
 } from "../utils/validators.js";
 import { buildDailyReportWorkbook, type DailyReportRow } from "../utils/excel.js";
+import { hasAction, parsePermissions } from "../utils/permissions.js";
+
+/**
+ * Read access to one check-in's roster/notes: the check-in's own owner, or
+ * anyone holding `monitoring:view` (the web Field Monitoring page opens
+ * these for *any* user's check-in, not just the viewer's own). Unlike the
+ * mutation endpoints on this resource (record outcome, add note, ping GPS),
+ * which are owner-only, these two reads are intentionally shared with
+ * monitoring — mirrors requirePermission's own admin/role-permission logic
+ * since ownership here can only be resolved after loading the check-in.
+ */
+async function canViewCheckIn(req: Request, checkInUserId: string): Promise<boolean> {
+  if (checkInUserId === req.user!.sub || req.user!.isPlatformAdmin) return true;
+  const roleId = req.user!.roleId;
+  if (!roleId) return false;
+  const role = await prisma.role.findUnique({ where: { id: roleId }, select: { permissions: true } });
+  return hasAction(parsePermissions(role?.permissions), "monitoring:view");
+}
 
 const include = {
   user: { select: { id: true, name: true, email: true } },
@@ -214,6 +232,9 @@ export async function listTodayRespondents(req: Request, res: Response): Promise
   const tenantId = requireTenantId(req);
   const checkIn = await prisma.fieldCheckIn.findFirst({ where: { id: idParam(req), tenantId } });
   if (!checkIn) throw new ApiError(404, "Check-in not found");
+  if (!(await canViewCheckIn(req, checkIn.userId))) {
+    throw new ApiError(403, "You can't view another field worker's respondents");
+  }
 
   const assignments = await prisma.beneficiaryAssignment.findMany({
     where: {
@@ -234,6 +255,7 @@ export async function listTodayRespondents(req: Request, res: Response): Promise
           cell: { select: { id: true, name: true } },
           village: { select: { id: true, name: true } },
           outcome: true,
+          programs: { select: { id: true, name: true } },
         },
       },
     },
@@ -251,6 +273,8 @@ export async function listTodayRespondents(req: Request, res: Response): Promise
           outcome: visitByBeneficiary.get(a.beneficiaryId)!.outcome,
           note: visitByBeneficiary.get(a.beneficiaryId)!.note,
           recordedAt: visitByBeneficiary.get(a.beneficiaryId)!.recordedAt,
+          confirmationStatus: visitByBeneficiary.get(a.beneficiaryId)!.confirmationStatus,
+          rejectionReason: visitByBeneficiary.get(a.beneficiaryId)!.rejectionReason,
         }
       : null,
   }));
@@ -316,6 +340,9 @@ export async function listFieldNotes(req: Request, res: Response): Promise<void>
   const tenantId = requireTenantId(req);
   const checkIn = await prisma.fieldCheckIn.findFirst({ where: { id: idParam(req), tenantId } });
   if (!checkIn) throw new ApiError(404, "Check-in not found");
+  if (!(await canViewCheckIn(req, checkIn.userId))) {
+    throw new ApiError(403, "You can't view another field worker's notes");
+  }
   const notes = await prisma.fieldNote.findMany({ where: { checkInId: checkIn.id }, orderBy: { createdAt: "asc" } });
   sendResponse(res, 200, "Field notes retrieved successfully", notes);
 }
