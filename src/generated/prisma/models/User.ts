@@ -27,10 +27,20 @@ export type AggregateUser = {
 }
 
 export type UserAvgAggregateOutputType = {
+  provinceId: number | null
+  districtId: number | null
+  sectorId: number | null
+  cellId: number | null
+  villageId: number | null
   tokenVersion: number | null
 }
 
 export type UserSumAggregateOutputType = {
+  provinceId: number | null
+  districtId: number | null
+  sectorId: number | null
+  cellId: number | null
+  villageId: number | null
   tokenVersion: number | null
 }
 
@@ -45,9 +55,11 @@ export type UserMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   telephone: string | null
-  province: string | null
-  district: string | null
-  sector: string | null
+  provinceId: number | null
+  districtId: number | null
+  sectorId: number | null
+  cellId: number | null
+  villageId: number | null
   gender: $Enums.Gender | null
   dateOfBirth: Date | null
   status: $Enums.UserStatus | null
@@ -57,8 +69,6 @@ export type UserMinAggregateOutputType = {
   roleId: string | null
   tenantId: string | null
   lastSeenAt: Date | null
-  cell: string | null
-  village: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -72,9 +82,11 @@ export type UserMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   telephone: string | null
-  province: string | null
-  district: string | null
-  sector: string | null
+  provinceId: number | null
+  districtId: number | null
+  sectorId: number | null
+  cellId: number | null
+  villageId: number | null
   gender: $Enums.Gender | null
   dateOfBirth: Date | null
   status: $Enums.UserStatus | null
@@ -84,8 +96,6 @@ export type UserMaxAggregateOutputType = {
   roleId: string | null
   tenantId: string | null
   lastSeenAt: Date | null
-  cell: string | null
-  village: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -99,9 +109,11 @@ export type UserCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   telephone: number
-  province: number
-  district: number
-  sector: number
+  provinceId: number
+  districtId: number
+  sectorId: number
+  cellId: number
+  villageId: number
   gender: number
   dateOfBirth: number
   status: number
@@ -111,17 +123,25 @@ export type UserCountAggregateOutputType = {
   roleId: number
   tenantId: number
   lastSeenAt: number
-  cell: number
-  village: number
   _all: number
 }
 
 
 export type UserAvgAggregateInputType = {
+  provinceId?: true
+  districtId?: true
+  sectorId?: true
+  cellId?: true
+  villageId?: true
   tokenVersion?: true
 }
 
 export type UserSumAggregateInputType = {
+  provinceId?: true
+  districtId?: true
+  sectorId?: true
+  cellId?: true
+  villageId?: true
   tokenVersion?: true
 }
 
@@ -136,9 +156,11 @@ export type UserMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   telephone?: true
-  province?: true
-  district?: true
-  sector?: true
+  provinceId?: true
+  districtId?: true
+  sectorId?: true
+  cellId?: true
+  villageId?: true
   gender?: true
   dateOfBirth?: true
   status?: true
@@ -148,8 +170,6 @@ export type UserMinAggregateInputType = {
   roleId?: true
   tenantId?: true
   lastSeenAt?: true
-  cell?: true
-  village?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -163,9 +183,11 @@ export type UserMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   telephone?: true
-  province?: true
-  district?: true
-  sector?: true
+  provinceId?: true
+  districtId?: true
+  sectorId?: true
+  cellId?: true
+  villageId?: true
   gender?: true
   dateOfBirth?: true
   status?: true
@@ -175,8 +197,6 @@ export type UserMaxAggregateInputType = {
   roleId?: true
   tenantId?: true
   lastSeenAt?: true
-  cell?: true
-  village?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -190,9 +210,11 @@ export type UserCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   telephone?: true
-  province?: true
-  district?: true
-  sector?: true
+  provinceId?: true
+  districtId?: true
+  sectorId?: true
+  cellId?: true
+  villageId?: true
   gender?: true
   dateOfBirth?: true
   status?: true
@@ -202,8 +224,6 @@ export type UserCountAggregateInputType = {
   roleId?: true
   tenantId?: true
   lastSeenAt?: true
-  cell?: true
-  village?: true
   _all?: true
 }
 
@@ -304,9 +324,11 @@ export type UserGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   telephone: string | null
-  province: string | null
-  district: string | null
-  sector: string | null
+  provinceId: number | null
+  districtId: number | null
+  sectorId: number | null
+  cellId: number | null
+  villageId: number | null
   gender: $Enums.Gender | null
   dateOfBirth: Date | null
   status: $Enums.UserStatus
@@ -316,8 +338,6 @@ export type UserGroupByOutputType = {
   roleId: string | null
   tenantId: string | null
   lastSeenAt: Date | null
-  cell: string | null
-  village: string | null
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -354,9 +374,11 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   telephone?: Prisma.StringNullableFilter<"User"> | string | null
-  province?: Prisma.StringNullableFilter<"User"> | string | null
-  district?: Prisma.StringNullableFilter<"User"> | string | null
-  sector?: Prisma.StringNullableFilter<"User"> | string | null
+  provinceId?: Prisma.IntNullableFilter<"User"> | number | null
+  districtId?: Prisma.IntNullableFilter<"User"> | number | null
+  sectorId?: Prisma.IntNullableFilter<"User"> | number | null
+  cellId?: Prisma.IntNullableFilter<"User"> | number | null
+  villageId?: Prisma.IntNullableFilter<"User"> | number | null
   gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
   dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
@@ -366,13 +388,19 @@ export type UserWhereInput = {
   roleId?: Prisma.StringNullableFilter<"User"> | string | null
   tenantId?: Prisma.StringNullableFilter<"User"> | string | null
   lastSeenAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  cell?: Prisma.StringNullableFilter<"User"> | string | null
-  village?: Prisma.StringNullableFilter<"User"> | string | null
+  province?: Prisma.XOR<Prisma.ProvinceNullableScalarRelationFilter, Prisma.ProvinceWhereInput> | null
+  district?: Prisma.XOR<Prisma.DistrictNullableScalarRelationFilter, Prisma.DistrictWhereInput> | null
+  sector?: Prisma.XOR<Prisma.SectorNullableScalarRelationFilter, Prisma.SectorWhereInput> | null
+  cell?: Prisma.XOR<Prisma.CellNullableScalarRelationFilter, Prisma.CellWhereInput> | null
+  village?: Prisma.XOR<Prisma.VillageNullableScalarRelationFilter, Prisma.VillageWhereInput> | null
   activityLogs?: Prisma.ActivityLogListRelationFilter
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentListRelationFilter
   fieldCheckIns?: Prisma.FieldCheckInListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   programAssignments?: Prisma.ProgramAssignmentListRelationFilter
+  programTeamsLed?: Prisma.ProgramTeamListRelationFilter
+  programTeamMemberships?: Prisma.ProgramTeamMemberListRelationFilter
+  availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
   replacementRequestsDecided?: Prisma.ReplacementRequestListRelationFilter
   replacementRequestsMade?: Prisma.ReplacementRequestListRelationFilter
   role?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
@@ -391,9 +419,11 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   telephone?: Prisma.SortOrderInput | Prisma.SortOrder
-  province?: Prisma.SortOrderInput | Prisma.SortOrder
-  district?: Prisma.SortOrderInput | Prisma.SortOrder
-  sector?: Prisma.SortOrderInput | Prisma.SortOrder
+  provinceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  districtId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sectorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  cellId?: Prisma.SortOrderInput | Prisma.SortOrder
+  villageId?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -403,13 +433,19 @@ export type UserOrderByWithRelationInput = {
   roleId?: Prisma.SortOrderInput | Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   lastSeenAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  cell?: Prisma.SortOrderInput | Prisma.SortOrder
-  village?: Prisma.SortOrderInput | Prisma.SortOrder
+  province?: Prisma.ProvinceOrderByWithRelationInput
+  district?: Prisma.DistrictOrderByWithRelationInput
+  sector?: Prisma.SectorOrderByWithRelationInput
+  cell?: Prisma.CellOrderByWithRelationInput
+  village?: Prisma.VillageOrderByWithRelationInput
   activityLogs?: Prisma.ActivityLogOrderByRelationAggregateInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentOrderByRelationAggregateInput
   fieldCheckIns?: Prisma.FieldCheckInOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   programAssignments?: Prisma.ProgramAssignmentOrderByRelationAggregateInput
+  programTeamsLed?: Prisma.ProgramTeamOrderByRelationAggregateInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberOrderByRelationAggregateInput
+  availabilityChecks?: Prisma.AvailabilityCheckOrderByRelationAggregateInput
   replacementRequestsDecided?: Prisma.ReplacementRequestOrderByRelationAggregateInput
   replacementRequestsMade?: Prisma.ReplacementRequestOrderByRelationAggregateInput
   role?: Prisma.RoleOrderByWithRelationInput
@@ -432,9 +468,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   telephone?: Prisma.StringNullableFilter<"User"> | string | null
-  province?: Prisma.StringNullableFilter<"User"> | string | null
-  district?: Prisma.StringNullableFilter<"User"> | string | null
-  sector?: Prisma.StringNullableFilter<"User"> | string | null
+  provinceId?: Prisma.IntNullableFilter<"User"> | number | null
+  districtId?: Prisma.IntNullableFilter<"User"> | number | null
+  sectorId?: Prisma.IntNullableFilter<"User"> | number | null
+  cellId?: Prisma.IntNullableFilter<"User"> | number | null
+  villageId?: Prisma.IntNullableFilter<"User"> | number | null
   gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
   dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
@@ -444,13 +482,19 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   roleId?: Prisma.StringNullableFilter<"User"> | string | null
   tenantId?: Prisma.StringNullableFilter<"User"> | string | null
   lastSeenAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  cell?: Prisma.StringNullableFilter<"User"> | string | null
-  village?: Prisma.StringNullableFilter<"User"> | string | null
+  province?: Prisma.XOR<Prisma.ProvinceNullableScalarRelationFilter, Prisma.ProvinceWhereInput> | null
+  district?: Prisma.XOR<Prisma.DistrictNullableScalarRelationFilter, Prisma.DistrictWhereInput> | null
+  sector?: Prisma.XOR<Prisma.SectorNullableScalarRelationFilter, Prisma.SectorWhereInput> | null
+  cell?: Prisma.XOR<Prisma.CellNullableScalarRelationFilter, Prisma.CellWhereInput> | null
+  village?: Prisma.XOR<Prisma.VillageNullableScalarRelationFilter, Prisma.VillageWhereInput> | null
   activityLogs?: Prisma.ActivityLogListRelationFilter
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentListRelationFilter
   fieldCheckIns?: Prisma.FieldCheckInListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   programAssignments?: Prisma.ProgramAssignmentListRelationFilter
+  programTeamsLed?: Prisma.ProgramTeamListRelationFilter
+  programTeamMemberships?: Prisma.ProgramTeamMemberListRelationFilter
+  availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
   replacementRequestsDecided?: Prisma.ReplacementRequestListRelationFilter
   replacementRequestsMade?: Prisma.ReplacementRequestListRelationFilter
   role?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
@@ -469,9 +513,11 @@ export type UserOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   telephone?: Prisma.SortOrderInput | Prisma.SortOrder
-  province?: Prisma.SortOrderInput | Prisma.SortOrder
-  district?: Prisma.SortOrderInput | Prisma.SortOrder
-  sector?: Prisma.SortOrderInput | Prisma.SortOrder
+  provinceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  districtId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sectorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  cellId?: Prisma.SortOrderInput | Prisma.SortOrder
+  villageId?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -481,8 +527,6 @@ export type UserOrderByWithAggregationInput = {
   roleId?: Prisma.SortOrderInput | Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   lastSeenAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  cell?: Prisma.SortOrderInput | Prisma.SortOrder
-  village?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -504,9 +548,11 @@ export type UserScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   telephone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  province?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  district?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  sector?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  provinceId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  districtId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  sectorId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  cellId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  villageId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   gender?: Prisma.EnumGenderNullableWithAggregatesFilter<"User"> | $Enums.Gender | null
   dateOfBirth?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
@@ -516,8 +562,6 @@ export type UserScalarWhereWithAggregatesInput = {
   roleId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   tenantId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   lastSeenAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  cell?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  village?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -531,9 +575,6 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -541,13 +582,19 @@ export type UserCreateInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
@@ -566,9 +613,11 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -578,13 +627,14 @@ export type UserUncheckedCreateInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
@@ -601,9 +651,6 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -611,13 +658,19 @@ export type UserUpdateInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
@@ -636,9 +689,11 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -648,13 +703,14 @@ export type UserUncheckedUpdateInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
@@ -671,9 +727,11 @@ export type UserCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -683,8 +741,6 @@ export type UserCreateManyInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -698,9 +754,6 @@ export type UserUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -708,8 +761,6 @@ export type UserUpdateManyMutationInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -723,9 +774,11 @@ export type UserUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -735,13 +788,6 @@ export type UserUncheckedUpdateManyInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
 }
 
 export type UserListRelationFilter = {
@@ -752,6 +798,11 @@ export type UserListRelationFilter = {
 
 export type UserOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type UserOrderByRelevanceInput = {
@@ -771,9 +822,11 @@ export type UserCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   telephone?: Prisma.SortOrder
-  province?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  sector?: Prisma.SortOrder
+  provinceId?: Prisma.SortOrder
+  districtId?: Prisma.SortOrder
+  sectorId?: Prisma.SortOrder
+  cellId?: Prisma.SortOrder
+  villageId?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -783,11 +836,14 @@ export type UserCountOrderByAggregateInput = {
   roleId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   lastSeenAt?: Prisma.SortOrder
-  cell?: Prisma.SortOrder
-  village?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
+  provinceId?: Prisma.SortOrder
+  districtId?: Prisma.SortOrder
+  sectorId?: Prisma.SortOrder
+  cellId?: Prisma.SortOrder
+  villageId?: Prisma.SortOrder
   tokenVersion?: Prisma.SortOrder
 }
 
@@ -802,9 +858,11 @@ export type UserMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   telephone?: Prisma.SortOrder
-  province?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  sector?: Prisma.SortOrder
+  provinceId?: Prisma.SortOrder
+  districtId?: Prisma.SortOrder
+  sectorId?: Prisma.SortOrder
+  cellId?: Prisma.SortOrder
+  villageId?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -814,8 +872,6 @@ export type UserMaxOrderByAggregateInput = {
   roleId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   lastSeenAt?: Prisma.SortOrder
-  cell?: Prisma.SortOrder
-  village?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -829,9 +885,11 @@ export type UserMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   telephone?: Prisma.SortOrder
-  province?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  sector?: Prisma.SortOrder
+  provinceId?: Prisma.SortOrder
+  districtId?: Prisma.SortOrder
+  sectorId?: Prisma.SortOrder
+  cellId?: Prisma.SortOrder
+  villageId?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -841,17 +899,230 @@ export type UserMinOrderByAggregateInput = {
   roleId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   lastSeenAt?: Prisma.SortOrder
-  cell?: Prisma.SortOrder
-  village?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
+  provinceId?: Prisma.SortOrder
+  districtId?: Prisma.SortOrder
+  sectorId?: Prisma.SortOrder
+  cellId?: Prisma.SortOrder
+  villageId?: Prisma.SortOrder
   tokenVersion?: Prisma.SortOrder
 }
 
 export type UserNullableScalarRelationFilter = {
   is?: Prisma.UserWhereInput | null
   isNot?: Prisma.UserWhereInput | null
+}
+
+export type UserCreateNestedManyWithoutProvinceInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProvinceInput, Prisma.UserUncheckedCreateWithoutProvinceInput> | Prisma.UserCreateWithoutProvinceInput[] | Prisma.UserUncheckedCreateWithoutProvinceInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProvinceInput | Prisma.UserCreateOrConnectWithoutProvinceInput[]
+  createMany?: Prisma.UserCreateManyProvinceInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutProvinceInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProvinceInput, Prisma.UserUncheckedCreateWithoutProvinceInput> | Prisma.UserCreateWithoutProvinceInput[] | Prisma.UserUncheckedCreateWithoutProvinceInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProvinceInput | Prisma.UserCreateOrConnectWithoutProvinceInput[]
+  createMany?: Prisma.UserCreateManyProvinceInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutProvinceNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProvinceInput, Prisma.UserUncheckedCreateWithoutProvinceInput> | Prisma.UserCreateWithoutProvinceInput[] | Prisma.UserUncheckedCreateWithoutProvinceInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProvinceInput | Prisma.UserCreateOrConnectWithoutProvinceInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutProvinceInput | Prisma.UserUpsertWithWhereUniqueWithoutProvinceInput[]
+  createMany?: Prisma.UserCreateManyProvinceInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutProvinceInput | Prisma.UserUpdateWithWhereUniqueWithoutProvinceInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutProvinceInput | Prisma.UserUpdateManyWithWhereWithoutProvinceInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutProvinceNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProvinceInput, Prisma.UserUncheckedCreateWithoutProvinceInput> | Prisma.UserCreateWithoutProvinceInput[] | Prisma.UserUncheckedCreateWithoutProvinceInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProvinceInput | Prisma.UserCreateOrConnectWithoutProvinceInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutProvinceInput | Prisma.UserUpsertWithWhereUniqueWithoutProvinceInput[]
+  createMany?: Prisma.UserCreateManyProvinceInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutProvinceInput | Prisma.UserUpdateWithWhereUniqueWithoutProvinceInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutProvinceInput | Prisma.UserUpdateManyWithWhereWithoutProvinceInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedManyWithoutDistrictInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDistrictInput, Prisma.UserUncheckedCreateWithoutDistrictInput> | Prisma.UserCreateWithoutDistrictInput[] | Prisma.UserUncheckedCreateWithoutDistrictInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDistrictInput | Prisma.UserCreateOrConnectWithoutDistrictInput[]
+  createMany?: Prisma.UserCreateManyDistrictInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutDistrictInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDistrictInput, Prisma.UserUncheckedCreateWithoutDistrictInput> | Prisma.UserCreateWithoutDistrictInput[] | Prisma.UserUncheckedCreateWithoutDistrictInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDistrictInput | Prisma.UserCreateOrConnectWithoutDistrictInput[]
+  createMany?: Prisma.UserCreateManyDistrictInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutDistrictNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDistrictInput, Prisma.UserUncheckedCreateWithoutDistrictInput> | Prisma.UserCreateWithoutDistrictInput[] | Prisma.UserUncheckedCreateWithoutDistrictInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDistrictInput | Prisma.UserCreateOrConnectWithoutDistrictInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutDistrictInput | Prisma.UserUpsertWithWhereUniqueWithoutDistrictInput[]
+  createMany?: Prisma.UserCreateManyDistrictInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutDistrictInput | Prisma.UserUpdateWithWhereUniqueWithoutDistrictInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutDistrictInput | Prisma.UserUpdateManyWithWhereWithoutDistrictInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutDistrictNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDistrictInput, Prisma.UserUncheckedCreateWithoutDistrictInput> | Prisma.UserCreateWithoutDistrictInput[] | Prisma.UserUncheckedCreateWithoutDistrictInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDistrictInput | Prisma.UserCreateOrConnectWithoutDistrictInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutDistrictInput | Prisma.UserUpsertWithWhereUniqueWithoutDistrictInput[]
+  createMany?: Prisma.UserCreateManyDistrictInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutDistrictInput | Prisma.UserUpdateWithWhereUniqueWithoutDistrictInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutDistrictInput | Prisma.UserUpdateManyWithWhereWithoutDistrictInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedManyWithoutSectorInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSectorInput, Prisma.UserUncheckedCreateWithoutSectorInput> | Prisma.UserCreateWithoutSectorInput[] | Prisma.UserUncheckedCreateWithoutSectorInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSectorInput | Prisma.UserCreateOrConnectWithoutSectorInput[]
+  createMany?: Prisma.UserCreateManySectorInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutSectorInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSectorInput, Prisma.UserUncheckedCreateWithoutSectorInput> | Prisma.UserCreateWithoutSectorInput[] | Prisma.UserUncheckedCreateWithoutSectorInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSectorInput | Prisma.UserCreateOrConnectWithoutSectorInput[]
+  createMany?: Prisma.UserCreateManySectorInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutSectorNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSectorInput, Prisma.UserUncheckedCreateWithoutSectorInput> | Prisma.UserCreateWithoutSectorInput[] | Prisma.UserUncheckedCreateWithoutSectorInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSectorInput | Prisma.UserCreateOrConnectWithoutSectorInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSectorInput | Prisma.UserUpsertWithWhereUniqueWithoutSectorInput[]
+  createMany?: Prisma.UserCreateManySectorInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutSectorInput | Prisma.UserUpdateWithWhereUniqueWithoutSectorInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSectorInput | Prisma.UserUpdateManyWithWhereWithoutSectorInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutSectorNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSectorInput, Prisma.UserUncheckedCreateWithoutSectorInput> | Prisma.UserCreateWithoutSectorInput[] | Prisma.UserUncheckedCreateWithoutSectorInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSectorInput | Prisma.UserCreateOrConnectWithoutSectorInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSectorInput | Prisma.UserUpsertWithWhereUniqueWithoutSectorInput[]
+  createMany?: Prisma.UserCreateManySectorInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutSectorInput | Prisma.UserUpdateWithWhereUniqueWithoutSectorInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSectorInput | Prisma.UserUpdateManyWithWhereWithoutSectorInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedManyWithoutCellInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCellInput, Prisma.UserUncheckedCreateWithoutCellInput> | Prisma.UserCreateWithoutCellInput[] | Prisma.UserUncheckedCreateWithoutCellInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCellInput | Prisma.UserCreateOrConnectWithoutCellInput[]
+  createMany?: Prisma.UserCreateManyCellInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutCellInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCellInput, Prisma.UserUncheckedCreateWithoutCellInput> | Prisma.UserCreateWithoutCellInput[] | Prisma.UserUncheckedCreateWithoutCellInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCellInput | Prisma.UserCreateOrConnectWithoutCellInput[]
+  createMany?: Prisma.UserCreateManyCellInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutCellNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCellInput, Prisma.UserUncheckedCreateWithoutCellInput> | Prisma.UserCreateWithoutCellInput[] | Prisma.UserUncheckedCreateWithoutCellInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCellInput | Prisma.UserCreateOrConnectWithoutCellInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutCellInput | Prisma.UserUpsertWithWhereUniqueWithoutCellInput[]
+  createMany?: Prisma.UserCreateManyCellInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutCellInput | Prisma.UserUpdateWithWhereUniqueWithoutCellInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutCellInput | Prisma.UserUpdateManyWithWhereWithoutCellInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutCellNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCellInput, Prisma.UserUncheckedCreateWithoutCellInput> | Prisma.UserCreateWithoutCellInput[] | Prisma.UserUncheckedCreateWithoutCellInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCellInput | Prisma.UserCreateOrConnectWithoutCellInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutCellInput | Prisma.UserUpsertWithWhereUniqueWithoutCellInput[]
+  createMany?: Prisma.UserCreateManyCellInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutCellInput | Prisma.UserUpdateWithWhereUniqueWithoutCellInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutCellInput | Prisma.UserUpdateManyWithWhereWithoutCellInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedManyWithoutVillageInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVillageInput, Prisma.UserUncheckedCreateWithoutVillageInput> | Prisma.UserCreateWithoutVillageInput[] | Prisma.UserUncheckedCreateWithoutVillageInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVillageInput | Prisma.UserCreateOrConnectWithoutVillageInput[]
+  createMany?: Prisma.UserCreateManyVillageInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutVillageInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVillageInput, Prisma.UserUncheckedCreateWithoutVillageInput> | Prisma.UserCreateWithoutVillageInput[] | Prisma.UserUncheckedCreateWithoutVillageInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVillageInput | Prisma.UserCreateOrConnectWithoutVillageInput[]
+  createMany?: Prisma.UserCreateManyVillageInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutVillageNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVillageInput, Prisma.UserUncheckedCreateWithoutVillageInput> | Prisma.UserCreateWithoutVillageInput[] | Prisma.UserUncheckedCreateWithoutVillageInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVillageInput | Prisma.UserCreateOrConnectWithoutVillageInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutVillageInput | Prisma.UserUpsertWithWhereUniqueWithoutVillageInput[]
+  createMany?: Prisma.UserCreateManyVillageInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutVillageInput | Prisma.UserUpdateWithWhereUniqueWithoutVillageInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutVillageInput | Prisma.UserUpdateManyWithWhereWithoutVillageInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutVillageNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVillageInput, Prisma.UserUncheckedCreateWithoutVillageInput> | Prisma.UserCreateWithoutVillageInput[] | Prisma.UserUncheckedCreateWithoutVillageInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVillageInput | Prisma.UserCreateOrConnectWithoutVillageInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutVillageInput | Prisma.UserUpsertWithWhereUniqueWithoutVillageInput[]
+  createMany?: Prisma.UserCreateManyVillageInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutVillageInput | Prisma.UserUpdateWithWhereUniqueWithoutVillageInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutVillageInput | Prisma.UserUpdateManyWithWhereWithoutVillageInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type UserCreateNestedOneWithoutNotificationsInput = {
@@ -956,10 +1227,6 @@ export type NullableEnumGenderFieldUpdateOperationsInput = {
   set?: $Enums.Gender | null
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type EnumUserStatusFieldUpdateOperationsInput = {
   set?: $Enums.UserStatus
 }
@@ -968,8 +1235,8 @@ export type NullableEnumEducationLevelFieldUpdateOperationsInput = {
   set?: $Enums.EducationLevel | null
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -988,6 +1255,50 @@ export type UserUpdateOneRequiredWithoutPasswordResetCodesNestedInput = {
   upsert?: Prisma.UserUpsertWithoutPasswordResetCodesInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPasswordResetCodesInput, Prisma.UserUpdateWithoutPasswordResetCodesInput>, Prisma.UserUncheckedUpdateWithoutPasswordResetCodesInput>
+}
+
+export type UserCreateNestedOneWithoutProgramTeamsLedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProgramTeamsLedInput, Prisma.UserUncheckedCreateWithoutProgramTeamsLedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProgramTeamsLedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutProgramTeamsLedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProgramTeamsLedInput, Prisma.UserUncheckedCreateWithoutProgramTeamsLedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProgramTeamsLedInput
+  upsert?: Prisma.UserUpsertWithoutProgramTeamsLedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProgramTeamsLedInput, Prisma.UserUpdateWithoutProgramTeamsLedInput>, Prisma.UserUncheckedUpdateWithoutProgramTeamsLedInput>
+}
+
+export type UserCreateNestedOneWithoutProgramTeamMembershipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProgramTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutProgramTeamMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProgramTeamMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutProgramTeamMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProgramTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutProgramTeamMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProgramTeamMembershipsInput
+  upsert?: Prisma.UserUpsertWithoutProgramTeamMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProgramTeamMembershipsInput, Prisma.UserUpdateWithoutProgramTeamMembershipsInput>, Prisma.UserUncheckedUpdateWithoutProgramTeamMembershipsInput>
+}
+
+export type UserCreateNestedOneWithoutAvailabilityChecksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityChecksInput, Prisma.UserUncheckedCreateWithoutAvailabilityChecksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAvailabilityChecksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAvailabilityChecksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityChecksInput, Prisma.UserUncheckedCreateWithoutAvailabilityChecksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAvailabilityChecksInput
+  upsert?: Prisma.UserUpsertWithoutAvailabilityChecksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAvailabilityChecksInput, Prisma.UserUpdateWithoutAvailabilityChecksInput>, Prisma.UserUncheckedUpdateWithoutAvailabilityChecksInput>
 }
 
 export type UserCreateNestedOneWithoutProgramAssignmentsInput = {
@@ -1078,6 +1389,536 @@ export type UserUpdateOneWithoutActivityLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.UserUpdateWithoutActivityLogsInput>, Prisma.UserUncheckedUpdateWithoutActivityLogsInput>
 }
 
+export type UserCreateWithoutProvinceInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  lastSeenAt?: Date | string | null
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
+  role?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
+  passwordResetCodes?: Prisma.PasswordResetCodeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutProvinceInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutProvinceInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProvinceInput, Prisma.UserUncheckedCreateWithoutProvinceInput>
+}
+
+export type UserCreateManyProvinceInputEnvelope = {
+  data: Prisma.UserCreateManyProvinceInput | Prisma.UserCreateManyProvinceInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutProvinceInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProvinceInput, Prisma.UserUncheckedUpdateWithoutProvinceInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProvinceInput, Prisma.UserUncheckedCreateWithoutProvinceInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutProvinceInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProvinceInput, Prisma.UserUncheckedUpdateWithoutProvinceInput>
+}
+
+export type UserUpdateManyWithWhereWithoutProvinceInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutProvinceInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  email?: Prisma.StringFilter<"User"> | string
+  name?: Prisma.StringNullableFilter<"User"> | string | null
+  firstName?: Prisma.StringNullableFilter<"User"> | string | null
+  lastName?: Prisma.StringNullableFilter<"User"> | string | null
+  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
+  password?: Prisma.StringFilter<"User"> | string
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  telephone?: Prisma.StringNullableFilter<"User"> | string | null
+  provinceId?: Prisma.IntNullableFilter<"User"> | number | null
+  districtId?: Prisma.IntNullableFilter<"User"> | number | null
+  sectorId?: Prisma.IntNullableFilter<"User"> | number | null
+  cellId?: Prisma.IntNullableFilter<"User"> | number | null
+  villageId?: Prisma.IntNullableFilter<"User"> | number | null
+  gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
+  dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
+  educationLevel?: Prisma.EnumEducationLevelNullableFilter<"User"> | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFilter<"User"> | boolean
+  tokenVersion?: Prisma.IntFilter<"User"> | number
+  roleId?: Prisma.StringNullableFilter<"User"> | string | null
+  tenantId?: Prisma.StringNullableFilter<"User"> | string | null
+  lastSeenAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+}
+
+export type UserCreateWithoutDistrictInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  lastSeenAt?: Date | string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
+  role?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
+  passwordResetCodes?: Prisma.PasswordResetCodeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDistrictInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDistrictInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDistrictInput, Prisma.UserUncheckedCreateWithoutDistrictInput>
+}
+
+export type UserCreateManyDistrictInputEnvelope = {
+  data: Prisma.UserCreateManyDistrictInput | Prisma.UserCreateManyDistrictInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutDistrictInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDistrictInput, Prisma.UserUncheckedUpdateWithoutDistrictInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDistrictInput, Prisma.UserUncheckedCreateWithoutDistrictInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutDistrictInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDistrictInput, Prisma.UserUncheckedUpdateWithoutDistrictInput>
+}
+
+export type UserUpdateManyWithWhereWithoutDistrictInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutDistrictInput>
+}
+
+export type UserCreateWithoutSectorInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  lastSeenAt?: Date | string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
+  role?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
+  passwordResetCodes?: Prisma.PasswordResetCodeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSectorInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSectorInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSectorInput, Prisma.UserUncheckedCreateWithoutSectorInput>
+}
+
+export type UserCreateManySectorInputEnvelope = {
+  data: Prisma.UserCreateManySectorInput | Prisma.UserCreateManySectorInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutSectorInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSectorInput, Prisma.UserUncheckedUpdateWithoutSectorInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSectorInput, Prisma.UserUncheckedCreateWithoutSectorInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutSectorInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSectorInput, Prisma.UserUncheckedUpdateWithoutSectorInput>
+}
+
+export type UserUpdateManyWithWhereWithoutSectorInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutSectorInput>
+}
+
+export type UserCreateWithoutCellInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  lastSeenAt?: Date | string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
+  role?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
+  passwordResetCodes?: Prisma.PasswordResetCodeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCellInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCellInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCellInput, Prisma.UserUncheckedCreateWithoutCellInput>
+}
+
+export type UserCreateManyCellInputEnvelope = {
+  data: Prisma.UserCreateManyCellInput | Prisma.UserCreateManyCellInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutCellInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCellInput, Prisma.UserUncheckedUpdateWithoutCellInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCellInput, Prisma.UserUncheckedCreateWithoutCellInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutCellInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCellInput, Prisma.UserUncheckedUpdateWithoutCellInput>
+}
+
+export type UserUpdateManyWithWhereWithoutCellInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutCellInput>
+}
+
+export type UserCreateWithoutVillageInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  lastSeenAt?: Date | string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
+  role?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
+  passwordResetCodes?: Prisma.PasswordResetCodeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutVillageInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutVillageInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutVillageInput, Prisma.UserUncheckedCreateWithoutVillageInput>
+}
+
+export type UserCreateManyVillageInputEnvelope = {
+  data: Prisma.UserCreateManyVillageInput | Prisma.UserCreateManyVillageInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutVillageInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutVillageInput, Prisma.UserUncheckedUpdateWithoutVillageInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutVillageInput, Prisma.UserUncheckedCreateWithoutVillageInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutVillageInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutVillageInput, Prisma.UserUncheckedUpdateWithoutVillageInput>
+}
+
+export type UserUpdateManyWithWhereWithoutVillageInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutVillageInput>
+}
+
 export type UserCreateWithoutNotificationsInput = {
   id?: string
   email: string
@@ -1089,9 +1930,6 @@ export type UserCreateWithoutNotificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1099,12 +1937,18 @@ export type UserCreateWithoutNotificationsInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
@@ -1123,9 +1967,11 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1135,12 +1981,13 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
@@ -1173,9 +2020,6 @@ export type UserUpdateWithoutNotificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1183,12 +2027,18 @@ export type UserUpdateWithoutNotificationsInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
@@ -1207,9 +2057,11 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1219,12 +2071,13 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
@@ -1241,9 +2094,6 @@ export type UserCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1251,13 +2101,19 @@ export type UserCreateWithoutTenantInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
@@ -1275,9 +2131,11 @@ export type UserUncheckedCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1286,13 +2144,14 @@ export type UserUncheckedCreateWithoutTenantInput = {
   tokenVersion?: number
   roleId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
@@ -1324,36 +2183,6 @@ export type UserUpdateManyWithWhereWithoutTenantInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutTenantInput>
 }
 
-export type UserScalarWhereInput = {
-  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-  OR?: Prisma.UserScalarWhereInput[]
-  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-  id?: Prisma.StringFilter<"User"> | string
-  email?: Prisma.StringFilter<"User"> | string
-  name?: Prisma.StringNullableFilter<"User"> | string | null
-  firstName?: Prisma.StringNullableFilter<"User"> | string | null
-  lastName?: Prisma.StringNullableFilter<"User"> | string | null
-  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
-  password?: Prisma.StringFilter<"User"> | string
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  telephone?: Prisma.StringNullableFilter<"User"> | string | null
-  province?: Prisma.StringNullableFilter<"User"> | string | null
-  district?: Prisma.StringNullableFilter<"User"> | string | null
-  sector?: Prisma.StringNullableFilter<"User"> | string | null
-  gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
-  dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
-  educationLevel?: Prisma.EnumEducationLevelNullableFilter<"User"> | $Enums.EducationLevel | null
-  isPlatformAdmin?: Prisma.BoolFilter<"User"> | boolean
-  tokenVersion?: Prisma.IntFilter<"User"> | number
-  roleId?: Prisma.StringNullableFilter<"User"> | string | null
-  tenantId?: Prisma.StringNullableFilter<"User"> | string | null
-  lastSeenAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  cell?: Prisma.StringNullableFilter<"User"> | string | null
-  village?: Prisma.StringNullableFilter<"User"> | string | null
-}
-
 export type UserCreateWithoutRoleInput = {
   id?: string
   email: string
@@ -1365,9 +2194,6 @@ export type UserCreateWithoutRoleInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1375,13 +2201,19 @@ export type UserCreateWithoutRoleInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
@@ -1399,9 +2231,11 @@ export type UserUncheckedCreateWithoutRoleInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1410,13 +2244,14 @@ export type UserUncheckedCreateWithoutRoleInput = {
   tokenVersion?: number
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
@@ -1459,9 +2294,6 @@ export type UserCreateWithoutPasswordResetCodesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1469,13 +2301,19 @@ export type UserCreateWithoutPasswordResetCodesInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
@@ -1493,9 +2331,11 @@ export type UserUncheckedCreateWithoutPasswordResetCodesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1505,13 +2345,14 @@ export type UserUncheckedCreateWithoutPasswordResetCodesInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
 }
@@ -1543,9 +2384,6 @@ export type UserUpdateWithoutPasswordResetCodesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1553,13 +2391,19 @@ export type UserUpdateWithoutPasswordResetCodesInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
@@ -1577,9 +2421,11 @@ export type UserUncheckedUpdateWithoutPasswordResetCodesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1589,15 +2435,508 @@ export type UserUncheckedUpdateWithoutPasswordResetCodesInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+}
+
+export type UserCreateWithoutProgramTeamsLedInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  lastSeenAt?: Date | string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
+  role?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
+  passwordResetCodes?: Prisma.PasswordResetCodeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutProgramTeamsLedInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutProgramTeamsLedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProgramTeamsLedInput, Prisma.UserUncheckedCreateWithoutProgramTeamsLedInput>
+}
+
+export type UserUpsertWithoutProgramTeamsLedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProgramTeamsLedInput, Prisma.UserUncheckedUpdateWithoutProgramTeamsLedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProgramTeamsLedInput, Prisma.UserUncheckedCreateWithoutProgramTeamsLedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProgramTeamsLedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProgramTeamsLedInput, Prisma.UserUncheckedUpdateWithoutProgramTeamsLedInput>
+}
+
+export type UserUpdateWithoutProgramTeamsLedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
+  role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProgramTeamsLedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutProgramTeamMembershipsInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  lastSeenAt?: Date | string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
+  role?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
+  passwordResetCodes?: Prisma.PasswordResetCodeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutProgramTeamMembershipsInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutProgramTeamMembershipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProgramTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutProgramTeamMembershipsInput>
+}
+
+export type UserUpsertWithoutProgramTeamMembershipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProgramTeamMembershipsInput, Prisma.UserUncheckedUpdateWithoutProgramTeamMembershipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProgramTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutProgramTeamMembershipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProgramTeamMembershipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProgramTeamMembershipsInput, Prisma.UserUncheckedUpdateWithoutProgramTeamMembershipsInput>
+}
+
+export type UserUpdateWithoutProgramTeamMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
+  role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProgramTeamMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAvailabilityChecksInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  lastSeenAt?: Date | string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
+  role?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
+  passwordResetCodes?: Prisma.PasswordResetCodeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAvailabilityChecksInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAvailabilityChecksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityChecksInput, Prisma.UserUncheckedCreateWithoutAvailabilityChecksInput>
+}
+
+export type UserUpsertWithoutAvailabilityChecksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAvailabilityChecksInput, Prisma.UserUncheckedUpdateWithoutAvailabilityChecksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityChecksInput, Prisma.UserUncheckedCreateWithoutAvailabilityChecksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAvailabilityChecksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAvailabilityChecksInput, Prisma.UserUncheckedUpdateWithoutAvailabilityChecksInput>
+}
+
+export type UserUpdateWithoutAvailabilityChecksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
+  role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAvailabilityChecksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProgramAssignmentsInput = {
@@ -1611,9 +2950,6 @@ export type UserCreateWithoutProgramAssignmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1621,12 +2957,18 @@ export type UserCreateWithoutProgramAssignmentsInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
@@ -1645,9 +2987,11 @@ export type UserUncheckedCreateWithoutProgramAssignmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1657,12 +3001,13 @@ export type UserUncheckedCreateWithoutProgramAssignmentsInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
@@ -1695,9 +3040,6 @@ export type UserUpdateWithoutProgramAssignmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1705,12 +3047,18 @@ export type UserUpdateWithoutProgramAssignmentsInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
@@ -1729,9 +3077,11 @@ export type UserUncheckedUpdateWithoutProgramAssignmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1741,12 +3091,13 @@ export type UserUncheckedUpdateWithoutProgramAssignmentsInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
@@ -1763,9 +3114,6 @@ export type UserCreateWithoutBeneficiaryAssignmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1773,12 +3121,18 @@ export type UserCreateWithoutBeneficiaryAssignmentsInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
@@ -1797,9 +3151,11 @@ export type UserUncheckedCreateWithoutBeneficiaryAssignmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1809,12 +3165,13 @@ export type UserUncheckedCreateWithoutBeneficiaryAssignmentsInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
@@ -1847,9 +3204,6 @@ export type UserUpdateWithoutBeneficiaryAssignmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1857,12 +3211,18 @@ export type UserUpdateWithoutBeneficiaryAssignmentsInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
@@ -1881,9 +3241,11 @@ export type UserUncheckedUpdateWithoutBeneficiaryAssignmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -1893,12 +3255,13 @@ export type UserUncheckedUpdateWithoutBeneficiaryAssignmentsInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
@@ -1915,9 +3278,6 @@ export type UserCreateWithoutReplacementRequestsDecidedInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1925,13 +3285,19 @@ export type UserCreateWithoutReplacementRequestsDecidedInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
@@ -1949,9 +3315,11 @@ export type UserUncheckedCreateWithoutReplacementRequestsDecidedInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1961,13 +3329,14 @@ export type UserUncheckedCreateWithoutReplacementRequestsDecidedInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1988,9 +3357,6 @@ export type UserCreateWithoutReplacementRequestsMadeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -1998,13 +3364,19 @@ export type UserCreateWithoutReplacementRequestsMadeInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
   tenant?: Prisma.TenantCreateNestedOneWithoutUsersInput
@@ -2022,9 +3394,11 @@ export type UserUncheckedCreateWithoutReplacementRequestsMadeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -2034,13 +3408,14 @@ export type UserUncheckedCreateWithoutReplacementRequestsMadeInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
 }
@@ -2072,9 +3447,6 @@ export type UserUpdateWithoutReplacementRequestsDecidedInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2082,13 +3454,19 @@ export type UserUpdateWithoutReplacementRequestsDecidedInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
@@ -2106,9 +3484,11 @@ export type UserUncheckedUpdateWithoutReplacementRequestsDecidedInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2118,13 +3498,14 @@ export type UserUncheckedUpdateWithoutReplacementRequestsDecidedInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -2151,9 +3532,6 @@ export type UserUpdateWithoutReplacementRequestsMadeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2161,13 +3539,19 @@ export type UserUpdateWithoutReplacementRequestsMadeInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
@@ -2185,9 +3569,11 @@ export type UserUncheckedUpdateWithoutReplacementRequestsMadeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2197,13 +3583,14 @@ export type UserUncheckedUpdateWithoutReplacementRequestsMadeInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -2219,9 +3606,6 @@ export type UserCreateWithoutFieldCheckInsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -2229,12 +3613,18 @@ export type UserCreateWithoutFieldCheckInsInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
@@ -2253,9 +3643,11 @@ export type UserUncheckedCreateWithoutFieldCheckInsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -2265,12 +3657,13 @@ export type UserUncheckedCreateWithoutFieldCheckInsInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
@@ -2303,9 +3696,6 @@ export type UserUpdateWithoutFieldCheckInsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2313,12 +3703,18 @@ export type UserUpdateWithoutFieldCheckInsInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
@@ -2337,9 +3733,11 @@ export type UserUncheckedUpdateWithoutFieldCheckInsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2349,12 +3747,13 @@ export type UserUncheckedUpdateWithoutFieldCheckInsInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
@@ -2371,9 +3770,6 @@ export type UserCreateWithoutActivityLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -2381,12 +3777,18 @@ export type UserCreateWithoutActivityLogsInput = {
   isPlatformAdmin?: boolean
   tokenVersion?: number
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  sector?: Prisma.SectorCreateNestedOneWithoutUsersInput
+  cell?: Prisma.CellCreateNestedOneWithoutUsersInput
+  village?: Prisma.VillageCreateNestedOneWithoutUsersInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestCreateNestedManyWithoutRequestedByInput
   role?: Prisma.RoleCreateNestedOneWithoutUsersInput
@@ -2405,9 +3807,11 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -2417,12 +3821,13 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
   roleId?: string | null
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutUserInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutUserInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutLeaderInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutUserInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutUserInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutDecidedByInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutRequestedByInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedCreateNestedManyWithoutUserInput
@@ -2455,9 +3860,6 @@ export type UserUpdateWithoutActivityLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2465,12 +3867,18 @@ export type UserUpdateWithoutActivityLogsInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
@@ -2489,9 +3897,11 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2501,15 +3911,646 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateManyProvinceInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+}
+
+export type UserUpdateWithoutProvinceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
+  role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProvinceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutProvinceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type UserCreateManyDistrictInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+}
+
+export type UserUpdateWithoutDistrictInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
+  role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDistrictInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutDistrictInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type UserCreateManySectorInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+}
+
+export type UserUpdateWithoutSectorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
+  role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSectorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutSectorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type UserCreateManyCellInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  villageId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+}
+
+export type UserUpdateWithoutCellInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
+  role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCellInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutCellInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type UserCreateManyVillageInput = {
+  id?: string
+  email: string
+  name?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  avatarUrl?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  telephone?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  educationLevel?: $Enums.EducationLevel | null
+  isPlatformAdmin?: boolean
+  tokenVersion?: number
+  roleId?: string | null
+  tenantId?: string | null
+  lastSeenAt?: Date | string | null
+}
+
+export type UserUpdateWithoutVillageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
+  role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutVillageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
+  replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
+  replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutVillageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserCreateManyTenantInput = {
@@ -2523,9 +4564,11 @@ export type UserCreateManyTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -2534,8 +4577,6 @@ export type UserCreateManyTenantInput = {
   tokenVersion?: number
   roleId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
 }
 
 export type UserUpdateWithoutTenantInput = {
@@ -2549,9 +4590,6 @@ export type UserUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2559,13 +4597,19 @@ export type UserUpdateWithoutTenantInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   role?: Prisma.RoleUpdateOneWithoutUsersNestedInput
@@ -2583,9 +4627,11 @@ export type UserUncheckedUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2594,13 +4640,14 @@ export type UserUncheckedUpdateWithoutTenantInput = {
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
@@ -2617,9 +4664,11 @@ export type UserUncheckedUpdateManyWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2628,8 +4677,6 @@ export type UserUncheckedUpdateManyWithoutTenantInput = {
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCreateManyRoleInput = {
@@ -2643,9 +4690,11 @@ export type UserCreateManyRoleInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   telephone?: string | null
-  province?: string | null
-  district?: string | null
-  sector?: string | null
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
   gender?: $Enums.Gender | null
   dateOfBirth?: Date | string | null
   status?: $Enums.UserStatus
@@ -2654,8 +4703,6 @@ export type UserCreateManyRoleInput = {
   tokenVersion?: number
   tenantId?: string | null
   lastSeenAt?: Date | string | null
-  cell?: string | null
-  village?: string | null
 }
 
 export type UserUpdateWithoutRoleInput = {
@@ -2669,9 +4716,6 @@ export type UserUpdateWithoutRoleInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2679,13 +4723,19 @@ export type UserUpdateWithoutRoleInput = {
   isPlatformAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutUsersNestedInput
+  cell?: Prisma.CellUpdateOneWithoutUsersNestedInput
+  village?: Prisma.VillageUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUpdateManyWithoutRequestedByNestedInput
   tenant?: Prisma.TenantUpdateOneWithoutUsersNestedInput
@@ -2703,9 +4753,11 @@ export type UserUncheckedUpdateWithoutRoleInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2714,13 +4766,14 @@ export type UserUncheckedUpdateWithoutRoleInput = {
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
   beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutUserNestedInput
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  programTeamsLed?: Prisma.ProgramTeamUncheckedUpdateManyWithoutLeaderNestedInput
+  programTeamMemberships?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutUserNestedInput
   replacementRequestsDecided?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutDecidedByNestedInput
   replacementRequestsMade?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutRequestedByNestedInput
   passwordResetCodes?: Prisma.PasswordResetCodeUncheckedUpdateManyWithoutUserNestedInput
@@ -2737,9 +4790,11 @@ export type UserUncheckedUpdateManyWithoutRoleInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
@@ -2748,8 +4803,6 @@ export type UserUncheckedUpdateManyWithoutRoleInput = {
   tokenVersion?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cell?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  village?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -2763,6 +4816,9 @@ export type UserCountOutputType = {
   fieldCheckIns: number
   notifications: number
   programAssignments: number
+  programTeamsLed: number
+  programTeamMemberships: number
+  availabilityChecks: number
   replacementRequestsDecided: number
   replacementRequestsMade: number
   passwordResetCodes: number
@@ -2774,6 +4830,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   fieldCheckIns?: boolean | UserCountOutputTypeCountFieldCheckInsArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   programAssignments?: boolean | UserCountOutputTypeCountProgramAssignmentsArgs
+  programTeamsLed?: boolean | UserCountOutputTypeCountProgramTeamsLedArgs
+  programTeamMemberships?: boolean | UserCountOutputTypeCountProgramTeamMembershipsArgs
+  availabilityChecks?: boolean | UserCountOutputTypeCountAvailabilityChecksArgs
   replacementRequestsDecided?: boolean | UserCountOutputTypeCountReplacementRequestsDecidedArgs
   replacementRequestsMade?: boolean | UserCountOutputTypeCountReplacementRequestsMadeArgs
   passwordResetCodes?: boolean | UserCountOutputTypeCountPasswordResetCodesArgs
@@ -2827,6 +4886,27 @@ export type UserCountOutputTypeCountProgramAssignmentsArgs<ExtArgs extends runti
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountProgramTeamsLedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramTeamWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountProgramTeamMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramTeamMemberWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAvailabilityChecksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AvailabilityCheckWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountReplacementRequestsDecidedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ReplacementRequestWhereInput
 }
@@ -2857,9 +4937,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   telephone?: boolean
-  province?: boolean
-  district?: boolean
-  sector?: boolean
+  provinceId?: boolean
+  districtId?: boolean
+  sectorId?: boolean
+  cellId?: boolean
+  villageId?: boolean
   gender?: boolean
   dateOfBirth?: boolean
   status?: boolean
@@ -2869,13 +4951,19 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   roleId?: boolean
   tenantId?: boolean
   lastSeenAt?: boolean
-  cell?: boolean
-  village?: boolean
+  province?: boolean | Prisma.User$provinceArgs<ExtArgs>
+  district?: boolean | Prisma.User$districtArgs<ExtArgs>
+  sector?: boolean | Prisma.User$sectorArgs<ExtArgs>
+  cell?: boolean | Prisma.User$cellArgs<ExtArgs>
+  village?: boolean | Prisma.User$villageArgs<ExtArgs>
   activityLogs?: boolean | Prisma.User$activityLogsArgs<ExtArgs>
   beneficiaryAssignments?: boolean | Prisma.User$beneficiaryAssignmentsArgs<ExtArgs>
   fieldCheckIns?: boolean | Prisma.User$fieldCheckInsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   programAssignments?: boolean | Prisma.User$programAssignmentsArgs<ExtArgs>
+  programTeamsLed?: boolean | Prisma.User$programTeamsLedArgs<ExtArgs>
+  programTeamMemberships?: boolean | Prisma.User$programTeamMembershipsArgs<ExtArgs>
+  availabilityChecks?: boolean | Prisma.User$availabilityChecksArgs<ExtArgs>
   replacementRequestsDecided?: boolean | Prisma.User$replacementRequestsDecidedArgs<ExtArgs>
   replacementRequestsMade?: boolean | Prisma.User$replacementRequestsMadeArgs<ExtArgs>
   role?: boolean | Prisma.User$roleArgs<ExtArgs>
@@ -2897,9 +4985,11 @@ export type UserSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   telephone?: boolean
-  province?: boolean
-  district?: boolean
-  sector?: boolean
+  provinceId?: boolean
+  districtId?: boolean
+  sectorId?: boolean
+  cellId?: boolean
+  villageId?: boolean
   gender?: boolean
   dateOfBirth?: boolean
   status?: boolean
@@ -2909,17 +4999,23 @@ export type UserSelectScalar = {
   roleId?: boolean
   tenantId?: boolean
   lastSeenAt?: boolean
-  cell?: boolean
-  village?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "firstName" | "lastName" | "avatarUrl" | "password" | "createdAt" | "updatedAt" | "telephone" | "province" | "district" | "sector" | "gender" | "dateOfBirth" | "status" | "educationLevel" | "isPlatformAdmin" | "tokenVersion" | "roleId" | "tenantId" | "lastSeenAt" | "cell" | "village", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "firstName" | "lastName" | "avatarUrl" | "password" | "createdAt" | "updatedAt" | "telephone" | "provinceId" | "districtId" | "sectorId" | "cellId" | "villageId" | "gender" | "dateOfBirth" | "status" | "educationLevel" | "isPlatformAdmin" | "tokenVersion" | "roleId" | "tenantId" | "lastSeenAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  province?: boolean | Prisma.User$provinceArgs<ExtArgs>
+  district?: boolean | Prisma.User$districtArgs<ExtArgs>
+  sector?: boolean | Prisma.User$sectorArgs<ExtArgs>
+  cell?: boolean | Prisma.User$cellArgs<ExtArgs>
+  village?: boolean | Prisma.User$villageArgs<ExtArgs>
   activityLogs?: boolean | Prisma.User$activityLogsArgs<ExtArgs>
   beneficiaryAssignments?: boolean | Prisma.User$beneficiaryAssignmentsArgs<ExtArgs>
   fieldCheckIns?: boolean | Prisma.User$fieldCheckInsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   programAssignments?: boolean | Prisma.User$programAssignmentsArgs<ExtArgs>
+  programTeamsLed?: boolean | Prisma.User$programTeamsLedArgs<ExtArgs>
+  programTeamMemberships?: boolean | Prisma.User$programTeamMembershipsArgs<ExtArgs>
+  availabilityChecks?: boolean | Prisma.User$availabilityChecksArgs<ExtArgs>
   replacementRequestsDecided?: boolean | Prisma.User$replacementRequestsDecidedArgs<ExtArgs>
   replacementRequestsMade?: boolean | Prisma.User$replacementRequestsMadeArgs<ExtArgs>
   role?: boolean | Prisma.User$roleArgs<ExtArgs>
@@ -2931,11 +5027,19 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    province: Prisma.$ProvincePayload<ExtArgs> | null
+    district: Prisma.$DistrictPayload<ExtArgs> | null
+    sector: Prisma.$SectorPayload<ExtArgs> | null
+    cell: Prisma.$CellPayload<ExtArgs> | null
+    village: Prisma.$VillagePayload<ExtArgs> | null
     activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
     beneficiaryAssignments: Prisma.$BeneficiaryAssignmentPayload<ExtArgs>[]
     fieldCheckIns: Prisma.$FieldCheckInPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     programAssignments: Prisma.$ProgramAssignmentPayload<ExtArgs>[]
+    programTeamsLed: Prisma.$ProgramTeamPayload<ExtArgs>[]
+    programTeamMemberships: Prisma.$ProgramTeamMemberPayload<ExtArgs>[]
+    availabilityChecks: Prisma.$AvailabilityCheckPayload<ExtArgs>[]
     replacementRequestsDecided: Prisma.$ReplacementRequestPayload<ExtArgs>[]
     replacementRequestsMade: Prisma.$ReplacementRequestPayload<ExtArgs>[]
     role: Prisma.$RolePayload<ExtArgs> | null
@@ -2953,9 +5057,11 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdAt: Date
     updatedAt: Date
     telephone: string | null
-    province: string | null
-    district: string | null
-    sector: string | null
+    provinceId: number | null
+    districtId: number | null
+    sectorId: number | null
+    cellId: number | null
+    villageId: number | null
     gender: $Enums.Gender | null
     dateOfBirth: Date | null
     status: $Enums.UserStatus
@@ -2965,8 +5071,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     roleId: string | null
     tenantId: string | null
     lastSeenAt: Date | null
-    cell: string | null
-    village: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -3307,11 +5411,19 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  province<T extends Prisma.User$provinceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$provinceArgs<ExtArgs>>): Prisma.Prisma__ProvinceClient<runtime.Types.Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  district<T extends Prisma.User$districtArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$districtArgs<ExtArgs>>): Prisma.Prisma__DistrictClient<runtime.Types.Result.GetResult<Prisma.$DistrictPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  sector<T extends Prisma.User$sectorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sectorArgs<ExtArgs>>): Prisma.Prisma__SectorClient<runtime.Types.Result.GetResult<Prisma.$SectorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  cell<T extends Prisma.User$cellArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cellArgs<ExtArgs>>): Prisma.Prisma__CellClient<runtime.Types.Result.GetResult<Prisma.$CellPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  village<T extends Prisma.User$villageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$villageArgs<ExtArgs>>): Prisma.Prisma__VillageClient<runtime.Types.Result.GetResult<Prisma.$VillagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   activityLogs<T extends Prisma.User$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   beneficiaryAssignments<T extends Prisma.User$beneficiaryAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$beneficiaryAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fieldCheckIns<T extends Prisma.User$fieldCheckInsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fieldCheckInsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldCheckInPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   programAssignments<T extends Prisma.User$programAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$programAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  programTeamsLed<T extends Prisma.User$programTeamsLedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$programTeamsLedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  programTeamMemberships<T extends Prisma.User$programTeamMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$programTeamMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramTeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  availabilityChecks<T extends Prisma.User$availabilityChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$availabilityChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilityCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   replacementRequestsDecided<T extends Prisma.User$replacementRequestsDecidedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$replacementRequestsDecidedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplacementRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   replacementRequestsMade<T extends Prisma.User$replacementRequestsMadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$replacementRequestsMadeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplacementRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   role<T extends Prisma.User$roleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roleArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -3356,9 +5468,11 @@ export interface UserFieldRefs {
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly telephone: Prisma.FieldRef<"User", 'String'>
-  readonly province: Prisma.FieldRef<"User", 'String'>
-  readonly district: Prisma.FieldRef<"User", 'String'>
-  readonly sector: Prisma.FieldRef<"User", 'String'>
+  readonly provinceId: Prisma.FieldRef<"User", 'Int'>
+  readonly districtId: Prisma.FieldRef<"User", 'Int'>
+  readonly sectorId: Prisma.FieldRef<"User", 'Int'>
+  readonly cellId: Prisma.FieldRef<"User", 'Int'>
+  readonly villageId: Prisma.FieldRef<"User", 'Int'>
   readonly gender: Prisma.FieldRef<"User", 'Gender'>
   readonly dateOfBirth: Prisma.FieldRef<"User", 'DateTime'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
@@ -3368,8 +5482,6 @@ export interface UserFieldRefs {
   readonly roleId: Prisma.FieldRef<"User", 'String'>
   readonly tenantId: Prisma.FieldRef<"User", 'String'>
   readonly lastSeenAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly cell: Prisma.FieldRef<"User", 'String'>
-  readonly village: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -3718,6 +5830,101 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.province
+ */
+export type User$provinceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Province
+   */
+  select?: Prisma.ProvinceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Province
+   */
+  omit?: Prisma.ProvinceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProvinceInclude<ExtArgs> | null
+  where?: Prisma.ProvinceWhereInput
+}
+
+/**
+ * User.district
+ */
+export type User$districtArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the District
+   */
+  select?: Prisma.DistrictSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the District
+   */
+  omit?: Prisma.DistrictOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DistrictInclude<ExtArgs> | null
+  where?: Prisma.DistrictWhereInput
+}
+
+/**
+ * User.sector
+ */
+export type User$sectorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Sector
+   */
+  select?: Prisma.SectorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Sector
+   */
+  omit?: Prisma.SectorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SectorInclude<ExtArgs> | null
+  where?: Prisma.SectorWhereInput
+}
+
+/**
+ * User.cell
+ */
+export type User$cellArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Cell
+   */
+  select?: Prisma.CellSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Cell
+   */
+  omit?: Prisma.CellOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CellInclude<ExtArgs> | null
+  where?: Prisma.CellWhereInput
+}
+
+/**
+ * User.village
+ */
+export type User$villageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Village
+   */
+  select?: Prisma.VillageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Village
+   */
+  omit?: Prisma.VillageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VillageInclude<ExtArgs> | null
+  where?: Prisma.VillageWhereInput
+}
+
+/**
  * User.activityLogs
  */
 export type User$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3835,6 +6042,78 @@ export type User$programAssignmentsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.ProgramAssignmentScalarFieldEnum | Prisma.ProgramAssignmentScalarFieldEnum[]
+}
+
+/**
+ * User.programTeamsLed
+ */
+export type User$programTeamsLedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProgramTeam
+   */
+  select?: Prisma.ProgramTeamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProgramTeam
+   */
+  omit?: Prisma.ProgramTeamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramTeamInclude<ExtArgs> | null
+  where?: Prisma.ProgramTeamWhereInput
+  orderBy?: Prisma.ProgramTeamOrderByWithRelationInput | Prisma.ProgramTeamOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramTeamWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgramTeamScalarFieldEnum | Prisma.ProgramTeamScalarFieldEnum[]
+}
+
+/**
+ * User.programTeamMemberships
+ */
+export type User$programTeamMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProgramTeamMember
+   */
+  select?: Prisma.ProgramTeamMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProgramTeamMember
+   */
+  omit?: Prisma.ProgramTeamMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramTeamMemberInclude<ExtArgs> | null
+  where?: Prisma.ProgramTeamMemberWhereInput
+  orderBy?: Prisma.ProgramTeamMemberOrderByWithRelationInput | Prisma.ProgramTeamMemberOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramTeamMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgramTeamMemberScalarFieldEnum | Prisma.ProgramTeamMemberScalarFieldEnum[]
+}
+
+/**
+ * User.availabilityChecks
+ */
+export type User$availabilityChecksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AvailabilityCheck
+   */
+  select?: Prisma.AvailabilityCheckSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AvailabilityCheck
+   */
+  omit?: Prisma.AvailabilityCheckOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AvailabilityCheckInclude<ExtArgs> | null
+  where?: Prisma.AvailabilityCheckWhereInput
+  orderBy?: Prisma.AvailabilityCheckOrderByWithRelationInput | Prisma.AvailabilityCheckOrderByWithRelationInput[]
+  cursor?: Prisma.AvailabilityCheckWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AvailabilityCheckScalarFieldEnum | Prisma.AvailabilityCheckScalarFieldEnum[]
 }
 
 /**

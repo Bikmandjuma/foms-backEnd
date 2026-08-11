@@ -12,6 +12,19 @@ const STATUS_VALUES = new Set(["ACTIVE", "INACTIVE", "SUSPENDED"]);
 
 const beneficiaryInclude = {
   programs: { select: { id: true, name: true } },
+  province: { select: { id: true, name: true } },
+  district: { select: { id: true, name: true } },
+  sector: { select: { id: true, name: true } },
+  cell: { select: { id: true, name: true } },
+  village: { select: { id: true, name: true } },
+  // The respondent's current caseworker, if any — surfaced as an
+  // "Enumerator" column on the program detail view.
+  assignments: {
+    where: { status: "ACTIVE" as const },
+    select: { user: { select: { id: true, name: true, email: true } } },
+    orderBy: { assignedAt: "desc" as const },
+    take: 1,
+  },
 } as const;
 
 function idParam(req: Request): string {
@@ -30,6 +43,90 @@ async function assertProgramsInTenant(programIds: string[], tenantId: string): P
   if (count !== programIds.length) throw new ApiError(400, "One or more programIds do not belong to your tenant");
 }
 
+type RawLocation = { province?: string; district?: string; sector?: string; cell?: string; village?: string };
+type ResolvedLocation = { provinceId?: number; districtId?: number; sectorId?: number; cellId?: number; villageId?: number };
+
+/**
+ * Excel rows carry human-typed place names; resolve them down the real
+ * province -> village hierarchy so imports land on the same FKs the
+ * cascading-select UI would produce. Returns null if the deepest name given
+ * can't be matched under its stated parents.
+ */
+async function resolveLocationIds(loc: RawLocation): Promise<ResolvedLocation | null> {
+  if (loc.village) {
+    const village = await prisma.village.findFirst({
+      where: {
+        name: loc.village,
+        cell: {
+          ...(loc.cell ? { name: loc.cell } : {}),
+          sector: {
+            ...(loc.sector ? { name: loc.sector } : {}),
+            district: {
+              ...(loc.district ? { name: loc.district } : {}),
+              ...(loc.province ? { province: { name: loc.province } } : {}),
+            },
+          },
+        },
+      },
+      select: {
+        id: true,
+        cellId: true,
+        cell: { select: { sectorId: true, sector: { select: { districtId: true, district: { select: { provinceId: true } } } } } },
+      },
+    });
+    if (!village) return null;
+    return {
+      villageId: village.id,
+      cellId: village.cellId,
+      sectorId: village.cell.sectorId,
+      districtId: village.cell.sector.districtId,
+      provinceId: village.cell.sector.district.provinceId,
+    };
+  }
+  if (loc.cell) {
+    const cell = await prisma.cell.findFirst({
+      where: {
+        name: loc.cell,
+        sector: {
+          ...(loc.sector ? { name: loc.sector } : {}),
+          district: {
+            ...(loc.district ? { name: loc.district } : {}),
+            ...(loc.province ? { province: { name: loc.province } } : {}),
+          },
+        },
+      },
+      select: { id: true, sectorId: true, sector: { select: { districtId: true, district: { select: { provinceId: true } } } } },
+    });
+    if (!cell) return null;
+    return { cellId: cell.id, sectorId: cell.sectorId, districtId: cell.sector.districtId, provinceId: cell.sector.district.provinceId };
+  }
+  if (loc.sector) {
+    const sector = await prisma.sector.findFirst({
+      where: {
+        name: loc.sector,
+        district: { ...(loc.district ? { name: loc.district } : {}), ...(loc.province ? { province: { name: loc.province } } : {}) },
+      },
+      select: { id: true, districtId: true, district: { select: { provinceId: true } } },
+    });
+    if (!sector) return null;
+    return { sectorId: sector.id, districtId: sector.districtId, provinceId: sector.district.provinceId };
+  }
+  if (loc.district) {
+    const district = await prisma.district.findFirst({
+      where: { name: loc.district, ...(loc.province ? { province: { name: loc.province } } : {}) },
+      select: { id: true, provinceId: true },
+    });
+    if (!district) return null;
+    return { districtId: district.id, provinceId: district.provinceId };
+  }
+  if (loc.province) {
+    const province = await prisma.province.findFirst({ where: { name: loc.province }, select: { id: true } });
+    if (!province) return null;
+    return { provinceId: province.id };
+  }
+  return {};
+}
+
 export async function listBeneficiaries(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
   const { programId, status, outcome, search } = req.query;
@@ -46,8 +143,8 @@ export async function listBeneficiaries(req: Request, res: Response): Promise<vo
               { name: { contains: search.trim() } },
               { code: { contains: search.trim() } },
               { telephone: { contains: search.trim() } },
-              { village: { contains: search.trim() } },
-              { sector: { contains: search.trim() } },
+              { village: { name: { contains: search.trim() } } },
+              { sector: { name: { contains: search.trim() } } },
             ],
           }
         : {}),
@@ -189,25 +286,25 @@ export async function importBeneficiaries(req: Request, res: Response): Promise<
     unknownPrograms: string[];
   }[] = [];
 
-  rawRows.forEach((raw, idx) => {
+  for (const raw of rawRows) {
     if (!raw.name) {
       errors.push({ row: raw.rowNumber, message: "Missing required 'Name'" });
-      return;
+      continue;
     }
     if (raw.gender && !GENDER_VALUES.has(raw.gender.toUpperCase())) {
       errors.push({ row: raw.rowNumber, message: `Unrecognized gender '${raw.gender}'` });
-      return;
+      continue;
     }
     if (raw.status && !STATUS_VALUES.has(raw.status.toUpperCase())) {
       errors.push({ row: raw.rowNumber, message: `Unrecognized status '${raw.status}'` });
-      return;
+      continue;
     }
     let dateOfBirth: Date | undefined;
     if (raw.dateOfBirth) {
       const parsed = new Date(raw.dateOfBirth);
       if (Number.isNaN(parsed.getTime())) {
         errors.push({ row: raw.rowNumber, message: `Unrecognized date of birth '${raw.dateOfBirth}'` });
-        return;
+        continue;
       }
       dateOfBirth = parsed;
     }
@@ -216,9 +313,28 @@ export async function importBeneficiaries(req: Request, res: Response): Promise<
       const parsed = Number(raw.householdSize);
       if (!Number.isFinite(parsed) || parsed < 0) {
         errors.push({ row: raw.rowNumber, message: `Invalid household size '${raw.householdSize}'` });
-        return;
+        continue;
       }
       householdSize = Math.trunc(parsed);
+    }
+
+    let locationIds: ResolvedLocation = {};
+    if (raw.province || raw.district || raw.sector || raw.cell || raw.village) {
+      const resolved = await resolveLocationIds({
+        province: raw.province,
+        district: raw.district,
+        sector: raw.sector,
+        cell: raw.cell,
+        village: raw.village,
+      });
+      if (!resolved) {
+        errors.push({
+          row: raw.rowNumber,
+          message: `Could not match location '${[raw.province, raw.district, raw.sector, raw.cell, raw.village].filter(Boolean).join(" > ")}' to a known administrative area`,
+        });
+        continue;
+      }
+      locationIds = resolved;
     }
 
     const requestedProgramNames = (raw.programs ?? "")
@@ -239,11 +355,7 @@ export async function importBeneficiaries(req: Request, res: Response): Promise<
         code: `BEN-${year}-${String(startingCount + toCreate.length + 1).padStart(5, "0")}`,
         name: raw.name,
         telephone: raw.telephone,
-        province: raw.province,
-        district: raw.district,
-        sector: raw.sector,
-        cell: raw.cell,
-        village: raw.village,
+        ...locationIds,
         gender: raw.gender ? raw.gender.toUpperCase() : undefined,
         dateOfBirth,
         nationalId: raw.nationalId,
@@ -254,8 +366,7 @@ export async function importBeneficiaries(req: Request, res: Response): Promise<
       programIds,
       unknownPrograms,
     });
-    void idx;
-  });
+  }
 
   const created: { id: string; code: string; name: string }[] = [];
   const warnings: { row: number; message: string }[] = [];

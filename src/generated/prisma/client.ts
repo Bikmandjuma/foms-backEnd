@@ -31,8 +31,8 @@ export * from "./enums.js"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Notifications
- * const notifications = await prisma.notification.findMany()
+ * // Fetch zero or more Provinces
+ * const provinces = await prisma.province.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -41,6 +41,31 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
+/**
+ * Model Province
+ * 
+ */
+export type Province = Prisma.ProvinceModel
+/**
+ * Model District
+ * 
+ */
+export type District = Prisma.DistrictModel
+/**
+ * Model Sector
+ * 
+ */
+export type Sector = Prisma.SectorModel
+/**
+ * Model Cell
+ * 
+ */
+export type Cell = Prisma.CellModel
+/**
+ * Model Village
+ * 
+ */
+export type Village = Prisma.VillageModel
 /**
  * Model Notification
  * 
@@ -67,15 +92,30 @@ export type User = Prisma.UserModel
  */
 export type PasswordResetCode = Prisma.PasswordResetCodeModel
 /**
- * Model AdminLocation
- * 
- */
-export type AdminLocation = Prisma.AdminLocationModel
-/**
  * Model Program
  * 
  */
 export type Program = Prisma.ProgramModel
+/**
+ * Model ProgramTeam
+ * 
+ */
+export type ProgramTeam = Prisma.ProgramTeamModel
+/**
+ * Model ProgramTeamMember
+ * 
+ */
+export type ProgramTeamMember = Prisma.ProgramTeamMemberModel
+/**
+ * Model ProgramTeamVehicle
+ * 
+ */
+export type ProgramTeamVehicle = Prisma.ProgramTeamVehicleModel
+/**
+ * Model AvailabilityCheck
+ * 
+ */
+export type AvailabilityCheck = Prisma.AvailabilityCheckModel
 /**
  * Model Beneficiary
  * 

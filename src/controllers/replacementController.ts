@@ -101,7 +101,7 @@ export async function createReplacementRequest(req: Request, res: Response): Pro
       outcome: { not: "REPLACED" },
       assignments: { none: { status: "ACTIVE" } },
     },
-    select: { id: true, code: true, name: true, province: true, district: true, sector: true, cell: true, village: true },
+    select: { id: true, code: true, name: true, provinceId: true, districtId: true, sectorId: true, cellId: true, villageId: true },
     take: 1000,
   });
 
@@ -189,7 +189,7 @@ export async function retryReplacementRequest(req: Request, res: Response): Prom
       outcome: { not: "REPLACED" },
       assignments: { none: { status: "ACTIVE" } },
     },
-    select: { id: true, code: true, name: true, province: true, district: true, sector: true, cell: true, village: true },
+    select: { id: true, code: true, name: true, provinceId: true, districtId: true, sectorId: true, cellId: true, villageId: true },
     take: 1000,
   });
 

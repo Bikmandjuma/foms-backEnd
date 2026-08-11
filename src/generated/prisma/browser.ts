@@ -18,6 +18,31 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
+ * Model Province
+ * 
+ */
+export type Province = Prisma.ProvinceModel
+/**
+ * Model District
+ * 
+ */
+export type District = Prisma.DistrictModel
+/**
+ * Model Sector
+ * 
+ */
+export type Sector = Prisma.SectorModel
+/**
+ * Model Cell
+ * 
+ */
+export type Cell = Prisma.CellModel
+/**
+ * Model Village
+ * 
+ */
+export type Village = Prisma.VillageModel
+/**
  * Model Notification
  * 
  */
@@ -43,15 +68,30 @@ export type User = Prisma.UserModel
  */
 export type PasswordResetCode = Prisma.PasswordResetCodeModel
 /**
- * Model AdminLocation
- * 
- */
-export type AdminLocation = Prisma.AdminLocationModel
-/**
  * Model Program
  * 
  */
 export type Program = Prisma.ProgramModel
+/**
+ * Model ProgramTeam
+ * 
+ */
+export type ProgramTeam = Prisma.ProgramTeamModel
+/**
+ * Model ProgramTeamMember
+ * 
+ */
+export type ProgramTeamMember = Prisma.ProgramTeamMemberModel
+/**
+ * Model ProgramTeamVehicle
+ * 
+ */
+export type ProgramTeamVehicle = Prisma.ProgramTeamVehicleModel
+/**
+ * Model AvailabilityCheck
+ * 
+ */
+export type AvailabilityCheck = Prisma.AvailabilityCheckModel
 /**
  * Model Beneficiary
  * 

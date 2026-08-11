@@ -2,118 +2,76 @@ import type { Request, Response } from "express";
 import { sendResponse } from "../utils/apiResponse.js";
 import { prisma } from "../utils/prisma.js";
 
-export async function listProvinces(_req: Request, res: Response): Promise<void> {
-  const rows = await prisma.adminLocation.findMany({
-    distinct: ["province"],
-    select: { province: true },
-    orderBy: { province: "asc" },
-  });
+function intParam(value: unknown): number | undefined {
+  if (typeof value !== "string") return undefined;
+  const n = Number(value);
+  return Number.isInteger(n) ? n : undefined;
+}
 
-  sendResponse(
-    res,
-    200,
-    "Provinces retrieved successfully",
-    rows.map((r: { province: string }) => r.province)
-  );
+export async function listProvinces(_req: Request, res: Response): Promise<void> {
+  const rows = await prisma.province.findMany({
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
+  });
+  sendResponse(res, 200, "Provinces retrieved successfully", rows);
 }
 
 export async function listDistricts(req: Request, res: Response): Promise<void> {
-  const { province } = req.query;
-
-  if (typeof province !== "string") {
+  const provinceId = intParam(req.query.provinceId);
+  if (provinceId === undefined) {
     sendResponse(res, 200, "Districts retrieved successfully", []);
     return;
   }
 
-  const rows = await prisma.adminLocation.findMany({
-    where: { province },
-    distinct: ["district"],
-    select: { district: true },
-    orderBy: { district: "asc" },
+  const rows = await prisma.district.findMany({
+    where: { provinceId },
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
   });
-
-  sendResponse(
-    res,
-    200,
-    "Districts retrieved successfully",
-    rows.map((r: { district: string }) => r.district)
-  );
+  sendResponse(res, 200, "Districts retrieved successfully", rows);
 }
 
 export async function listSectors(req: Request, res: Response): Promise<void> {
-  const { province, district } = req.query;
-
-  if (typeof district !== "string") {
+  const districtId = intParam(req.query.districtId);
+  if (districtId === undefined) {
     sendResponse(res, 200, "Sectors retrieved successfully", []);
     return;
   }
 
-  const rows = await prisma.adminLocation.findMany({
-    where: {
-      district,
-      ...(typeof province === "string" ? { province } : {}),
-    },
-    distinct: ["sector"],
-    select: { sector: true },
-    orderBy: { sector: "asc" },
+  const rows = await prisma.sector.findMany({
+    where: { districtId },
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
   });
-
-  sendResponse(
-    res,
-    200,
-    "Sectors retrieved successfully",
-    rows.map((r: { sector: string }) => r.sector)
-  );
+  sendResponse(res, 200, "Sectors retrieved successfully", rows);
 }
 
 export async function listCells(req: Request, res: Response): Promise<void> {
-  const { district, sector } = req.query;
-
-  if (typeof sector !== "string") {
+  const sectorId = intParam(req.query.sectorId);
+  if (sectorId === undefined) {
     sendResponse(res, 200, "Cells retrieved successfully", []);
     return;
   }
 
-  const rows = await prisma.adminLocation.findMany({
-    where: {
-      sector,
-      ...(typeof district === "string" ? { district } : {}),
-    },
-    distinct: ["cell"],
-    select: { cell: true },
-    orderBy: { cell: "asc" },
+  const rows = await prisma.cell.findMany({
+    where: { sectorId },
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
   });
-
-  sendResponse(
-    res,
-    200,
-    "Cells retrieved successfully",
-    rows.map((r: { cell: string }) => r.cell)
-  );
+  sendResponse(res, 200, "Cells retrieved successfully", rows);
 }
 
 export async function listVillages(req: Request, res: Response): Promise<void> {
-  const { sector, cell } = req.query;
-
-  if (typeof cell !== "string") {
+  const cellId = intParam(req.query.cellId);
+  if (cellId === undefined) {
     sendResponse(res, 200, "Villages retrieved successfully", []);
     return;
   }
 
-  const rows = await prisma.adminLocation.findMany({
-    where: {
-      cell,
-      ...(typeof sector === "string" ? { sector } : {}),
-    },
-    distinct: ["village"],
-    select: { village: true },
-    orderBy: { village: "asc" },
+  const rows = await prisma.village.findMany({
+    where: { cellId },
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
   });
-
-  sendResponse(
-    res,
-    200,
-    "Villages retrieved successfully",
-    rows.map((r: { village: string }) => r.village)
-  );
+  sendResponse(res, 200, "Villages retrieved successfully", rows);
 }

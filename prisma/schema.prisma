@@ -7,6 +7,84 @@ datasource db {
   provider = "mysql"
 }
 
+// --- Rwanda's real administrative hierarchy, normalized -------------------
+// Numeric ids matching the government reference codes (imported once via
+// scripts/import-geo-sql.ts). `izina` on Province is the Kinyarwanda name.
+
+model Province {
+  id            Int           @id
+  name          String        @db.VarChar(255)
+  izina         String        @db.VarChar(255)
+  createdAt     DateTime?     @map("created_at") @db.Timestamp(0)
+  updatedAt     DateTime?     @map("updated_at") @db.Timestamp(0)
+  districts     District[]
+  users         User[]
+  beneficiaries Beneficiary[]
+
+  @@map("provinces")
+}
+
+model District {
+  id            Int           @id
+  name          String        @db.VarChar(255)
+  provinceId    Int           @map("province")
+  createdAt     DateTime?     @map("created_at") @db.Timestamp(0)
+  updatedAt     DateTime?     @map("updated_at") @db.Timestamp(0)
+  province      Province      @relation(fields: [provinceId], references: [id], map: "districts_province_fkey")
+  sectors       Sector[]
+  users         User[]
+  beneficiaries Beneficiary[]
+
+  @@index([provinceId], map: "districts_province_foreign")
+  @@map("districts")
+}
+
+model Sector {
+  id            Int           @id
+  name          String        @db.VarChar(255)
+  districtId    Int           @map("district")
+  createdAt     DateTime?     @map("created_at") @db.Timestamp(0)
+  updatedAt     DateTime?     @map("updated_at") @db.Timestamp(0)
+  district      District      @relation(fields: [districtId], references: [id], map: "sectors_district_fkey")
+  cells         Cell[]
+  users         User[]
+  beneficiaries Beneficiary[]
+
+  @@index([districtId], map: "sectors_district_foreign")
+  @@map("sectors")
+}
+
+model Cell {
+  id            Int           @id
+  name          String        @db.VarChar(255)
+  sectorId      Int           @map("sector")
+  createdAt     DateTime?     @map("created_at") @db.Timestamp(0)
+  updatedAt     DateTime?     @map("updated_at") @db.Timestamp(0)
+  sector        Sector        @relation(fields: [sectorId], references: [id], map: "cells_sector_fkey")
+  villages      Village[]
+  users         User[]
+  beneficiaries Beneficiary[]
+
+  @@index([sectorId], map: "cells_sector_foreign")
+  @@map("cells")
+}
+
+model Village {
+  id            Int           @id
+  name          String        @db.VarChar(255)
+  cellId        Int           @map("cell")
+  createdAt     DateTime?     @map("created_at") @db.Timestamp(0)
+  updatedAt     DateTime?     @map("updated_at") @db.Timestamp(0)
+  cell          Cell          @relation(fields: [cellId], references: [id], map: "villages_cell_fkey")
+  users         User[]
+  beneficiaries Beneficiary[]
+
+  @@index([cellId], map: "villages_cell_foreign")
+  @@map("villages")
+}
+
+// ---------------------------------------------------------------------
+
 model Notification {
   id         String           @id @default(uuid())
   type       NotificationType
@@ -36,6 +114,8 @@ model Tenant {
   notifications          Notification[]
   programs               Program[]
   programAssignments     ProgramAssignment[]
+  programTeams           ProgramTeam[]
+  availabilityChecks     AvailabilityCheck[]
   replacementRequests    ReplacementRequest[]
   roles                  Role[]
   users                  User[]
@@ -43,15 +123,18 @@ model Tenant {
 }
 
 model Role {
-  id          String   @id @default(uuid())
-  name        String
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  tenantId    String
-  permissions Json?
-  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  users       User[]
+  id                       String    @id @default(uuid())
+  name                     String
+  description              String?
+  createdAt                DateTime  @default(now())
+  updatedAt                DateTime  @updatedAt
+  tenantId                 String
+  permissions              Json?
+  tenant                   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  users                    User[]
+  programsAsTeamLeaderRole Program[] @relation("TeamLeaderRole")
+  programsAsTeamMemberRole Program[] @relation("TeamMemberRole")
+  programsAsCheckerRole    Program[] @relation("CheckerRole")
 
   @@unique([tenantId, name])
 }
@@ -67,9 +150,16 @@ model User {
   createdAt                  DateTime                @default(now())
   updatedAt                  DateTime                @updatedAt
   telephone                  String?
-  province                   String?
-  district                   String?
-  sector                     String?
+  provinceId                 Int?
+  districtId                 Int?
+  sectorId                   Int?
+  cellId                     Int?
+  villageId                  Int?
+  province                   Province?               @relation(fields: [provinceId], references: [id])
+  district                   District?               @relation(fields: [districtId], references: [id])
+  sector                     Sector?                 @relation(fields: [sectorId], references: [id])
+  cell                       Cell?                   @relation(fields: [cellId], references: [id])
+  village                    Village?                @relation(fields: [villageId], references: [id])
   gender                     Gender?
   dateOfBirth                DateTime?
   status                     UserStatus              @default(ACTIVE)
@@ -79,13 +169,14 @@ model User {
   roleId                     String?
   tenantId                   String?
   lastSeenAt                 DateTime?
-  cell                       String?
-  village                    String?
   activityLogs               ActivityLog[]
   beneficiaryAssignments     BeneficiaryAssignment[]
   fieldCheckIns              FieldCheckIn[]
   notifications              Notification[]
   programAssignments         ProgramAssignment[]
+  programTeamsLed            ProgramTeam[]           @relation("ProgramTeamLeader")
+  programTeamMemberships     ProgramTeamMember[]
+  availabilityChecks         AvailabilityCheck[]
   replacementRequestsDecided ReplacementRequest[]    @relation("DecidedBy")
   replacementRequestsMade    ReplacementRequest[]    @relation("RequestedBy")
   role                       Role?                   @relation(fields: [roleId], references: [id])
@@ -94,6 +185,11 @@ model User {
 
   @@index([roleId], map: "User_roleId_fkey")
   @@index([tenantId], map: "User_tenantId_fkey")
+  @@index([provinceId])
+  @@index([districtId])
+  @@index([sectorId])
+  @@index([cellId])
+  @@index([villageId])
 }
 
 model PasswordResetCode {
@@ -106,39 +202,106 @@ model PasswordResetCode {
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model AdminLocation {
-  id       String @id @default(uuid())
-  province String
-  district String
-  sector   String
-  cell     String
-  village  String
-
-  @@unique([province, district, sector, cell, village], map: "AdminLocation_full_path_key")
-  @@index([province], map: "AdminLocation_province_idx")
-  @@index([province, district], map: "AdminLocation_province_district_idx")
-  @@index([province, district, sector], map: "AdminLocation_pds_idx")
-  @@index([province, district, sector, cell], map: "AdminLocation_pdsc_idx")
-}
-
 model Program {
-  id               String              @id @default(uuid())
-  name             String
-  description      String?
-  createdAt        DateTime            @default(now())
-  updatedAt        DateTime            @updatedAt
-  tenantId         String
-  endDate          DateTime?
-  scenarioType     ScenarioType?
-  startDate        DateTime?
-  status           ProjectStatus       @default(PLANNING)
-  targetSampleSize Int?
-  fieldCheckIns    FieldCheckIn[]
-  tenant           Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  assignments      ProgramAssignment[]
-  beneficiaries    Beneficiary[]       @relation("BeneficiaryToProgram")
+  id                 String              @id @default(uuid())
+  name               String
+  description        String?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  tenantId           String
+  endDate            DateTime?
+  scenarioType       ScenarioType?
+  startDate          DateTime?
+  status             ProjectStatus       @default(PLANNING)
+  targetSampleSize   Int?
+  // Team-based field-ops config — all nullable until an admin configures them.
+  teamCount          Int?
+  membersPerTeam     Int?
+  teamLeaderRoleId   String?
+  teamMemberRoleId   String?
+  checkerRoleId      String?
+  teamLeaderRole     Role?               @relation("TeamLeaderRole", fields: [teamLeaderRoleId], references: [id], onDelete: SetNull)
+  teamMemberRole     Role?               @relation("TeamMemberRole", fields: [teamMemberRoleId], references: [id], onDelete: SetNull)
+  checkerRole        Role?               @relation("CheckerRole", fields: [checkerRoleId], references: [id], onDelete: SetNull)
+  fieldCheckIns      FieldCheckIn[]
+  tenant             Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  assignments        ProgramAssignment[]
+  teams              ProgramTeam[]
+  availabilityChecks AvailabilityCheck[]
+  beneficiaries      Beneficiary[]       @relation("BeneficiaryToProgram")
 
   @@unique([tenantId, name])
+  @@index([teamLeaderRoleId], map: "Program_teamLeaderRoleId_fkey")
+  @@index([teamMemberRoleId], map: "Program_teamMemberRoleId_fkey")
+  @@index([checkerRoleId], map: "Program_checkerRoleId_fkey")
+}
+
+model ProgramTeam {
+  id        String               @id @default(uuid())
+  programId String
+  tenantId  String
+  name      String
+  leaderId  String?
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  program   Program              @relation(fields: [programId], references: [id], onDelete: Cascade)
+  tenant    Tenant               @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  leader    User?                @relation("ProgramTeamLeader", fields: [leaderId], references: [id], onDelete: SetNull)
+  members   ProgramTeamMember[]
+  vehicles  ProgramTeamVehicle[]
+
+  @@unique([programId, name])
+  @@index([tenantId], map: "ProgramTeam_tenantId_fkey")
+  @@index([leaderId], map: "ProgramTeam_leaderId_fkey")
+}
+
+model ProgramTeamMember {
+  id        String      @id @default(uuid())
+  teamId    String
+  programId String
+  userId    String
+  createdAt DateTime    @default(now())
+  team      ProgramTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([programId, userId])
+  @@index([teamId], map: "ProgramTeamMember_teamId_fkey")
+  @@index([userId], map: "ProgramTeamMember_userId_fkey")
+}
+
+model ProgramTeamVehicle {
+  id        String      @id @default(uuid())
+  teamId    String
+  vehicleId String
+  createdAt DateTime    @default(now())
+  team      ProgramTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  vehicle   Vehicle     @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, vehicleId])
+  @@index([vehicleId], map: "ProgramTeamVehicle_vehicleId_fkey")
+}
+
+model AvailabilityCheck {
+  id            String                  @id @default(uuid())
+  programId     String
+  beneficiaryId String
+  userId        String
+  tenantId      String
+  status        AvailabilityCheckStatus @default(PENDING)
+  notes         String?
+  assignedAt    DateTime                @default(now())
+  checkedAt     DateTime?
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+  program       Program                 @relation(fields: [programId], references: [id], onDelete: Cascade)
+  beneficiary   Beneficiary             @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
+  user          User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant        Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([programId, beneficiaryId])
+  @@index([beneficiaryId], map: "AvailabilityCheck_beneficiaryId_fkey")
+  @@index([userId], map: "AvailabilityCheck_userId_fkey")
+  @@index([tenantId], map: "AvailabilityCheck_tenantId_fkey")
 }
 
 model Beneficiary {
@@ -149,9 +312,16 @@ model Beneficiary {
   gender                       Gender?
   dateOfBirth                  DateTime?
   status                       UserStatus              @default(ACTIVE)
-  province                     String?
-  district                     String?
-  sector                       String?
+  provinceId                   Int?
+  districtId                   Int?
+  sectorId                     Int?
+  cellId                       Int?
+  villageId                    Int?
+  province                     Province?               @relation(fields: [provinceId], references: [id])
+  district                     District?               @relation(fields: [districtId], references: [id])
+  sector                       Sector?                 @relation(fields: [sectorId], references: [id])
+  cell                         Cell?                   @relation(fields: [cellId], references: [id])
+  village                      Village?                @relation(fields: [villageId], references: [id])
   nationalId                   String?
   householdSize                Int?
   createdAt                    DateTime                @default(now())
@@ -160,17 +330,21 @@ model Beneficiary {
   consentAt                    DateTime?
   consentGiven                 Boolean                 @default(false)
   outcome                      ResponseOutcome         @default(PENDING)
-  cell                         String?
-  village                      String?
   tenant                       Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   assignments                  BeneficiaryAssignment[]
   fieldVisits                  FieldVisit[]
+  availabilityChecks           AvailabilityCheck[]
   candidateReplacementRequests ReplacementRequest[]    @relation("CandidateRespondent")
   originalReplacementRequests  ReplacementRequest[]    @relation("OriginalRespondent")
   programs                     Program[]               @relation("BeneficiaryToProgram")
 
   @@unique([tenantId, code])
   @@unique([tenantId, nationalId])
+  @@index([provinceId])
+  @@index([districtId])
+  @@index([sectorId])
+  @@index([cellId])
+  @@index([villageId])
 }
 
 model ProgramAssignment {
@@ -226,6 +400,7 @@ model Vehicle {
   updatedAt      DateTime                @updatedAt
   tenantId       String
   assignments    BeneficiaryAssignment[]
+  teams          ProgramTeamVehicle[]
   tenant         Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@index([tenantId], map: "Vehicle_tenantId_fkey")
@@ -409,4 +584,16 @@ enum NotificationType {
   REPLACEMENT_REQUESTED
   REPLACEMENT_DECIDED
   SYSTEM
+}
+
+// PENDING/AVAILABLE plus the app's established field-visit outcome
+// vocabulary — matches the corrected enum from migration
+// 20260810162020_availability_check_statuses.
+enum AvailabilityCheckStatus {
+  PENDING
+  AVAILABLE
+  REFUSED
+  NOT_FOUND
+  RELOCATED
+  DECEASED
 }

@@ -34,6 +34,10 @@ export const PERMISSIONS = [
   "assignments:edit",
   "assignments:delete",
   "assignments:manage", // legacy
+  "teams:view",
+  "teams:create",
+  "teams:edit",
+  "teams:delete",
   "replacements:view",
   "replacements:create",
   "replacements:edit",
@@ -45,6 +49,7 @@ export const PERMISSIONS = [
   "vehicles:delete",
   "monitoring:view",
   "monitoring:manage",
+  "field-team-reports:view",
   "activity:view",
   "tenants:view",
   "tenants:manage",
@@ -61,6 +66,7 @@ export const PERMISSION_GROUPS: { label: string; permissions: Permission[] }[] =
     permissions: ["beneficiaries:view", "beneficiaries:create", "beneficiaries:edit", "beneficiaries:delete"],
   },
   { label: "Assignments", permissions: ["assignments:view", "assignments:create", "assignments:edit", "assignments:delete"] },
+  { label: "Program teams", permissions: ["teams:view", "teams:create", "teams:edit", "teams:delete"] },
   {
     label: "Replacement requests",
     permissions: ["replacements:view", "replacements:create", "replacements:edit", "replacements:delete"],
@@ -70,6 +76,7 @@ export const PERMISSION_GROUPS: { label: string; permissions: Permission[] }[] =
   // about overriding an in-progress check-out, not CRUD — so they keep the
   // simpler view/manage shape.
   { label: "Field monitoring", permissions: ["monitoring:view", "monitoring:manage"] },
+  { label: "Field team reports", permissions: ["field-team-reports:view"] },
   { label: "Activity logs", permissions: ["activity:view"] },
 ];
 

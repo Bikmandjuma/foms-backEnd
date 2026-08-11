@@ -28,11 +28,11 @@ const userProfileFields = {
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   telephone: z.string().optional(),
-  province: z.string().optional(),
-  district: z.string().optional(),
-  sector: z.string().optional(),
-  cell: z.string().optional(),
-  village: z.string().optional(),
+  provinceId: z.number().int().optional(),
+  districtId: z.number().int().optional(),
+  sectorId: z.number().int().optional(),
+  cellId: z.number().int().optional(),
+  villageId: z.number().int().optional(),
   gender: genderSchema.optional(),
   dateOfBirth: z.coerce.date().optional(),
   status: userStatusSchema.optional(),
@@ -109,11 +109,11 @@ export const updateProgramSchema = z.object({
 export const createBeneficiarySchema = z.object({
   name: z.string().min(1),
   telephone: z.string().optional(),
-  province: z.string().optional(),
-  district: z.string().optional(),
-  sector: z.string().optional(),
-  cell: z.string().optional(),
-  village: z.string().optional(),
+  provinceId: z.number().int().optional(),
+  districtId: z.number().int().optional(),
+  sectorId: z.number().int().optional(),
+  cellId: z.number().int().optional(),
+  villageId: z.number().int().optional(),
   gender: genderSchema.optional(),
   dateOfBirth: z.coerce.date().optional(),
   status: userStatusSchema.optional(),
@@ -128,11 +128,11 @@ export const createBeneficiarySchema = z.object({
 export const updateBeneficiarySchema = z.object({
   name: z.string().min(1).optional(),
   telephone: z.string().optional(),
-  province: z.string().optional(),
-  district: z.string().optional(),
-  sector: z.string().optional(),
-  cell: z.string().optional(),
-  village: z.string().optional(),
+  provinceId: z.number().int().optional(),
+  districtId: z.number().int().optional(),
+  sectorId: z.number().int().optional(),
+  cellId: z.number().int().optional(),
+  villageId: z.number().int().optional(),
   gender: genderSchema.optional(),
   dateOfBirth: z.coerce.date().optional(),
   status: userStatusSchema.optional(),
@@ -167,6 +167,47 @@ export const bulkProgramAssignmentSchema = z.object({
 export const autoAssignBeneficiariesSchema = z.object({
   programId: z.string().uuid(),
   vehicleIds: z.array(z.string().uuid()).min(1, "Select at least one vehicle"),
+});
+
+export const updateProgramTeamConfigSchema = z.object({
+  programId: z.string().uuid(),
+  teamLeaderRoleId: z.string().uuid(),
+  teamMemberRoleId: z.string().uuid(),
+  membersPerTeam: z.number().int().min(1).max(500),
+});
+
+export const setProgramTeamLeaderSchema = z.object({
+  userId: z.string().uuid(),
+});
+
+export const addProgramTeamMemberSchema = z.object({
+  userId: z.string().uuid(),
+});
+
+export const addProgramTeamVehicleSchema = z.object({
+  vehicleId: z.string().uuid(),
+});
+
+// "Confirm availability" — an independent, saved-per-program configuration
+// (which role does the checking) separate from the geo-assignment engine.
+export const updateAvailabilityCheckConfigSchema = z.object({
+  programId: z.string().uuid(),
+  checkerRoleId: z.string().uuid(),
+});
+
+export const assignAvailabilityChecksSchema = z.object({
+  programId: z.string().uuid(),
+});
+
+// The checker's own submit — PENDING is the default-only "not checked yet"
+// state and is never a choice here.
+export const submitAvailabilityCheckSchema = z.object({
+  status: z.enum(["AVAILABLE", "REFUSED", "NOT_FOUND", "RELOCATED", "DECEASED"]),
+  notes: z.string().optional(),
+});
+
+export const programTeamProgramIdSchema = z.object({
+  programId: z.string().uuid(),
 });
 
 export const createVehicleSchema = z.object({

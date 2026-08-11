@@ -1,0 +1,3 @@
+-- No schema changes required.
+-- province, district and sector already exist from
+-- 20260806120000_user_profile_and_geo.

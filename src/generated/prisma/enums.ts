@@ -131,3 +131,15 @@ export const NotificationType = {
 } as const
 
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const AvailabilityCheckStatus = {
+  PENDING: 'PENDING',
+  AVAILABLE: 'AVAILABLE',
+  REFUSED: 'REFUSED',
+  NOT_FOUND: 'NOT_FOUND',
+  RELOCATED: 'RELOCATED',
+  DECEASED: 'DECEASED'
+} as const
+
+export type AvailabilityCheckStatus = (typeof AvailabilityCheckStatus)[keyof typeof AvailabilityCheckStatus]
