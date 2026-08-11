@@ -10,6 +10,12 @@
 -- Normalize User and Beneficiary geographic locations
 -- ============================================================
 
+-- ============================================================
+-- Normalize User and Beneficiary geographic locations
+-- ============================================================
+
+-- Add all normalized geographic FK columns.
+
 ALTER TABLE `User`
     ADD COLUMN `provinceId` INT NULL;
 
@@ -25,7 +31,6 @@ ALTER TABLE `User`
 ALTER TABLE `User`
     ADD COLUMN `villageId` INT NULL;
 
-
 ALTER TABLE `Beneficiary`
     ADD COLUMN `provinceId` INT NULL;
 
@@ -40,6 +45,7 @@ ALTER TABLE `Beneficiary`
 
 ALTER TABLE `Beneficiary`
     ADD COLUMN `villageId` INT NULL;
+
 
 
 -- ============================================================
