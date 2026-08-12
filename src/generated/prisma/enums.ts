@@ -94,6 +94,15 @@ export const ResponseOutcome = {
 export type ResponseOutcome = (typeof ResponseOutcome)[keyof typeof ResponseOutcome]
 
 
+export const ConfirmationStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type ConfirmationStatus = (typeof ConfirmationStatus)[keyof typeof ConfirmationStatus]
+
+
 export const ReplacementStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
@@ -139,19 +148,18 @@ export const NotificationType = {
   ASSIGNMENT_BENEFICIARY: 'ASSIGNMENT_BENEFICIARY',
   REPLACEMENT_REQUESTED: 'REPLACEMENT_REQUESTED',
   REPLACEMENT_DECIDED: 'REPLACEMENT_DECIDED',
+  EXPENSE_REVIEWED: 'EXPENSE_REVIEWED',
+  OUTCOME_REVIEWED: 'OUTCOME_REVIEWED',
   SYSTEM: 'SYSTEM'
 } as const
 
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
 
 
-export const AvailabilityCheckStatus = {
+export const ExpenseStatus = {
   PENDING: 'PENDING',
-  AVAILABLE: 'AVAILABLE',
-  REFUSED: 'REFUSED',
-  NOT_FOUND: 'NOT_FOUND',
-  RELOCATED: 'RELOCATED',
-  DECEASED: 'DECEASED'
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
 } as const
 
-export type AvailabilityCheckStatus = (typeof AvailabilityCheckStatus)[keyof typeof AvailabilityCheckStatus]
+export type ExpenseStatus = (typeof ExpenseStatus)[keyof typeof ExpenseStatus]

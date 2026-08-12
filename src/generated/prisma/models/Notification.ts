@@ -411,7 +411,11 @@ export type NotificationListRelationFilter = {
 }
 
 export type NotificationOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+  _count?: Prisma.SortOrder 
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
 }
 
 export type EnumNotificationTypeFieldUpdateOperationsInput = {
