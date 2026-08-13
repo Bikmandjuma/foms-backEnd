@@ -2,9 +2,12 @@ import { Router } from "express";
 import {
   addProgramTeamMember,
   addProgramTeamVehicle,
+  adoptGroup,
+  assignRandomRespondentToGroupMember,
   autoAssignProgramTeamVehicles,
   clearProgramTeamLeader,
   getProgramTeams,
+  listImportedGroups,
   removeProgramTeamMember,
   removeProgramTeamVehicle,
   runProgramAssignment,
@@ -20,6 +23,9 @@ const router = Router();
 router.use(authenticate);
 
 router.get("/", requirePermission("teams:view"), asyncHandler(getProgramTeams));
+router.get("/groups", requirePermission("teams:view"), asyncHandler(listImportedGroups));
+router.post("/groups/adopt", requirePermission("teams:create"), asyncHandler(adoptGroup));
+router.post("/:teamId/members/:userId/assign-random", requirePermission("teams:edit"), asyncHandler(assignRandomRespondentToGroupMember));
 router.put("/config", requirePermission("teams:create"), asyncHandler(updateProgramTeamConfig));
 router.post("/run", requirePermission("teams:create"), asyncHandler(runProgramAssignment));
 router.post("/:teamId/leader", requirePermission("teams:edit"), asyncHandler(setProgramTeamLeader));

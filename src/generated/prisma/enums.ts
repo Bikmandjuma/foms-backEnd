@@ -52,7 +52,8 @@ export const ScenarioType = {
   ENDLINE_SURVEY: 'ENDLINE_SURVEY',
   TRACER_STUDY: 'TRACER_STUDY',
   PROGRAM_OUTCOME_ASSESSMENT: 'PROGRAM_OUTCOME_ASSESSMENT',
-  QUALITATIVE_STUDY: 'QUALITATIVE_STUDY'
+  QUALITATIVE_STUDY: 'QUALITATIVE_STUDY',
+  OTHER: 'OTHER'
 } as const
 
 export type ScenarioType = (typeof ScenarioType)[keyof typeof ScenarioType]
@@ -63,7 +64,8 @@ export const ProjectStatus = {
   FIELDWORK: 'FIELDWORK',
   DATA_CLEANING: 'DATA_CLEANING',
   REPORTING: 'REPORTING',
-  COMPLETED: 'COMPLETED'
+  COMPLETED: 'COMPLETED',
+  OTHER: 'OTHER'
 } as const
 
 export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
@@ -127,10 +129,30 @@ export const NotificationType = {
   ASSIGNMENT_BENEFICIARY: 'ASSIGNMENT_BENEFICIARY',
   REPLACEMENT_REQUESTED: 'REPLACEMENT_REQUESTED',
   REPLACEMENT_DECIDED: 'REPLACEMENT_DECIDED',
+  EXPENSE_REVIEWED: 'EXPENSE_REVIEWED',
+  OUTCOME_REVIEWED: 'OUTCOME_REVIEWED',
   SYSTEM: 'SYSTEM'
 } as const
 
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const FieldExpenseStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type FieldExpenseStatus = (typeof FieldExpenseStatus)[keyof typeof FieldExpenseStatus]
+
+
+export const ConfirmationStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type ConfirmationStatus = (typeof ConfirmationStatus)[keyof typeof ConfirmationStatus]
 
 
 export const AvailabilityCheckStatus = {

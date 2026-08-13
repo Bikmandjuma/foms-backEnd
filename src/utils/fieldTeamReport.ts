@@ -6,6 +6,7 @@ export interface FieldTeamReportRow {
   id: string;
   teamName: string;
   district: string | null;
+  supervisorId: string | null;
   supervisorName: string | null;
   supervisorPhone: string | null;
   staffName: string;
@@ -15,18 +16,20 @@ export interface FieldTeamReportRow {
   respondentPhone: string | null;
   sector: string | null;
   cell: string | null;
-  challengesObservations: string;
+  status: ResponseOutcome | "NOT_ASSIGNED";
+  statusLabel: string;
+  notes: string | null;
   visitDate: string | null;
 }
 
 const OUTCOME_LABELS: Record<ResponseOutcome, string> = {
   PENDING: "Not yet interviewed",
-  COMPLETED: "Assigned respondent — interviewed as planned",
-  REFUSED: "No interview conducted — respondent declined",
-  NOT_FOUND: "No interview conducted — respondent unreachable/not found",
-  RELOCATED: "No interview conducted — respondent relocated",
-  DECEASED: "No interview conducted — respondent deceased",
-  REPLACED: "Respondent was replaced",
+  COMPLETED: "Completed",
+  REFUSED: "Refused",
+  NOT_FOUND: "Not found",
+  RELOCATED: "Relocated",
+  DECEASED: "Deceased",
+  REPLACED: "Replaced",
 };
 
 /** Parses a "YYYY-MM-DD"-style query param into a Date, or throws a 400. */
@@ -38,33 +41,64 @@ function parseDateParam(value: unknown, label: string): Date | undefined {
   return date;
 }
 
+const STATUS_VALUES = new Set(["PENDING", "COMPLETED", "REFUSED", "NOT_FOUND", "RELOCATED", "DECEASED", "REPLACED", "NOT_ASSIGNED"]);
+const PERIOD_VALUES = new Set(["daily", "weekly", "monthly", "yearly"]);
+
+/** Turns a "daily/weekly/monthly/yearly" shorthand into an actual date
+ * range ending now — only used when the caller didn't give explicit
+ * startDate/endDate, which always win when present. */
+function dateRangeForPeriod(period: string): { startDate: Date; endDate: Date } {
+  const endDate = new Date();
+  const startDate = new Date();
+  if (period === "daily") startDate.setDate(startDate.getDate() - 1);
+  else if (period === "weekly") startDate.setDate(startDate.getDate() - 7);
+  else if (period === "monthly") startDate.setMonth(startDate.getMonth() - 1);
+  else startDate.setFullYear(startDate.getFullYear() - 1);
+  return { startDate, endDate };
+}
+
 export interface FieldTeamReportFilters {
   programId: string;
+  teamId?: string;
   startDate?: Date;
   endDate?: Date;
   search?: string;
+  status?: string;
 }
 
 /** Parses and validates the report's query params — shared by the list and
  * export endpoints so both apply exactly the same rules. Throws ApiError on
  * anything invalid, including an end date before the start date. */
 export function parseFieldTeamReportFilters(query: Record<string, unknown>): FieldTeamReportFilters {
-  const { programId, startDate: rawStart, endDate: rawEnd, search } = query;
+  const { programId, teamId, startDate: rawStart, endDate: rawEnd, search, status, period } = query;
   if (typeof programId !== "string" || !programId) {
     throw new ApiError(400, "programId query parameter is required");
   }
 
-  const startDate = parseDateParam(rawStart, "startDate");
-  const endDate = parseDateParam(rawEnd, "endDate");
+  let startDate = parseDateParam(rawStart, "startDate");
+  let endDate = parseDateParam(rawEnd, "endDate");
   if (startDate && endDate && startDate.getTime() > endDate.getTime()) {
     throw new ApiError(400, "startDate must be on or before endDate");
   }
 
+  // Report-period shorthand (daily/weekly/monthly/yearly) only applies when
+  // no explicit date range was given — explicit dates always take priority.
+  if (!startDate && !endDate && typeof period === "string" && period) {
+    if (!PERIOD_VALUES.has(period)) throw new ApiError(400, "period must be one of daily, weekly, monthly, yearly");
+    ({ startDate, endDate } = dateRangeForPeriod(period));
+  }
+
+  if (status !== undefined && (typeof status !== "string" || !STATUS_VALUES.has(status))) {
+    throw new ApiError(400, "status must be one of PENDING, COMPLETED, REFUSED, NOT_FOUND, RELOCATED, DECEASED, REPLACED, NOT_ASSIGNED");
+  }
+
   return {
     programId,
+    teamId: typeof teamId === "string" && teamId ? teamId : undefined,
     startDate,
     endDate,
     search: typeof search === "string" && search.trim() ? search.trim().toLowerCase() : undefined,
+    status: typeof status === "string" ? status : undefined,
   };
 }
 
@@ -74,15 +108,25 @@ export function parseFieldTeamReportFilters(query: Record<string, unknown>): Fie
  * range is given, only members with a recorded field visit inside that
  * window are included (the report is scoped to what happened in that
  * window); otherwise every member is shown with their latest known status.
+ *
+ * `canViewUnconfirmed` gates whether a visit's outcome/notes show before its
+ * supervisor has confirmed it — Admin and Data Manager roles are expected
+ * not to have this by default, so a row's real status stays hidden (shown
+ * as "Pending confirmation") until confirmed; Supervisors, who do the
+ * confirming, see everything immediately.
  */
-export async function getFieldTeamReportRows(tenantId: string, filters: FieldTeamReportFilters): Promise<FieldTeamReportRow[]> {
-  const { programId, startDate, endDate, search } = filters;
+export async function getFieldTeamReportRows(
+  tenantId: string,
+  filters: FieldTeamReportFilters,
+  canViewUnconfirmed: boolean
+): Promise<FieldTeamReportRow[]> {
+  const { programId, teamId, startDate, endDate, search, status } = filters;
 
   const program = await prisma.program.findFirst({ where: { id: programId, tenantId } });
   if (!program) throw new ApiError(404, "Program not found");
 
   const teams = await prisma.programTeam.findMany({
-    where: { programId, tenantId },
+    where: { programId, tenantId, ...(teamId ? { id: teamId } : {}) },
     include: {
       leader: { select: { id: true, name: true, telephone: true } },
       members: {
@@ -162,18 +206,30 @@ export async function getFieldTeamReportRows(tenantId: string, filters: FieldTea
       // part of that period's report.
       if (dateRangeGiven && !visit) continue;
 
-      const challengesObservations = visit?.note?.trim()
-        ? visit.note.trim()
-        : visit
-          ? OUTCOME_LABELS[visit.outcome]
-          : assignment
-            ? "Not yet interviewed"
-            : "No respondent assigned yet";
+      // A visit the supervisor hasn't confirmed yet stays hidden from
+      // viewers without canViewUnconfirmed — they see that it's pending,
+      // not what was actually recorded.
+      const isHiddenPendingConfirmation = Boolean(visit) && visit!.confirmationStatus !== "CONFIRMED" && !canViewUnconfirmed;
+
+      const trueStatus: FieldTeamReportRow["status"] = !assignment ? "NOT_ASSIGNED" : visit ? visit.outcome : "PENDING";
+      // The real outcome stays hidden — not just its notes — until the
+      // supervisor confirms it, so an ungated "status" filter/column can't
+      // be used to see the answer before it's confirmed.
+      const rowStatus: FieldTeamReportRow["status"] = isHiddenPendingConfirmation ? "PENDING" : trueStatus;
+      const statusLabel = isHiddenPendingConfirmation
+        ? "Pending supervisor confirmation"
+        : !assignment
+          ? "No respondent assigned yet"
+          : OUTCOME_LABELS[rowStatus as ResponseOutcome] ?? rowStatus;
+      const notes = isHiddenPendingConfirmation ? null : (visit?.note?.trim() ?? null);
+
+      if (status && rowStatus !== status) continue;
 
       rows.push({
         id: `${team.id}:${member.userId}`,
         teamName: team.name,
         district: assignment?.beneficiary.district?.name ?? null,
+        supervisorId: team.leader?.id ?? null,
         supervisorName: team.leader?.name ?? null,
         supervisorPhone: team.leader?.telephone ?? null,
         staffName: member.user.name ?? "",
@@ -183,7 +239,9 @@ export async function getFieldTeamReportRows(tenantId: string, filters: FieldTea
         respondentPhone: assignment?.beneficiary.telephone ?? null,
         sector: assignment?.beneficiary.sector?.name ?? null,
         cell: assignment?.beneficiary.cell?.name ?? null,
-        challengesObservations,
+        status: rowStatus,
+        statusLabel,
+        notes,
         visitDate: visit?.recordedAt ? visit.recordedAt.toISOString() : null,
       });
     }

@@ -50,6 +50,12 @@ export const PERMISSIONS = [
   "monitoring:view",
   "monitoring:manage",
   "field-team-reports:view",
+  "field-team-reports:view-unconfirmed",
+  "expenses:view",
+  "expenses:edit",
+  "expenses:delete",
+  "outcomes:view",
+  "outcomes:confirm",
   "activity:view",
   "tenants:view",
   "tenants:manage",
@@ -76,7 +82,12 @@ export const PERMISSION_GROUPS: { label: string; permissions: Permission[] }[] =
   // about overriding an in-progress check-out, not CRUD — so they keep the
   // simpler view/manage shape.
   { label: "Field monitoring", permissions: ["monitoring:view", "monitoring:manage"] },
-  { label: "Field team reports", permissions: ["field-team-reports:view"] },
+  {
+    label: "Field team reports",
+    permissions: ["field-team-reports:view", "field-team-reports:view-unconfirmed"],
+  },
+  { label: "Field expenses", permissions: ["expenses:view", "expenses:edit", "expenses:delete"] },
+  { label: "Outcome confirmations", permissions: ["outcomes:view", "outcomes:confirm"] },
   { label: "Activity logs", permissions: ["activity:view"] },
 ];
 

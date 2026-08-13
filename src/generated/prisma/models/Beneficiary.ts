@@ -32,7 +32,6 @@ export type BeneficiaryAvgAggregateOutputType = {
   sectorId: number | null
   cellId: number | null
   villageId: number | null
-  householdSize: number | null
 }
 
 export type BeneficiarySumAggregateOutputType = {
@@ -41,7 +40,6 @@ export type BeneficiarySumAggregateOutputType = {
   sectorId: number | null
   cellId: number | null
   villageId: number | null
-  householdSize: number | null
 }
 
 export type BeneficiaryMinAggregateOutputType = {
@@ -50,15 +48,16 @@ export type BeneficiaryMinAggregateOutputType = {
   name: string | null
   telephone: string | null
   gender: $Enums.Gender | null
-  dateOfBirth: Date | null
+  ageRange: string | null
   status: $Enums.UserStatus | null
   provinceId: number | null
   districtId: number | null
   sectorId: number | null
   cellId: number | null
   villageId: number | null
-  nationalId: string | null
-  householdSize: number | null
+  ipName: string | null
+  category: string | null
+  personalId: string | null
   createdAt: Date | null
   updatedAt: Date | null
   tenantId: string | null
@@ -73,15 +72,16 @@ export type BeneficiaryMaxAggregateOutputType = {
   name: string | null
   telephone: string | null
   gender: $Enums.Gender | null
-  dateOfBirth: Date | null
+  ageRange: string | null
   status: $Enums.UserStatus | null
   provinceId: number | null
   districtId: number | null
   sectorId: number | null
   cellId: number | null
   villageId: number | null
-  nationalId: string | null
-  householdSize: number | null
+  ipName: string | null
+  category: string | null
+  personalId: string | null
   createdAt: Date | null
   updatedAt: Date | null
   tenantId: string | null
@@ -96,15 +96,16 @@ export type BeneficiaryCountAggregateOutputType = {
   name: number
   telephone: number
   gender: number
-  dateOfBirth: number
+  ageRange: number
   status: number
   provinceId: number
   districtId: number
   sectorId: number
   cellId: number
   villageId: number
-  nationalId: number
-  householdSize: number
+  ipName: number
+  category: number
+  personalId: number
   createdAt: number
   updatedAt: number
   tenantId: number
@@ -121,7 +122,6 @@ export type BeneficiaryAvgAggregateInputType = {
   sectorId?: true
   cellId?: true
   villageId?: true
-  householdSize?: true
 }
 
 export type BeneficiarySumAggregateInputType = {
@@ -130,7 +130,6 @@ export type BeneficiarySumAggregateInputType = {
   sectorId?: true
   cellId?: true
   villageId?: true
-  householdSize?: true
 }
 
 export type BeneficiaryMinAggregateInputType = {
@@ -139,15 +138,16 @@ export type BeneficiaryMinAggregateInputType = {
   name?: true
   telephone?: true
   gender?: true
-  dateOfBirth?: true
+  ageRange?: true
   status?: true
   provinceId?: true
   districtId?: true
   sectorId?: true
   cellId?: true
   villageId?: true
-  nationalId?: true
-  householdSize?: true
+  ipName?: true
+  category?: true
+  personalId?: true
   createdAt?: true
   updatedAt?: true
   tenantId?: true
@@ -162,15 +162,16 @@ export type BeneficiaryMaxAggregateInputType = {
   name?: true
   telephone?: true
   gender?: true
-  dateOfBirth?: true
+  ageRange?: true
   status?: true
   provinceId?: true
   districtId?: true
   sectorId?: true
   cellId?: true
   villageId?: true
-  nationalId?: true
-  householdSize?: true
+  ipName?: true
+  category?: true
+  personalId?: true
   createdAt?: true
   updatedAt?: true
   tenantId?: true
@@ -185,15 +186,16 @@ export type BeneficiaryCountAggregateInputType = {
   name?: true
   telephone?: true
   gender?: true
-  dateOfBirth?: true
+  ageRange?: true
   status?: true
   provinceId?: true
   districtId?: true
   sectorId?: true
   cellId?: true
   villageId?: true
-  nationalId?: true
-  householdSize?: true
+  ipName?: true
+  category?: true
+  personalId?: true
   createdAt?: true
   updatedAt?: true
   tenantId?: true
@@ -295,15 +297,16 @@ export type BeneficiaryGroupByOutputType = {
   name: string
   telephone: string | null
   gender: $Enums.Gender | null
-  dateOfBirth: Date | null
+  ageRange: string | null
   status: $Enums.UserStatus
   provinceId: number | null
   districtId: number | null
   sectorId: number | null
   cellId: number | null
   villageId: number | null
-  nationalId: string | null
-  householdSize: number | null
+  ipName: string | null
+  category: string | null
+  personalId: string | null
   createdAt: Date
   updatedAt: Date
   tenantId: string
@@ -341,15 +344,16 @@ export type BeneficiaryWhereInput = {
   name?: Prisma.StringFilter<"Beneficiary"> | string
   telephone?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   gender?: Prisma.EnumGenderNullableFilter<"Beneficiary"> | $Enums.Gender | null
-  dateOfBirth?: Prisma.DateTimeNullableFilter<"Beneficiary"> | Date | string | null
+  ageRange?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   status?: Prisma.EnumUserStatusFilter<"Beneficiary"> | $Enums.UserStatus
   provinceId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   districtId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   sectorId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   cellId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   villageId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
-  nationalId?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
-  householdSize?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
+  ipName?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
+  category?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
+  personalId?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   tenantId?: Prisma.StringFilter<"Beneficiary"> | string
@@ -376,15 +380,16 @@ export type BeneficiaryOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   telephone?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
-  dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
+  ageRange?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   provinceId?: Prisma.SortOrderInput | Prisma.SortOrder
   districtId?: Prisma.SortOrderInput | Prisma.SortOrder
   sectorId?: Prisma.SortOrderInput | Prisma.SortOrder
   cellId?: Prisma.SortOrderInput | Prisma.SortOrder
   villageId?: Prisma.SortOrderInput | Prisma.SortOrder
-  nationalId?: Prisma.SortOrderInput | Prisma.SortOrder
-  householdSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  ipName?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  personalId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -409,7 +414,7 @@ export type BeneficiaryOrderByWithRelationInput = {
 export type BeneficiaryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   tenantId_code?: Prisma.BeneficiaryTenantIdCodeCompoundUniqueInput
-  tenantId_nationalId?: Prisma.BeneficiaryTenantIdNationalIdCompoundUniqueInput
+  tenantId_personalId?: Prisma.BeneficiaryTenantIdPersonalIdCompoundUniqueInput
   AND?: Prisma.BeneficiaryWhereInput | Prisma.BeneficiaryWhereInput[]
   OR?: Prisma.BeneficiaryWhereInput[]
   NOT?: Prisma.BeneficiaryWhereInput | Prisma.BeneficiaryWhereInput[]
@@ -417,15 +422,16 @@ export type BeneficiaryWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Beneficiary"> | string
   telephone?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   gender?: Prisma.EnumGenderNullableFilter<"Beneficiary"> | $Enums.Gender | null
-  dateOfBirth?: Prisma.DateTimeNullableFilter<"Beneficiary"> | Date | string | null
+  ageRange?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   status?: Prisma.EnumUserStatusFilter<"Beneficiary"> | $Enums.UserStatus
   provinceId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   districtId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   sectorId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   cellId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   villageId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
-  nationalId?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
-  householdSize?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
+  ipName?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
+  category?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
+  personalId?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   tenantId?: Prisma.StringFilter<"Beneficiary"> | string
@@ -444,7 +450,7 @@ export type BeneficiaryWhereUniqueInput = Prisma.AtLeast<{
   candidateReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
   originalReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
   programs?: Prisma.ProgramListRelationFilter
-}, "id" | "tenantId_code" | "tenantId_nationalId">
+}, "id" | "tenantId_code" | "tenantId_personalId">
 
 export type BeneficiaryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -452,15 +458,16 @@ export type BeneficiaryOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   telephone?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
-  dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
+  ageRange?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   provinceId?: Prisma.SortOrderInput | Prisma.SortOrder
   districtId?: Prisma.SortOrderInput | Prisma.SortOrder
   sectorId?: Prisma.SortOrderInput | Prisma.SortOrder
   cellId?: Prisma.SortOrderInput | Prisma.SortOrder
   villageId?: Prisma.SortOrderInput | Prisma.SortOrder
-  nationalId?: Prisma.SortOrderInput | Prisma.SortOrder
-  householdSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  ipName?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  personalId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -483,15 +490,16 @@ export type BeneficiaryScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Beneficiary"> | string
   telephone?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
   gender?: Prisma.EnumGenderNullableWithAggregatesFilter<"Beneficiary"> | $Enums.Gender | null
-  dateOfBirth?: Prisma.DateTimeNullableWithAggregatesFilter<"Beneficiary"> | Date | string | null
+  ageRange?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"Beneficiary"> | $Enums.UserStatus
   provinceId?: Prisma.IntNullableWithAggregatesFilter<"Beneficiary"> | number | null
   districtId?: Prisma.IntNullableWithAggregatesFilter<"Beneficiary"> | number | null
   sectorId?: Prisma.IntNullableWithAggregatesFilter<"Beneficiary"> | number | null
   cellId?: Prisma.IntNullableWithAggregatesFilter<"Beneficiary"> | number | null
   villageId?: Prisma.IntNullableWithAggregatesFilter<"Beneficiary"> | number | null
-  nationalId?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
-  householdSize?: Prisma.IntNullableWithAggregatesFilter<"Beneficiary"> | number | null
+  ipName?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
+  category?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
+  personalId?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Beneficiary"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Beneficiary"> | Date | string
   tenantId?: Prisma.StringWithAggregatesFilter<"Beneficiary"> | string
@@ -506,10 +514,11 @@ export type BeneficiaryCreateInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -535,15 +544,16 @@ export type BeneficiaryUncheckedCreateInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -564,10 +574,11 @@ export type BeneficiaryUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -593,15 +604,16 @@ export type BeneficiaryUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -622,15 +634,16 @@ export type BeneficiaryCreateManyInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -645,10 +658,11 @@ export type BeneficiaryUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -662,15 +676,16 @@ export type BeneficiaryUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -705,9 +720,9 @@ export type BeneficiaryTenantIdCodeCompoundUniqueInput = {
   code: string
 }
 
-export type BeneficiaryTenantIdNationalIdCompoundUniqueInput = {
+export type BeneficiaryTenantIdPersonalIdCompoundUniqueInput = {
   tenantId: string
-  nationalId: string
+  personalId: string
 }
 
 export type BeneficiaryCountOrderByAggregateInput = {
@@ -716,15 +731,16 @@ export type BeneficiaryCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   telephone?: Prisma.SortOrder
   gender?: Prisma.SortOrder
-  dateOfBirth?: Prisma.SortOrder
+  ageRange?: Prisma.SortOrder
   status?: Prisma.SortOrder
   provinceId?: Prisma.SortOrder
   districtId?: Prisma.SortOrder
   sectorId?: Prisma.SortOrder
   cellId?: Prisma.SortOrder
   villageId?: Prisma.SortOrder
-  nationalId?: Prisma.SortOrder
-  householdSize?: Prisma.SortOrder
+  ipName?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  personalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -739,7 +755,6 @@ export type BeneficiaryAvgOrderByAggregateInput = {
   sectorId?: Prisma.SortOrder
   cellId?: Prisma.SortOrder
   villageId?: Prisma.SortOrder
-  householdSize?: Prisma.SortOrder
 }
 
 export type BeneficiaryMaxOrderByAggregateInput = {
@@ -748,15 +763,16 @@ export type BeneficiaryMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   telephone?: Prisma.SortOrder
   gender?: Prisma.SortOrder
-  dateOfBirth?: Prisma.SortOrder
+  ageRange?: Prisma.SortOrder
   status?: Prisma.SortOrder
   provinceId?: Prisma.SortOrder
   districtId?: Prisma.SortOrder
   sectorId?: Prisma.SortOrder
   cellId?: Prisma.SortOrder
   villageId?: Prisma.SortOrder
-  nationalId?: Prisma.SortOrder
-  householdSize?: Prisma.SortOrder
+  ipName?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  personalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -771,15 +787,16 @@ export type BeneficiaryMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   telephone?: Prisma.SortOrder
   gender?: Prisma.SortOrder
-  dateOfBirth?: Prisma.SortOrder
+  ageRange?: Prisma.SortOrder
   status?: Prisma.SortOrder
   provinceId?: Prisma.SortOrder
   districtId?: Prisma.SortOrder
   sectorId?: Prisma.SortOrder
   cellId?: Prisma.SortOrder
   villageId?: Prisma.SortOrder
-  nationalId?: Prisma.SortOrder
-  householdSize?: Prisma.SortOrder
+  ipName?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  personalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -794,7 +811,6 @@ export type BeneficiarySumOrderByAggregateInput = {
   sectorId?: Prisma.SortOrder
   cellId?: Prisma.SortOrder
   villageId?: Prisma.SortOrder
-  householdSize?: Prisma.SortOrder
 }
 
 export type BeneficiaryNullableScalarRelationFilter = {
@@ -1174,10 +1190,11 @@ export type BeneficiaryCreateWithoutProvinceInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1202,14 +1219,15 @@ export type BeneficiaryUncheckedCreateWithoutProvinceInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -1259,15 +1277,16 @@ export type BeneficiaryScalarWhereInput = {
   name?: Prisma.StringFilter<"Beneficiary"> | string
   telephone?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   gender?: Prisma.EnumGenderNullableFilter<"Beneficiary"> | $Enums.Gender | null
-  dateOfBirth?: Prisma.DateTimeNullableFilter<"Beneficiary"> | Date | string | null
+  ageRange?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   status?: Prisma.EnumUserStatusFilter<"Beneficiary"> | $Enums.UserStatus
   provinceId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   districtId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   sectorId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   cellId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
   villageId?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
-  nationalId?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
-  householdSize?: Prisma.IntNullableFilter<"Beneficiary"> | number | null
+  ipName?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
+  category?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
+  personalId?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   tenantId?: Prisma.StringFilter<"Beneficiary"> | string
@@ -1282,10 +1301,11 @@ export type BeneficiaryCreateWithoutDistrictInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1310,14 +1330,15 @@ export type BeneficiaryUncheckedCreateWithoutDistrictInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -1364,10 +1385,11 @@ export type BeneficiaryCreateWithoutSectorInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1392,14 +1414,15 @@ export type BeneficiaryUncheckedCreateWithoutSectorInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -1446,10 +1469,11 @@ export type BeneficiaryCreateWithoutCellInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1474,14 +1498,15 @@ export type BeneficiaryUncheckedCreateWithoutCellInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -1528,10 +1553,11 @@ export type BeneficiaryCreateWithoutVillageInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1556,14 +1582,15 @@ export type BeneficiaryUncheckedCreateWithoutVillageInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -1610,10 +1637,11 @@ export type BeneficiaryCreateWithoutTenantInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1638,15 +1666,16 @@ export type BeneficiaryUncheckedCreateWithoutTenantInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1692,10 +1721,11 @@ export type BeneficiaryCreateWithoutProgramsInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1720,15 +1750,16 @@ export type BeneficiaryUncheckedCreateWithoutProgramsInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -1769,10 +1800,11 @@ export type BeneficiaryCreateWithoutAvailabilityChecksInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1797,15 +1829,16 @@ export type BeneficiaryUncheckedCreateWithoutAvailabilityChecksInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -1841,10 +1874,11 @@ export type BeneficiaryUpdateWithoutAvailabilityChecksInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1869,15 +1903,16 @@ export type BeneficiaryUncheckedUpdateWithoutAvailabilityChecksInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1897,10 +1932,11 @@ export type BeneficiaryCreateWithoutAssignmentsInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -1925,15 +1961,16 @@ export type BeneficiaryUncheckedCreateWithoutAssignmentsInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -1969,10 +2006,11 @@ export type BeneficiaryUpdateWithoutAssignmentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1997,15 +2035,16 @@ export type BeneficiaryUncheckedUpdateWithoutAssignmentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2025,10 +2064,11 @@ export type BeneficiaryCreateWithoutCandidateReplacementRequestsInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -2053,15 +2093,16 @@ export type BeneficiaryUncheckedCreateWithoutCandidateReplacementRequestsInput =
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -2086,10 +2127,11 @@ export type BeneficiaryCreateWithoutOriginalReplacementRequestsInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -2114,15 +2156,16 @@ export type BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput = 
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -2158,10 +2201,11 @@ export type BeneficiaryUpdateWithoutCandidateReplacementRequestsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2186,15 +2230,16 @@ export type BeneficiaryUncheckedUpdateWithoutCandidateReplacementRequestsInput =
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2225,10 +2270,11 @@ export type BeneficiaryUpdateWithoutOriginalReplacementRequestsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2253,15 +2299,16 @@ export type BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput = 
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2281,10 +2328,11 @@ export type BeneficiaryCreateWithoutFieldVisitsInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -2309,15 +2357,16 @@ export type BeneficiaryUncheckedCreateWithoutFieldVisitsInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -2353,10 +2402,11 @@ export type BeneficiaryUpdateWithoutFieldVisitsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2381,15 +2431,16 @@ export type BeneficiaryUncheckedUpdateWithoutFieldVisitsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2409,14 +2460,15 @@ export type BeneficiaryCreateManyProvinceInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -2431,10 +2483,11 @@ export type BeneficiaryUpdateWithoutProvinceInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2459,14 +2512,15 @@ export type BeneficiaryUncheckedUpdateWithoutProvinceInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2487,14 +2541,15 @@ export type BeneficiaryUncheckedUpdateManyWithoutProvinceInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2509,14 +2564,15 @@ export type BeneficiaryCreateManyDistrictInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -2531,10 +2587,11 @@ export type BeneficiaryUpdateWithoutDistrictInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2559,14 +2616,15 @@ export type BeneficiaryUncheckedUpdateWithoutDistrictInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2587,14 +2645,15 @@ export type BeneficiaryUncheckedUpdateManyWithoutDistrictInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2609,14 +2668,15 @@ export type BeneficiaryCreateManySectorInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -2631,10 +2691,11 @@ export type BeneficiaryUpdateWithoutSectorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2659,14 +2720,15 @@ export type BeneficiaryUncheckedUpdateWithoutSectorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2687,14 +2749,15 @@ export type BeneficiaryUncheckedUpdateManyWithoutSectorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2709,14 +2772,15 @@ export type BeneficiaryCreateManyCellInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -2731,10 +2795,11 @@ export type BeneficiaryUpdateWithoutCellInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2759,14 +2824,15 @@ export type BeneficiaryUncheckedUpdateWithoutCellInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2787,14 +2853,15 @@ export type BeneficiaryUncheckedUpdateManyWithoutCellInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2809,14 +2876,15 @@ export type BeneficiaryCreateManyVillageInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -2831,10 +2899,11 @@ export type BeneficiaryUpdateWithoutVillageInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2859,14 +2928,15 @@ export type BeneficiaryUncheckedUpdateWithoutVillageInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2887,14 +2957,15 @@ export type BeneficiaryUncheckedUpdateManyWithoutVillageInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2909,15 +2980,16 @@ export type BeneficiaryCreateManyTenantInput = {
   name: string
   telephone?: string | null
   gender?: $Enums.Gender | null
-  dateOfBirth?: Date | string | null
+  ageRange?: string | null
   status?: $Enums.UserStatus
   provinceId?: number | null
   districtId?: number | null
   sectorId?: number | null
   cellId?: number | null
   villageId?: number | null
-  nationalId?: string | null
-  householdSize?: number | null
+  ipName?: string | null
+  category?: string | null
+  personalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   consentAt?: Date | string | null
@@ -2931,10 +3003,11 @@ export type BeneficiaryUpdateWithoutTenantInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2959,15 +3032,16 @@ export type BeneficiaryUncheckedUpdateWithoutTenantInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2987,15 +3061,16 @@ export type BeneficiaryUncheckedUpdateManyWithoutTenantInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3009,10 +3084,11 @@ export type BeneficiaryUpdateWithoutProgramsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3037,15 +3113,16 @@ export type BeneficiaryUncheckedUpdateWithoutProgramsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3065,15 +3142,16 @@ export type BeneficiaryUncheckedUpdateManyWithoutProgramsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ageRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3164,15 +3242,16 @@ export type BeneficiarySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   name?: boolean
   telephone?: boolean
   gender?: boolean
-  dateOfBirth?: boolean
+  ageRange?: boolean
   status?: boolean
   provinceId?: boolean
   districtId?: boolean
   sectorId?: boolean
   cellId?: boolean
   villageId?: boolean
-  nationalId?: boolean
-  householdSize?: boolean
+  ipName?: boolean
+  category?: boolean
+  personalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenantId?: boolean
@@ -3202,15 +3281,16 @@ export type BeneficiarySelectScalar = {
   name?: boolean
   telephone?: boolean
   gender?: boolean
-  dateOfBirth?: boolean
+  ageRange?: boolean
   status?: boolean
   provinceId?: boolean
   districtId?: boolean
   sectorId?: boolean
   cellId?: boolean
   villageId?: boolean
-  nationalId?: boolean
-  householdSize?: boolean
+  ipName?: boolean
+  category?: boolean
+  personalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenantId?: boolean
@@ -3219,7 +3299,7 @@ export type BeneficiarySelectScalar = {
   outcome?: boolean
 }
 
-export type BeneficiaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "telephone" | "gender" | "dateOfBirth" | "status" | "provinceId" | "districtId" | "sectorId" | "cellId" | "villageId" | "nationalId" | "householdSize" | "createdAt" | "updatedAt" | "tenantId" | "consentAt" | "consentGiven" | "outcome", ExtArgs["result"]["beneficiary"]>
+export type BeneficiaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "telephone" | "gender" | "ageRange" | "status" | "provinceId" | "districtId" | "sectorId" | "cellId" | "villageId" | "ipName" | "category" | "personalId" | "createdAt" | "updatedAt" | "tenantId" | "consentAt" | "consentGiven" | "outcome", ExtArgs["result"]["beneficiary"]>
 export type BeneficiaryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   province?: boolean | Prisma.Beneficiary$provinceArgs<ExtArgs>
   district?: boolean | Prisma.Beneficiary$districtArgs<ExtArgs>
@@ -3258,15 +3338,16 @@ export type $BeneficiaryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     name: string
     telephone: string | null
     gender: $Enums.Gender | null
-    dateOfBirth: Date | null
+    ageRange: string | null
     status: $Enums.UserStatus
     provinceId: number | null
     districtId: number | null
     sectorId: number | null
     cellId: number | null
     villageId: number | null
-    nationalId: string | null
-    householdSize: number | null
+    ipName: string | null
+    category: string | null
+    personalId: string | null
     createdAt: Date
     updatedAt: Date
     tenantId: string
@@ -3659,15 +3740,16 @@ export interface BeneficiaryFieldRefs {
   readonly name: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly telephone: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly gender: Prisma.FieldRef<"Beneficiary", 'Gender'>
-  readonly dateOfBirth: Prisma.FieldRef<"Beneficiary", 'DateTime'>
+  readonly ageRange: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly status: Prisma.FieldRef<"Beneficiary", 'UserStatus'>
   readonly provinceId: Prisma.FieldRef<"Beneficiary", 'Int'>
   readonly districtId: Prisma.FieldRef<"Beneficiary", 'Int'>
   readonly sectorId: Prisma.FieldRef<"Beneficiary", 'Int'>
   readonly cellId: Prisma.FieldRef<"Beneficiary", 'Int'>
   readonly villageId: Prisma.FieldRef<"Beneficiary", 'Int'>
-  readonly nationalId: Prisma.FieldRef<"Beneficiary", 'String'>
-  readonly householdSize: Prisma.FieldRef<"Beneficiary", 'Int'>
+  readonly ipName: Prisma.FieldRef<"Beneficiary", 'String'>
+  readonly category: Prisma.FieldRef<"Beneficiary", 'String'>
+  readonly personalId: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly createdAt: Prisma.FieldRef<"Beneficiary", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Beneficiary", 'DateTime'>
   readonly tenantId: Prisma.FieldRef<"Beneficiary", 'String'>

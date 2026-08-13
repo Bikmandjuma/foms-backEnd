@@ -28,6 +28,12 @@ const userProfileFields = {
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   telephone: z.string().optional(),
+  // Free-text label from the Supervisor & Enumerator group import — lets
+  // people added together stay recognizably "the same group" before they're
+  // ever assigned to a program (see group-import below).
+  groupName: z.string().optional(),
+  groupCode: z.string().optional(),
+  operationalArea: z.string().optional(),
   provinceId: z.number().int().optional(),
   districtId: z.number().int().optional(),
   sectorId: z.number().int().optional(),
@@ -41,7 +47,10 @@ const userProfileFields = {
 
 export const createUserSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
+  // Optional: Supervisor/Enumerator/Other-staff creation derives the
+  // password from telephone instead (see phoneCredential.ts) — required
+  // only when the caller supplies their own (e.g. platform/tenant admins).
+  password: z.string().min(8).optional(),
   roleId: z.string().uuid(),
   ...userProfileFields,
 });
@@ -51,6 +60,14 @@ export const updateUserSchema = z.object({
   password: z.string().min(8).optional(),
   roleId: z.string().uuid().optional(),
   ...userProfileFields,
+});
+
+// Self-service — the caller changes their own password from inside their
+// account, distinct from the forgot-password flow (which doesn't require
+// knowing the current one).
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1),
+  newPassword: z.string().min(8),
 });
 
 const tenantAdminSchema = z.object({
@@ -74,8 +91,9 @@ export const scenarioTypeSchema = z.enum([
   "TRACER_STUDY",
   "PROGRAM_OUTCOME_ASSESSMENT",
   "QUALITATIVE_STUDY",
+  "OTHER",
 ]);
-export const projectStatusSchema = z.enum(["PLANNING", "FIELDWORK", "DATA_CLEANING", "REPORTING", "COMPLETED"]);
+export const projectStatusSchema = z.enum(["PLANNING", "FIELDWORK", "DATA_CLEANING", "REPORTING", "COMPLETED", "OTHER"]);
 export const responseOutcomeSchema = z.enum([
   "PENDING",
   "COMPLETED",
@@ -90,7 +108,11 @@ export const createProgramSchema = z.object({
   name: z.string().min(1),
   description: z.string().optional(),
   scenarioType: scenarioTypeSchema.optional(),
+  // Required when scenarioType/status is "OTHER" — enforced in the
+  // controller rather than here, since it's conditional on that value.
+  scenarioTypeOther: z.string().optional(),
   status: projectStatusSchema.optional(),
+  statusOther: z.string().optional(),
   targetSampleSize: z.number().int().nonnegative().optional(),
   startDate: z.coerce.date().optional(),
   endDate: z.coerce.date().optional(),
@@ -100,11 +122,19 @@ export const updateProgramSchema = z.object({
   name: z.string().min(1).optional(),
   description: z.string().optional(),
   scenarioType: scenarioTypeSchema.optional(),
+  scenarioTypeOther: z.string().optional(),
   status: projectStatusSchema.optional(),
+  statusOther: z.string().optional(),
   targetSampleSize: z.number().int().nonnegative().optional(),
   startDate: z.coerce.date().optional(),
   endDate: z.coerce.date().optional(),
 });
+
+// "18-20", "30-35" — two numbers, first not greater than the second.
+export const ageRangeSchema = z.string().regex(/^\d{1,3}-\d{1,3}$/, "Use a range like 18-20").refine((v) => {
+  const [lo, hi] = v.split("-").map(Number);
+  return lo <= hi;
+}, "The first number can't be greater than the second");
 
 export const createBeneficiarySchema = z.object({
   name: z.string().min(1),
@@ -115,10 +145,11 @@ export const createBeneficiarySchema = z.object({
   cellId: z.number().int().optional(),
   villageId: z.number().int().optional(),
   gender: genderSchema.optional(),
-  dateOfBirth: z.coerce.date().optional(),
+  ageRange: ageRangeSchema.optional(),
   status: userStatusSchema.optional(),
-  nationalId: z.string().optional(),
-  householdSize: z.number().int().nonnegative().optional(),
+  ipName: z.string().optional(),
+  category: z.string().optional(),
+  personalId: z.string().optional(),
   programIds: z.array(z.string().uuid()).optional(),
   consentGiven: z.boolean().optional(),
   consentAt: z.coerce.date().optional(),
@@ -134,10 +165,11 @@ export const updateBeneficiarySchema = z.object({
   cellId: z.number().int().optional(),
   villageId: z.number().int().optional(),
   gender: genderSchema.optional(),
-  dateOfBirth: z.coerce.date().optional(),
+  ageRange: ageRangeSchema.optional(),
   status: userStatusSchema.optional(),
-  nationalId: z.string().optional(),
-  householdSize: z.number().int().nonnegative().optional(),
+  ipName: z.string().optional(),
+  category: z.string().optional(),
+  personalId: z.string().optional(),
   programIds: z.array(z.string().uuid()).optional(),
   consentGiven: z.boolean().optional(),
   consentAt: z.coerce.date().optional(),
@@ -210,6 +242,11 @@ export const programTeamProgramIdSchema = z.object({
   programId: z.string().uuid(),
 });
 
+export const adoptGroupSchema = z.object({
+  programId: z.string().uuid(),
+  groupCode: z.string().min(1),
+});
+
 export const createVehicleSchema = z.object({
   name: z.string().min(1),
   type: z.enum(["VEHICLE", "MOTORCYCLE"]).default("VEHICLE"),
@@ -252,4 +289,22 @@ export const currentGpsSchema = z.object({
   gpsLat: z.number(),
   gpsLng: z.number(),
   note: z.string().optional(),
+});
+
+// Multipart form fields (multer) always arrive as strings, hence the coercion.
+export const createFieldExpenseSchema = z.object({
+  programId: z.string().min(1),
+  description: z.string().min(1),
+  amount: z.coerce.number().positive(),
+  expenseDate: z.coerce.date(),
+});
+
+export const reviewFieldExpenseSchema = z.object({
+  status: z.enum(["APPROVED", "REJECTED"]),
+  reviewNotes: z.string().optional(),
+});
+
+export const confirmFieldVisitOutcomeSchema = z.object({
+  status: z.enum(["CONFIRMED", "REJECTED"]),
+  reason: z.string().optional(),
 });

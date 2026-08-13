@@ -13,6 +13,13 @@ function daysAgo(n: number): Date {
 }
 
 function startOfPeriodsAgo(period: string, n: number): Date {
+  if (period === "day") {
+    // Rolling last 24 hours, not "since midnight" — matches the hourly
+    // buckets bucketCount draws for this period.
+    const d = new Date();
+    d.setHours(d.getHours() - 24 * n);
+    return d;
+  }
   const d = new Date();
   d.setHours(0, 0, 0, 0);
   if (period === "week") d.setDate(d.getDate() - n * 7);
@@ -115,13 +122,17 @@ export async function getOnlineUsers(req: Request, res: Response): Promise<void>
   sendResponse(res, 200, "Online users retrieved successfully", users.map(withFullName));
 }
 
-const METRICS = ["checkins", "online-users", "beneficiary-attendance"] as const;
-const PERIODS = ["week", "month", "year", "lifetime"] as const;
+const METRICS = ["checkins", "logins", "online-users", "beneficiary-attendance"] as const;
+const PERIODS = ["day", "week", "month", "year", "lifetime"] as const;
 
 const METRIC_LABELS: Record<(typeof METRICS)[number], { title: (period: string) => string; subtitle: string }> = {
   checkins: {
     title: (period) => `Field check-ins, last ${periodLabel(period)}`,
     subtitle: "Duty-of-care activity across the whole tenant",
+  },
+  logins: {
+    title: (period) => `Logins, last ${periodLabel(period)}`,
+    subtitle: "How many times people signed in over time",
   },
   "online-users": {
     title: (period) => `Online users, last ${periodLabel(period)}`,
@@ -134,6 +145,7 @@ const METRIC_LABELS: Record<(typeof METRICS)[number], { title: (period: string) 
 };
 
 function periodLabel(period: string): string {
+  if (period === "day") return "24 hours";
   if (period === "week") return "7 days";
   if (period === "month") return "30 days";
   if (period === "year") return "12 months";
@@ -141,6 +153,24 @@ function periodLabel(period: string): string {
 }
 
 function bucketCount<T>(items: T[], getDate: (item: T) => Date, period: string): { label: string; count: number }[] {
+  if (period === "day") {
+    const buckets: { label: string; count: number; start: Date; end: Date }[] = [];
+    const now = new Date();
+    for (let i = 23; i >= 0; i--) {
+      const start = new Date(now);
+      start.setMinutes(0, 0, 0);
+      start.setHours(start.getHours() - i);
+      const end = new Date(start);
+      end.setHours(end.getHours() + 1);
+      buckets.push({ label: start.toLocaleTimeString(undefined, { hour: "numeric" }), count: 0, start, end });
+    }
+    for (const it of items) {
+      const d = getDate(it);
+      const bucket = buckets.find((b) => d >= b.start && d < b.end);
+      if (bucket) bucket.count += 1;
+    }
+    return buckets.map((b) => ({ label: b.label, count: b.count }));
+  }
   if (period === "week") {
     const buckets: { label: string; count: number }[] = [];
     for (let i = 6; i >= 0; i--) {
@@ -199,16 +229,22 @@ export async function getDashboardChart(req: Request, res: Response): Promise<vo
   const metric = METRICS.includes(req.query.metric as any) ? (req.query.metric as (typeof METRICS)[number]) : "checkins";
   const period = PERIODS.includes(req.query.period as any) ? (req.query.period as (typeof PERIODS)[number]) : "week";
 
-  const since = startOfPeriodsAgo(period, period === "week" ? 1 : period === "month" ? 1 : period === "year" ? 1 : 100);
+  const since = startOfPeriodsAgo(period, period === "day" || period === "week" || period === "month" || period === "year" ? 1 : 100);
 
   let series: { label: string; count: number }[];
 
   if (metric === "checkins") {
     const rows = await prisma.fieldCheckIn.findMany({ where: { ...tenantWhere, checkInAt: { gte: since } }, select: { checkInAt: true } });
     series = bucketCount(rows, (r) => r.checkInAt, period);
+  } else if (metric === "logins") {
+    const rows = await prisma.activityLog.findMany({
+      where: { ...tenantWhere, action: "logged in", createdAt: { gte: since } },
+      select: { createdAt: true },
+    });
+    series = bucketCount(rows, (r) => r.createdAt, period);
   } else if (metric === "beneficiary-attendance") {
     const rows = await prisma.fieldVisit.findMany({
-      where: { recordedAt: { gte: since }, fieldcheckin: tenantId ? { tenantId } : undefined },
+      where: { recordedAt: { gte: since }, checkIn: tenantId ? { tenantId } : undefined },
       select: { recordedAt: true },
     });
     series = bucketCount(rows, (r) => r.recordedAt, period);

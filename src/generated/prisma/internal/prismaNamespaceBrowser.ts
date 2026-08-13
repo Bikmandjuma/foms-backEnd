@@ -66,6 +66,7 @@ export const ModelName = {
   ProgramTeamMember: 'ProgramTeamMember',
   ProgramTeamVehicle: 'ProgramTeamVehicle',
   AvailabilityCheck: 'AvailabilityCheck',
+  FieldExpense: 'FieldExpense',
   Beneficiary: 'Beneficiary',
   ProgramAssignment: 'ProgramAssignment',
   BeneficiaryAssignment: 'BeneficiaryAssignment',
@@ -197,6 +198,9 @@ export const UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   telephone: 'telephone',
+  groupCode: 'groupCode',
+  groupName: 'groupName',
+  operationalArea: 'operationalArea',
   provinceId: 'provinceId',
   districtId: 'districtId',
   sectorId: 'sectorId',
@@ -237,9 +241,12 @@ export const ProgramScalarFieldEnum = {
   tenantId: 'tenantId',
   endDate: 'endDate',
   scenarioType: 'scenarioType',
+  scenarioTypeOther: 'scenarioTypeOther',
   startDate: 'startDate',
   status: 'status',
+  statusOther: 'statusOther',
   targetSampleSize: 'targetSampleSize',
+  tracingRequired: 'tracingRequired',
   teamCount: 'teamCount',
   membersPerTeam: 'membersPerTeam',
   teamLeaderRoleId: 'teamLeaderRoleId',
@@ -256,6 +263,7 @@ export const ProgramTeamScalarFieldEnum = {
   tenantId: 'tenantId',
   name: 'name',
   leaderId: 'leaderId',
+  sourceGroupCode: 'sourceGroupCode',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -301,21 +309,42 @@ export const AvailabilityCheckScalarFieldEnum = {
 export type AvailabilityCheckScalarFieldEnum = (typeof AvailabilityCheckScalarFieldEnum)[keyof typeof AvailabilityCheckScalarFieldEnum]
 
 
+export const FieldExpenseScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  programId: 'programId',
+  description: 'description',
+  amount: 'amount',
+  documentUrl: 'documentUrl',
+  expenseDate: 'expenseDate',
+  status: 'status',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  reviewNotes: 'reviewNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FieldExpenseScalarFieldEnum = (typeof FieldExpenseScalarFieldEnum)[keyof typeof FieldExpenseScalarFieldEnum]
+
+
 export const BeneficiaryScalarFieldEnum = {
   id: 'id',
   code: 'code',
   name: 'name',
   telephone: 'telephone',
   gender: 'gender',
-  dateOfBirth: 'dateOfBirth',
+  ageRange: 'ageRange',
   status: 'status',
   provinceId: 'provinceId',
   districtId: 'districtId',
   sectorId: 'sectorId',
   cellId: 'cellId',
   villageId: 'villageId',
-  nationalId: 'nationalId',
-  householdSize: 'householdSize',
+  ipName: 'ipName',
+  category: 'category',
+  personalId: 'personalId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   tenantId: 'tenantId',
@@ -418,7 +447,11 @@ export const FieldVisitScalarFieldEnum = {
   note: 'note',
   recordedAt: 'recordedAt',
   checkInId: 'checkInId',
-  beneficiaryId: 'beneficiaryId'
+  beneficiaryId: 'beneficiaryId',
+  confirmationStatus: 'confirmationStatus',
+  confirmedAt: 'confirmedAt',
+  confirmedById: 'confirmedById',
+  rejectionReason: 'rejectionReason'
 } as const
 
 export type FieldVisitScalarFieldEnum = (typeof FieldVisitScalarFieldEnum)[keyof typeof FieldVisitScalarFieldEnum]
@@ -564,6 +597,9 @@ export const UserOrderByRelevanceFieldEnum = {
   avatarUrl: 'avatarUrl',
   password: 'password',
   telephone: 'telephone',
+  groupCode: 'groupCode',
+  groupName: 'groupName',
+  operationalArea: 'operationalArea',
   roleId: 'roleId',
   tenantId: 'tenantId'
 } as const
@@ -585,6 +621,8 @@ export const ProgramOrderByRelevanceFieldEnum = {
   name: 'name',
   description: 'description',
   tenantId: 'tenantId',
+  scenarioTypeOther: 'scenarioTypeOther',
+  statusOther: 'statusOther',
   teamLeaderRoleId: 'teamLeaderRoleId',
   teamMemberRoleId: 'teamMemberRoleId',
   checkerRoleId: 'checkerRoleId'
@@ -598,7 +636,8 @@ export const ProgramTeamOrderByRelevanceFieldEnum = {
   programId: 'programId',
   tenantId: 'tenantId',
   name: 'name',
-  leaderId: 'leaderId'
+  leaderId: 'leaderId',
+  sourceGroupCode: 'sourceGroupCode'
 } as const
 
 export type ProgramTeamOrderByRelevanceFieldEnum = (typeof ProgramTeamOrderByRelevanceFieldEnum)[keyof typeof ProgramTeamOrderByRelevanceFieldEnum]
@@ -635,12 +674,29 @@ export const AvailabilityCheckOrderByRelevanceFieldEnum = {
 export type AvailabilityCheckOrderByRelevanceFieldEnum = (typeof AvailabilityCheckOrderByRelevanceFieldEnum)[keyof typeof AvailabilityCheckOrderByRelevanceFieldEnum]
 
 
+export const FieldExpenseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  programId: 'programId',
+  description: 'description',
+  documentUrl: 'documentUrl',
+  reviewedById: 'reviewedById',
+  reviewNotes: 'reviewNotes'
+} as const
+
+export type FieldExpenseOrderByRelevanceFieldEnum = (typeof FieldExpenseOrderByRelevanceFieldEnum)[keyof typeof FieldExpenseOrderByRelevanceFieldEnum]
+
+
 export const BeneficiaryOrderByRelevanceFieldEnum = {
   id: 'id',
   code: 'code',
   name: 'name',
   telephone: 'telephone',
-  nationalId: 'nationalId',
+  ageRange: 'ageRange',
+  ipName: 'ipName',
+  category: 'category',
+  personalId: 'personalId',
   tenantId: 'tenantId'
 } as const
 
@@ -709,7 +765,9 @@ export const FieldVisitOrderByRelevanceFieldEnum = {
   id: 'id',
   note: 'note',
   checkInId: 'checkInId',
-  beneficiaryId: 'beneficiaryId'
+  beneficiaryId: 'beneficiaryId',
+  confirmedById: 'confirmedById',
+  rejectionReason: 'rejectionReason'
 } as const
 
 export type FieldVisitOrderByRelevanceFieldEnum = (typeof FieldVisitOrderByRelevanceFieldEnum)[keyof typeof FieldVisitOrderByRelevanceFieldEnum]

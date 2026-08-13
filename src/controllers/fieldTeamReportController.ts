@@ -4,6 +4,8 @@ import { sendResponse } from "../utils/apiResponse.js";
 import { getFieldTeamReportRows, parseFieldTeamReportFilters, type FieldTeamReportRow } from "../utils/fieldTeamReport.js";
 import { buildFieldTeamReportPdf } from "../utils/pdf.js";
 import { buildCsv } from "../utils/csv.js";
+import { prisma } from "../utils/prisma.js";
+import { hasAction, parsePermissions } from "../utils/permissions.js";
 
 const CSV_COLUMNS = [
   { key: "teamName", label: "Team" },
@@ -17,15 +19,28 @@ const CSV_COLUMNS = [
   { key: "respondentPhone", label: "Respondent Phone" },
   { key: "sector", label: "Sector" },
   { key: "cell", label: "Cell" },
-  { key: "challengesObservations", label: "Challenges & Observations" },
+  { key: "statusLabel", label: "Status" },
+  { key: "notes", label: "Notes" },
   { key: "visitDate", label: "Visit Date" },
 ] as const;
+
+/** Whether this caller sees a visit's real outcome/notes before its
+ * supervisor has confirmed it — platform admins and anyone whose role
+ * carries field-team-reports:view-unconfirmed (typically Supervisors);
+ * Admin/Data Manager roles are expected not to have it by default. */
+async function resolveCanViewUnconfirmed(req: Request): Promise<boolean> {
+  if (req.user!.isPlatformAdmin) return true;
+  if (!req.user!.roleId) return false;
+  const role = await prisma.role.findUnique({ where: { id: req.user!.roleId }, select: { permissions: true } });
+  return hasAction(parsePermissions(role?.permissions), "field-team-reports:view-unconfirmed");
+}
 
 /** Paginated, searchable table view — GET /field-team-reports */
 export async function listFieldTeamReport(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
   const filters = parseFieldTeamReportFilters(req.query as Record<string, unknown>);
-  const allRows = await getFieldTeamReportRows(tenantId, filters);
+  const canViewUnconfirmed = await resolveCanViewUnconfirmed(req);
+  const allRows = await getFieldTeamReportRows(tenantId, filters, canViewUnconfirmed);
 
   const page = Math.max(1, Number(req.query.page) || 1);
   const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 20));
@@ -45,7 +60,8 @@ export async function listFieldTeamReport(req: Request, res: Response): Promise<
 export async function exportFieldTeamReport(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
   const filters = parseFieldTeamReportFilters(req.query as Record<string, unknown>);
-  const rows = await getFieldTeamReportRows(tenantId, filters);
+  const canViewUnconfirmed = await resolveCanViewUnconfirmed(req);
+  const rows = await getFieldTeamReportRows(tenantId, filters, canViewUnconfirmed);
 
   const format = typeof req.query.format === "string" ? req.query.format.toLowerCase() : "pdf";
   const dateSuffix = new Date().toISOString().slice(0, 10);

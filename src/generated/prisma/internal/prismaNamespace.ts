@@ -412,6 +412,7 @@ export const ModelName = {
   ProgramTeamMember: 'ProgramTeamMember',
   ProgramTeamVehicle: 'ProgramTeamVehicle',
   AvailabilityCheck: 'AvailabilityCheck',
+  FieldExpense: 'FieldExpense',
   Beneficiary: 'Beneficiary',
   ProgramAssignment: 'ProgramAssignment',
   BeneficiaryAssignment: 'BeneficiaryAssignment',
@@ -436,7 +437,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "province" | "district" | "sector" | "cell" | "village" | "notification" | "tenant" | "role" | "user" | "passwordResetCode" | "program" | "programTeam" | "programTeamMember" | "programTeamVehicle" | "availabilityCheck" | "beneficiary" | "programAssignment" | "beneficiaryAssignment" | "vehicle" | "replacementRequest" | "fieldCheckIn" | "fieldVisit" | "fieldNote" | "activityLog"
+    modelProps: "province" | "district" | "sector" | "cell" | "village" | "notification" | "tenant" | "role" | "user" | "passwordResetCode" | "program" | "programTeam" | "programTeamMember" | "programTeamVehicle" | "availabilityCheck" | "fieldExpense" | "beneficiary" | "programAssignment" | "beneficiaryAssignment" | "vehicle" | "replacementRequest" | "fieldCheckIn" | "fieldVisit" | "fieldNote" | "activityLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1430,6 +1431,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FieldExpense: {
+      payload: Prisma.$FieldExpensePayload<ExtArgs>
+      fields: Prisma.FieldExpenseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FieldExpenseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FieldExpenseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        findFirst: {
+          args: Prisma.FieldExpenseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FieldExpenseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        findMany: {
+          args: Prisma.FieldExpenseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>[]
+        }
+        create: {
+          args: Prisma.FieldExpenseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        createMany: {
+          args: Prisma.FieldExpenseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FieldExpenseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        update: {
+          args: Prisma.FieldExpenseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        deleteMany: {
+          args: Prisma.FieldExpenseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FieldExpenseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FieldExpenseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldExpensePayload>
+        }
+        aggregate: {
+          args: Prisma.FieldExpenseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFieldExpense>
+        }
+        groupBy: {
+          args: Prisma.FieldExpenseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldExpenseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FieldExpenseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldExpenseCountAggregateOutputType> | number
+        }
+      }
+    }
     Beneficiary: {
       payload: Prisma.$BeneficiaryPayload<ExtArgs>
       fields: Prisma.BeneficiaryFieldRefs
@@ -2167,6 +2234,9 @@ export const UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   telephone: 'telephone',
+  groupCode: 'groupCode',
+  groupName: 'groupName',
+  operationalArea: 'operationalArea',
   provinceId: 'provinceId',
   districtId: 'districtId',
   sectorId: 'sectorId',
@@ -2207,9 +2277,12 @@ export const ProgramScalarFieldEnum = {
   tenantId: 'tenantId',
   endDate: 'endDate',
   scenarioType: 'scenarioType',
+  scenarioTypeOther: 'scenarioTypeOther',
   startDate: 'startDate',
   status: 'status',
+  statusOther: 'statusOther',
   targetSampleSize: 'targetSampleSize',
+  tracingRequired: 'tracingRequired',
   teamCount: 'teamCount',
   membersPerTeam: 'membersPerTeam',
   teamLeaderRoleId: 'teamLeaderRoleId',
@@ -2226,6 +2299,7 @@ export const ProgramTeamScalarFieldEnum = {
   tenantId: 'tenantId',
   name: 'name',
   leaderId: 'leaderId',
+  sourceGroupCode: 'sourceGroupCode',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2271,21 +2345,42 @@ export const AvailabilityCheckScalarFieldEnum = {
 export type AvailabilityCheckScalarFieldEnum = (typeof AvailabilityCheckScalarFieldEnum)[keyof typeof AvailabilityCheckScalarFieldEnum]
 
 
+export const FieldExpenseScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  programId: 'programId',
+  description: 'description',
+  amount: 'amount',
+  documentUrl: 'documentUrl',
+  expenseDate: 'expenseDate',
+  status: 'status',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  reviewNotes: 'reviewNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FieldExpenseScalarFieldEnum = (typeof FieldExpenseScalarFieldEnum)[keyof typeof FieldExpenseScalarFieldEnum]
+
+
 export const BeneficiaryScalarFieldEnum = {
   id: 'id',
   code: 'code',
   name: 'name',
   telephone: 'telephone',
   gender: 'gender',
-  dateOfBirth: 'dateOfBirth',
+  ageRange: 'ageRange',
   status: 'status',
   provinceId: 'provinceId',
   districtId: 'districtId',
   sectorId: 'sectorId',
   cellId: 'cellId',
   villageId: 'villageId',
-  nationalId: 'nationalId',
-  householdSize: 'householdSize',
+  ipName: 'ipName',
+  category: 'category',
+  personalId: 'personalId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   tenantId: 'tenantId',
@@ -2388,7 +2483,11 @@ export const FieldVisitScalarFieldEnum = {
   note: 'note',
   recordedAt: 'recordedAt',
   checkInId: 'checkInId',
-  beneficiaryId: 'beneficiaryId'
+  beneficiaryId: 'beneficiaryId',
+  confirmationStatus: 'confirmationStatus',
+  confirmedAt: 'confirmedAt',
+  confirmedById: 'confirmedById',
+  rejectionReason: 'rejectionReason'
 } as const
 
 export type FieldVisitScalarFieldEnum = (typeof FieldVisitScalarFieldEnum)[keyof typeof FieldVisitScalarFieldEnum]
@@ -2534,6 +2633,9 @@ export const UserOrderByRelevanceFieldEnum = {
   avatarUrl: 'avatarUrl',
   password: 'password',
   telephone: 'telephone',
+  groupCode: 'groupCode',
+  groupName: 'groupName',
+  operationalArea: 'operationalArea',
   roleId: 'roleId',
   tenantId: 'tenantId'
 } as const
@@ -2555,6 +2657,8 @@ export const ProgramOrderByRelevanceFieldEnum = {
   name: 'name',
   description: 'description',
   tenantId: 'tenantId',
+  scenarioTypeOther: 'scenarioTypeOther',
+  statusOther: 'statusOther',
   teamLeaderRoleId: 'teamLeaderRoleId',
   teamMemberRoleId: 'teamMemberRoleId',
   checkerRoleId: 'checkerRoleId'
@@ -2568,7 +2672,8 @@ export const ProgramTeamOrderByRelevanceFieldEnum = {
   programId: 'programId',
   tenantId: 'tenantId',
   name: 'name',
-  leaderId: 'leaderId'
+  leaderId: 'leaderId',
+  sourceGroupCode: 'sourceGroupCode'
 } as const
 
 export type ProgramTeamOrderByRelevanceFieldEnum = (typeof ProgramTeamOrderByRelevanceFieldEnum)[keyof typeof ProgramTeamOrderByRelevanceFieldEnum]
@@ -2605,12 +2710,29 @@ export const AvailabilityCheckOrderByRelevanceFieldEnum = {
 export type AvailabilityCheckOrderByRelevanceFieldEnum = (typeof AvailabilityCheckOrderByRelevanceFieldEnum)[keyof typeof AvailabilityCheckOrderByRelevanceFieldEnum]
 
 
+export const FieldExpenseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  programId: 'programId',
+  description: 'description',
+  documentUrl: 'documentUrl',
+  reviewedById: 'reviewedById',
+  reviewNotes: 'reviewNotes'
+} as const
+
+export type FieldExpenseOrderByRelevanceFieldEnum = (typeof FieldExpenseOrderByRelevanceFieldEnum)[keyof typeof FieldExpenseOrderByRelevanceFieldEnum]
+
+
 export const BeneficiaryOrderByRelevanceFieldEnum = {
   id: 'id',
   code: 'code',
   name: 'name',
   telephone: 'telephone',
-  nationalId: 'nationalId',
+  ageRange: 'ageRange',
+  ipName: 'ipName',
+  category: 'category',
+  personalId: 'personalId',
   tenantId: 'tenantId'
 } as const
 
@@ -2679,7 +2801,9 @@ export const FieldVisitOrderByRelevanceFieldEnum = {
   id: 'id',
   note: 'note',
   checkInId: 'checkInId',
-  beneficiaryId: 'beneficiaryId'
+  beneficiaryId: 'beneficiaryId',
+  confirmedById: 'confirmedById',
+  rejectionReason: 'rejectionReason'
 } as const
 
 export type FieldVisitOrderByRelevanceFieldEnum = (typeof FieldVisitOrderByRelevanceFieldEnum)[keyof typeof FieldVisitOrderByRelevanceFieldEnum]
@@ -2804,6 +2928,20 @@ export type EnumAvailabilityCheckStatusFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'FieldExpenseStatus'
+ */
+export type EnumFieldExpenseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FieldExpenseStatus'>
+    
+
+
+/**
  * Reference to a field of type 'ResponseOutcome'
  */
 export type EnumResponseOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ResponseOutcome'>
@@ -2846,9 +2984,9 @@ export type EnumGeoMatchLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
- * Reference to a field of type 'Float'
+ * Reference to a field of type 'ConfirmationStatus'
  */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+export type EnumConfirmationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConfirmationStatus'>
     
 
 /**
@@ -3017,6 +3155,7 @@ export type GlobalOmitConfig = {
   programTeamMember?: Prisma.ProgramTeamMemberOmit
   programTeamVehicle?: Prisma.ProgramTeamVehicleOmit
   availabilityCheck?: Prisma.AvailabilityCheckOmit
+  fieldExpense?: Prisma.FieldExpenseOmit
   beneficiary?: Prisma.BeneficiaryOmit
   programAssignment?: Prisma.ProgramAssignmentOmit
   beneficiaryAssignment?: Prisma.BeneficiaryAssignmentOmit

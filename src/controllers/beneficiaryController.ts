@@ -299,23 +299,14 @@ export async function importBeneficiaries(req: Request, res: Response): Promise<
       errors.push({ row: raw.rowNumber, message: `Unrecognized status '${raw.status}'` });
       continue;
     }
-    let dateOfBirth: Date | undefined;
-    if (raw.dateOfBirth) {
-      const parsed = new Date(raw.dateOfBirth);
-      if (Number.isNaN(parsed.getTime())) {
-        errors.push({ row: raw.rowNumber, message: `Unrecognized date of birth '${raw.dateOfBirth}'` });
+    let ageRange: string | undefined;
+    if (raw.ageRange) {
+      const match = /^(\d{1,3})-(\d{1,3})$/.exec(raw.ageRange.trim());
+      if (!match || Number(match[1]) > Number(match[2])) {
+        errors.push({ row: raw.rowNumber, message: `Age range must look like '18-20' — got '${raw.ageRange}'` });
         continue;
       }
-      dateOfBirth = parsed;
-    }
-    let householdSize: number | undefined;
-    if (raw.householdSize) {
-      const parsed = Number(raw.householdSize);
-      if (!Number.isFinite(parsed) || parsed < 0) {
-        errors.push({ row: raw.rowNumber, message: `Invalid household size '${raw.householdSize}'` });
-        continue;
-      }
-      householdSize = Math.trunc(parsed);
+      ageRange = raw.ageRange.trim();
     }
 
     let locationIds: ResolvedLocation = {};
@@ -357,9 +348,10 @@ export async function importBeneficiaries(req: Request, res: Response): Promise<
         telephone: raw.telephone,
         ...locationIds,
         gender: raw.gender ? raw.gender.toUpperCase() : undefined,
-        dateOfBirth,
-        nationalId: raw.nationalId,
-        householdSize,
+        ageRange,
+        ipName: raw.ipName,
+        category: raw.category,
+        personalId: raw.personalId,
         status: raw.status ? raw.status.toUpperCase() : "ACTIVE",
         tenantId,
       },

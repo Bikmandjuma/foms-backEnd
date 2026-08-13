@@ -116,6 +116,7 @@ model Tenant {
   programAssignments     ProgramAssignment[]
   programTeams           ProgramTeam[]
   availabilityChecks     AvailabilityCheck[]
+  fieldExpenses          FieldExpense[]
   replacementRequests    ReplacementRequest[]
   roles                  Role[]
   users                  User[]
@@ -150,6 +151,13 @@ model User {
   createdAt                  DateTime                @default(now())
   updatedAt                  DateTime                @updatedAt
   telephone                  String?
+  // Set only for users created via the Supervisor & Enumerator group
+  // import — the group's own code/name/area from that spreadsheet, so
+  // people brought in together stay identifiable as one group before any
+  // program-level assignment exists.
+  groupCode                  String?
+  groupName                  String?
+  operationalArea            String?
   provinceId                 Int?
   districtId                 Int?
   sectorId                   Int?
@@ -177,6 +185,9 @@ model User {
   programTeamsLed            ProgramTeam[]           @relation("ProgramTeamLeader")
   programTeamMemberships     ProgramTeamMember[]
   availabilityChecks         AvailabilityCheck[]
+  fieldExpensesSubmitted     FieldExpense[]          @relation("FieldExpenseSubmitter")
+  fieldExpensesReviewed      FieldExpense[]          @relation("FieldExpenseReviewer")
+  fieldVisitsConfirmed       FieldVisit[]            @relation("FieldVisitConfirmer")
   replacementRequestsDecided ReplacementRequest[]    @relation("DecidedBy")
   replacementRequestsMade    ReplacementRequest[]    @relation("RequestedBy")
   role                       Role?                   @relation(fields: [roleId], references: [id])
@@ -211,9 +222,12 @@ model Program {
   tenantId           String
   endDate            DateTime?
   scenarioType       ScenarioType?
+  scenarioTypeOther  String?
   startDate          DateTime?
   status             ProjectStatus       @default(PLANNING)
+  statusOther        String?
   targetSampleSize   Int?
+  tracingRequired    Boolean             @default(false)
   // Team-based field-ops config — all nullable until an admin configures them.
   teamCount          Int?
   membersPerTeam     Int?
@@ -228,6 +242,7 @@ model Program {
   assignments        ProgramAssignment[]
   teams              ProgramTeam[]
   availabilityChecks AvailabilityCheck[]
+  fieldExpenses      FieldExpense[]
   beneficiaries      Beneficiary[]       @relation("BeneficiaryToProgram")
 
   @@unique([tenantId, name])
@@ -237,20 +252,26 @@ model Program {
 }
 
 model ProgramTeam {
-  id        String               @id @default(uuid())
-  programId String
-  tenantId  String
-  name      String
-  leaderId  String?
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
-  program   Program              @relation(fields: [programId], references: [id], onDelete: Cascade)
-  tenant    Tenant               @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  leader    User?                @relation("ProgramTeamLeader", fields: [leaderId], references: [id], onDelete: SetNull)
-  members   ProgramTeamMember[]
-  vehicles  ProgramTeamVehicle[]
+  id              String               @id @default(uuid())
+  programId       String
+  tenantId        String
+  name            String
+  leaderId        String?
+  // Set only when this team was created by "adopting" a pre-formed group
+  // from the Supervisor & Enumerator import (User.groupCode) into a
+  // program — lets the assignment UI tell which imported groups are
+  // already linked to a given program vs. still available to adopt.
+  sourceGroupCode String?
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  program         Program              @relation(fields: [programId], references: [id], onDelete: Cascade)
+  tenant          Tenant               @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  leader          User?                @relation("ProgramTeamLeader", fields: [leaderId], references: [id], onDelete: SetNull)
+  members         ProgramTeamMember[]
+  vehicles        ProgramTeamVehicle[]
 
   @@unique([programId, name])
+  @@unique([programId, sourceGroupCode])
   @@index([tenantId], map: "ProgramTeam_tenantId_fkey")
   @@index([leaderId], map: "ProgramTeam_leaderId_fkey")
 }
@@ -304,13 +325,41 @@ model AvailabilityCheck {
   @@index([tenantId], map: "AvailabilityCheck_tenantId_fkey")
 }
 
+model FieldExpense {
+  id           String             @id @default(uuid())
+  tenantId     String
+  userId       String
+  programId    String
+  description  String
+  amount       Float
+  documentUrl  String?
+  expenseDate  DateTime
+  status       FieldExpenseStatus @default(PENDING)
+  reviewedById String?
+  reviewedAt   DateTime?
+  reviewNotes  String?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  tenant       Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user         User               @relation("FieldExpenseSubmitter", fields: [userId], references: [id], onDelete: Cascade)
+  program      Program            @relation(fields: [programId], references: [id], onDelete: Cascade)
+  reviewedBy   User?              @relation("FieldExpenseReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  @@index([tenantId], map: "FieldExpense_tenantId_fkey")
+  @@index([userId], map: "FieldExpense_userId_fkey")
+  @@index([programId], map: "FieldExpense_programId_fkey")
+  @@index([reviewedById], map: "FieldExpense_reviewedById_fkey")
+}
+
 model Beneficiary {
   id                           String                  @id @default(uuid())
   code                         String
   name                         String
   telephone                    String?
   gender                       Gender?
-  dateOfBirth                  DateTime?
+  // Replaces dateOfBirth — an age band like "18-20" or "30-35" rather than
+  // an exact birth date.
+  ageRange                     String?
   status                       UserStatus              @default(ACTIVE)
   provinceId                   Int?
   districtId                   Int?
@@ -322,8 +371,11 @@ model Beneficiary {
   sector                       Sector?                 @relation(fields: [sectorId], references: [id])
   cell                         Cell?                   @relation(fields: [cellId], references: [id])
   village                      Village?                @relation(fields: [villageId], references: [id])
-  nationalId                   String?
-  householdSize                Int?
+  ipName                       String?
+  category                     String?
+  // Never auto-generated — supplied by the tenant, typically via the
+  // Excel import, replacing the old nationalId/householdSize fields.
+  personalId                   String?
   createdAt                    DateTime                @default(now())
   updatedAt                    DateTime                @updatedAt
   tenantId                     String
@@ -339,7 +391,7 @@ model Beneficiary {
   programs                     Program[]               @relation("BeneficiaryToProgram")
 
   @@unique([tenantId, code])
-  @@unique([tenantId, nationalId])
+  @@unique([tenantId, personalId])
   @@index([provinceId])
   @@index([districtId])
   @@index([sectorId])
@@ -459,17 +511,23 @@ model FieldCheckIn {
 }
 
 model FieldVisit {
-  id            String          @id @default(uuid())
-  outcome       ResponseOutcome @default(PENDING)
-  note          String?
-  recordedAt    DateTime        @default(now())
-  checkInId     String
-  beneficiaryId String
-  beneficiary   Beneficiary     @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
-  checkIn       FieldCheckIn    @relation(fields: [checkInId], references: [id], onDelete: Cascade)
+  id                 String              @id @default(uuid())
+  outcome            ResponseOutcome     @default(PENDING)
+  note               String?
+  recordedAt         DateTime            @default(now())
+  checkInId          String
+  beneficiaryId      String
+  confirmationStatus ConfirmationStatus  @default(PENDING)
+  confirmedAt        DateTime?
+  confirmedById      String?
+  rejectionReason    String?
+  beneficiary        Beneficiary         @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
+  checkIn            FieldCheckIn        @relation(fields: [checkInId], references: [id], onDelete: Cascade)
+  confirmedBy        User?               @relation("FieldVisitConfirmer", fields: [confirmedById], references: [id], onDelete: SetNull)
 
   @@unique([checkInId, beneficiaryId])
   @@index([beneficiaryId], map: "FieldVisit_beneficiaryId_fkey")
+  @@index([confirmedById], map: "FieldVisit_confirmedById_fkey")
 }
 
 model FieldNote {
@@ -530,6 +588,7 @@ enum ScenarioType {
   TRACER_STUDY
   PROGRAM_OUTCOME_ASSESSMENT
   QUALITATIVE_STUDY
+  OTHER
 }
 
 enum ProjectStatus {
@@ -538,6 +597,7 @@ enum ProjectStatus {
   DATA_CLEANING
   REPORTING
   COMPLETED
+  OTHER
 }
 
 enum ResponseOutcome {
@@ -583,7 +643,21 @@ enum NotificationType {
   ASSIGNMENT_BENEFICIARY
   REPLACEMENT_REQUESTED
   REPLACEMENT_DECIDED
+  EXPENSE_REVIEWED
+  OUTCOME_REVIEWED
   SYSTEM
+}
+
+enum FieldExpenseStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ConfirmationStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
 }
 
 // PENDING/AVAILABLE plus the app's established field-visit outcome

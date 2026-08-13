@@ -7,6 +7,7 @@ import { prisma } from "../utils/prisma.js";
 import { signToken, signResetToken, verifyResetToken } from "../utils/jwt.js";
 import { recordActivity } from "../utils/activityLog.js";
 import { sendMail } from "../utils/mailer.js";
+import { emitUserOnline } from "../realtime/socket.js";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -47,6 +48,20 @@ export async function login(req: Request, res: Response): Promise<void> {
   });
 
   await prisma.user.update({ where: { id: user.id }, data: { lastSeenAt: new Date() } });
+
+  // Field Supervisors/Enumerators are identified by having a groupCode —
+  // set only via the group import, since role names are freeform per
+  // tenant and can't be matched reliably. Anyone viewing the dashboard
+  // gets a toast naming the group and who just logged in.
+  if (user.groupCode || user.groupName) {
+    emitUserOnline(user.tenantId, {
+      userId: user.id,
+      name: user.name ?? user.email,
+      groupCode: user.groupCode,
+      groupName: user.groupName,
+      roleName: user.role?.name ?? null,
+    });
+  }
 
   res.cookie(COOKIE_NAME, token, {
     httpOnly: true,

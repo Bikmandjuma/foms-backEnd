@@ -111,3 +111,27 @@ export function emitNotification(userId: string, notification: unknown): void {
   if (!io) return;
   io.to(`user:${userId}`).emit("notification:new", notification);
 }
+
+/** Broadcast to a tenant's room whenever a field worker's live location
+ * changes, so the field-ops map can move a pin instantly instead of
+ * waiting on the next poll. */
+export function emitLocationUpdate(
+  tenantId: string | null,
+  payload: { userId: string; checkInId: string; lat: number; lng: number; at: string }
+): void {
+  if (!io || !tenantId) return;
+  io.to(`tenant:${tenantId}`).emit("location:update", payload);
+}
+
+/** Broadcast to a tenant's room when a Supervisor or Enumerator (identified
+ * by having a groupCode — set only for users created via the group import,
+ * since role names are freeform per tenant and can't be matched reliably)
+ * logs in. Anyone else viewing the dashboard sees a toast naming their
+ * group and who just came online. */
+export function emitUserOnline(
+  tenantId: string | null,
+  payload: { userId: string; name: string; groupCode: string | null; groupName: string | null; roleName: string | null }
+): void {
+  if (!io || !tenantId) return;
+  io.to(`tenant:${tenantId}`).emit("user:online", payload);
+}

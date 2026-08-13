@@ -12,6 +12,7 @@ import {
   recordFieldVisitSchema,
 } from "../utils/validators.js";
 import { buildDailyReportWorkbook, type DailyReportRow } from "../utils/excel.js";
+import { emitLocationUpdate } from "../realtime/socket.js";
 
 const include = {
   user: { select: { id: true, name: true, email: true } },
@@ -115,6 +116,16 @@ export async function createCheckIn(req: Request, res: Response): Promise<void> 
     entityType: "FieldCheckIn",
     entityId: checkIn.id,
   });
+
+  if (checkIn.gpsLat !== null && checkIn.gpsLng !== null) {
+    emitLocationUpdate(tenantId, {
+      userId: checkIn.userId,
+      checkInId: checkIn.id,
+      lat: checkIn.gpsLat,
+      lng: checkIn.gpsLng,
+      at: checkIn.checkInAt.toISOString(),
+    });
+  }
 
   sendResponse(res, 201, "Checked in successfully", checkIn);
 }
@@ -332,6 +343,13 @@ export async function pingCurrentGps(req: Request, res: Response): Promise<void>
     data: { currentGpsLat: data.gpsLat, currentGpsLng: data.gpsLng, currentGpsAt: new Date(), currentGpsNote: data.note },
     include,
   });
+  emitLocationUpdate(tenantId, {
+    userId: checkIn.userId,
+    checkInId: checkIn.id,
+    lat: data.gpsLat,
+    lng: data.gpsLng,
+    at: updated.currentGpsAt!.toISOString(),
+  });
   sendResponse(res, 200, "Location updated", updated);
 }
 
@@ -339,6 +357,8 @@ interface RosterEntry {
   userId: string;
   name: string;
   email: string;
+  district: string | null;
+  province: string | null;
   checkIn: {
     id: string;
     checkInAt: Date;
@@ -353,23 +373,42 @@ interface RosterEntry {
   completed: number;
   refused: number;
   notFound: number;
+  relocated: number;
   replaced: number;
 }
 
-async function buildRoster(tenantId: string, programId: string | undefined, dateStr: string): Promise<RosterEntry[]> {
+async function buildRoster(
+  tenantId: string,
+  programId: string | undefined,
+  dateStr: string,
+  teamId?: string
+): Promise<RosterEntry[]> {
   const dayStart = new Date(`${dateStr}T00:00:00.000Z`);
   const dayEnd = new Date(`${dateStr}T23:59:59.999Z`);
 
+  // Scoping to a specific group: only its leader + members count, and only
+  // within that program (a group's membership is per-program by design).
+  const teamUserIds = teamId
+    ? await prisma.programTeam
+        .findUnique({ where: { id: teamId }, select: { leaderId: true, members: { select: { userId: true } } } })
+        .then((t) => (t ? new Set([t.leaderId, ...t.members.map((m) => m.userId)].filter((id): id is string => Boolean(id))) : new Set<string>()))
+    : null;
+
   const staffAssignments = await prisma.programAssignment.findMany({
     where: { tenantId, status: "ACTIVE", ...(programId ? { programId } : {}) },
-    include: { user: { select: { id: true, name: true, email: true } } },
+    include: { user: { select: { id: true, name: true, email: true, district: { select: { name: true } }, province: { select: { name: true } } } } },
   });
-  const staffMap = new Map(staffAssignments.map((a) => [a.userId, a.user]));
+  const staffMap = new Map(
+    staffAssignments.filter((a) => !teamUserIds || teamUserIds.has(a.userId)).map((a) => [a.userId, a.user])
+  );
 
   const checkIns = await prisma.fieldCheckIn.findMany({
     where: { tenantId, ...(programId ? { projectId: programId } : {}), checkInAt: { gte: dayStart, lte: dayEnd } },
   });
-  for (const c of checkIns) if (!staffMap.has(c.userId)) staffMap.set(c.userId, { id: c.userId, name: null, email: "" });
+  for (const c of checkIns) {
+    if (teamUserIds && !teamUserIds.has(c.userId)) continue;
+    if (!staffMap.has(c.userId)) staffMap.set(c.userId, { id: c.userId, name: null, email: "", district: null, province: null });
+  }
 
   const checkInByUser = new Map(checkIns.map((c) => [c.userId, c]));
 
@@ -386,12 +425,14 @@ async function buildRoster(tenantId: string, programId: string | undefined, date
     let completed = 0;
     let refused = 0;
     let notFound = 0;
+    let relocated = 0;
     let replaced = 0;
     if (checkIn) {
       const visits = await prisma.fieldVisit.findMany({ where: { checkInId: checkIn.id } });
       completed = visits.filter((v) => v.outcome === "COMPLETED").length;
       refused = visits.filter((v) => v.outcome === "REFUSED").length;
       notFound = visits.filter((v) => v.outcome === "NOT_FOUND").length;
+      relocated = visits.filter((v) => v.outcome === "RELOCATED").length;
       replaced = visits.filter((v) => v.outcome === "REPLACED").length;
     }
 
@@ -399,6 +440,8 @@ async function buildRoster(tenantId: string, programId: string | undefined, date
       userId,
       name: user.name ?? user.email ?? "—",
       email: user.email ?? "",
+      district: user.district?.name ?? null,
+      province: user.province?.name ?? null,
       checkIn: checkIn
         ? {
             id: checkIn.id,
@@ -415,6 +458,7 @@ async function buildRoster(tenantId: string, programId: string | undefined, date
       completed,
       refused,
       notFound,
+      relocated,
       replaced,
     });
   }
@@ -427,9 +471,10 @@ async function buildRoster(tenantId: string, programId: string | undefined, date
 export async function dailyRoster(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
   const programId = typeof req.query.programId === "string" && req.query.programId ? req.query.programId : undefined;
+  const teamId = typeof req.query.teamId === "string" && req.query.teamId ? req.query.teamId : undefined;
   const date = typeof req.query.date === "string" && req.query.date ? req.query.date : new Date().toISOString().slice(0, 10);
 
-  const roster = await buildRoster(tenantId, programId, date);
+  const roster = await buildRoster(tenantId, programId, date, teamId);
 
   const present = roster.filter((r) => r.checkIn).length;
   const summary = {
@@ -442,6 +487,7 @@ export async function dailyRoster(req: Request, res: Response): Promise<void> {
     completed: roster.reduce((s, r) => s + r.completed, 0),
     refused: roster.reduce((s, r) => s + r.refused, 0),
     notFound: roster.reduce((s, r) => s + r.notFound, 0),
+    relocated: roster.reduce((s, r) => s + r.relocated, 0),
     replaced: roster.reduce((s, r) => s + r.replaced, 0),
   };
 

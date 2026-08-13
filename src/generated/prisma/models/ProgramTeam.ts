@@ -30,6 +30,7 @@ export type ProgramTeamMinAggregateOutputType = {
   tenantId: string | null
   name: string | null
   leaderId: string | null
+  sourceGroupCode: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -40,6 +41,7 @@ export type ProgramTeamMaxAggregateOutputType = {
   tenantId: string | null
   name: string | null
   leaderId: string | null
+  sourceGroupCode: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +52,7 @@ export type ProgramTeamCountAggregateOutputType = {
   tenantId: number
   name: number
   leaderId: number
+  sourceGroupCode: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -62,6 +65,7 @@ export type ProgramTeamMinAggregateInputType = {
   tenantId?: true
   name?: true
   leaderId?: true
+  sourceGroupCode?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -72,6 +76,7 @@ export type ProgramTeamMaxAggregateInputType = {
   tenantId?: true
   name?: true
   leaderId?: true
+  sourceGroupCode?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +87,7 @@ export type ProgramTeamCountAggregateInputType = {
   tenantId?: true
   name?: true
   leaderId?: true
+  sourceGroupCode?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -165,6 +171,7 @@ export type ProgramTeamGroupByOutputType = {
   tenantId: string
   name: string
   leaderId: string | null
+  sourceGroupCode: string | null
   createdAt: Date
   updatedAt: Date
   _count: ProgramTeamCountAggregateOutputType | null
@@ -196,6 +203,7 @@ export type ProgramTeamWhereInput = {
   tenantId?: Prisma.StringFilter<"ProgramTeam"> | string
   name?: Prisma.StringFilter<"ProgramTeam"> | string
   leaderId?: Prisma.StringNullableFilter<"ProgramTeam"> | string | null
+  sourceGroupCode?: Prisma.StringNullableFilter<"ProgramTeam"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProgramTeam"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProgramTeam"> | Date | string
   program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
@@ -211,6 +219,7 @@ export type ProgramTeamOrderByWithRelationInput = {
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   leaderId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceGroupCode?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   program?: Prisma.ProgramOrderByWithRelationInput
@@ -224,6 +233,7 @@ export type ProgramTeamOrderByWithRelationInput = {
 export type ProgramTeamWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   programId_name?: Prisma.ProgramTeamProgramIdNameCompoundUniqueInput
+  programId_sourceGroupCode?: Prisma.ProgramTeamProgramIdSourceGroupCodeCompoundUniqueInput
   AND?: Prisma.ProgramTeamWhereInput | Prisma.ProgramTeamWhereInput[]
   OR?: Prisma.ProgramTeamWhereInput[]
   NOT?: Prisma.ProgramTeamWhereInput | Prisma.ProgramTeamWhereInput[]
@@ -231,6 +241,7 @@ export type ProgramTeamWhereUniqueInput = Prisma.AtLeast<{
   tenantId?: Prisma.StringFilter<"ProgramTeam"> | string
   name?: Prisma.StringFilter<"ProgramTeam"> | string
   leaderId?: Prisma.StringNullableFilter<"ProgramTeam"> | string | null
+  sourceGroupCode?: Prisma.StringNullableFilter<"ProgramTeam"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProgramTeam"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProgramTeam"> | Date | string
   program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
@@ -238,7 +249,7 @@ export type ProgramTeamWhereUniqueInput = Prisma.AtLeast<{
   leader?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   members?: Prisma.ProgramTeamMemberListRelationFilter
   vehicles?: Prisma.ProgramTeamVehicleListRelationFilter
-}, "id" | "programId_name">
+}, "id" | "programId_name" | "programId_sourceGroupCode">
 
 export type ProgramTeamOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -246,6 +257,7 @@ export type ProgramTeamOrderByWithAggregationInput = {
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   leaderId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceGroupCode?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ProgramTeamCountOrderByAggregateInput
@@ -262,6 +274,7 @@ export type ProgramTeamScalarWhereWithAggregatesInput = {
   tenantId?: Prisma.StringWithAggregatesFilter<"ProgramTeam"> | string
   name?: Prisma.StringWithAggregatesFilter<"ProgramTeam"> | string
   leaderId?: Prisma.StringNullableWithAggregatesFilter<"ProgramTeam"> | string | null
+  sourceGroupCode?: Prisma.StringNullableWithAggregatesFilter<"ProgramTeam"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ProgramTeam"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ProgramTeam"> | Date | string
 }
@@ -269,6 +282,7 @@ export type ProgramTeamScalarWhereWithAggregatesInput = {
 export type ProgramTeamCreateInput = {
   id?: string
   name: string
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
@@ -284,6 +298,7 @@ export type ProgramTeamUncheckedCreateInput = {
   tenantId: string
   name: string
   leaderId?: string | null
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutTeamInput
@@ -293,6 +308,7 @@ export type ProgramTeamUncheckedCreateInput = {
 export type ProgramTeamUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
@@ -308,6 +324,7 @@ export type ProgramTeamUncheckedUpdateInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutTeamNestedInput
@@ -320,6 +337,7 @@ export type ProgramTeamCreateManyInput = {
   tenantId: string
   name: string
   leaderId?: string | null
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -327,6 +345,7 @@ export type ProgramTeamCreateManyInput = {
 export type ProgramTeamUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -337,6 +356,7 @@ export type ProgramTeamUncheckedUpdateManyInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -362,12 +382,18 @@ export type ProgramTeamProgramIdNameCompoundUniqueInput = {
   name: string
 }
 
+export type ProgramTeamProgramIdSourceGroupCodeCompoundUniqueInput = {
+  programId: string
+  sourceGroupCode: string
+}
+
 export type ProgramTeamCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   programId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   leaderId?: Prisma.SortOrder
+  sourceGroupCode?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -378,6 +404,7 @@ export type ProgramTeamMaxOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   leaderId?: Prisma.SortOrder
+  sourceGroupCode?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -388,6 +415,7 @@ export type ProgramTeamMinOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   leaderId?: Prisma.SortOrder
+  sourceGroupCode?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -554,6 +582,7 @@ export type ProgramTeamUpdateOneRequiredWithoutVehiclesNestedInput = {
 export type ProgramTeamCreateWithoutTenantInput = {
   id?: string
   name: string
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
@@ -567,6 +596,7 @@ export type ProgramTeamUncheckedCreateWithoutTenantInput = {
   programId: string
   name: string
   leaderId?: string | null
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutTeamInput
@@ -608,6 +638,7 @@ export type ProgramTeamScalarWhereInput = {
   tenantId?: Prisma.StringFilter<"ProgramTeam"> | string
   name?: Prisma.StringFilter<"ProgramTeam"> | string
   leaderId?: Prisma.StringNullableFilter<"ProgramTeam"> | string | null
+  sourceGroupCode?: Prisma.StringNullableFilter<"ProgramTeam"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProgramTeam"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProgramTeam"> | Date | string
 }
@@ -615,6 +646,7 @@ export type ProgramTeamScalarWhereInput = {
 export type ProgramTeamCreateWithoutLeaderInput = {
   id?: string
   name: string
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
@@ -628,6 +660,7 @@ export type ProgramTeamUncheckedCreateWithoutLeaderInput = {
   programId: string
   tenantId: string
   name: string
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutTeamInput
@@ -663,6 +696,7 @@ export type ProgramTeamUpdateManyWithWhereWithoutLeaderInput = {
 export type ProgramTeamCreateWithoutProgramInput = {
   id?: string
   name: string
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutProgramTeamsInput
@@ -676,6 +710,7 @@ export type ProgramTeamUncheckedCreateWithoutProgramInput = {
   tenantId: string
   name: string
   leaderId?: string | null
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutTeamInput
@@ -711,6 +746,7 @@ export type ProgramTeamUpdateManyWithWhereWithoutProgramInput = {
 export type ProgramTeamCreateWithoutMembersInput = {
   id?: string
   name: string
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
@@ -725,6 +761,7 @@ export type ProgramTeamUncheckedCreateWithoutMembersInput = {
   tenantId: string
   name: string
   leaderId?: string | null
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   vehicles?: Prisma.ProgramTeamVehicleUncheckedCreateNestedManyWithoutTeamInput
@@ -749,6 +786,7 @@ export type ProgramTeamUpdateToOneWithWhereWithoutMembersInput = {
 export type ProgramTeamUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
@@ -763,6 +801,7 @@ export type ProgramTeamUncheckedUpdateWithoutMembersInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vehicles?: Prisma.ProgramTeamVehicleUncheckedUpdateManyWithoutTeamNestedInput
@@ -771,6 +810,7 @@ export type ProgramTeamUncheckedUpdateWithoutMembersInput = {
 export type ProgramTeamCreateWithoutVehiclesInput = {
   id?: string
   name: string
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutTeamsInput
@@ -785,6 +825,7 @@ export type ProgramTeamUncheckedCreateWithoutVehiclesInput = {
   tenantId: string
   name: string
   leaderId?: string | null
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.ProgramTeamMemberUncheckedCreateNestedManyWithoutTeamInput
@@ -809,6 +850,7 @@ export type ProgramTeamUpdateToOneWithWhereWithoutVehiclesInput = {
 export type ProgramTeamUpdateWithoutVehiclesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
@@ -823,6 +865,7 @@ export type ProgramTeamUncheckedUpdateWithoutVehiclesInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutTeamNestedInput
@@ -833,6 +876,7 @@ export type ProgramTeamCreateManyTenantInput = {
   programId: string
   name: string
   leaderId?: string | null
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -840,6 +884,7 @@ export type ProgramTeamCreateManyTenantInput = {
 export type ProgramTeamUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
@@ -853,6 +898,7 @@ export type ProgramTeamUncheckedUpdateWithoutTenantInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutTeamNestedInput
@@ -864,6 +910,7 @@ export type ProgramTeamUncheckedUpdateManyWithoutTenantInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -873,6 +920,7 @@ export type ProgramTeamCreateManyLeaderInput = {
   programId: string
   tenantId: string
   name: string
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -880,6 +928,7 @@ export type ProgramTeamCreateManyLeaderInput = {
 export type ProgramTeamUpdateWithoutLeaderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutTeamsNestedInput
@@ -893,6 +942,7 @@ export type ProgramTeamUncheckedUpdateWithoutLeaderInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutTeamNestedInput
@@ -904,6 +954,7 @@ export type ProgramTeamUncheckedUpdateManyWithoutLeaderInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -913,6 +964,7 @@ export type ProgramTeamCreateManyProgramInput = {
   tenantId: string
   name: string
   leaderId?: string | null
+  sourceGroupCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -920,6 +972,7 @@ export type ProgramTeamCreateManyProgramInput = {
 export type ProgramTeamUpdateWithoutProgramInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramTeamsNestedInput
@@ -933,6 +986,7 @@ export type ProgramTeamUncheckedUpdateWithoutProgramInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ProgramTeamMemberUncheckedUpdateManyWithoutTeamNestedInput
@@ -944,6 +998,7 @@ export type ProgramTeamUncheckedUpdateManyWithoutProgramInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leaderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceGroupCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -994,6 +1049,7 @@ export type ProgramTeamSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   tenantId?: boolean
   name?: boolean
   leaderId?: boolean
+  sourceGroupCode?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
@@ -1012,11 +1068,12 @@ export type ProgramTeamSelectScalar = {
   tenantId?: boolean
   name?: boolean
   leaderId?: boolean
+  sourceGroupCode?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProgramTeamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "programId" | "tenantId" | "name" | "leaderId" | "createdAt" | "updatedAt", ExtArgs["result"]["programTeam"]>
+export type ProgramTeamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "programId" | "tenantId" | "name" | "leaderId" | "sourceGroupCode" | "createdAt" | "updatedAt", ExtArgs["result"]["programTeam"]>
 export type ProgramTeamInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
@@ -1041,6 +1098,7 @@ export type $ProgramTeamPayload<ExtArgs extends runtime.Types.Extensions.Interna
     tenantId: string
     name: string
     leaderId: string | null
+    sourceGroupCode: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["programTeam"]>
@@ -1422,6 +1480,7 @@ export interface ProgramTeamFieldRefs {
   readonly tenantId: Prisma.FieldRef<"ProgramTeam", 'String'>
   readonly name: Prisma.FieldRef<"ProgramTeam", 'String'>
   readonly leaderId: Prisma.FieldRef<"ProgramTeam", 'String'>
+  readonly sourceGroupCode: Prisma.FieldRef<"ProgramTeam", 'String'>
   readonly createdAt: Prisma.FieldRef<"ProgramTeam", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ProgramTeam", 'DateTime'>
 }

@@ -47,9 +47,12 @@ export type ProgramMinAggregateOutputType = {
   tenantId: string | null
   endDate: Date | null
   scenarioType: $Enums.ScenarioType | null
+  scenarioTypeOther: string | null
   startDate: Date | null
   status: $Enums.ProjectStatus | null
+  statusOther: string | null
   targetSampleSize: number | null
+  tracingRequired: boolean | null
   teamCount: number | null
   membersPerTeam: number | null
   teamLeaderRoleId: string | null
@@ -66,9 +69,12 @@ export type ProgramMaxAggregateOutputType = {
   tenantId: string | null
   endDate: Date | null
   scenarioType: $Enums.ScenarioType | null
+  scenarioTypeOther: string | null
   startDate: Date | null
   status: $Enums.ProjectStatus | null
+  statusOther: string | null
   targetSampleSize: number | null
+  tracingRequired: boolean | null
   teamCount: number | null
   membersPerTeam: number | null
   teamLeaderRoleId: string | null
@@ -85,9 +91,12 @@ export type ProgramCountAggregateOutputType = {
   tenantId: number
   endDate: number
   scenarioType: number
+  scenarioTypeOther: number
   startDate: number
   status: number
+  statusOther: number
   targetSampleSize: number
+  tracingRequired: number
   teamCount: number
   membersPerTeam: number
   teamLeaderRoleId: number
@@ -118,9 +127,12 @@ export type ProgramMinAggregateInputType = {
   tenantId?: true
   endDate?: true
   scenarioType?: true
+  scenarioTypeOther?: true
   startDate?: true
   status?: true
+  statusOther?: true
   targetSampleSize?: true
+  tracingRequired?: true
   teamCount?: true
   membersPerTeam?: true
   teamLeaderRoleId?: true
@@ -137,9 +149,12 @@ export type ProgramMaxAggregateInputType = {
   tenantId?: true
   endDate?: true
   scenarioType?: true
+  scenarioTypeOther?: true
   startDate?: true
   status?: true
+  statusOther?: true
   targetSampleSize?: true
+  tracingRequired?: true
   teamCount?: true
   membersPerTeam?: true
   teamLeaderRoleId?: true
@@ -156,9 +171,12 @@ export type ProgramCountAggregateInputType = {
   tenantId?: true
   endDate?: true
   scenarioType?: true
+  scenarioTypeOther?: true
   startDate?: true
   status?: true
+  statusOther?: true
   targetSampleSize?: true
+  tracingRequired?: true
   teamCount?: true
   membersPerTeam?: true
   teamLeaderRoleId?: true
@@ -262,9 +280,12 @@ export type ProgramGroupByOutputType = {
   tenantId: string
   endDate: Date | null
   scenarioType: $Enums.ScenarioType | null
+  scenarioTypeOther: string | null
   startDate: Date | null
   status: $Enums.ProjectStatus
+  statusOther: string | null
   targetSampleSize: number | null
+  tracingRequired: boolean
   teamCount: number | null
   membersPerTeam: number | null
   teamLeaderRoleId: string | null
@@ -304,9 +325,12 @@ export type ProgramWhereInput = {
   tenantId?: Prisma.StringFilter<"Program"> | string
   endDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   scenarioType?: Prisma.EnumScenarioTypeNullableFilter<"Program"> | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.StringNullableFilter<"Program"> | string | null
   startDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   status?: Prisma.EnumProjectStatusFilter<"Program"> | $Enums.ProjectStatus
+  statusOther?: Prisma.StringNullableFilter<"Program"> | string | null
   targetSampleSize?: Prisma.IntNullableFilter<"Program"> | number | null
+  tracingRequired?: Prisma.BoolFilter<"Program"> | boolean
   teamCount?: Prisma.IntNullableFilter<"Program"> | number | null
   membersPerTeam?: Prisma.IntNullableFilter<"Program"> | number | null
   teamLeaderRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
@@ -320,6 +344,7 @@ export type ProgramWhereInput = {
   assignments?: Prisma.ProgramAssignmentListRelationFilter
   teams?: Prisma.ProgramTeamListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
+  fieldExpenses?: Prisma.FieldExpenseListRelationFilter
   beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }
 
@@ -332,9 +357,12 @@ export type ProgramOrderByWithRelationInput = {
   tenantId?: Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   scenarioType?: Prisma.SortOrderInput | Prisma.SortOrder
+  scenarioTypeOther?: Prisma.SortOrderInput | Prisma.SortOrder
   startDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  statusOther?: Prisma.SortOrderInput | Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
   teamCount?: Prisma.SortOrderInput | Prisma.SortOrder
   membersPerTeam?: Prisma.SortOrderInput | Prisma.SortOrder
   teamLeaderRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -348,6 +376,7 @@ export type ProgramOrderByWithRelationInput = {
   assignments?: Prisma.ProgramAssignmentOrderByRelationAggregateInput
   teams?: Prisma.ProgramTeamOrderByRelationAggregateInput
   availabilityChecks?: Prisma.AvailabilityCheckOrderByRelationAggregateInput
+  fieldExpenses?: Prisma.FieldExpenseOrderByRelationAggregateInput
   beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
   _relevance?: Prisma.ProgramOrderByRelevanceInput
 }
@@ -365,9 +394,12 @@ export type ProgramWhereUniqueInput = Prisma.AtLeast<{
   tenantId?: Prisma.StringFilter<"Program"> | string
   endDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   scenarioType?: Prisma.EnumScenarioTypeNullableFilter<"Program"> | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.StringNullableFilter<"Program"> | string | null
   startDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   status?: Prisma.EnumProjectStatusFilter<"Program"> | $Enums.ProjectStatus
+  statusOther?: Prisma.StringNullableFilter<"Program"> | string | null
   targetSampleSize?: Prisma.IntNullableFilter<"Program"> | number | null
+  tracingRequired?: Prisma.BoolFilter<"Program"> | boolean
   teamCount?: Prisma.IntNullableFilter<"Program"> | number | null
   membersPerTeam?: Prisma.IntNullableFilter<"Program"> | number | null
   teamLeaderRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
@@ -381,6 +413,7 @@ export type ProgramWhereUniqueInput = Prisma.AtLeast<{
   assignments?: Prisma.ProgramAssignmentListRelationFilter
   teams?: Prisma.ProgramTeamListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
+  fieldExpenses?: Prisma.FieldExpenseListRelationFilter
   beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }, "id" | "tenantId_name">
 
@@ -393,9 +426,12 @@ export type ProgramOrderByWithAggregationInput = {
   tenantId?: Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   scenarioType?: Prisma.SortOrderInput | Prisma.SortOrder
+  scenarioTypeOther?: Prisma.SortOrderInput | Prisma.SortOrder
   startDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  statusOther?: Prisma.SortOrderInput | Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
   teamCount?: Prisma.SortOrderInput | Prisma.SortOrder
   membersPerTeam?: Prisma.SortOrderInput | Prisma.SortOrder
   teamLeaderRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -420,9 +456,12 @@ export type ProgramScalarWhereWithAggregatesInput = {
   tenantId?: Prisma.StringWithAggregatesFilter<"Program"> | string
   endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Program"> | Date | string | null
   scenarioType?: Prisma.EnumScenarioTypeNullableWithAggregatesFilter<"Program"> | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
   startDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Program"> | Date | string | null
   status?: Prisma.EnumProjectStatusWithAggregatesFilter<"Program"> | $Enums.ProjectStatus
+  statusOther?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
   targetSampleSize?: Prisma.IntNullableWithAggregatesFilter<"Program"> | number | null
+  tracingRequired?: Prisma.BoolWithAggregatesFilter<"Program"> | boolean
   teamCount?: Prisma.IntNullableWithAggregatesFilter<"Program"> | number | null
   membersPerTeam?: Prisma.IntNullableWithAggregatesFilter<"Program"> | number | null
   teamLeaderRoleId?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
@@ -438,9 +477,12 @@ export type ProgramCreateInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
@@ -451,6 +493,7 @@ export type ProgramCreateInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -463,9 +506,12 @@ export type ProgramUncheckedCreateInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -475,6 +521,7 @@ export type ProgramUncheckedCreateInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -486,9 +533,12 @@ export type ProgramUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
@@ -499,6 +549,7 @@ export type ProgramUpdateInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -511,9 +562,12 @@ export type ProgramUncheckedUpdateInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -523,6 +577,7 @@ export type ProgramUncheckedUpdateInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -535,9 +590,12 @@ export type ProgramCreateManyInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -553,9 +611,12 @@ export type ProgramUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -569,9 +630,12 @@ export type ProgramUncheckedUpdateManyInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -609,9 +673,12 @@ export type ProgramCountOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   scenarioType?: Prisma.SortOrder
+  scenarioTypeOther?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  statusOther?: Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
   teamCount?: Prisma.SortOrder
   membersPerTeam?: Prisma.SortOrder
   teamLeaderRoleId?: Prisma.SortOrder
@@ -634,9 +701,12 @@ export type ProgramMaxOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   scenarioType?: Prisma.SortOrder
+  scenarioTypeOther?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  statusOther?: Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
   teamCount?: Prisma.SortOrder
   membersPerTeam?: Prisma.SortOrder
   teamLeaderRoleId?: Prisma.SortOrder
@@ -653,9 +723,12 @@ export type ProgramMinOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   scenarioType?: Prisma.SortOrder
+  scenarioTypeOther?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  statusOther?: Prisma.SortOrder
   targetSampleSize?: Prisma.SortOrder
+  tracingRequired?: Prisma.SortOrder
   teamCount?: Prisma.SortOrder
   membersPerTeam?: Prisma.SortOrder
   teamLeaderRoleId?: Prisma.SortOrder
@@ -883,6 +956,20 @@ export type ProgramUpdateOneRequiredWithoutAvailabilityChecksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutAvailabilityChecksInput, Prisma.ProgramUpdateWithoutAvailabilityChecksInput>, Prisma.ProgramUncheckedUpdateWithoutAvailabilityChecksInput>
 }
 
+export type ProgramCreateNestedOneWithoutFieldExpensesInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutFieldExpensesInput
+  connect?: Prisma.ProgramWhereUniqueInput
+}
+
+export type ProgramUpdateOneRequiredWithoutFieldExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutFieldExpensesInput
+  upsert?: Prisma.ProgramUpsertWithoutFieldExpensesInput
+  connect?: Prisma.ProgramWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutFieldExpensesInput, Prisma.ProgramUpdateWithoutFieldExpensesInput>, Prisma.ProgramUncheckedUpdateWithoutFieldExpensesInput>
+}
+
 export type ProgramCreateNestedManyWithoutBeneficiariesInput = {
   create?: Prisma.XOR<Prisma.ProgramCreateWithoutBeneficiariesInput, Prisma.ProgramUncheckedCreateWithoutBeneficiariesInput> | Prisma.ProgramCreateWithoutBeneficiariesInput[] | Prisma.ProgramUncheckedCreateWithoutBeneficiariesInput[]
   connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutBeneficiariesInput | Prisma.ProgramCreateOrConnectWithoutBeneficiariesInput[]
@@ -959,9 +1046,12 @@ export type ProgramCreateWithoutTenantInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
@@ -971,6 +1061,7 @@ export type ProgramCreateWithoutTenantInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -982,9 +1073,12 @@ export type ProgramUncheckedCreateWithoutTenantInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -994,6 +1088,7 @@ export type ProgramUncheckedCreateWithoutTenantInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1035,9 +1130,12 @@ export type ProgramScalarWhereInput = {
   tenantId?: Prisma.StringFilter<"Program"> | string
   endDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   scenarioType?: Prisma.EnumScenarioTypeNullableFilter<"Program"> | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.StringNullableFilter<"Program"> | string | null
   startDate?: Prisma.DateTimeNullableFilter<"Program"> | Date | string | null
   status?: Prisma.EnumProjectStatusFilter<"Program"> | $Enums.ProjectStatus
+  statusOther?: Prisma.StringNullableFilter<"Program"> | string | null
   targetSampleSize?: Prisma.IntNullableFilter<"Program"> | number | null
+  tracingRequired?: Prisma.BoolFilter<"Program"> | boolean
   teamCount?: Prisma.IntNullableFilter<"Program"> | number | null
   membersPerTeam?: Prisma.IntNullableFilter<"Program"> | number | null
   teamLeaderRoleId?: Prisma.StringNullableFilter<"Program"> | string | null
@@ -1053,9 +1151,12 @@ export type ProgramCreateWithoutTeamLeaderRoleInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
@@ -1065,6 +1166,7 @@ export type ProgramCreateWithoutTeamLeaderRoleInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1077,9 +1179,12 @@ export type ProgramUncheckedCreateWithoutTeamLeaderRoleInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamMemberRoleId?: string | null
@@ -1088,6 +1193,7 @@ export type ProgramUncheckedCreateWithoutTeamLeaderRoleInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1109,9 +1215,12 @@ export type ProgramCreateWithoutTeamMemberRoleInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
@@ -1121,6 +1230,7 @@ export type ProgramCreateWithoutTeamMemberRoleInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1133,9 +1243,12 @@ export type ProgramUncheckedCreateWithoutTeamMemberRoleInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1144,6 +1257,7 @@ export type ProgramUncheckedCreateWithoutTeamMemberRoleInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1165,9 +1279,12 @@ export type ProgramCreateWithoutCheckerRoleInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
@@ -1177,6 +1294,7 @@ export type ProgramCreateWithoutCheckerRoleInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1189,9 +1307,12 @@ export type ProgramUncheckedCreateWithoutCheckerRoleInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1200,6 +1321,7 @@ export type ProgramUncheckedCreateWithoutCheckerRoleInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1269,9 +1391,12 @@ export type ProgramCreateWithoutTeamsInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
@@ -1281,6 +1406,7 @@ export type ProgramCreateWithoutTeamsInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1293,9 +1419,12 @@ export type ProgramUncheckedCreateWithoutTeamsInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1304,6 +1433,7 @@ export type ProgramUncheckedCreateWithoutTeamsInput = {
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1331,9 +1461,12 @@ export type ProgramUpdateWithoutTeamsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
@@ -1343,6 +1476,7 @@ export type ProgramUpdateWithoutTeamsInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1355,9 +1489,12 @@ export type ProgramUncheckedUpdateWithoutTeamsInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1366,6 +1503,7 @@ export type ProgramUncheckedUpdateWithoutTeamsInput = {
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1377,9 +1515,12 @@ export type ProgramCreateWithoutAvailabilityChecksInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
@@ -1389,6 +1530,7 @@ export type ProgramCreateWithoutAvailabilityChecksInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1401,9 +1543,12 @@ export type ProgramUncheckedCreateWithoutAvailabilityChecksInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1412,6 +1557,7 @@ export type ProgramUncheckedCreateWithoutAvailabilityChecksInput = {
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1439,9 +1585,12 @@ export type ProgramUpdateWithoutAvailabilityChecksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
@@ -1451,6 +1600,7 @@ export type ProgramUpdateWithoutAvailabilityChecksInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1463,9 +1613,12 @@ export type ProgramUncheckedUpdateWithoutAvailabilityChecksInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1474,6 +1627,131 @@ export type ProgramUncheckedUpdateWithoutAvailabilityChecksInput = {
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
+}
+
+export type ProgramCreateWithoutFieldExpensesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  endDate?: Date | string | null
+  scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
+  startDate?: Date | string | null
+  status?: $Enums.ProjectStatus
+  statusOther?: string | null
+  targetSampleSize?: number | null
+  tracingRequired?: boolean
+  teamCount?: number | null
+  membersPerTeam?: number | null
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
+  assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+}
+
+export type ProgramUncheckedCreateWithoutFieldExpensesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenantId: string
+  endDate?: Date | string | null
+  scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
+  startDate?: Date | string | null
+  status?: $Enums.ProjectStatus
+  statusOther?: string | null
+  targetSampleSize?: number | null
+  tracingRequired?: boolean
+  teamCount?: number | null
+  membersPerTeam?: number | null
+  teamLeaderRoleId?: string | null
+  teamMemberRoleId?: string | null
+  checkerRoleId?: string | null
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
+}
+
+export type ProgramCreateOrConnectWithoutFieldExpensesInput = {
+  where: Prisma.ProgramWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
+}
+
+export type ProgramUpsertWithoutFieldExpensesInput = {
+  update: Prisma.XOR<Prisma.ProgramUpdateWithoutFieldExpensesInput, Prisma.ProgramUncheckedUpdateWithoutFieldExpensesInput>
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
+  where?: Prisma.ProgramWhereInput
+}
+
+export type ProgramUpdateToOneWithWhereWithoutFieldExpensesInput = {
+  where?: Prisma.ProgramWhereInput
+  data: Prisma.XOR<Prisma.ProgramUpdateWithoutFieldExpensesInput, Prisma.ProgramUncheckedUpdateWithoutFieldExpensesInput>
+}
+
+export type ProgramUpdateWithoutFieldExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
+  assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+}
+
+export type ProgramUncheckedUpdateWithoutFieldExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1485,9 +1763,12 @@ export type ProgramCreateWithoutBeneficiariesInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
@@ -1498,6 +1779,7 @@ export type ProgramCreateWithoutBeneficiariesInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutBeneficiariesInput = {
@@ -1509,9 +1791,12 @@ export type ProgramUncheckedCreateWithoutBeneficiariesInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1521,6 +1806,7 @@ export type ProgramUncheckedCreateWithoutBeneficiariesInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutBeneficiariesInput = {
@@ -1552,9 +1838,12 @@ export type ProgramCreateWithoutAssignmentsInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
@@ -1564,6 +1853,7 @@ export type ProgramCreateWithoutAssignmentsInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1576,9 +1866,12 @@ export type ProgramUncheckedCreateWithoutAssignmentsInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1587,6 +1880,7 @@ export type ProgramUncheckedCreateWithoutAssignmentsInput = {
   fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1614,9 +1908,12 @@ export type ProgramUpdateWithoutAssignmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
@@ -1626,6 +1923,7 @@ export type ProgramUpdateWithoutAssignmentsInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1638,9 +1936,12 @@ export type ProgramUncheckedUpdateWithoutAssignmentsInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1649,6 +1950,7 @@ export type ProgramUncheckedUpdateWithoutAssignmentsInput = {
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1660,9 +1962,12 @@ export type ProgramCreateWithoutFieldCheckInsInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
@@ -1672,6 +1977,7 @@ export type ProgramCreateWithoutFieldCheckInsInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1684,9 +1990,12 @@ export type ProgramUncheckedCreateWithoutFieldCheckInsInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1695,6 +2004,7 @@ export type ProgramUncheckedCreateWithoutFieldCheckInsInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1722,9 +2032,12 @@ export type ProgramUpdateWithoutFieldCheckInsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
@@ -1734,6 +2047,7 @@ export type ProgramUpdateWithoutFieldCheckInsInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1746,9 +2060,12 @@ export type ProgramUncheckedUpdateWithoutFieldCheckInsInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1757,6 +2074,7 @@ export type ProgramUncheckedUpdateWithoutFieldCheckInsInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1768,9 +2086,12 @@ export type ProgramCreateManyTenantInput = {
   updatedAt?: Date | string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1786,9 +2107,12 @@ export type ProgramUpdateWithoutTenantInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
@@ -1798,6 +2122,7 @@ export type ProgramUpdateWithoutTenantInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1809,9 +2134,12 @@ export type ProgramUncheckedUpdateWithoutTenantInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1821,6 +2149,7 @@ export type ProgramUncheckedUpdateWithoutTenantInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1832,9 +2161,12 @@ export type ProgramUncheckedUpdateManyWithoutTenantInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1851,9 +2183,12 @@ export type ProgramCreateManyTeamLeaderRoleInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamMemberRoleId?: string | null
@@ -1869,9 +2204,12 @@ export type ProgramCreateManyTeamMemberRoleInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1887,9 +2225,12 @@ export type ProgramCreateManyCheckerRoleInput = {
   tenantId: string
   endDate?: Date | string | null
   scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
   startDate?: Date | string | null
   status?: $Enums.ProjectStatus
+  statusOther?: string | null
   targetSampleSize?: number | null
+  tracingRequired?: boolean
   teamCount?: number | null
   membersPerTeam?: number | null
   teamLeaderRoleId?: string | null
@@ -1904,9 +2245,12 @@ export type ProgramUpdateWithoutTeamLeaderRoleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
@@ -1916,6 +2260,7 @@ export type ProgramUpdateWithoutTeamLeaderRoleInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1928,9 +2273,12 @@ export type ProgramUncheckedUpdateWithoutTeamLeaderRoleInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1939,6 +2287,7 @@ export type ProgramUncheckedUpdateWithoutTeamLeaderRoleInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1951,9 +2300,12 @@ export type ProgramUncheckedUpdateManyWithoutTeamLeaderRoleInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1968,9 +2320,12 @@ export type ProgramUpdateWithoutTeamMemberRoleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
@@ -1980,6 +2335,7 @@ export type ProgramUpdateWithoutTeamMemberRoleInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1992,9 +2348,12 @@ export type ProgramUncheckedUpdateWithoutTeamMemberRoleInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2003,6 +2362,7 @@ export type ProgramUncheckedUpdateWithoutTeamMemberRoleInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2015,9 +2375,12 @@ export type ProgramUncheckedUpdateManyWithoutTeamMemberRoleInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2032,9 +2395,12 @@ export type ProgramUpdateWithoutCheckerRoleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
@@ -2044,6 +2410,7 @@ export type ProgramUpdateWithoutCheckerRoleInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2056,9 +2423,12 @@ export type ProgramUncheckedUpdateWithoutCheckerRoleInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2067,6 +2437,7 @@ export type ProgramUncheckedUpdateWithoutCheckerRoleInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2079,9 +2450,12 @@ export type ProgramUncheckedUpdateManyWithoutCheckerRoleInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2096,9 +2470,12 @@ export type ProgramUpdateWithoutBeneficiariesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
@@ -2109,6 +2486,7 @@ export type ProgramUpdateWithoutBeneficiariesInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutBeneficiariesInput = {
@@ -2120,9 +2498,12 @@ export type ProgramUncheckedUpdateWithoutBeneficiariesInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2132,6 +2513,7 @@ export type ProgramUncheckedUpdateWithoutBeneficiariesInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutBeneficiariesInput = {
@@ -2143,9 +2525,12 @@ export type ProgramUncheckedUpdateManyWithoutBeneficiariesInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2163,6 +2548,7 @@ export type ProgramCountOutputType = {
   assignments: number
   teams: number
   availabilityChecks: number
+  fieldExpenses: number
   beneficiaries: number
 }
 
@@ -2171,6 +2557,7 @@ export type ProgramCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   assignments?: boolean | ProgramCountOutputTypeCountAssignmentsArgs
   teams?: boolean | ProgramCountOutputTypeCountTeamsArgs
   availabilityChecks?: boolean | ProgramCountOutputTypeCountAvailabilityChecksArgs
+  fieldExpenses?: boolean | ProgramCountOutputTypeCountFieldExpensesArgs
   beneficiaries?: boolean | ProgramCountOutputTypeCountBeneficiariesArgs
 }
 
@@ -2215,6 +2602,13 @@ export type ProgramCountOutputTypeCountAvailabilityChecksArgs<ExtArgs extends ru
 /**
  * ProgramCountOutputType without action
  */
+export type ProgramCountOutputTypeCountFieldExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FieldExpenseWhereInput
+}
+
+/**
+ * ProgramCountOutputType without action
+ */
 export type ProgramCountOutputTypeCountBeneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BeneficiaryWhereInput
 }
@@ -2229,9 +2623,12 @@ export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   tenantId?: boolean
   endDate?: boolean
   scenarioType?: boolean
+  scenarioTypeOther?: boolean
   startDate?: boolean
   status?: boolean
+  statusOther?: boolean
   targetSampleSize?: boolean
+  tracingRequired?: boolean
   teamCount?: boolean
   membersPerTeam?: boolean
   teamLeaderRoleId?: boolean
@@ -2245,6 +2642,7 @@ export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
   teams?: boolean | Prisma.Program$teamsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Program$availabilityChecksArgs<ExtArgs>
+  fieldExpenses?: boolean | Prisma.Program$fieldExpensesArgs<ExtArgs>
   beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["program"]>
@@ -2260,9 +2658,12 @@ export type ProgramSelectScalar = {
   tenantId?: boolean
   endDate?: boolean
   scenarioType?: boolean
+  scenarioTypeOther?: boolean
   startDate?: boolean
   status?: boolean
+  statusOther?: boolean
   targetSampleSize?: boolean
+  tracingRequired?: boolean
   teamCount?: boolean
   membersPerTeam?: boolean
   teamLeaderRoleId?: boolean
@@ -2270,7 +2671,7 @@ export type ProgramSelectScalar = {
   checkerRoleId?: boolean
 }
 
-export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "tenantId" | "endDate" | "scenarioType" | "startDate" | "status" | "targetSampleSize" | "teamCount" | "membersPerTeam" | "teamLeaderRoleId" | "teamMemberRoleId" | "checkerRoleId", ExtArgs["result"]["program"]>
+export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "tenantId" | "endDate" | "scenarioType" | "scenarioTypeOther" | "startDate" | "status" | "statusOther" | "targetSampleSize" | "tracingRequired" | "teamCount" | "membersPerTeam" | "teamLeaderRoleId" | "teamMemberRoleId" | "checkerRoleId", ExtArgs["result"]["program"]>
 export type ProgramInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   teamLeaderRole?: boolean | Prisma.Program$teamLeaderRoleArgs<ExtArgs>
   teamMemberRole?: boolean | Prisma.Program$teamMemberRoleArgs<ExtArgs>
@@ -2280,6 +2681,7 @@ export type ProgramInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   assignments?: boolean | Prisma.Program$assignmentsArgs<ExtArgs>
   teams?: boolean | Prisma.Program$teamsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Program$availabilityChecksArgs<ExtArgs>
+  fieldExpenses?: boolean | Prisma.Program$fieldExpensesArgs<ExtArgs>
   beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2295,6 +2697,7 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     assignments: Prisma.$ProgramAssignmentPayload<ExtArgs>[]
     teams: Prisma.$ProgramTeamPayload<ExtArgs>[]
     availabilityChecks: Prisma.$AvailabilityCheckPayload<ExtArgs>[]
+    fieldExpenses: Prisma.$FieldExpensePayload<ExtArgs>[]
     beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2306,9 +2709,12 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     tenantId: string
     endDate: Date | null
     scenarioType: $Enums.ScenarioType | null
+    scenarioTypeOther: string | null
     startDate: Date | null
     status: $Enums.ProjectStatus
+    statusOther: string | null
     targetSampleSize: number | null
+    tracingRequired: boolean
     teamCount: number | null
     membersPerTeam: number | null
     teamLeaderRoleId: string | null
@@ -2662,6 +3068,7 @@ export interface Prisma__ProgramClient<T, Null = never, ExtArgs extends runtime.
   assignments<T extends Prisma.Program$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   teams<T extends Prisma.Program$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   availabilityChecks<T extends Prisma.Program$availabilityChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$availabilityChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilityCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fieldExpenses<T extends Prisma.Program$fieldExpensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$fieldExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   beneficiaries<T extends Prisma.Program$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2700,9 +3107,12 @@ export interface ProgramFieldRefs {
   readonly tenantId: Prisma.FieldRef<"Program", 'String'>
   readonly endDate: Prisma.FieldRef<"Program", 'DateTime'>
   readonly scenarioType: Prisma.FieldRef<"Program", 'ScenarioType'>
+  readonly scenarioTypeOther: Prisma.FieldRef<"Program", 'String'>
   readonly startDate: Prisma.FieldRef<"Program", 'DateTime'>
   readonly status: Prisma.FieldRef<"Program", 'ProjectStatus'>
+  readonly statusOther: Prisma.FieldRef<"Program", 'String'>
   readonly targetSampleSize: Prisma.FieldRef<"Program", 'Int'>
+  readonly tracingRequired: Prisma.FieldRef<"Program", 'Boolean'>
   readonly teamCount: Prisma.FieldRef<"Program", 'Int'>
   readonly membersPerTeam: Prisma.FieldRef<"Program", 'Int'>
   readonly teamLeaderRoleId: Prisma.FieldRef<"Program", 'String'>
@@ -3206,6 +3616,30 @@ export type Program$availabilityChecksArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.AvailabilityCheckScalarFieldEnum | Prisma.AvailabilityCheckScalarFieldEnum[]
+}
+
+/**
+ * Program.fieldExpenses
+ */
+export type Program$fieldExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FieldExpense
+   */
+  select?: Prisma.FieldExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FieldExpense
+   */
+  omit?: Prisma.FieldExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FieldExpenseInclude<ExtArgs> | null
+  where?: Prisma.FieldExpenseWhereInput
+  orderBy?: Prisma.FieldExpenseOrderByWithRelationInput | Prisma.FieldExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.FieldExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FieldExpenseScalarFieldEnum | Prisma.FieldExpenseScalarFieldEnum[]
 }
 
 /**

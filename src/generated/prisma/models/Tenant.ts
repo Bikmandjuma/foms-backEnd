@@ -183,6 +183,7 @@ export type TenantWhereInput = {
   programAssignments?: Prisma.ProgramAssignmentListRelationFilter
   programTeams?: Prisma.ProgramTeamListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
+  fieldExpenses?: Prisma.FieldExpenseListRelationFilter
   replacementRequests?: Prisma.ReplacementRequestListRelationFilter
   roles?: Prisma.RoleListRelationFilter
   users?: Prisma.UserListRelationFilter
@@ -203,6 +204,7 @@ export type TenantOrderByWithRelationInput = {
   programAssignments?: Prisma.ProgramAssignmentOrderByRelationAggregateInput
   programTeams?: Prisma.ProgramTeamOrderByRelationAggregateInput
   availabilityChecks?: Prisma.AvailabilityCheckOrderByRelationAggregateInput
+  fieldExpenses?: Prisma.FieldExpenseOrderByRelationAggregateInput
   replacementRequests?: Prisma.ReplacementRequestOrderByRelationAggregateInput
   roles?: Prisma.RoleOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
@@ -227,6 +229,7 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   programAssignments?: Prisma.ProgramAssignmentListRelationFilter
   programTeams?: Prisma.ProgramTeamListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
+  fieldExpenses?: Prisma.FieldExpenseListRelationFilter
   replacementRequests?: Prisma.ReplacementRequestListRelationFilter
   roles?: Prisma.RoleListRelationFilter
   users?: Prisma.UserListRelationFilter
@@ -267,6 +270,7 @@ export type TenantCreateInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -287,6 +291,7 @@ export type TenantUncheckedCreateInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -307,6 +312,7 @@ export type TenantUpdateInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -327,6 +333,7 @@ export type TenantUncheckedUpdateInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -479,6 +486,20 @@ export type TenantUpdateOneRequiredWithoutAvailabilityChecksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutAvailabilityChecksInput, Prisma.TenantUpdateWithoutAvailabilityChecksInput>, Prisma.TenantUncheckedUpdateWithoutAvailabilityChecksInput>
 }
 
+export type TenantCreateNestedOneWithoutFieldExpensesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutFieldExpensesInput, Prisma.TenantUncheckedCreateWithoutFieldExpensesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutFieldExpensesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutFieldExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutFieldExpensesInput, Prisma.TenantUncheckedCreateWithoutFieldExpensesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutFieldExpensesInput
+  upsert?: Prisma.TenantUpsertWithoutFieldExpensesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutFieldExpensesInput, Prisma.TenantUpdateWithoutFieldExpensesInput>, Prisma.TenantUncheckedUpdateWithoutFieldExpensesInput>
+}
+
 export type TenantCreateNestedOneWithoutBeneficiariesInput = {
   create?: Prisma.XOR<Prisma.TenantCreateWithoutBeneficiariesInput, Prisma.TenantUncheckedCreateWithoutBeneficiariesInput>
   connectOrCreate?: Prisma.TenantCreateOrConnectWithoutBeneficiariesInput
@@ -592,6 +613,7 @@ export type TenantCreateWithoutNotificationsInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -611,6 +633,7 @@ export type TenantUncheckedCreateWithoutNotificationsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -646,6 +669,7 @@ export type TenantUpdateWithoutNotificationsInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -665,6 +689,7 @@ export type TenantUncheckedUpdateWithoutNotificationsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -685,6 +710,7 @@ export type TenantCreateWithoutRolesInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
   vehicles?: Prisma.VehicleCreateNestedManyWithoutTenantInput
@@ -704,6 +730,7 @@ export type TenantUncheckedCreateWithoutRolesInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
   vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutTenantInput
@@ -739,6 +766,7 @@ export type TenantUpdateWithoutRolesInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
   vehicles?: Prisma.VehicleUpdateManyWithoutTenantNestedInput
@@ -758,6 +786,7 @@ export type TenantUncheckedUpdateWithoutRolesInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
   vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutTenantNestedInput
@@ -777,6 +806,7 @@ export type TenantCreateWithoutUsersInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   vehicles?: Prisma.VehicleCreateNestedManyWithoutTenantInput
@@ -796,6 +826,7 @@ export type TenantUncheckedCreateWithoutUsersInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutTenantInput
@@ -831,6 +862,7 @@ export type TenantUpdateWithoutUsersInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   vehicles?: Prisma.VehicleUpdateManyWithoutTenantNestedInput
@@ -850,6 +882,7 @@ export type TenantUncheckedUpdateWithoutUsersInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutTenantNestedInput
@@ -868,6 +901,7 @@ export type TenantCreateWithoutProgramsInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -887,6 +921,7 @@ export type TenantUncheckedCreateWithoutProgramsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -922,6 +957,7 @@ export type TenantUpdateWithoutProgramsInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -941,6 +977,7 @@ export type TenantUncheckedUpdateWithoutProgramsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -960,6 +997,7 @@ export type TenantCreateWithoutProgramTeamsInput = {
   programs?: Prisma.ProgramCreateNestedManyWithoutTenantInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -979,6 +1017,7 @@ export type TenantUncheckedCreateWithoutProgramTeamsInput = {
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutTenantInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -1014,6 +1053,7 @@ export type TenantUpdateWithoutProgramTeamsInput = {
   programs?: Prisma.ProgramUpdateManyWithoutTenantNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -1033,6 +1073,7 @@ export type TenantUncheckedUpdateWithoutProgramTeamsInput = {
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutTenantNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -1052,6 +1093,7 @@ export type TenantCreateWithoutAvailabilityChecksInput = {
   programs?: Prisma.ProgramCreateNestedManyWithoutTenantInput
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -1071,6 +1113,7 @@ export type TenantUncheckedCreateWithoutAvailabilityChecksInput = {
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutTenantInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -1106,6 +1149,7 @@ export type TenantUpdateWithoutAvailabilityChecksInput = {
   programs?: Prisma.ProgramUpdateManyWithoutTenantNestedInput
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -1125,6 +1169,103 @@ export type TenantUncheckedUpdateWithoutAvailabilityChecksInput = {
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutTenantNestedInput
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutFieldExpensesInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutTenantInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutTenantInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutTenantInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutTenantInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
+  programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutFieldExpensesInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutTenantInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutTenantInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutTenantInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutTenantInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
+  programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutFieldExpensesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutFieldExpensesInput, Prisma.TenantUncheckedCreateWithoutFieldExpensesInput>
+}
+
+export type TenantUpsertWithoutFieldExpensesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutFieldExpensesInput, Prisma.TenantUncheckedUpdateWithoutFieldExpensesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutFieldExpensesInput, Prisma.TenantUncheckedCreateWithoutFieldExpensesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutFieldExpensesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutFieldExpensesInput, Prisma.TenantUncheckedUpdateWithoutFieldExpensesInput>
+}
+
+export type TenantUpdateWithoutFieldExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutTenantNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutTenantNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutTenantNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutTenantNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
+  programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutFieldExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutTenantNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutTenantNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutTenantNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutTenantNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
+  programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -1144,6 +1285,7 @@ export type TenantCreateWithoutBeneficiariesInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -1163,6 +1305,7 @@ export type TenantUncheckedCreateWithoutBeneficiariesInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -1198,6 +1341,7 @@ export type TenantUpdateWithoutBeneficiariesInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -1217,6 +1361,7 @@ export type TenantUncheckedUpdateWithoutBeneficiariesInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -1236,6 +1381,7 @@ export type TenantCreateWithoutProgramAssignmentsInput = {
   programs?: Prisma.ProgramCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -1255,6 +1401,7 @@ export type TenantUncheckedCreateWithoutProgramAssignmentsInput = {
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -1290,6 +1437,7 @@ export type TenantUpdateWithoutProgramAssignmentsInput = {
   programs?: Prisma.ProgramUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -1309,6 +1457,7 @@ export type TenantUncheckedUpdateWithoutProgramAssignmentsInput = {
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -1328,6 +1477,7 @@ export type TenantCreateWithoutBeneficiaryAssignmentsInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -1347,6 +1497,7 @@ export type TenantUncheckedCreateWithoutBeneficiaryAssignmentsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -1382,6 +1533,7 @@ export type TenantUpdateWithoutBeneficiaryAssignmentsInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -1401,6 +1553,7 @@ export type TenantUncheckedUpdateWithoutBeneficiaryAssignmentsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -1421,6 +1574,7 @@ export type TenantCreateWithoutVehiclesInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -1440,6 +1594,7 @@ export type TenantUncheckedCreateWithoutVehiclesInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -1475,6 +1630,7 @@ export type TenantUpdateWithoutVehiclesInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -1494,6 +1650,7 @@ export type TenantUncheckedUpdateWithoutVehiclesInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -1513,6 +1670,7 @@ export type TenantCreateWithoutReplacementRequestsInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
   vehicles?: Prisma.VehicleCreateNestedManyWithoutTenantInput
@@ -1532,6 +1690,7 @@ export type TenantUncheckedCreateWithoutReplacementRequestsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
   vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutTenantInput
@@ -1567,6 +1726,7 @@ export type TenantUpdateWithoutReplacementRequestsInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
   vehicles?: Prisma.VehicleUpdateManyWithoutTenantNestedInput
@@ -1586,6 +1746,7 @@ export type TenantUncheckedUpdateWithoutReplacementRequestsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
   vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutTenantNestedInput
@@ -1604,6 +1765,7 @@ export type TenantCreateWithoutFieldCheckInsInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -1623,6 +1785,7 @@ export type TenantUncheckedCreateWithoutFieldCheckInsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -1658,6 +1821,7 @@ export type TenantUpdateWithoutFieldCheckInsInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -1677,6 +1841,7 @@ export type TenantUncheckedUpdateWithoutFieldCheckInsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -1696,6 +1861,7 @@ export type TenantCreateWithoutActivityLogsInput = {
   programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -1715,6 +1881,7 @@ export type TenantUncheckedCreateWithoutActivityLogsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -1750,6 +1917,7 @@ export type TenantUpdateWithoutActivityLogsInput = {
   programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -1769,6 +1937,7 @@ export type TenantUncheckedUpdateWithoutActivityLogsInput = {
   programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -1790,6 +1959,7 @@ export type TenantCountOutputType = {
   programAssignments: number
   programTeams: number
   availabilityChecks: number
+  fieldExpenses: number
   replacementRequests: number
   roles: number
   users: number
@@ -1806,6 +1976,7 @@ export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   programAssignments?: boolean | TenantCountOutputTypeCountProgramAssignmentsArgs
   programTeams?: boolean | TenantCountOutputTypeCountProgramTeamsArgs
   availabilityChecks?: boolean | TenantCountOutputTypeCountAvailabilityChecksArgs
+  fieldExpenses?: boolean | TenantCountOutputTypeCountFieldExpensesArgs
   replacementRequests?: boolean | TenantCountOutputTypeCountReplacementRequestsArgs
   roles?: boolean | TenantCountOutputTypeCountRolesArgs
   users?: boolean | TenantCountOutputTypeCountUsersArgs
@@ -1888,6 +2059,13 @@ export type TenantCountOutputTypeCountAvailabilityChecksArgs<ExtArgs extends run
 /**
  * TenantCountOutputType without action
  */
+export type TenantCountOutputTypeCountFieldExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FieldExpenseWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
 export type TenantCountOutputTypeCountReplacementRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ReplacementRequestWhereInput
 }
@@ -1928,6 +2106,7 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   programAssignments?: boolean | Prisma.Tenant$programAssignmentsArgs<ExtArgs>
   programTeams?: boolean | Prisma.Tenant$programTeamsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Tenant$availabilityChecksArgs<ExtArgs>
+  fieldExpenses?: boolean | Prisma.Tenant$fieldExpensesArgs<ExtArgs>
   replacementRequests?: boolean | Prisma.Tenant$replacementRequestsArgs<ExtArgs>
   roles?: boolean | Prisma.Tenant$rolesArgs<ExtArgs>
   users?: boolean | Prisma.Tenant$usersArgs<ExtArgs>
@@ -1955,6 +2134,7 @@ export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   programAssignments?: boolean | Prisma.Tenant$programAssignmentsArgs<ExtArgs>
   programTeams?: boolean | Prisma.Tenant$programTeamsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Tenant$availabilityChecksArgs<ExtArgs>
+  fieldExpenses?: boolean | Prisma.Tenant$fieldExpensesArgs<ExtArgs>
   replacementRequests?: boolean | Prisma.Tenant$replacementRequestsArgs<ExtArgs>
   roles?: boolean | Prisma.Tenant$rolesArgs<ExtArgs>
   users?: boolean | Prisma.Tenant$usersArgs<ExtArgs>
@@ -1974,6 +2154,7 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     programAssignments: Prisma.$ProgramAssignmentPayload<ExtArgs>[]
     programTeams: Prisma.$ProgramTeamPayload<ExtArgs>[]
     availabilityChecks: Prisma.$AvailabilityCheckPayload<ExtArgs>[]
+    fieldExpenses: Prisma.$FieldExpensePayload<ExtArgs>[]
     replacementRequests: Prisma.$ReplacementRequestPayload<ExtArgs>[]
     roles: Prisma.$RolePayload<ExtArgs>[]
     users: Prisma.$UserPayload<ExtArgs>[]
@@ -2333,6 +2514,7 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
   programAssignments<T extends Prisma.Tenant$programAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$programAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   programTeams<T extends Prisma.Tenant$programTeamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$programTeamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   availabilityChecks<T extends Prisma.Tenant$availabilityChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$availabilityChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilityCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fieldExpenses<T extends Prisma.Tenant$fieldExpensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$fieldExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   replacementRequests<T extends Prisma.Tenant$replacementRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$replacementRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplacementRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roles<T extends Prisma.Tenant$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.Tenant$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2931,6 +3113,30 @@ export type Tenant$availabilityChecksArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.AvailabilityCheckScalarFieldEnum | Prisma.AvailabilityCheckScalarFieldEnum[]
+}
+
+/**
+ * Tenant.fieldExpenses
+ */
+export type Tenant$fieldExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FieldExpense
+   */
+  select?: Prisma.FieldExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FieldExpense
+   */
+  omit?: Prisma.FieldExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FieldExpenseInclude<ExtArgs> | null
+  where?: Prisma.FieldExpenseWhereInput
+  orderBy?: Prisma.FieldExpenseOrderByWithRelationInput | Prisma.FieldExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.FieldExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FieldExpenseScalarFieldEnum | Prisma.FieldExpenseScalarFieldEnum[]
 }
 
 /**

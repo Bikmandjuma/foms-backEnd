@@ -10,9 +10,10 @@ export interface RawBeneficiaryRow {
   cell?: string;
   village?: string;
   gender?: string;
-  dateOfBirth?: string;
-  nationalId?: string;
-  householdSize?: string;
+  ageRange?: string;
+  ipName?: string;
+  category?: string;
+  personalId?: string;
   status?: string;
   outcome?: string;
   programs?: string; // comma-separated program names
@@ -27,9 +28,10 @@ const BENEFICIARY_COLUMNS: { key: keyof Omit<RawBeneficiaryRow, "rowNumber">; he
   { key: "cell", header: "Cell" },
   { key: "village", header: "Village" },
   { key: "gender", header: "Gender (MALE/FEMALE/OTHER)" },
-  { key: "dateOfBirth", header: "Date of birth (YYYY-MM-DD)" },
-  { key: "nationalId", header: "National ID" },
-  { key: "householdSize", header: "Household size" },
+  { key: "ageRange", header: "Age (e.g. 18-20)" },
+  { key: "ipName", header: "IP Name" },
+  { key: "category", header: "Category" },
+  { key: "personalId", header: "Personal ID" },
   { key: "status", header: "Status (ACTIVE/INACTIVE/SUSPENDED)" },
   { key: "programs", header: "Programs (comma-separated names)" },
 ];
@@ -106,11 +108,108 @@ export async function buildBeneficiaryTemplateWorkbook(): Promise<Buffer> {
     cell: "Cyabajwa",
     village: "Nyamirama",
     gender: "FEMALE",
-    dateOfBirth: "1990-05-14",
-    nationalId: "1199080012345678",
-    householdSize: "4",
+    ageRange: "30-35",
+    ipName: "World Vision",
+    category: "Elderly",
+    personalId: "1199080012345678",
     status: "ACTIVE",
     programs: "Agriculture Baseline Survey 2026",
+  });
+  const buffer = await workbook.xlsx.writeBuffer();
+  return Buffer.from(buffer);
+}
+
+export interface RawUserGroupRow {
+  rowNumber: number;
+  groupCode?: string; // "Group 01"
+  groupName?: string; // "Gasabo Cluster A"
+  operationalArea?: string;
+  role?: string; // "Supervisor" | "Enumerator"
+  name?: string;
+  telephone?: string;
+  email?: string;
+  district?: string;
+  region?: string; // informal name for province, e.g. "Kigali City" -> Kigali
+}
+
+const USER_GROUP_COLUMNS: { key: keyof Omit<RawUserGroupRow, "rowNumber">; header: string }[] = [
+  { key: "groupCode", header: "Group" },
+  { key: "groupName", header: "Group name" },
+  { key: "operationalArea", header: "Operational area" },
+  { key: "role", header: "Role" },
+  { key: "name", header: "Name" },
+  { key: "telephone", header: "Phone number" },
+  { key: "email", header: "Email" },
+  { key: "district", header: "District" },
+  { key: "region", header: "Region" },
+];
+
+/**
+ * Reads the Supervisor & Enumerator group spreadsheet — one row per person,
+ * grouped by the "Group" column, each row stating its own Role. Same
+ * case-insensitive header matching as parseBeneficiariesWorkbook.
+ */
+export async function parseUserGroupsWorkbook(buffer: Buffer): Promise<RawUserGroupRow[]> {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(buffer as unknown as ArrayBuffer);
+  const sheet = workbook.worksheets[0];
+  if (!sheet) return [];
+
+  const headerRow = sheet.getRow(1);
+  const columnForIndex = new Map<number, keyof Omit<RawUserGroupRow, "rowNumber">>();
+
+  headerRow.eachCell({ includeEmpty: false }, (cell, colNumber) => {
+    const raw = cellText(cell)?.toLowerCase() ?? "";
+    const match = USER_GROUP_COLUMNS.find((c) => raw.startsWith(c.header.toLowerCase()) || raw.startsWith(c.key.toLowerCase()));
+    if (match) columnForIndex.set(colNumber, match.key);
+  });
+
+  const rows: RawUserGroupRow[] = [];
+  for (let r = 2; r <= sheet.rowCount; r++) {
+    const row = sheet.getRow(r);
+    if (row.cellCount === 0) continue;
+    const entry: RawUserGroupRow = { rowNumber: r };
+    let hasAnyValue = false;
+    row.eachCell({ includeEmpty: false }, (cell, colNumber) => {
+      const key = columnForIndex.get(colNumber);
+      if (!key) return;
+      const text = cellText(cell);
+      if (text) {
+        (entry as unknown as Record<string, string>)[key] = text;
+        hasAnyValue = true;
+      }
+    });
+    if (hasAnyValue) rows.push(entry);
+  }
+  return rows;
+}
+
+export async function buildUserGroupsTemplateWorkbook(): Promise<Buffer> {
+  const workbook = new ExcelJS.Workbook();
+  const sheet = workbook.addWorksheet("Groups");
+  sheet.columns = USER_GROUP_COLUMNS.map((c) => ({ header: c.header, key: c.key, width: 22 }));
+  sheet.getRow(1).font = { bold: true };
+  sheet.addRow({
+    groupCode: "Group 01",
+    groupName: "Gasabo Cluster A",
+    operationalArea: "Gasabo District",
+    role: "Supervisor",
+    name: "Kanyarukiga Meshack",
+    telephone: "+250788303215",
+    email: "meshackkanyarukiga@gmail.com",
+    district: "Gasabo",
+    region: "Kigali City",
+  });
+  sheet.addRow({
+    groupCode: "Group 01",
+    groupName: "Gasabo Cluster A",
+    operationalArea: "Gasabo District",
+    role: "Enumerator",
+    name: "Habonimana Gabriel",
+    telephone: "+250782540234",
+    email: "gabrielhabonimana@gmail.com",
+    district: "Gasabo",
+    region: "Kigali City",
   });
   const buffer = await workbook.xlsx.writeBuffer();
   return Buffer.from(buffer);

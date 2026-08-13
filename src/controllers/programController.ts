@@ -28,6 +28,12 @@ export async function getProgram(req: Request, res: Response): Promise<void> {
 
 export async function createProgram(req: Request, res: Response): Promise<void> {
   const data = createProgramSchema.parse(req.body);
+  if (data.scenarioType === "OTHER" && !data.scenarioTypeOther?.trim()) {
+    throw new ApiError(400, "Describe the study scenario when selecting 'Other'");
+  }
+  if (data.status === "OTHER" && !data.statusOther?.trim()) {
+    throw new ApiError(400, "Describe the status when selecting 'Other'");
+  }
   const tenantId = requireTenantId(req);
   const program = await prisma.program.create({ data: { ...data, tenantId } });
 
@@ -45,6 +51,12 @@ export async function createProgram(req: Request, res: Response): Promise<void> 
 
 export async function updateProgram(req: Request, res: Response): Promise<void> {
   const data = updateProgramSchema.parse(req.body);
+  if (data.scenarioType === "OTHER" && !data.scenarioTypeOther?.trim()) {
+    throw new ApiError(400, "Describe the study scenario when selecting 'Other'");
+  }
+  if (data.status === "OTHER" && !data.statusOther?.trim()) {
+    throw new ApiError(400, "Describe the status when selecting 'Other'");
+  }
   const tenantId = requireTenantId(req);
 
   const existing = await prisma.program.findFirst({

@@ -31,6 +31,10 @@ export type FieldVisitMinAggregateOutputType = {
   recordedAt: Date | null
   checkInId: string | null
   beneficiaryId: string | null
+  confirmationStatus: $Enums.ConfirmationStatus | null
+  confirmedAt: Date | null
+  confirmedById: string | null
+  rejectionReason: string | null
 }
 
 export type FieldVisitMaxAggregateOutputType = {
@@ -40,6 +44,10 @@ export type FieldVisitMaxAggregateOutputType = {
   recordedAt: Date | null
   checkInId: string | null
   beneficiaryId: string | null
+  confirmationStatus: $Enums.ConfirmationStatus | null
+  confirmedAt: Date | null
+  confirmedById: string | null
+  rejectionReason: string | null
 }
 
 export type FieldVisitCountAggregateOutputType = {
@@ -49,6 +57,10 @@ export type FieldVisitCountAggregateOutputType = {
   recordedAt: number
   checkInId: number
   beneficiaryId: number
+  confirmationStatus: number
+  confirmedAt: number
+  confirmedById: number
+  rejectionReason: number
   _all: number
 }
 
@@ -60,6 +72,10 @@ export type FieldVisitMinAggregateInputType = {
   recordedAt?: true
   checkInId?: true
   beneficiaryId?: true
+  confirmationStatus?: true
+  confirmedAt?: true
+  confirmedById?: true
+  rejectionReason?: true
 }
 
 export type FieldVisitMaxAggregateInputType = {
@@ -69,6 +85,10 @@ export type FieldVisitMaxAggregateInputType = {
   recordedAt?: true
   checkInId?: true
   beneficiaryId?: true
+  confirmationStatus?: true
+  confirmedAt?: true
+  confirmedById?: true
+  rejectionReason?: true
 }
 
 export type FieldVisitCountAggregateInputType = {
@@ -78,6 +98,10 @@ export type FieldVisitCountAggregateInputType = {
   recordedAt?: true
   checkInId?: true
   beneficiaryId?: true
+  confirmationStatus?: true
+  confirmedAt?: true
+  confirmedById?: true
+  rejectionReason?: true
   _all?: true
 }
 
@@ -160,6 +184,10 @@ export type FieldVisitGroupByOutputType = {
   recordedAt: Date
   checkInId: string
   beneficiaryId: string
+  confirmationStatus: $Enums.ConfirmationStatus
+  confirmedAt: Date | null
+  confirmedById: string | null
+  rejectionReason: string | null
   _count: FieldVisitCountAggregateOutputType | null
   _min: FieldVisitMinAggregateOutputType | null
   _max: FieldVisitMaxAggregateOutputType | null
@@ -190,8 +218,13 @@ export type FieldVisitWhereInput = {
   recordedAt?: Prisma.DateTimeFilter<"FieldVisit"> | Date | string
   checkInId?: Prisma.StringFilter<"FieldVisit"> | string
   beneficiaryId?: Prisma.StringFilter<"FieldVisit"> | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFilter<"FieldVisit"> | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.DateTimeNullableFilter<"FieldVisit"> | Date | string | null
+  confirmedById?: Prisma.StringNullableFilter<"FieldVisit"> | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"FieldVisit"> | string | null
   beneficiary?: Prisma.XOR<Prisma.BeneficiaryScalarRelationFilter, Prisma.BeneficiaryWhereInput>
   checkIn?: Prisma.XOR<Prisma.FieldCheckInScalarRelationFilter, Prisma.FieldCheckInWhereInput>
+  confirmedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type FieldVisitOrderByWithRelationInput = {
@@ -201,8 +234,13 @@ export type FieldVisitOrderByWithRelationInput = {
   recordedAt?: Prisma.SortOrder
   checkInId?: Prisma.SortOrder
   beneficiaryId?: Prisma.SortOrder
+  confirmationStatus?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  confirmedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
   beneficiary?: Prisma.BeneficiaryOrderByWithRelationInput
   checkIn?: Prisma.FieldCheckInOrderByWithRelationInput
+  confirmedBy?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.FieldVisitOrderByRelevanceInput
 }
 
@@ -217,8 +255,13 @@ export type FieldVisitWhereUniqueInput = Prisma.AtLeast<{
   recordedAt?: Prisma.DateTimeFilter<"FieldVisit"> | Date | string
   checkInId?: Prisma.StringFilter<"FieldVisit"> | string
   beneficiaryId?: Prisma.StringFilter<"FieldVisit"> | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFilter<"FieldVisit"> | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.DateTimeNullableFilter<"FieldVisit"> | Date | string | null
+  confirmedById?: Prisma.StringNullableFilter<"FieldVisit"> | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"FieldVisit"> | string | null
   beneficiary?: Prisma.XOR<Prisma.BeneficiaryScalarRelationFilter, Prisma.BeneficiaryWhereInput>
   checkIn?: Prisma.XOR<Prisma.FieldCheckInScalarRelationFilter, Prisma.FieldCheckInWhereInput>
+  confirmedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id" | "checkInId_beneficiaryId">
 
 export type FieldVisitOrderByWithAggregationInput = {
@@ -228,6 +271,10 @@ export type FieldVisitOrderByWithAggregationInput = {
   recordedAt?: Prisma.SortOrder
   checkInId?: Prisma.SortOrder
   beneficiaryId?: Prisma.SortOrder
+  confirmationStatus?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  confirmedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FieldVisitCountOrderByAggregateInput
   _max?: Prisma.FieldVisitMaxOrderByAggregateInput
   _min?: Prisma.FieldVisitMinOrderByAggregateInput
@@ -243,6 +290,10 @@ export type FieldVisitScalarWhereWithAggregatesInput = {
   recordedAt?: Prisma.DateTimeWithAggregatesFilter<"FieldVisit"> | Date | string
   checkInId?: Prisma.StringWithAggregatesFilter<"FieldVisit"> | string
   beneficiaryId?: Prisma.StringWithAggregatesFilter<"FieldVisit"> | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusWithAggregatesFilter<"FieldVisit"> | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FieldVisit"> | Date | string | null
+  confirmedById?: Prisma.StringNullableWithAggregatesFilter<"FieldVisit"> | string | null
+  rejectionReason?: Prisma.StringNullableWithAggregatesFilter<"FieldVisit"> | string | null
 }
 
 export type FieldVisitCreateInput = {
@@ -250,8 +301,12 @@ export type FieldVisitCreateInput = {
   outcome?: $Enums.ResponseOutcome
   note?: string | null
   recordedAt?: Date | string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  rejectionReason?: string | null
   beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutFieldVisitsInput
   checkIn: Prisma.FieldCheckInCreateNestedOneWithoutVisitsInput
+  confirmedBy?: Prisma.UserCreateNestedOneWithoutFieldVisitsConfirmedInput
 }
 
 export type FieldVisitUncheckedCreateInput = {
@@ -261,6 +316,10 @@ export type FieldVisitUncheckedCreateInput = {
   recordedAt?: Date | string
   checkInId: string
   beneficiaryId: string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  confirmedById?: string | null
+  rejectionReason?: string | null
 }
 
 export type FieldVisitUpdateInput = {
@@ -268,8 +327,12 @@ export type FieldVisitUpdateInput = {
   outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutFieldVisitsNestedInput
   checkIn?: Prisma.FieldCheckInUpdateOneRequiredWithoutVisitsNestedInput
+  confirmedBy?: Prisma.UserUpdateOneWithoutFieldVisitsConfirmedNestedInput
 }
 
 export type FieldVisitUncheckedUpdateInput = {
@@ -279,6 +342,10 @@ export type FieldVisitUncheckedUpdateInput = {
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkInId?: Prisma.StringFieldUpdateOperationsInput | string
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldVisitCreateManyInput = {
@@ -288,6 +355,10 @@ export type FieldVisitCreateManyInput = {
   recordedAt?: Date | string
   checkInId: string
   beneficiaryId: string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  confirmedById?: string | null
+  rejectionReason?: string | null
 }
 
 export type FieldVisitUpdateManyMutationInput = {
@@ -295,6 +366,9 @@ export type FieldVisitUpdateManyMutationInput = {
   outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldVisitUncheckedUpdateManyInput = {
@@ -304,6 +378,10 @@ export type FieldVisitUncheckedUpdateManyInput = {
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkInId?: Prisma.StringFieldUpdateOperationsInput | string
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldVisitListRelationFilter = {
@@ -334,6 +412,10 @@ export type FieldVisitCountOrderByAggregateInput = {
   recordedAt?: Prisma.SortOrder
   checkInId?: Prisma.SortOrder
   beneficiaryId?: Prisma.SortOrder
+  confirmationStatus?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrder
+  confirmedById?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
 }
 
 export type FieldVisitMaxOrderByAggregateInput = {
@@ -343,6 +425,10 @@ export type FieldVisitMaxOrderByAggregateInput = {
   recordedAt?: Prisma.SortOrder
   checkInId?: Prisma.SortOrder
   beneficiaryId?: Prisma.SortOrder
+  confirmationStatus?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrder
+  confirmedById?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
 }
 
 export type FieldVisitMinOrderByAggregateInput = {
@@ -352,6 +438,52 @@ export type FieldVisitMinOrderByAggregateInput = {
   recordedAt?: Prisma.SortOrder
   checkInId?: Prisma.SortOrder
   beneficiaryId?: Prisma.SortOrder
+  confirmationStatus?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrder
+  confirmedById?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+}
+
+export type FieldVisitCreateNestedManyWithoutConfirmedByInput = {
+  create?: Prisma.XOR<Prisma.FieldVisitCreateWithoutConfirmedByInput, Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput> | Prisma.FieldVisitCreateWithoutConfirmedByInput[] | Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput[]
+  connectOrCreate?: Prisma.FieldVisitCreateOrConnectWithoutConfirmedByInput | Prisma.FieldVisitCreateOrConnectWithoutConfirmedByInput[]
+  createMany?: Prisma.FieldVisitCreateManyConfirmedByInputEnvelope
+  connect?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+}
+
+export type FieldVisitUncheckedCreateNestedManyWithoutConfirmedByInput = {
+  create?: Prisma.XOR<Prisma.FieldVisitCreateWithoutConfirmedByInput, Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput> | Prisma.FieldVisitCreateWithoutConfirmedByInput[] | Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput[]
+  connectOrCreate?: Prisma.FieldVisitCreateOrConnectWithoutConfirmedByInput | Prisma.FieldVisitCreateOrConnectWithoutConfirmedByInput[]
+  createMany?: Prisma.FieldVisitCreateManyConfirmedByInputEnvelope
+  connect?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+}
+
+export type FieldVisitUpdateManyWithoutConfirmedByNestedInput = {
+  create?: Prisma.XOR<Prisma.FieldVisitCreateWithoutConfirmedByInput, Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput> | Prisma.FieldVisitCreateWithoutConfirmedByInput[] | Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput[]
+  connectOrCreate?: Prisma.FieldVisitCreateOrConnectWithoutConfirmedByInput | Prisma.FieldVisitCreateOrConnectWithoutConfirmedByInput[]
+  upsert?: Prisma.FieldVisitUpsertWithWhereUniqueWithoutConfirmedByInput | Prisma.FieldVisitUpsertWithWhereUniqueWithoutConfirmedByInput[]
+  createMany?: Prisma.FieldVisitCreateManyConfirmedByInputEnvelope
+  set?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+  disconnect?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+  delete?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+  connect?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+  update?: Prisma.FieldVisitUpdateWithWhereUniqueWithoutConfirmedByInput | Prisma.FieldVisitUpdateWithWhereUniqueWithoutConfirmedByInput[]
+  updateMany?: Prisma.FieldVisitUpdateManyWithWhereWithoutConfirmedByInput | Prisma.FieldVisitUpdateManyWithWhereWithoutConfirmedByInput[]
+  deleteMany?: Prisma.FieldVisitScalarWhereInput | Prisma.FieldVisitScalarWhereInput[]
+}
+
+export type FieldVisitUncheckedUpdateManyWithoutConfirmedByNestedInput = {
+  create?: Prisma.XOR<Prisma.FieldVisitCreateWithoutConfirmedByInput, Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput> | Prisma.FieldVisitCreateWithoutConfirmedByInput[] | Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput[]
+  connectOrCreate?: Prisma.FieldVisitCreateOrConnectWithoutConfirmedByInput | Prisma.FieldVisitCreateOrConnectWithoutConfirmedByInput[]
+  upsert?: Prisma.FieldVisitUpsertWithWhereUniqueWithoutConfirmedByInput | Prisma.FieldVisitUpsertWithWhereUniqueWithoutConfirmedByInput[]
+  createMany?: Prisma.FieldVisitCreateManyConfirmedByInputEnvelope
+  set?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+  disconnect?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+  delete?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+  connect?: Prisma.FieldVisitWhereUniqueInput | Prisma.FieldVisitWhereUniqueInput[]
+  update?: Prisma.FieldVisitUpdateWithWhereUniqueWithoutConfirmedByInput | Prisma.FieldVisitUpdateWithWhereUniqueWithoutConfirmedByInput[]
+  updateMany?: Prisma.FieldVisitUpdateManyWithWhereWithoutConfirmedByInput | Prisma.FieldVisitUpdateManyWithWhereWithoutConfirmedByInput[]
+  deleteMany?: Prisma.FieldVisitScalarWhereInput | Prisma.FieldVisitScalarWhereInput[]
 }
 
 export type FieldVisitCreateNestedManyWithoutBeneficiaryInput = {
@@ -438,12 +570,86 @@ export type FieldVisitUncheckedUpdateManyWithoutCheckInNestedInput = {
   deleteMany?: Prisma.FieldVisitScalarWhereInput | Prisma.FieldVisitScalarWhereInput[]
 }
 
+export type EnumConfirmationStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ConfirmationStatus
+}
+
+export type FieldVisitCreateWithoutConfirmedByInput = {
+  id?: string
+  outcome?: $Enums.ResponseOutcome
+  note?: string | null
+  recordedAt?: Date | string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  rejectionReason?: string | null
+  beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutFieldVisitsInput
+  checkIn: Prisma.FieldCheckInCreateNestedOneWithoutVisitsInput
+}
+
+export type FieldVisitUncheckedCreateWithoutConfirmedByInput = {
+  id?: string
+  outcome?: $Enums.ResponseOutcome
+  note?: string | null
+  recordedAt?: Date | string
+  checkInId: string
+  beneficiaryId: string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  rejectionReason?: string | null
+}
+
+export type FieldVisitCreateOrConnectWithoutConfirmedByInput = {
+  where: Prisma.FieldVisitWhereUniqueInput
+  create: Prisma.XOR<Prisma.FieldVisitCreateWithoutConfirmedByInput, Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput>
+}
+
+export type FieldVisitCreateManyConfirmedByInputEnvelope = {
+  data: Prisma.FieldVisitCreateManyConfirmedByInput | Prisma.FieldVisitCreateManyConfirmedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type FieldVisitUpsertWithWhereUniqueWithoutConfirmedByInput = {
+  where: Prisma.FieldVisitWhereUniqueInput
+  update: Prisma.XOR<Prisma.FieldVisitUpdateWithoutConfirmedByInput, Prisma.FieldVisitUncheckedUpdateWithoutConfirmedByInput>
+  create: Prisma.XOR<Prisma.FieldVisitCreateWithoutConfirmedByInput, Prisma.FieldVisitUncheckedCreateWithoutConfirmedByInput>
+}
+
+export type FieldVisitUpdateWithWhereUniqueWithoutConfirmedByInput = {
+  where: Prisma.FieldVisitWhereUniqueInput
+  data: Prisma.XOR<Prisma.FieldVisitUpdateWithoutConfirmedByInput, Prisma.FieldVisitUncheckedUpdateWithoutConfirmedByInput>
+}
+
+export type FieldVisitUpdateManyWithWhereWithoutConfirmedByInput = {
+  where: Prisma.FieldVisitScalarWhereInput
+  data: Prisma.XOR<Prisma.FieldVisitUpdateManyMutationInput, Prisma.FieldVisitUncheckedUpdateManyWithoutConfirmedByInput>
+}
+
+export type FieldVisitScalarWhereInput = {
+  AND?: Prisma.FieldVisitScalarWhereInput | Prisma.FieldVisitScalarWhereInput[]
+  OR?: Prisma.FieldVisitScalarWhereInput[]
+  NOT?: Prisma.FieldVisitScalarWhereInput | Prisma.FieldVisitScalarWhereInput[]
+  id?: Prisma.StringFilter<"FieldVisit"> | string
+  outcome?: Prisma.EnumResponseOutcomeFilter<"FieldVisit"> | $Enums.ResponseOutcome
+  note?: Prisma.StringNullableFilter<"FieldVisit"> | string | null
+  recordedAt?: Prisma.DateTimeFilter<"FieldVisit"> | Date | string
+  checkInId?: Prisma.StringFilter<"FieldVisit"> | string
+  beneficiaryId?: Prisma.StringFilter<"FieldVisit"> | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFilter<"FieldVisit"> | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.DateTimeNullableFilter<"FieldVisit"> | Date | string | null
+  confirmedById?: Prisma.StringNullableFilter<"FieldVisit"> | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"FieldVisit"> | string | null
+}
+
 export type FieldVisitCreateWithoutBeneficiaryInput = {
   id?: string
   outcome?: $Enums.ResponseOutcome
   note?: string | null
   recordedAt?: Date | string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  rejectionReason?: string | null
   checkIn: Prisma.FieldCheckInCreateNestedOneWithoutVisitsInput
+  confirmedBy?: Prisma.UserCreateNestedOneWithoutFieldVisitsConfirmedInput
 }
 
 export type FieldVisitUncheckedCreateWithoutBeneficiaryInput = {
@@ -452,6 +658,10 @@ export type FieldVisitUncheckedCreateWithoutBeneficiaryInput = {
   note?: string | null
   recordedAt?: Date | string
   checkInId: string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  confirmedById?: string | null
+  rejectionReason?: string | null
 }
 
 export type FieldVisitCreateOrConnectWithoutBeneficiaryInput = {
@@ -480,24 +690,16 @@ export type FieldVisitUpdateManyWithWhereWithoutBeneficiaryInput = {
   data: Prisma.XOR<Prisma.FieldVisitUpdateManyMutationInput, Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryInput>
 }
 
-export type FieldVisitScalarWhereInput = {
-  AND?: Prisma.FieldVisitScalarWhereInput | Prisma.FieldVisitScalarWhereInput[]
-  OR?: Prisma.FieldVisitScalarWhereInput[]
-  NOT?: Prisma.FieldVisitScalarWhereInput | Prisma.FieldVisitScalarWhereInput[]
-  id?: Prisma.StringFilter<"FieldVisit"> | string
-  outcome?: Prisma.EnumResponseOutcomeFilter<"FieldVisit"> | $Enums.ResponseOutcome
-  note?: Prisma.StringNullableFilter<"FieldVisit"> | string | null
-  recordedAt?: Prisma.DateTimeFilter<"FieldVisit"> | Date | string
-  checkInId?: Prisma.StringFilter<"FieldVisit"> | string
-  beneficiaryId?: Prisma.StringFilter<"FieldVisit"> | string
-}
-
 export type FieldVisitCreateWithoutCheckInInput = {
   id?: string
   outcome?: $Enums.ResponseOutcome
   note?: string | null
   recordedAt?: Date | string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  rejectionReason?: string | null
   beneficiary: Prisma.BeneficiaryCreateNestedOneWithoutFieldVisitsInput
+  confirmedBy?: Prisma.UserCreateNestedOneWithoutFieldVisitsConfirmedInput
 }
 
 export type FieldVisitUncheckedCreateWithoutCheckInInput = {
@@ -506,6 +708,10 @@ export type FieldVisitUncheckedCreateWithoutCheckInInput = {
   note?: string | null
   recordedAt?: Date | string
   beneficiaryId: string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  confirmedById?: string | null
+  rejectionReason?: string | null
 }
 
 export type FieldVisitCreateOrConnectWithoutCheckInInput = {
@@ -534,12 +740,64 @@ export type FieldVisitUpdateManyWithWhereWithoutCheckInInput = {
   data: Prisma.XOR<Prisma.FieldVisitUpdateManyMutationInput, Prisma.FieldVisitUncheckedUpdateManyWithoutCheckInInput>
 }
 
+export type FieldVisitCreateManyConfirmedByInput = {
+  id?: string
+  outcome?: $Enums.ResponseOutcome
+  note?: string | null
+  recordedAt?: Date | string
+  checkInId: string
+  beneficiaryId: string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  rejectionReason?: string | null
+}
+
+export type FieldVisitUpdateWithoutConfirmedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutFieldVisitsNestedInput
+  checkIn?: Prisma.FieldCheckInUpdateOneRequiredWithoutVisitsNestedInput
+}
+
+export type FieldVisitUncheckedUpdateWithoutConfirmedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  checkInId?: Prisma.StringFieldUpdateOperationsInput | string
+  beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type FieldVisitUncheckedUpdateManyWithoutConfirmedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  checkInId?: Prisma.StringFieldUpdateOperationsInput | string
+  beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
 export type FieldVisitCreateManyBeneficiaryInput = {
   id?: string
   outcome?: $Enums.ResponseOutcome
   note?: string | null
   recordedAt?: Date | string
   checkInId: string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  confirmedById?: string | null
+  rejectionReason?: string | null
 }
 
 export type FieldVisitUpdateWithoutBeneficiaryInput = {
@@ -547,7 +805,11 @@ export type FieldVisitUpdateWithoutBeneficiaryInput = {
   outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checkIn?: Prisma.FieldCheckInUpdateOneRequiredWithoutVisitsNestedInput
+  confirmedBy?: Prisma.UserUpdateOneWithoutFieldVisitsConfirmedNestedInput
 }
 
 export type FieldVisitUncheckedUpdateWithoutBeneficiaryInput = {
@@ -556,6 +818,10 @@ export type FieldVisitUncheckedUpdateWithoutBeneficiaryInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkInId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldVisitUncheckedUpdateManyWithoutBeneficiaryInput = {
@@ -564,6 +830,10 @@ export type FieldVisitUncheckedUpdateManyWithoutBeneficiaryInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkInId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldVisitCreateManyCheckInInput = {
@@ -572,6 +842,10 @@ export type FieldVisitCreateManyCheckInInput = {
   note?: string | null
   recordedAt?: Date | string
   beneficiaryId: string
+  confirmationStatus?: $Enums.ConfirmationStatus
+  confirmedAt?: Date | string | null
+  confirmedById?: string | null
+  rejectionReason?: string | null
 }
 
 export type FieldVisitUpdateWithoutCheckInInput = {
@@ -579,7 +853,11 @@ export type FieldVisitUpdateWithoutCheckInInput = {
   outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   beneficiary?: Prisma.BeneficiaryUpdateOneRequiredWithoutFieldVisitsNestedInput
+  confirmedBy?: Prisma.UserUpdateOneWithoutFieldVisitsConfirmedNestedInput
 }
 
 export type FieldVisitUncheckedUpdateWithoutCheckInInput = {
@@ -588,6 +866,10 @@ export type FieldVisitUncheckedUpdateWithoutCheckInInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldVisitUncheckedUpdateManyWithoutCheckInInput = {
@@ -596,6 +878,10 @@ export type FieldVisitUncheckedUpdateManyWithoutCheckInInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   beneficiaryId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmationStatus?: Prisma.EnumConfirmationStatusFieldUpdateOperationsInput | $Enums.ConfirmationStatus
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -607,8 +893,13 @@ export type FieldVisitSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   recordedAt?: boolean
   checkInId?: boolean
   beneficiaryId?: boolean
+  confirmationStatus?: boolean
+  confirmedAt?: boolean
+  confirmedById?: boolean
+  rejectionReason?: boolean
   beneficiary?: boolean | Prisma.BeneficiaryDefaultArgs<ExtArgs>
   checkIn?: boolean | Prisma.FieldCheckInDefaultArgs<ExtArgs>
+  confirmedBy?: boolean | Prisma.FieldVisit$confirmedByArgs<ExtArgs>
 }, ExtArgs["result"]["fieldVisit"]>
 
 
@@ -620,12 +911,17 @@ export type FieldVisitSelectScalar = {
   recordedAt?: boolean
   checkInId?: boolean
   beneficiaryId?: boolean
+  confirmationStatus?: boolean
+  confirmedAt?: boolean
+  confirmedById?: boolean
+  rejectionReason?: boolean
 }
 
-export type FieldVisitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "outcome" | "note" | "recordedAt" | "checkInId" | "beneficiaryId", ExtArgs["result"]["fieldVisit"]>
+export type FieldVisitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "outcome" | "note" | "recordedAt" | "checkInId" | "beneficiaryId" | "confirmationStatus" | "confirmedAt" | "confirmedById" | "rejectionReason", ExtArgs["result"]["fieldVisit"]>
 export type FieldVisitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   beneficiary?: boolean | Prisma.BeneficiaryDefaultArgs<ExtArgs>
   checkIn?: boolean | Prisma.FieldCheckInDefaultArgs<ExtArgs>
+  confirmedBy?: boolean | Prisma.FieldVisit$confirmedByArgs<ExtArgs>
 }
 
 export type $FieldVisitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -633,6 +929,7 @@ export type $FieldVisitPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     beneficiary: Prisma.$BeneficiaryPayload<ExtArgs>
     checkIn: Prisma.$FieldCheckInPayload<ExtArgs>
+    confirmedBy: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -641,6 +938,10 @@ export type $FieldVisitPayload<ExtArgs extends runtime.Types.Extensions.Internal
     recordedAt: Date
     checkInId: string
     beneficiaryId: string
+    confirmationStatus: $Enums.ConfirmationStatus
+    confirmedAt: Date | null
+    confirmedById: string | null
+    rejectionReason: string | null
   }, ExtArgs["result"]["fieldVisit"]>
   composites: {}
 }
@@ -983,6 +1284,7 @@ export interface Prisma__FieldVisitClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   beneficiary<T extends Prisma.BeneficiaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BeneficiaryDefaultArgs<ExtArgs>>): Prisma.Prisma__BeneficiaryClient<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   checkIn<T extends Prisma.FieldCheckInDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldCheckInDefaultArgs<ExtArgs>>): Prisma.Prisma__FieldCheckInClient<runtime.Types.Result.GetResult<Prisma.$FieldCheckInPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  confirmedBy<T extends Prisma.FieldVisit$confirmedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldVisit$confirmedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1018,6 +1320,10 @@ export interface FieldVisitFieldRefs {
   readonly recordedAt: Prisma.FieldRef<"FieldVisit", 'DateTime'>
   readonly checkInId: Prisma.FieldRef<"FieldVisit", 'String'>
   readonly beneficiaryId: Prisma.FieldRef<"FieldVisit", 'String'>
+  readonly confirmationStatus: Prisma.FieldRef<"FieldVisit", 'ConfirmationStatus'>
+  readonly confirmedAt: Prisma.FieldRef<"FieldVisit", 'DateTime'>
+  readonly confirmedById: Prisma.FieldRef<"FieldVisit", 'String'>
+  readonly rejectionReason: Prisma.FieldRef<"FieldVisit", 'String'>
 }
     
 
@@ -1363,6 +1669,25 @@ export type FieldVisitDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many FieldVisits to delete.
    */
   limit?: number
+}
+
+/**
+ * FieldVisit.confirmedBy
+ */
+export type FieldVisit$confirmedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

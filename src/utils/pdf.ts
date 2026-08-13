@@ -75,7 +75,8 @@ export function buildFieldTeamReportPdf(rows: FieldTeamReportRow[], title: strin
       { key: "respondentPhone", label: "Respondent Phone", width: 85 },
       { key: "sector", label: "Sector", width: 75 },
       { key: "cell", label: "Cell", width: 75 },
-      { key: "challengesObservations", label: "Challenges & Observations", width: 175 },
+      { key: "statusLabel", label: "Status", width: 100 },
+      { key: "notes", label: "Notes", width: 165 },
     ] as const;
     const startX = doc.page.margins.left;
     const tableWidth = columns.reduce((sum, c) => sum + c.width, 0);

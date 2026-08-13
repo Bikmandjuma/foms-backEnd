@@ -6,6 +6,7 @@ import { prisma } from "../utils/prisma.js";
 import {
   addProgramTeamMemberSchema,
   addProgramTeamVehicleSchema,
+  adoptGroupSchema,
   programTeamProgramIdSchema,
   setProgramTeamLeaderSchema,
   updateProgramTeamConfigSchema,
@@ -833,4 +834,266 @@ export async function runProgramAssignment(req: Request, res: Response): Promise
     teamsMissingSupervisor: teams.filter((t) => !t.leaderId).length,
     teams,
   });
+}
+
+/**
+ * Lists every group brought in via the Supervisor & Enumerator import
+ * (distinct User.groupCode values, tenant-wide) alongside whether it's
+ * already been adopted into *this* program as a real ProgramTeam. A group
+ * only ever needs a supervisor + enumerators sharing a district/province —
+ * exactly what the import already captured — so nothing here depends on
+ * geo-clustering or the automatic assignment engine.
+ */
+export async function listImportedGroups(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const { programId } = req.query;
+  if (typeof programId !== "string" || !programId) {
+    throw new ApiError(400, "programId query parameter is required");
+  }
+  await loadProgramOrThrow(programId, tenantId);
+
+  const groupedUsers = await prisma.user.findMany({
+    where: { tenantId, groupCode: { not: null } },
+    select: {
+      groupCode: true,
+      groupName: true,
+      operationalArea: true,
+      id: true,
+      name: true,
+      telephone: true,
+      districtId: true,
+      provinceId: true,
+      district: { select: { name: true } },
+      province: { select: { name: true } },
+      role: { select: { name: true } },
+    },
+  });
+
+  const byGroup = new Map<string, typeof groupedUsers>();
+  for (const u of groupedUsers) {
+    const arr = byGroup.get(u.groupCode!);
+    if (arr) arr.push(u);
+    else byGroup.set(u.groupCode!, [u]);
+  }
+
+  const adoptedTeams = await prisma.programTeam.findMany({
+    where: { programId, sourceGroupCode: { not: null } },
+    select: { id: true, sourceGroupCode: true, members: { select: { id: true, userId: true } } },
+  });
+  const adoptedByCode = new Map(adoptedTeams.map((t) => [t.sourceGroupCode!, t]));
+
+  // A group's assignment count only matters once it's adopted into this
+  // program, so a single follow-up query covers every adopted team.
+  const memberUserIds = adoptedTeams.flatMap((t) => t.members.map((m) => m.userId));
+  const assignmentCounts =
+    memberUserIds.length === 0
+      ? new Map<string, number>()
+      : await prisma.beneficiaryAssignment
+          .findMany({ where: { status: "ACTIVE", userId: { in: memberUserIds } }, select: { userId: true } })
+          .then((rows) => {
+            const m = new Map<string, number>();
+            for (const r of rows) m.set(r.userId, (m.get(r.userId) ?? 0) + 1);
+            return m;
+          });
+
+  const groups = await Promise.all(
+    Array.from(byGroup.entries()).map(async ([groupCode, users]) => {
+      const supervisor = users.find((u) => u.role?.name?.trim().toLowerCase() === "supervisor");
+      const enumerators = users.filter((u) => u.role?.name?.trim().toLowerCase() === "enumerator");
+      const first = users[0]!;
+      const adopted = adoptedByCode.get(groupCode);
+      const totalAssigned = adopted ? adopted.members.reduce((sum, m) => sum + (assignmentCounts.get(m.userId) ?? 0), 0) : 0;
+
+      // The badge count the spec asks for: how many active, unassigned
+      // respondents currently sit in this exact district/province —
+      // visible before a group is even linked to a program, so an admin
+      // can see whether a group's region has anyone to assign at all.
+      const eligibleRespondentCount =
+        first.districtId || first.provinceId
+          ? await prisma.beneficiary.count({
+              where: {
+                tenantId,
+                status: "ACTIVE",
+                outcome: { not: "REPLACED" },
+                assignments: { none: { status: "ACTIVE" } },
+                ...(first.districtId ? { districtId: first.districtId } : {}),
+                ...(first.provinceId ? { provinceId: first.provinceId } : {}),
+              },
+            })
+          : 0;
+
+      return {
+        groupCode,
+        groupName: first.groupName,
+        operationalArea: first.operationalArea,
+        district: first.district?.name ?? null,
+        province: first.province?.name ?? null,
+        districtId: first.districtId,
+        provinceId: first.provinceId,
+        supervisor: supervisor ? { id: supervisor.id, name: supervisor.name, telephone: supervisor.telephone } : null,
+        enumeratorCount: enumerators.length,
+        eligibleRespondentCount,
+        adopted: Boolean(adopted),
+        teamId: adopted?.id ?? null,
+        hasAssignments: totalAssigned > 0,
+      };
+    })
+  );
+
+  sendResponse(res, 200, "Imported groups retrieved successfully", groups);
+}
+
+/**
+ * Links a pre-formed group into a program — creates its ProgramTeam using
+ * the group's already-existing supervisor as leader and enumerators as
+ * members, and puts everyone in the group onto the program. Idempotent:
+ * adopting an already-adopted group just returns the existing team.
+ */
+export async function adoptGroup(req: Request, res: Response): Promise<void> {
+  const data = adoptGroupSchema.parse(req.body);
+  const tenantId = requireTenantId(req);
+  const program = await loadProgramOrThrow(data.programId, tenantId);
+
+  const existing = await prisma.programTeam.findFirst({
+    where: { programId: program.id, sourceGroupCode: data.groupCode },
+    include: teamInclude,
+  });
+  if (existing) {
+    sendResponse(res, 200, "This group is already linked to this program", existing);
+    return;
+  }
+
+  const users = await prisma.user.findMany({
+    where: { tenantId, groupCode: data.groupCode },
+    select: { id: true, name: true, groupName: true, role: { select: { name: true } } },
+  });
+  if (users.length === 0) throw new ApiError(404, "No users found for this group code");
+
+  const supervisor = users.find((u) => u.role?.name?.trim().toLowerCase() === "supervisor");
+  const enumerators = users.filter((u) => u.role?.name?.trim().toLowerCase() === "enumerator");
+  if (enumerators.length === 0) throw new ApiError(400, "This group has no enumerators to assign");
+
+  const teamName = users[0]!.groupName || data.groupCode;
+
+  const team = await prisma.programTeam.create({
+    data: {
+      programId: program.id,
+      tenantId,
+      name: teamName,
+      sourceGroupCode: data.groupCode,
+      leaderId: supervisor?.id,
+      members: { create: enumerators.map((e) => ({ programId: program.id, userId: e.id })) },
+    },
+    include: teamInclude,
+  });
+
+  for (const u of users) {
+    await ensureProgramAssignment(tenantId, u.id, program.id);
+  }
+
+  await recordActivity({
+    tenantId,
+    userId: req.user!.sub,
+    action: "linked group to",
+    entityType: "Program",
+    entityId: program.id,
+    metadata: { group: teamName, groupCode: data.groupCode, program: program.name },
+  });
+
+  sendResponse(res, 201, "Group linked to program successfully", team);
+}
+
+/**
+ * Randomly hands one eligible respondent — active, enrolled in this
+ * program, not already carrying an active assignment, and in the *same
+ * district and province the group itself is saved under* — to one member
+ * of an adopted group. The person is never hand-picked by number, only by
+ * clicking Assign; a click with nothing eligible left is a 409, not a
+ * silent no-op.
+ */
+export async function assignRandomRespondentToGroupMember(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const team = await prisma.programTeam.findFirst({
+    where: { id: teamIdParam(req), tenantId },
+    include: { program: { select: { id: true, name: true } } },
+  });
+  if (!team || !team.sourceGroupCode) throw new ApiError(404, "Group not found");
+
+  const userId = req.params.userId as string;
+  const member = await prisma.programTeamMember.findFirst({ where: { teamId: team.id, userId } });
+  const isLeader = team.leaderId === userId;
+  if (!member && !isLeader) throw new ApiError(404, "This person is not in this group");
+
+  const groupUsers = await prisma.user.findMany({
+    where: { tenantId, groupCode: team.sourceGroupCode },
+    select: { districtId: true, provinceId: true },
+  });
+  const districtId = groupUsers.find((u) => u.districtId)?.districtId ?? null;
+  const provinceId = groupUsers.find((u) => u.provinceId)?.provinceId ?? null;
+  if (!districtId && !provinceId) {
+    throw new ApiError(422, "This group has no saved district/province to match respondents against");
+  }
+
+  // Auto-enroll active respondents from this exact region onto the program
+  // first — matches how the automatic engine treats enrollment, just
+  // scoped down to this group's own area instead of the whole tenant.
+  await prisma.program.update({
+    where: { id: team.program.id },
+    data: {
+      beneficiaries: {
+        connect: (
+          await prisma.beneficiary.findMany({
+            where: {
+              tenantId,
+              status: "ACTIVE",
+              outcome: { not: "REPLACED" },
+              ...(districtId ? { districtId } : {}),
+              ...(provinceId ? { provinceId } : {}),
+              programs: { none: { id: team.program.id } },
+            },
+            select: { id: true },
+          })
+        ).map((b) => ({ id: b.id })),
+      },
+    },
+  });
+
+  const eligible = await prisma.beneficiary.findMany({
+    where: {
+      tenantId,
+      programs: { some: { id: team.program.id } },
+      status: "ACTIVE",
+      outcome: { not: "REPLACED" },
+      assignments: { none: { status: "ACTIVE" } },
+      ...(districtId ? { districtId } : {}),
+      ...(provinceId ? { provinceId } : {}),
+    },
+    select: { id: true, name: true },
+  });
+  if (eligible.length === 0) {
+    throw new ApiError(409, "No unassigned respondents left in this group's district/province");
+  }
+
+  const chosen = eligible[Math.floor(Math.random() * eligible.length)]!;
+  await prisma.beneficiaryAssignment.create({ data: { beneficiaryId: chosen.id, userId, tenantId } });
+
+  await recordActivity({
+    tenantId,
+    userId: req.user!.sub,
+    action: "assigned a respondent within group",
+    entityType: "ProgramTeam",
+    entityId: team.id,
+    metadata: { group: team.name, respondent: chosen.name },
+  });
+
+  await notifyUser({
+    tenantId,
+    userId,
+    type: "ASSIGNMENT_BENEFICIARY",
+    message: `You've been assigned a new respondent: ${chosen.name}`,
+    entityType: "Program",
+    entityId: team.program.id,
+  });
+
+  sendResponse(res, 201, `${chosen.name} assigned successfully`, { beneficiaryId: chosen.id, beneficiaryName: chosen.name });
 }

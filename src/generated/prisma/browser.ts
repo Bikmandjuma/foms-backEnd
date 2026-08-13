@@ -93,6 +93,11 @@ export type ProgramTeamVehicle = Prisma.ProgramTeamVehicleModel
  */
 export type AvailabilityCheck = Prisma.AvailabilityCheckModel
 /**
+ * Model FieldExpense
+ * 
+ */
+export type FieldExpense = Prisma.FieldExpenseModel
+/**
  * Model Beneficiary
  * 
  */
