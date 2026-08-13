@@ -302,6 +302,7 @@ model Beneficiary {
   assignments                  BeneficiaryAssignment[]
   availabilityChecks           AvailabilityCheck[]
   fieldVisits                  FieldVisit[]
+  fieldVisitOtps               FieldVisitOtp[]
   candidateReplacementRequests ReplacementRequest[]    @relation("CandidateRespondent")
   originalReplacementRequests  ReplacementRequest[]    @relation("OriginalRespondent")
   programs                     Program[]               @relation("BeneficiaryToProgram")
@@ -448,8 +449,8 @@ model ReplacementRequest {
 }
 
 model FieldCheckIn {
-  id                     String       @id @default(uuid())
-  checkInAt              DateTime     @default(now())
+  id                     String          @id @default(uuid())
+  checkInAt              DateTime        @default(now())
   checkOutAt             DateTime?
   gpsLat                 Float?
   gpsLng                 Float?
@@ -462,11 +463,12 @@ model FieldCheckIn {
   currentGpsAt           DateTime?
   currentGpsNote         String?
   checkoutOverrideReason String?
-  project                Program?     @relation(fields: [projectId], references: [id])
-  tenant                 Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  user                   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project                Program?        @relation(fields: [projectId], references: [id])
+  tenant                 Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user                   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   notes                  FieldNote[]
   visits                 FieldVisit[]
+  otps                   FieldVisitOtp[]
 
   @@index([projectId], map: "FieldCheckIn_projectId_fkey")
   @@index([tenantId], map: "FieldCheckIn_tenantId_fkey")
@@ -501,6 +503,26 @@ model FieldNote {
   checkIn   FieldCheckIn @relation(fields: [checkInId], references: [id], onDelete: Cascade)
 
   @@index([checkInId], map: "FieldNote_checkInId_fkey")
+}
+
+// A one-time SMS code sent to a beneficiary's phone to verify the
+// enumerator is actually with them before a COMPLETED/REFUSED outcome can
+// be saved (see recordVisitOutcome). Plaintext + short-lived, same posture
+// as PasswordResetCode.
+model FieldVisitOtp {
+  id            String    @id @default(uuid())
+  checkInId     String
+  beneficiaryId String
+  code          String
+  expiresAt     DateTime
+  usedAt        DateTime?
+  attempts      Int       @default(0)
+  createdAt     DateTime  @default(now())
+
+  checkIn     FieldCheckIn @relation(fields: [checkInId], references: [id], onDelete: Cascade)
+  beneficiary Beneficiary  @relation(fields: [beneficiaryId], references: [id], onDelete: Cascade)
+
+  @@index([checkInId, beneficiaryId])
 }
 
 model ActivityLog {
@@ -626,26 +648,37 @@ enum ExpenseStatus {
   REJECTED
 }
 
+enum ExpenseCategory {
+  TRANSPORT
+  OTHER
+}
+
 model FieldExpense {
-  id           String        @id @default(uuid())
+  id           String          @id @default(uuid())
   tenantId     String
   userId       String
-  programId    String
+  category     ExpenseCategory @default(OTHER)
+  programId    String?
   description  String
   amount       Float
   documentUrl  String?
   expenseDate  DateTime
-  status       ExpenseStatus @default(PENDING)
+  status       ExpenseStatus   @default(PENDING)
+  receiptNo    String?
+  riderName    String?
+  riderPhone   String?
+  routeFrom    String?
+  routeTo      String?
   reviewedById String?
   reviewedAt   DateTime?
   reviewNotes  String?
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
 
-  tenant     Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  user       User    @relation("FieldExpenseSubmitter", fields: [userId], references: [id], onDelete: Cascade)
-  program    Program @relation(fields: [programId], references: [id], onDelete: Cascade)
-  reviewedBy User?   @relation("FieldExpenseReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user       User     @relation("FieldExpenseSubmitter", fields: [userId], references: [id], onDelete: Cascade)
+  program    Program? @relation(fields: [programId], references: [id], onDelete: Cascade)
+  reviewedBy User?    @relation("FieldExpenseReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
 
   @@index([tenantId], map: "FieldExpense_tenantId_fkey")
   @@index([userId], map: "FieldExpense_userId_fkey")

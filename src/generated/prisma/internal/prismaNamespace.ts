@@ -420,6 +420,7 @@ export const ModelName = {
   FieldCheckIn: 'FieldCheckIn',
   FieldVisit: 'FieldVisit',
   FieldNote: 'FieldNote',
+  FieldVisitOtp: 'FieldVisitOtp',
   ActivityLog: 'ActivityLog',
   FieldExpense: 'FieldExpense'
 } as const
@@ -437,7 +438,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "notification" | "tenant" | "role" | "user" | "passwordResetCode" | "province" | "district" | "sector" | "cell" | "village" | "program" | "availabilityCheck" | "beneficiary" | "programAssignment" | "programTeam" | "programTeamVehicle" | "programTeamMember" | "beneficiaryAssignment" | "vehicle" | "replacementRequest" | "fieldCheckIn" | "fieldVisit" | "fieldNote" | "activityLog" | "fieldExpense"
+    modelProps: "notification" | "tenant" | "role" | "user" | "passwordResetCode" | "province" | "district" | "sector" | "cell" | "village" | "program" | "availabilityCheck" | "beneficiary" | "programAssignment" | "programTeam" | "programTeamVehicle" | "programTeamMember" | "beneficiaryAssignment" | "vehicle" | "replacementRequest" | "fieldCheckIn" | "fieldVisit" | "fieldNote" | "fieldVisitOtp" | "activityLog" | "fieldExpense"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1959,6 +1960,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FieldVisitOtp: {
+      payload: Prisma.$FieldVisitOtpPayload<ExtArgs>
+      fields: Prisma.FieldVisitOtpFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FieldVisitOtpFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitOtpPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FieldVisitOtpFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitOtpPayload>
+        }
+        findFirst: {
+          args: Prisma.FieldVisitOtpFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitOtpPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FieldVisitOtpFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitOtpPayload>
+        }
+        findMany: {
+          args: Prisma.FieldVisitOtpFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitOtpPayload>[]
+        }
+        create: {
+          args: Prisma.FieldVisitOtpCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitOtpPayload>
+        }
+        createMany: {
+          args: Prisma.FieldVisitOtpCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FieldVisitOtpDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitOtpPayload>
+        }
+        update: {
+          args: Prisma.FieldVisitOtpUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitOtpPayload>
+        }
+        deleteMany: {
+          args: Prisma.FieldVisitOtpDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FieldVisitOtpUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FieldVisitOtpUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FieldVisitOtpPayload>
+        }
+        aggregate: {
+          args: Prisma.FieldVisitOtpAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFieldVisitOtp>
+        }
+        groupBy: {
+          args: Prisma.FieldVisitOtpGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldVisitOtpGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FieldVisitOtpCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FieldVisitOtpCountAggregateOutputType> | number
+        }
+      }
+    }
     ActivityLog: {
       payload: Prisma.$ActivityLogPayload<ExtArgs>
       fields: Prisma.ActivityLogFieldRefs
@@ -2476,6 +2543,20 @@ export const FieldNoteScalarFieldEnum = {
 export type FieldNoteScalarFieldEnum = (typeof FieldNoteScalarFieldEnum)[keyof typeof FieldNoteScalarFieldEnum]
 
 
+export const FieldVisitOtpScalarFieldEnum = {
+  id: 'id',
+  checkInId: 'checkInId',
+  beneficiaryId: 'beneficiaryId',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  attempts: 'attempts',
+  createdAt: 'createdAt'
+} as const
+
+export type FieldVisitOtpScalarFieldEnum = (typeof FieldVisitOtpScalarFieldEnum)[keyof typeof FieldVisitOtpScalarFieldEnum]
+
+
 export const ActivityLogScalarFieldEnum = {
   id: 'id',
   action: 'action',
@@ -2494,12 +2575,18 @@ export const FieldExpenseScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   userId: 'userId',
+  category: 'category',
   programId: 'programId',
   description: 'description',
   amount: 'amount',
   documentUrl: 'documentUrl',
   expenseDate: 'expenseDate',
   status: 'status',
+  receiptNo: 'receiptNo',
+  riderName: 'riderName',
+  riderPhone: 'riderPhone',
+  routeFrom: 'routeFrom',
+  routeTo: 'routeTo',
   reviewedById: 'reviewedById',
   reviewedAt: 'reviewedAt',
   reviewNotes: 'reviewNotes',
@@ -2788,6 +2875,16 @@ export const FieldNoteOrderByRelevanceFieldEnum = {
 export type FieldNoteOrderByRelevanceFieldEnum = (typeof FieldNoteOrderByRelevanceFieldEnum)[keyof typeof FieldNoteOrderByRelevanceFieldEnum]
 
 
+export const FieldVisitOtpOrderByRelevanceFieldEnum = {
+  id: 'id',
+  checkInId: 'checkInId',
+  beneficiaryId: 'beneficiaryId',
+  code: 'code'
+} as const
+
+export type FieldVisitOtpOrderByRelevanceFieldEnum = (typeof FieldVisitOtpOrderByRelevanceFieldEnum)[keyof typeof FieldVisitOtpOrderByRelevanceFieldEnum]
+
+
 export const ActivityLogOrderByRelevanceFieldEnum = {
   id: 'id',
   action: 'action',
@@ -2807,6 +2904,11 @@ export const FieldExpenseOrderByRelevanceFieldEnum = {
   programId: 'programId',
   description: 'description',
   documentUrl: 'documentUrl',
+  receiptNo: 'receiptNo',
+  riderName: 'riderName',
+  riderPhone: 'riderPhone',
+  routeFrom: 'routeFrom',
+  routeTo: 'routeTo',
   reviewedById: 'reviewedById',
   reviewNotes: 'reviewNotes'
 } as const
@@ -2964,6 +3066,13 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'ConfirmationStatus'
  */
 export type EnumConfirmationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConfirmationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ExpenseCategory'
+ */
+export type EnumExpenseCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseCategory'>
     
 
 
@@ -3147,6 +3256,7 @@ export type GlobalOmitConfig = {
   fieldCheckIn?: Prisma.FieldCheckInOmit
   fieldVisit?: Prisma.FieldVisitOmit
   fieldNote?: Prisma.FieldNoteOmit
+  fieldVisitOtp?: Prisma.FieldVisitOtpOmit
   activityLog?: Prisma.ActivityLogOmit
   fieldExpense?: Prisma.FieldExpenseOmit
 }

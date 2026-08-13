@@ -1,0 +1,8 @@
+-- AlterTable
+ALTER TABLE `FieldExpense` ADD COLUMN `category` ENUM('TRANSPORT', 'OTHER') NOT NULL DEFAULT 'OTHER',
+    ADD COLUMN `receiptNo` VARCHAR(191) NULL,
+    ADD COLUMN `riderName` VARCHAR(191) NULL,
+    ADD COLUMN `riderPhone` VARCHAR(191) NULL,
+    ADD COLUMN `routeFrom` VARCHAR(191) NULL,
+    ADD COLUMN `routeTo` VARCHAR(191) NULL,
+    MODIFY `programId` VARCHAR(191) NULL;

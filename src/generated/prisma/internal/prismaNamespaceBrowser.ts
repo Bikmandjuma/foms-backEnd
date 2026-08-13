@@ -74,6 +74,7 @@ export const ModelName = {
   FieldCheckIn: 'FieldCheckIn',
   FieldVisit: 'FieldVisit',
   FieldNote: 'FieldNote',
+  FieldVisitOtp: 'FieldVisitOtp',
   ActivityLog: 'ActivityLog',
   FieldExpense: 'FieldExpense'
 } as const
@@ -440,6 +441,20 @@ export const FieldNoteScalarFieldEnum = {
 export type FieldNoteScalarFieldEnum = (typeof FieldNoteScalarFieldEnum)[keyof typeof FieldNoteScalarFieldEnum]
 
 
+export const FieldVisitOtpScalarFieldEnum = {
+  id: 'id',
+  checkInId: 'checkInId',
+  beneficiaryId: 'beneficiaryId',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  attempts: 'attempts',
+  createdAt: 'createdAt'
+} as const
+
+export type FieldVisitOtpScalarFieldEnum = (typeof FieldVisitOtpScalarFieldEnum)[keyof typeof FieldVisitOtpScalarFieldEnum]
+
+
 export const ActivityLogScalarFieldEnum = {
   id: 'id',
   action: 'action',
@@ -458,12 +473,18 @@ export const FieldExpenseScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   userId: 'userId',
+  category: 'category',
   programId: 'programId',
   description: 'description',
   amount: 'amount',
   documentUrl: 'documentUrl',
   expenseDate: 'expenseDate',
   status: 'status',
+  receiptNo: 'receiptNo',
+  riderName: 'riderName',
+  riderPhone: 'riderPhone',
+  routeFrom: 'routeFrom',
+  routeTo: 'routeTo',
   reviewedById: 'reviewedById',
   reviewedAt: 'reviewedAt',
   reviewNotes: 'reviewNotes',
@@ -752,6 +773,16 @@ export const FieldNoteOrderByRelevanceFieldEnum = {
 export type FieldNoteOrderByRelevanceFieldEnum = (typeof FieldNoteOrderByRelevanceFieldEnum)[keyof typeof FieldNoteOrderByRelevanceFieldEnum]
 
 
+export const FieldVisitOtpOrderByRelevanceFieldEnum = {
+  id: 'id',
+  checkInId: 'checkInId',
+  beneficiaryId: 'beneficiaryId',
+  code: 'code'
+} as const
+
+export type FieldVisitOtpOrderByRelevanceFieldEnum = (typeof FieldVisitOtpOrderByRelevanceFieldEnum)[keyof typeof FieldVisitOtpOrderByRelevanceFieldEnum]
+
+
 export const ActivityLogOrderByRelevanceFieldEnum = {
   id: 'id',
   action: 'action',
@@ -771,6 +802,11 @@ export const FieldExpenseOrderByRelevanceFieldEnum = {
   programId: 'programId',
   description: 'description',
   documentUrl: 'documentUrl',
+  receiptNo: 'receiptNo',
+  riderName: 'riderName',
+  riderPhone: 'riderPhone',
+  routeFrom: 'routeFrom',
+  routeTo: 'routeTo',
   reviewedById: 'reviewedById',
   reviewNotes: 'reviewNotes'
 } as const

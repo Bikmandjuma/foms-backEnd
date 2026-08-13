@@ -229,14 +229,30 @@ export const assignRespondentsToProgramSchema = z.object({
   count: z.number().int().positive().optional(),
 });
 
-// Multipart submit (program/description/amount/date fields + a document
-// file) — text fields arrive as strings, hence the coercion.
-export const createFieldExpenseSchema = z.object({
-  programId: z.string().uuid(),
-  description: z.string().min(1),
-  amount: z.coerce.number().positive(),
-  expenseDate: z.coerce.date(),
-});
+// Multipart submit (fields + a document file) — text fields arrive as
+// strings, hence the coercion. The category picked first decides the rest
+// of the shape: TRANSPORT has no program but adds receipt/rider/route
+// fields; OTHER keeps the original program+description shape.
+export const createFieldExpenseSchema = z.discriminatedUnion("category", [
+  z.object({
+    category: z.literal("TRANSPORT"),
+    receiptNo: z.string().min(1),
+    riderName: z.string().min(1),
+    riderPhone: z.string().min(1),
+    routeFrom: z.string().min(1),
+    routeTo: z.string().min(1),
+    description: z.string().min(1), // purpose of travel
+    amount: z.coerce.number().positive(),
+    expenseDate: z.coerce.date(),
+  }),
+  z.object({
+    category: z.literal("OTHER"),
+    programId: z.string().uuid(),
+    description: z.string().min(1),
+    amount: z.coerce.number().positive(),
+    expenseDate: z.coerce.date(),
+  }),
+]);
 
 export const reviewFieldExpenseSchema = z.object({
   status: z.enum(["APPROVED", "REJECTED"]),
@@ -271,6 +287,10 @@ export const decideReplacementSchema = z.object({
 export const recordFieldVisitSchema = z.object({
   outcome: responseOutcomeSchema,
   note: z.string().optional(),
+  // Required only when outcome is COMPLETED or REFUSED — enforced in the
+  // controller (see OTP_REQUIRED_OUTCOMES), not here, since that check
+  // needs to run against stored FieldVisitOtp rows.
+  otpCode: z.string().length(6).optional(),
 });
 
 // The supervisor's review of a recorded outcome — CONFIRMED or REJECTED,

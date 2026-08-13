@@ -23,25 +23,58 @@ function idParam(req: Request): string {
 /**
  * POST /field-expenses — self-service, scoped to the caller (same
  * convention as field-checkins / availability-checks: no admin permission
- * gate). One multipart request: program + description + amount + date
- * fields alongside the supporting document file.
+ * gate). One multipart request: category + its fields alongside the
+ * supporting document file, which is required for every category.
  */
 export async function createFieldExpense(req: Request, res: Response): Promise<void> {
   const data = createFieldExpenseSchema.parse(req.body);
   const tenantId = requireTenantId(req);
   const userId = req.user!.sub;
 
-  const program = await prisma.program.findFirst({ where: { id: data.programId, tenantId }, select: { id: true, name: true } });
-  if (!program) throw new ApiError(400, "programId does not belong to your tenant");
-
   const file = (req as Request & { file?: Express.Multer.File }).file;
   if (!file) throw new ApiError(400, "Upload a supporting document");
   const documentUrl = `/uploads/expenses/${file.filename}`;
+
+  if (data.category === "TRANSPORT") {
+    const expense = await prisma.fieldExpense.create({
+      data: {
+        tenantId,
+        userId,
+        category: "TRANSPORT",
+        receiptNo: data.receiptNo,
+        riderName: data.riderName,
+        riderPhone: data.riderPhone,
+        routeFrom: data.routeFrom,
+        routeTo: data.routeTo,
+        description: data.description,
+        amount: data.amount,
+        expenseDate: data.expenseDate,
+        documentUrl,
+      },
+      include: expenseInclude,
+    });
+
+    await recordActivity({
+      tenantId,
+      userId,
+      action: "submitted a transport expense",
+      entityType: "FieldExpense",
+      entityId: expense.id,
+      metadata: { route: `${data.routeFrom} - ${data.routeTo}`, riderName: data.riderName, amount: data.amount },
+    });
+
+    sendResponse(res, 201, "Expense submitted successfully", expense);
+    return;
+  }
+
+  const program = await prisma.program.findFirst({ where: { id: data.programId, tenantId }, select: { id: true, name: true } });
+  if (!program) throw new ApiError(400, "programId does not belong to your tenant");
 
   const expense = await prisma.fieldExpense.create({
     data: {
       tenantId,
       userId,
+      category: "OTHER",
       programId: data.programId,
       description: data.description,
       amount: data.amount,
@@ -76,7 +109,7 @@ export async function listMyFieldExpenses(req: Request, res: Response): Promise<
 /** GET /field-expenses — admin, tenant-scoped, filterable. */
 export async function listFieldExpenses(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
-  const { programId, userId, status } = req.query;
+  const { programId, userId, status, category } = req.query;
 
   const expenses = await prisma.fieldExpense.findMany({
     where: {
@@ -84,6 +117,7 @@ export async function listFieldExpenses(req: Request, res: Response): Promise<vo
       ...(typeof programId === "string" && programId ? { programId } : {}),
       ...(typeof userId === "string" && userId ? { userId } : {}),
       ...(status === "PENDING" || status === "APPROVED" || status === "REJECTED" ? { status } : {}),
+      ...(category === "TRANSPORT" || category === "OTHER" ? { category } : {}),
     },
     include: expenseInclude,
     orderBy: { createdAt: "desc" },

@@ -38,12 +38,18 @@ export type FieldExpenseMinAggregateOutputType = {
   id: string | null
   tenantId: string | null
   userId: string | null
+  category: $Enums.ExpenseCategory | null
   programId: string | null
   description: string | null
   amount: number | null
   documentUrl: string | null
   expenseDate: Date | null
   status: $Enums.ExpenseStatus | null
+  receiptNo: string | null
+  riderName: string | null
+  riderPhone: string | null
+  routeFrom: string | null
+  routeTo: string | null
   reviewedById: string | null
   reviewedAt: Date | null
   reviewNotes: string | null
@@ -55,12 +61,18 @@ export type FieldExpenseMaxAggregateOutputType = {
   id: string | null
   tenantId: string | null
   userId: string | null
+  category: $Enums.ExpenseCategory | null
   programId: string | null
   description: string | null
   amount: number | null
   documentUrl: string | null
   expenseDate: Date | null
   status: $Enums.ExpenseStatus | null
+  receiptNo: string | null
+  riderName: string | null
+  riderPhone: string | null
+  routeFrom: string | null
+  routeTo: string | null
   reviewedById: string | null
   reviewedAt: Date | null
   reviewNotes: string | null
@@ -72,12 +84,18 @@ export type FieldExpenseCountAggregateOutputType = {
   id: number
   tenantId: number
   userId: number
+  category: number
   programId: number
   description: number
   amount: number
   documentUrl: number
   expenseDate: number
   status: number
+  receiptNo: number
+  riderName: number
+  riderPhone: number
+  routeFrom: number
+  routeTo: number
   reviewedById: number
   reviewedAt: number
   reviewNotes: number
@@ -99,12 +117,18 @@ export type FieldExpenseMinAggregateInputType = {
   id?: true
   tenantId?: true
   userId?: true
+  category?: true
   programId?: true
   description?: true
   amount?: true
   documentUrl?: true
   expenseDate?: true
   status?: true
+  receiptNo?: true
+  riderName?: true
+  riderPhone?: true
+  routeFrom?: true
+  routeTo?: true
   reviewedById?: true
   reviewedAt?: true
   reviewNotes?: true
@@ -116,12 +140,18 @@ export type FieldExpenseMaxAggregateInputType = {
   id?: true
   tenantId?: true
   userId?: true
+  category?: true
   programId?: true
   description?: true
   amount?: true
   documentUrl?: true
   expenseDate?: true
   status?: true
+  receiptNo?: true
+  riderName?: true
+  riderPhone?: true
+  routeFrom?: true
+  routeTo?: true
   reviewedById?: true
   reviewedAt?: true
   reviewNotes?: true
@@ -133,12 +163,18 @@ export type FieldExpenseCountAggregateInputType = {
   id?: true
   tenantId?: true
   userId?: true
+  category?: true
   programId?: true
   description?: true
   amount?: true
   documentUrl?: true
   expenseDate?: true
   status?: true
+  receiptNo?: true
+  riderName?: true
+  riderPhone?: true
+  routeFrom?: true
+  routeTo?: true
   reviewedById?: true
   reviewedAt?: true
   reviewNotes?: true
@@ -237,12 +273,18 @@ export type FieldExpenseGroupByOutputType = {
   id: string
   tenantId: string
   userId: string
-  programId: string
+  category: $Enums.ExpenseCategory
+  programId: string | null
   description: string
   amount: number
   documentUrl: string | null
   expenseDate: Date
   status: $Enums.ExpenseStatus
+  receiptNo: string | null
+  riderName: string | null
+  riderPhone: string | null
+  routeFrom: string | null
+  routeTo: string | null
   reviewedById: string | null
   reviewedAt: Date | null
   reviewNotes: string | null
@@ -277,12 +319,18 @@ export type FieldExpenseWhereInput = {
   id?: Prisma.StringFilter<"FieldExpense"> | string
   tenantId?: Prisma.StringFilter<"FieldExpense"> | string
   userId?: Prisma.StringFilter<"FieldExpense"> | string
-  programId?: Prisma.StringFilter<"FieldExpense"> | string
+  category?: Prisma.EnumExpenseCategoryFilter<"FieldExpense"> | $Enums.ExpenseCategory
+  programId?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   description?: Prisma.StringFilter<"FieldExpense"> | string
   amount?: Prisma.FloatFilter<"FieldExpense"> | number
   documentUrl?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   expenseDate?: Prisma.DateTimeFilter<"FieldExpense"> | Date | string
   status?: Prisma.EnumExpenseStatusFilter<"FieldExpense"> | $Enums.ExpenseStatus
+  receiptNo?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  riderName?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  riderPhone?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  routeFrom?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  routeTo?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   reviewedById?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"FieldExpense"> | Date | string | null
   reviewNotes?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
@@ -290,7 +338,7 @@ export type FieldExpenseWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"FieldExpense"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
+  program?: Prisma.XOR<Prisma.ProgramNullableScalarRelationFilter, Prisma.ProgramWhereInput> | null
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
@@ -298,12 +346,18 @@ export type FieldExpenseOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  programId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  programId?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   documentUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  riderName?: Prisma.SortOrderInput | Prisma.SortOrder
+  riderPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  routeFrom?: Prisma.SortOrderInput | Prisma.SortOrder
+  routeTo?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedById?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewNotes?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -323,12 +377,18 @@ export type FieldExpenseWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.FieldExpenseWhereInput | Prisma.FieldExpenseWhereInput[]
   tenantId?: Prisma.StringFilter<"FieldExpense"> | string
   userId?: Prisma.StringFilter<"FieldExpense"> | string
-  programId?: Prisma.StringFilter<"FieldExpense"> | string
+  category?: Prisma.EnumExpenseCategoryFilter<"FieldExpense"> | $Enums.ExpenseCategory
+  programId?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   description?: Prisma.StringFilter<"FieldExpense"> | string
   amount?: Prisma.FloatFilter<"FieldExpense"> | number
   documentUrl?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   expenseDate?: Prisma.DateTimeFilter<"FieldExpense"> | Date | string
   status?: Prisma.EnumExpenseStatusFilter<"FieldExpense"> | $Enums.ExpenseStatus
+  receiptNo?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  riderName?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  riderPhone?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  routeFrom?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  routeTo?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   reviewedById?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"FieldExpense"> | Date | string | null
   reviewNotes?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
@@ -336,7 +396,7 @@ export type FieldExpenseWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"FieldExpense"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
+  program?: Prisma.XOR<Prisma.ProgramNullableScalarRelationFilter, Prisma.ProgramWhereInput> | null
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
@@ -344,12 +404,18 @@ export type FieldExpenseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  programId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  programId?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   documentUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  riderName?: Prisma.SortOrderInput | Prisma.SortOrder
+  riderPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  routeFrom?: Prisma.SortOrderInput | Prisma.SortOrder
+  routeTo?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedById?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewNotes?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -369,12 +435,18 @@ export type FieldExpenseScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"FieldExpense"> | string
   tenantId?: Prisma.StringWithAggregatesFilter<"FieldExpense"> | string
   userId?: Prisma.StringWithAggregatesFilter<"FieldExpense"> | string
-  programId?: Prisma.StringWithAggregatesFilter<"FieldExpense"> | string
+  category?: Prisma.EnumExpenseCategoryWithAggregatesFilter<"FieldExpense"> | $Enums.ExpenseCategory
+  programId?: Prisma.StringNullableWithAggregatesFilter<"FieldExpense"> | string | null
   description?: Prisma.StringWithAggregatesFilter<"FieldExpense"> | string
   amount?: Prisma.FloatWithAggregatesFilter<"FieldExpense"> | number
   documentUrl?: Prisma.StringNullableWithAggregatesFilter<"FieldExpense"> | string | null
   expenseDate?: Prisma.DateTimeWithAggregatesFilter<"FieldExpense"> | Date | string
   status?: Prisma.EnumExpenseStatusWithAggregatesFilter<"FieldExpense"> | $Enums.ExpenseStatus
+  receiptNo?: Prisma.StringNullableWithAggregatesFilter<"FieldExpense"> | string | null
+  riderName?: Prisma.StringNullableWithAggregatesFilter<"FieldExpense"> | string | null
+  riderPhone?: Prisma.StringNullableWithAggregatesFilter<"FieldExpense"> | string | null
+  routeFrom?: Prisma.StringNullableWithAggregatesFilter<"FieldExpense"> | string | null
+  routeTo?: Prisma.StringNullableWithAggregatesFilter<"FieldExpense"> | string | null
   reviewedById?: Prisma.StringNullableWithAggregatesFilter<"FieldExpense"> | string | null
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FieldExpense"> | Date | string | null
   reviewNotes?: Prisma.StringNullableWithAggregatesFilter<"FieldExpense"> | string | null
@@ -384,18 +456,24 @@ export type FieldExpenseScalarWhereWithAggregatesInput = {
 
 export type FieldExpenseCreateInput = {
   id?: string
+  category?: $Enums.ExpenseCategory
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutFieldExpensesInput
   user: Prisma.UserCreateNestedOneWithoutFieldExpensesSubmittedInput
-  program: Prisma.ProgramCreateNestedOneWithoutFieldExpensesInput
+  program?: Prisma.ProgramCreateNestedOneWithoutFieldExpensesInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutFieldExpensesReviewedInput
 }
 
@@ -403,12 +481,18 @@ export type FieldExpenseUncheckedCreateInput = {
   id?: string
   tenantId: string
   userId: string
-  programId: string
+  category?: $Enums.ExpenseCategory
+  programId?: string | null
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedById?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
@@ -418,18 +502,24 @@ export type FieldExpenseUncheckedCreateInput = {
 
 export type FieldExpenseUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutFieldExpensesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFieldExpensesSubmittedNestedInput
-  program?: Prisma.ProgramUpdateOneRequiredWithoutFieldExpensesNestedInput
+  program?: Prisma.ProgramUpdateOneWithoutFieldExpensesNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutFieldExpensesReviewedNestedInput
 }
 
@@ -437,12 +527,18 @@ export type FieldExpenseUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  programId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -454,12 +550,18 @@ export type FieldExpenseCreateManyInput = {
   id?: string
   tenantId: string
   userId: string
-  programId: string
+  category?: $Enums.ExpenseCategory
+  programId?: string | null
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedById?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
@@ -469,11 +571,17 @@ export type FieldExpenseCreateManyInput = {
 
 export type FieldExpenseUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -484,12 +592,18 @@ export type FieldExpenseUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  programId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -517,12 +631,18 @@ export type FieldExpenseCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   programId?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   documentUrl?: Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptNo?: Prisma.SortOrder
+  riderName?: Prisma.SortOrder
+  riderPhone?: Prisma.SortOrder
+  routeFrom?: Prisma.SortOrder
+  routeTo?: Prisma.SortOrder
   reviewedById?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   reviewNotes?: Prisma.SortOrder
@@ -538,12 +658,18 @@ export type FieldExpenseMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   programId?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   documentUrl?: Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptNo?: Prisma.SortOrder
+  riderName?: Prisma.SortOrder
+  riderPhone?: Prisma.SortOrder
+  routeFrom?: Prisma.SortOrder
+  routeTo?: Prisma.SortOrder
   reviewedById?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   reviewNotes?: Prisma.SortOrder
@@ -555,12 +681,18 @@ export type FieldExpenseMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   programId?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   documentUrl?: Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptNo?: Prisma.SortOrder
+  riderName?: Prisma.SortOrder
+  riderPhone?: Prisma.SortOrder
+  routeFrom?: Prisma.SortOrder
+  routeTo?: Prisma.SortOrder
   reviewedById?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   reviewNotes?: Prisma.SortOrder
@@ -740,6 +872,10 @@ export type FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput = {
   deleteMany?: Prisma.FieldExpenseScalarWhereInput | Prisma.FieldExpenseScalarWhereInput[]
 }
 
+export type EnumExpenseCategoryFieldUpdateOperationsInput = {
+  set?: $Enums.ExpenseCategory
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -754,29 +890,41 @@ export type EnumExpenseStatusFieldUpdateOperationsInput = {
 
 export type FieldExpenseCreateWithoutTenantInput = {
   id?: string
+  category?: $Enums.ExpenseCategory
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFieldExpensesSubmittedInput
-  program: Prisma.ProgramCreateNestedOneWithoutFieldExpensesInput
+  program?: Prisma.ProgramCreateNestedOneWithoutFieldExpensesInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutFieldExpensesReviewedInput
 }
 
 export type FieldExpenseUncheckedCreateWithoutTenantInput = {
   id?: string
   userId: string
-  programId: string
+  category?: $Enums.ExpenseCategory
+  programId?: string | null
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedById?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
@@ -817,12 +965,18 @@ export type FieldExpenseScalarWhereInput = {
   id?: Prisma.StringFilter<"FieldExpense"> | string
   tenantId?: Prisma.StringFilter<"FieldExpense"> | string
   userId?: Prisma.StringFilter<"FieldExpense"> | string
-  programId?: Prisma.StringFilter<"FieldExpense"> | string
+  category?: Prisma.EnumExpenseCategoryFilter<"FieldExpense"> | $Enums.ExpenseCategory
+  programId?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   description?: Prisma.StringFilter<"FieldExpense"> | string
   amount?: Prisma.FloatFilter<"FieldExpense"> | number
   documentUrl?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   expenseDate?: Prisma.DateTimeFilter<"FieldExpense"> | Date | string
   status?: Prisma.EnumExpenseStatusFilter<"FieldExpense"> | $Enums.ExpenseStatus
+  receiptNo?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  riderName?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  riderPhone?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  routeFrom?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
+  routeTo?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   reviewedById?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"FieldExpense"> | Date | string | null
   reviewNotes?: Prisma.StringNullableFilter<"FieldExpense"> | string | null
@@ -832,29 +986,41 @@ export type FieldExpenseScalarWhereInput = {
 
 export type FieldExpenseCreateWithoutUserInput = {
   id?: string
+  category?: $Enums.ExpenseCategory
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutFieldExpensesInput
-  program: Prisma.ProgramCreateNestedOneWithoutFieldExpensesInput
+  program?: Prisma.ProgramCreateNestedOneWithoutFieldExpensesInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutFieldExpensesReviewedInput
 }
 
 export type FieldExpenseUncheckedCreateWithoutUserInput = {
   id?: string
   tenantId: string
-  programId: string
+  category?: $Enums.ExpenseCategory
+  programId?: string | null
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedById?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
@@ -874,30 +1040,42 @@ export type FieldExpenseCreateManyUserInputEnvelope = {
 
 export type FieldExpenseCreateWithoutReviewedByInput = {
   id?: string
+  category?: $Enums.ExpenseCategory
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutFieldExpensesInput
   user: Prisma.UserCreateNestedOneWithoutFieldExpensesSubmittedInput
-  program: Prisma.ProgramCreateNestedOneWithoutFieldExpensesInput
+  program?: Prisma.ProgramCreateNestedOneWithoutFieldExpensesInput
 }
 
 export type FieldExpenseUncheckedCreateWithoutReviewedByInput = {
   id?: string
   tenantId: string
   userId: string
-  programId: string
+  category?: $Enums.ExpenseCategory
+  programId?: string | null
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
   createdAt?: Date | string
@@ -948,11 +1126,17 @@ export type FieldExpenseUpdateManyWithWhereWithoutReviewedByInput = {
 
 export type FieldExpenseCreateWithoutProgramInput = {
   id?: string
+  category?: $Enums.ExpenseCategory
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
   createdAt?: Date | string
@@ -966,11 +1150,17 @@ export type FieldExpenseUncheckedCreateWithoutProgramInput = {
   id?: string
   tenantId: string
   userId: string
+  category?: $Enums.ExpenseCategory
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedById?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
@@ -1007,12 +1197,18 @@ export type FieldExpenseUpdateManyWithWhereWithoutProgramInput = {
 export type FieldExpenseCreateManyTenantInput = {
   id?: string
   userId: string
-  programId: string
+  category?: $Enums.ExpenseCategory
+  programId?: string | null
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedById?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
@@ -1022,29 +1218,41 @@ export type FieldExpenseCreateManyTenantInput = {
 
 export type FieldExpenseUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFieldExpensesSubmittedNestedInput
-  program?: Prisma.ProgramUpdateOneRequiredWithoutFieldExpensesNestedInput
+  program?: Prisma.ProgramUpdateOneWithoutFieldExpensesNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutFieldExpensesReviewedNestedInput
 }
 
 export type FieldExpenseUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  programId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1055,12 +1263,18 @@ export type FieldExpenseUncheckedUpdateWithoutTenantInput = {
 export type FieldExpenseUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  programId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1071,12 +1285,18 @@ export type FieldExpenseUncheckedUpdateManyWithoutTenantInput = {
 export type FieldExpenseCreateManyUserInput = {
   id?: string
   tenantId: string
-  programId: string
+  category?: $Enums.ExpenseCategory
+  programId?: string | null
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedById?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
@@ -1088,12 +1308,18 @@ export type FieldExpenseCreateManyReviewedByInput = {
   id?: string
   tenantId: string
   userId: string
-  programId: string
+  category?: $Enums.ExpenseCategory
+  programId?: string | null
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
   createdAt?: Date | string
@@ -1102,29 +1328,41 @@ export type FieldExpenseCreateManyReviewedByInput = {
 
 export type FieldExpenseUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutFieldExpensesNestedInput
-  program?: Prisma.ProgramUpdateOneRequiredWithoutFieldExpensesNestedInput
+  program?: Prisma.ProgramUpdateOneWithoutFieldExpensesNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutFieldExpensesReviewedNestedInput
 }
 
 export type FieldExpenseUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  programId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1135,12 +1373,18 @@ export type FieldExpenseUncheckedUpdateWithoutUserInput = {
 export type FieldExpenseUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  programId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1150,30 +1394,42 @@ export type FieldExpenseUncheckedUpdateManyWithoutUserInput = {
 
 export type FieldExpenseUpdateWithoutReviewedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutFieldExpensesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFieldExpensesSubmittedNestedInput
-  program?: Prisma.ProgramUpdateOneRequiredWithoutFieldExpensesNestedInput
+  program?: Prisma.ProgramUpdateOneWithoutFieldExpensesNestedInput
 }
 
 export type FieldExpenseUncheckedUpdateWithoutReviewedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  programId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1184,12 +1440,18 @@ export type FieldExpenseUncheckedUpdateManyWithoutReviewedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  programId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1200,11 +1462,17 @@ export type FieldExpenseCreateManyProgramInput = {
   id?: string
   tenantId: string
   userId: string
+  category?: $Enums.ExpenseCategory
   description: string
   amount: number
   documentUrl?: string | null
   expenseDate: Date | string
   status?: $Enums.ExpenseStatus
+  receiptNo?: string | null
+  riderName?: string | null
+  riderPhone?: string | null
+  routeFrom?: string | null
+  routeTo?: string | null
   reviewedById?: string | null
   reviewedAt?: Date | string | null
   reviewNotes?: string | null
@@ -1214,11 +1482,17 @@ export type FieldExpenseCreateManyProgramInput = {
 
 export type FieldExpenseUpdateWithoutProgramInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1232,11 +1506,17 @@ export type FieldExpenseUncheckedUpdateWithoutProgramInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1248,11 +1528,17 @@ export type FieldExpenseUncheckedUpdateManyWithoutProgramInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   description?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   documentUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  receiptNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  riderPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeFrom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1266,12 +1552,18 @@ export type FieldExpenseSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   tenantId?: boolean
   userId?: boolean
+  category?: boolean
   programId?: boolean
   description?: boolean
   amount?: boolean
   documentUrl?: boolean
   expenseDate?: boolean
   status?: boolean
+  receiptNo?: boolean
+  riderName?: boolean
+  riderPhone?: boolean
+  routeFrom?: boolean
+  routeTo?: boolean
   reviewedById?: boolean
   reviewedAt?: boolean
   reviewNotes?: boolean
@@ -1279,7 +1571,7 @@ export type FieldExpenseSelect<ExtArgs extends runtime.Types.Extensions.Internal
   updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
+  program?: boolean | Prisma.FieldExpense$programArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.FieldExpense$reviewedByArgs<ExtArgs>
 }, ExtArgs["result"]["fieldExpense"]>
 
@@ -1289,12 +1581,18 @@ export type FieldExpenseSelectScalar = {
   id?: boolean
   tenantId?: boolean
   userId?: boolean
+  category?: boolean
   programId?: boolean
   description?: boolean
   amount?: boolean
   documentUrl?: boolean
   expenseDate?: boolean
   status?: boolean
+  receiptNo?: boolean
+  riderName?: boolean
+  riderPhone?: boolean
+  routeFrom?: boolean
+  routeTo?: boolean
   reviewedById?: boolean
   reviewedAt?: boolean
   reviewNotes?: boolean
@@ -1302,11 +1600,11 @@ export type FieldExpenseSelectScalar = {
   updatedAt?: boolean
 }
 
-export type FieldExpenseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "userId" | "programId" | "description" | "amount" | "documentUrl" | "expenseDate" | "status" | "reviewedById" | "reviewedAt" | "reviewNotes" | "createdAt" | "updatedAt", ExtArgs["result"]["fieldExpense"]>
+export type FieldExpenseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "userId" | "category" | "programId" | "description" | "amount" | "documentUrl" | "expenseDate" | "status" | "receiptNo" | "riderName" | "riderPhone" | "routeFrom" | "routeTo" | "reviewedById" | "reviewedAt" | "reviewNotes" | "createdAt" | "updatedAt", ExtArgs["result"]["fieldExpense"]>
 export type FieldExpenseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
+  program?: boolean | Prisma.FieldExpense$programArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.FieldExpense$reviewedByArgs<ExtArgs>
 }
 
@@ -1315,19 +1613,25 @@ export type $FieldExpensePayload<ExtArgs extends runtime.Types.Extensions.Intern
   objects: {
     tenant: Prisma.$TenantPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
-    program: Prisma.$ProgramPayload<ExtArgs>
+    program: Prisma.$ProgramPayload<ExtArgs> | null
     reviewedBy: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     tenantId: string
     userId: string
-    programId: string
+    category: $Enums.ExpenseCategory
+    programId: string | null
     description: string
     amount: number
     documentUrl: string | null
     expenseDate: Date
     status: $Enums.ExpenseStatus
+    receiptNo: string | null
+    riderName: string | null
+    riderPhone: string | null
+    routeFrom: string | null
+    routeTo: string | null
     reviewedById: string | null
     reviewedAt: Date | null
     reviewNotes: string | null
@@ -1675,7 +1979,7 @@ export interface Prisma__FieldExpenseClient<T, Null = never, ExtArgs extends run
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  program<T extends Prisma.ProgramDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProgramDefaultArgs<ExtArgs>>): Prisma.Prisma__ProgramClient<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  program<T extends Prisma.FieldExpense$programArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldExpense$programArgs<ExtArgs>>): Prisma.Prisma__ProgramClient<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   reviewedBy<T extends Prisma.FieldExpense$reviewedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldExpense$reviewedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1709,12 +2013,18 @@ export interface FieldExpenseFieldRefs {
   readonly id: Prisma.FieldRef<"FieldExpense", 'String'>
   readonly tenantId: Prisma.FieldRef<"FieldExpense", 'String'>
   readonly userId: Prisma.FieldRef<"FieldExpense", 'String'>
+  readonly category: Prisma.FieldRef<"FieldExpense", 'ExpenseCategory'>
   readonly programId: Prisma.FieldRef<"FieldExpense", 'String'>
   readonly description: Prisma.FieldRef<"FieldExpense", 'String'>
   readonly amount: Prisma.FieldRef<"FieldExpense", 'Float'>
   readonly documentUrl: Prisma.FieldRef<"FieldExpense", 'String'>
   readonly expenseDate: Prisma.FieldRef<"FieldExpense", 'DateTime'>
   readonly status: Prisma.FieldRef<"FieldExpense", 'ExpenseStatus'>
+  readonly receiptNo: Prisma.FieldRef<"FieldExpense", 'String'>
+  readonly riderName: Prisma.FieldRef<"FieldExpense", 'String'>
+  readonly riderPhone: Prisma.FieldRef<"FieldExpense", 'String'>
+  readonly routeFrom: Prisma.FieldRef<"FieldExpense", 'String'>
+  readonly routeTo: Prisma.FieldRef<"FieldExpense", 'String'>
   readonly reviewedById: Prisma.FieldRef<"FieldExpense", 'String'>
   readonly reviewedAt: Prisma.FieldRef<"FieldExpense", 'DateTime'>
   readonly reviewNotes: Prisma.FieldRef<"FieldExpense", 'String'>
@@ -2065,6 +2375,25 @@ export type FieldExpenseDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many FieldExpenses to delete.
    */
   limit?: number
+}
+
+/**
+ * FieldExpense.program
+ */
+export type FieldExpense$programArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Program
+   */
+  select?: Prisma.ProgramSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Program
+   */
+  omit?: Prisma.ProgramOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramInclude<ExtArgs> | null
+  where?: Prisma.ProgramWhereInput
 }
 
 /**

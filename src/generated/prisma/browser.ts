@@ -139,6 +139,11 @@ export type FieldVisit = Prisma.FieldVisitModel
  */
 export type FieldNote = Prisma.FieldNoteModel
 /**
+ * Model FieldVisitOtp
+ * 
+ */
+export type FieldVisitOtp = Prisma.FieldVisitOtpModel
+/**
  * Model ActivityLog
  * 
  */

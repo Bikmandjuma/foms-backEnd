@@ -163,3 +163,11 @@ export const ExpenseStatus = {
 } as const
 
 export type ExpenseStatus = (typeof ExpenseStatus)[keyof typeof ExpenseStatus]
+
+
+export const ExpenseCategory = {
+  TRANSPORT: 'TRANSPORT',
+  OTHER: 'OTHER'
+} as const
+
+export type ExpenseCategory = (typeof ExpenseCategory)[keyof typeof ExpenseCategory]

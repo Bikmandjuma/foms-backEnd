@@ -365,6 +365,7 @@ export type BeneficiaryWhereInput = {
   assignments?: Prisma.BeneficiaryAssignmentListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
   fieldVisits?: Prisma.FieldVisitListRelationFilter
+  fieldVisitOtps?: Prisma.FieldVisitOtpListRelationFilter
   candidateReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
   originalReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
   programs?: Prisma.ProgramListRelationFilter
@@ -400,6 +401,7 @@ export type BeneficiaryOrderByWithRelationInput = {
   assignments?: Prisma.BeneficiaryAssignmentOrderByRelationAggregateInput
   availabilityChecks?: Prisma.AvailabilityCheckOrderByRelationAggregateInput
   fieldVisits?: Prisma.FieldVisitOrderByRelationAggregateInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpOrderByRelationAggregateInput
   candidateReplacementRequests?: Prisma.ReplacementRequestOrderByRelationAggregateInput
   originalReplacementRequests?: Prisma.ReplacementRequestOrderByRelationAggregateInput
   programs?: Prisma.ProgramOrderByRelationAggregateInput
@@ -441,6 +443,7 @@ export type BeneficiaryWhereUniqueInput = Prisma.AtLeast<{
   assignments?: Prisma.BeneficiaryAssignmentListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
   fieldVisits?: Prisma.FieldVisitListRelationFilter
+  fieldVisitOtps?: Prisma.FieldVisitOtpListRelationFilter
   candidateReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
   originalReplacementRequests?: Prisma.ReplacementRequestListRelationFilter
   programs?: Prisma.ProgramListRelationFilter
@@ -524,6 +527,7 @@ export type BeneficiaryCreateInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -553,6 +557,7 @@ export type BeneficiaryUncheckedCreateInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -582,6 +587,7 @@ export type BeneficiaryUpdateInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -611,6 +617,7 @@ export type BeneficiaryUncheckedUpdateInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -1168,6 +1175,20 @@ export type BeneficiaryUpdateOneRequiredWithoutFieldVisitsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BeneficiaryUpdateToOneWithWhereWithoutFieldVisitsInput, Prisma.BeneficiaryUpdateWithoutFieldVisitsInput>, Prisma.BeneficiaryUncheckedUpdateWithoutFieldVisitsInput>
 }
 
+export type BeneficiaryCreateNestedOneWithoutFieldVisitOtpsInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutFieldVisitOtpsInput, Prisma.BeneficiaryUncheckedCreateWithoutFieldVisitOtpsInput>
+  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutFieldVisitOtpsInput
+  connect?: Prisma.BeneficiaryWhereUniqueInput
+}
+
+export type BeneficiaryUpdateOneRequiredWithoutFieldVisitOtpsNestedInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutFieldVisitOtpsInput, Prisma.BeneficiaryUncheckedCreateWithoutFieldVisitOtpsInput>
+  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutFieldVisitOtpsInput
+  upsert?: Prisma.BeneficiaryUpsertWithoutFieldVisitOtpsInput
+  connect?: Prisma.BeneficiaryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BeneficiaryUpdateToOneWithWhereWithoutFieldVisitOtpsInput, Prisma.BeneficiaryUpdateWithoutFieldVisitOtpsInput>, Prisma.BeneficiaryUncheckedUpdateWithoutFieldVisitOtpsInput>
+}
+
 export type BeneficiaryCreateWithoutTenantInput = {
   id?: string
   code: string
@@ -1191,6 +1212,7 @@ export type BeneficiaryCreateWithoutTenantInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -1219,6 +1241,7 @@ export type BeneficiaryUncheckedCreateWithoutTenantInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -1299,6 +1322,7 @@ export type BeneficiaryCreateWithoutProvinceInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -1327,6 +1351,7 @@ export type BeneficiaryUncheckedCreateWithoutProvinceInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -1381,6 +1406,7 @@ export type BeneficiaryCreateWithoutDistrictInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -1409,6 +1435,7 @@ export type BeneficiaryUncheckedCreateWithoutDistrictInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -1463,6 +1490,7 @@ export type BeneficiaryCreateWithoutSectorInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -1491,6 +1519,7 @@ export type BeneficiaryUncheckedCreateWithoutSectorInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -1545,6 +1574,7 @@ export type BeneficiaryCreateWithoutCellInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -1573,6 +1603,7 @@ export type BeneficiaryUncheckedCreateWithoutCellInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -1627,6 +1658,7 @@ export type BeneficiaryCreateWithoutVillageInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -1655,6 +1687,7 @@ export type BeneficiaryUncheckedCreateWithoutVillageInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -1710,6 +1743,7 @@ export type BeneficiaryCreateWithoutProgramsInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
 }
@@ -1738,6 +1772,7 @@ export type BeneficiaryUncheckedCreateWithoutProgramsInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
 }
@@ -1786,6 +1821,7 @@ export type BeneficiaryCreateWithoutAvailabilityChecksInput = {
   village?: Prisma.VillageCreateNestedOneWithoutBeneficiariesInput
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -1814,6 +1850,7 @@ export type BeneficiaryUncheckedCreateWithoutAvailabilityChecksInput = {
   villageId?: number | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -1858,6 +1895,7 @@ export type BeneficiaryUpdateWithoutAvailabilityChecksInput = {
   village?: Prisma.VillageUpdateOneWithoutBeneficiariesNestedInput
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -1886,6 +1924,7 @@ export type BeneficiaryUncheckedUpdateWithoutAvailabilityChecksInput = {
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -1914,6 +1953,7 @@ export type BeneficiaryCreateWithoutAssignmentsInput = {
   village?: Prisma.VillageCreateNestedOneWithoutBeneficiariesInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -1942,6 +1982,7 @@ export type BeneficiaryUncheckedCreateWithoutAssignmentsInput = {
   villageId?: number | null
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -1986,6 +2027,7 @@ export type BeneficiaryUpdateWithoutAssignmentsInput = {
   village?: Prisma.VillageUpdateOneWithoutBeneficiariesNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -2014,6 +2056,7 @@ export type BeneficiaryUncheckedUpdateWithoutAssignmentsInput = {
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -2043,6 +2086,7 @@ export type BeneficiaryCreateWithoutCandidateReplacementRequestsInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
 }
@@ -2071,6 +2115,7 @@ export type BeneficiaryUncheckedCreateWithoutCandidateReplacementRequestsInput =
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
 }
@@ -2104,6 +2149,7 @@ export type BeneficiaryCreateWithoutOriginalReplacementRequestsInput = {
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
 }
@@ -2132,6 +2178,7 @@ export type BeneficiaryUncheckedCreateWithoutOriginalReplacementRequestsInput = 
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
   fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
 }
@@ -2176,6 +2223,7 @@ export type BeneficiaryUpdateWithoutCandidateReplacementRequestsInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
 }
@@ -2204,6 +2252,7 @@ export type BeneficiaryUncheckedUpdateWithoutCandidateReplacementRequestsInput =
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
 }
@@ -2243,6 +2292,7 @@ export type BeneficiaryUpdateWithoutOriginalReplacementRequestsInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
 }
@@ -2271,6 +2321,7 @@ export type BeneficiaryUncheckedUpdateWithoutOriginalReplacementRequestsInput = 
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
 }
@@ -2298,6 +2349,7 @@ export type BeneficiaryCreateWithoutFieldVisitsInput = {
   village?: Prisma.VillageCreateNestedOneWithoutBeneficiariesInput
   assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
@@ -2326,6 +2378,7 @@ export type BeneficiaryUncheckedCreateWithoutFieldVisitsInput = {
   villageId?: number | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedCreateNestedManyWithoutBeneficiaryInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
@@ -2370,6 +2423,7 @@ export type BeneficiaryUpdateWithoutFieldVisitsInput = {
   village?: Prisma.VillageUpdateOneWithoutBeneficiariesNestedInput
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -2398,6 +2452,139 @@ export type BeneficiaryUncheckedUpdateWithoutFieldVisitsInput = {
   villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
+}
+
+export type BeneficiaryCreateWithoutFieldVisitOtpsInput = {
+  id?: string
+  code: string
+  name: string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  householdSize?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  tenant: Prisma.TenantCreateNestedOneWithoutBeneficiariesInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutBeneficiariesInput
+  district?: Prisma.DistrictCreateNestedOneWithoutBeneficiariesInput
+  sector?: Prisma.SectorCreateNestedOneWithoutBeneficiariesInput
+  cell?: Prisma.CellCreateNestedOneWithoutBeneficiariesInput
+  village?: Prisma.VillageCreateNestedOneWithoutBeneficiariesInput
+  assignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutBeneficiaryInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutBeneficiaryInput
+  fieldVisits?: Prisma.FieldVisitCreateNestedManyWithoutBeneficiaryInput
+  candidateReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutBeneficiariesInput
+}
+
+export type BeneficiaryUncheckedCreateWithoutFieldVisitOtpsInput = {
+  id?: string
+  code: string
+  name: string
+  telephone?: string | null
+  gender?: $Enums.Gender | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  householdSize?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenantId: string
+  consentAt?: Date | string | null
+  consentGiven?: boolean
+  outcome?: $Enums.ResponseOutcome
+  provinceId?: number | null
+  districtId?: number | null
+  sectorId?: number | null
+  cellId?: number | null
+  villageId?: number | null
+  assignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutBeneficiaryInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutBeneficiaryInput
+  fieldVisits?: Prisma.FieldVisitUncheckedCreateNestedManyWithoutBeneficiaryInput
+  candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutCandidateRespondentInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutOriginalRespondentInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutBeneficiariesInput
+}
+
+export type BeneficiaryCreateOrConnectWithoutFieldVisitOtpsInput = {
+  where: Prisma.BeneficiaryWhereUniqueInput
+  create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutFieldVisitOtpsInput, Prisma.BeneficiaryUncheckedCreateWithoutFieldVisitOtpsInput>
+}
+
+export type BeneficiaryUpsertWithoutFieldVisitOtpsInput = {
+  update: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutFieldVisitOtpsInput, Prisma.BeneficiaryUncheckedUpdateWithoutFieldVisitOtpsInput>
+  create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutFieldVisitOtpsInput, Prisma.BeneficiaryUncheckedCreateWithoutFieldVisitOtpsInput>
+  where?: Prisma.BeneficiaryWhereInput
+}
+
+export type BeneficiaryUpdateToOneWithWhereWithoutFieldVisitOtpsInput = {
+  where?: Prisma.BeneficiaryWhereInput
+  data: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutFieldVisitOtpsInput, Prisma.BeneficiaryUncheckedUpdateWithoutFieldVisitOtpsInput>
+}
+
+export type BeneficiaryUpdateWithoutFieldVisitOtpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBeneficiariesNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutBeneficiariesNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutBeneficiariesNestedInput
+  sector?: Prisma.SectorUpdateOneWithoutBeneficiariesNestedInput
+  cell?: Prisma.CellUpdateOneWithoutBeneficiariesNestedInput
+  village?: Prisma.VillageUpdateOneWithoutBeneficiariesNestedInput
+  assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
+  originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
+}
+
+export type BeneficiaryUncheckedUpdateWithoutFieldVisitOtpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  householdSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  consentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  consentGiven?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  outcome?: Prisma.EnumResponseOutcomeFieldUpdateOperationsInput | $Enums.ResponseOutcome
+  provinceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  districtId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sectorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cellId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  villageId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -2448,6 +2635,7 @@ export type BeneficiaryUpdateWithoutTenantInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -2476,6 +2664,7 @@ export type BeneficiaryUncheckedUpdateWithoutTenantInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -2548,6 +2737,7 @@ export type BeneficiaryUpdateWithoutProvinceInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -2576,6 +2766,7 @@ export type BeneficiaryUncheckedUpdateWithoutProvinceInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -2648,6 +2839,7 @@ export type BeneficiaryUpdateWithoutDistrictInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -2676,6 +2868,7 @@ export type BeneficiaryUncheckedUpdateWithoutDistrictInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -2748,6 +2941,7 @@ export type BeneficiaryUpdateWithoutSectorInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -2776,6 +2970,7 @@ export type BeneficiaryUncheckedUpdateWithoutSectorInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -2848,6 +3043,7 @@ export type BeneficiaryUpdateWithoutCellInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -2876,6 +3072,7 @@ export type BeneficiaryUncheckedUpdateWithoutCellInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -2948,6 +3145,7 @@ export type BeneficiaryUpdateWithoutVillageInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutBeneficiariesNestedInput
@@ -2976,6 +3174,7 @@ export type BeneficiaryUncheckedUpdateWithoutVillageInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutBeneficiariesNestedInput
@@ -3027,6 +3226,7 @@ export type BeneficiaryUpdateWithoutProgramsInput = {
   assignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutOriginalRespondentNestedInput
 }
@@ -3055,6 +3255,7 @@ export type BeneficiaryUncheckedUpdateWithoutProgramsInput = {
   assignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutBeneficiaryNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutBeneficiaryNestedInput
   fieldVisits?: Prisma.FieldVisitUncheckedUpdateManyWithoutBeneficiaryNestedInput
+  fieldVisitOtps?: Prisma.FieldVisitOtpUncheckedUpdateManyWithoutBeneficiaryNestedInput
   candidateReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutCandidateRespondentNestedInput
   originalReplacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutOriginalRespondentNestedInput
 }
@@ -3091,6 +3292,7 @@ export type BeneficiaryCountOutputType = {
   assignments: number
   availabilityChecks: number
   fieldVisits: number
+  fieldVisitOtps: number
   candidateReplacementRequests: number
   originalReplacementRequests: number
   programs: number
@@ -3100,6 +3302,7 @@ export type BeneficiaryCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   assignments?: boolean | BeneficiaryCountOutputTypeCountAssignmentsArgs
   availabilityChecks?: boolean | BeneficiaryCountOutputTypeCountAvailabilityChecksArgs
   fieldVisits?: boolean | BeneficiaryCountOutputTypeCountFieldVisitsArgs
+  fieldVisitOtps?: boolean | BeneficiaryCountOutputTypeCountFieldVisitOtpsArgs
   candidateReplacementRequests?: boolean | BeneficiaryCountOutputTypeCountCandidateReplacementRequestsArgs
   originalReplacementRequests?: boolean | BeneficiaryCountOutputTypeCountOriginalReplacementRequestsArgs
   programs?: boolean | BeneficiaryCountOutputTypeCountProgramsArgs
@@ -3134,6 +3337,13 @@ export type BeneficiaryCountOutputTypeCountAvailabilityChecksArgs<ExtArgs extend
  */
 export type BeneficiaryCountOutputTypeCountFieldVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FieldVisitWhereInput
+}
+
+/**
+ * BeneficiaryCountOutputType without action
+ */
+export type BeneficiaryCountOutputTypeCountFieldVisitOtpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FieldVisitOtpWhereInput
 }
 
 /**
@@ -3188,6 +3398,7 @@ export type BeneficiarySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   assignments?: boolean | Prisma.Beneficiary$assignmentsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Beneficiary$availabilityChecksArgs<ExtArgs>
   fieldVisits?: boolean | Prisma.Beneficiary$fieldVisitsArgs<ExtArgs>
+  fieldVisitOtps?: boolean | Prisma.Beneficiary$fieldVisitOtpsArgs<ExtArgs>
   candidateReplacementRequests?: boolean | Prisma.Beneficiary$candidateReplacementRequestsArgs<ExtArgs>
   originalReplacementRequests?: boolean | Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs>
   programs?: boolean | Prisma.Beneficiary$programsArgs<ExtArgs>
@@ -3230,6 +3441,7 @@ export type BeneficiaryInclude<ExtArgs extends runtime.Types.Extensions.Internal
   assignments?: boolean | Prisma.Beneficiary$assignmentsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Beneficiary$availabilityChecksArgs<ExtArgs>
   fieldVisits?: boolean | Prisma.Beneficiary$fieldVisitsArgs<ExtArgs>
+  fieldVisitOtps?: boolean | Prisma.Beneficiary$fieldVisitOtpsArgs<ExtArgs>
   candidateReplacementRequests?: boolean | Prisma.Beneficiary$candidateReplacementRequestsArgs<ExtArgs>
   originalReplacementRequests?: boolean | Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs>
   programs?: boolean | Prisma.Beneficiary$programsArgs<ExtArgs>
@@ -3248,6 +3460,7 @@ export type $BeneficiaryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     assignments: Prisma.$BeneficiaryAssignmentPayload<ExtArgs>[]
     availabilityChecks: Prisma.$AvailabilityCheckPayload<ExtArgs>[]
     fieldVisits: Prisma.$FieldVisitPayload<ExtArgs>[]
+    fieldVisitOtps: Prisma.$FieldVisitOtpPayload<ExtArgs>[]
     candidateReplacementRequests: Prisma.$ReplacementRequestPayload<ExtArgs>[]
     originalReplacementRequests: Prisma.$ReplacementRequestPayload<ExtArgs>[]
     programs: Prisma.$ProgramPayload<ExtArgs>[]
@@ -3622,6 +3835,7 @@ export interface Prisma__BeneficiaryClient<T, Null = never, ExtArgs extends runt
   assignments<T extends Prisma.Beneficiary$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   availabilityChecks<T extends Prisma.Beneficiary$availabilityChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$availabilityChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilityCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fieldVisits<T extends Prisma.Beneficiary$fieldVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$fieldVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fieldVisitOtps<T extends Prisma.Beneficiary$fieldVisitOtpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$fieldVisitOtpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldVisitOtpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   candidateReplacementRequests<T extends Prisma.Beneficiary$candidateReplacementRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$candidateReplacementRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplacementRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   originalReplacementRequests<T extends Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$originalReplacementRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplacementRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   programs<T extends Prisma.Beneficiary$programsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$programsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4186,6 +4400,30 @@ export type Beneficiary$fieldVisitsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.FieldVisitScalarFieldEnum | Prisma.FieldVisitScalarFieldEnum[]
+}
+
+/**
+ * Beneficiary.fieldVisitOtps
+ */
+export type Beneficiary$fieldVisitOtpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FieldVisitOtp
+   */
+  select?: Prisma.FieldVisitOtpSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FieldVisitOtp
+   */
+  omit?: Prisma.FieldVisitOtpOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FieldVisitOtpInclude<ExtArgs> | null
+  where?: Prisma.FieldVisitOtpWhereInput
+  orderBy?: Prisma.FieldVisitOtpOrderByWithRelationInput | Prisma.FieldVisitOtpOrderByWithRelationInput[]
+  cursor?: Prisma.FieldVisitOtpWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FieldVisitOtpScalarFieldEnum | Prisma.FieldVisitOtpScalarFieldEnum[]
 }
 
 /**

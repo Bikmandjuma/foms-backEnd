@@ -986,10 +986,12 @@ export type ProgramCreateNestedOneWithoutFieldExpensesInput = {
   connect?: Prisma.ProgramWhereUniqueInput
 }
 
-export type ProgramUpdateOneRequiredWithoutFieldExpensesNestedInput = {
+export type ProgramUpdateOneWithoutFieldExpensesNestedInput = {
   create?: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
   connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutFieldExpensesInput
   upsert?: Prisma.ProgramUpsertWithoutFieldExpensesInput
+  disconnect?: Prisma.ProgramWhereInput | boolean
+  delete?: Prisma.ProgramWhereInput | boolean
   connect?: Prisma.ProgramWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutFieldExpensesInput, Prisma.ProgramUpdateWithoutFieldExpensesInput>, Prisma.ProgramUncheckedUpdateWithoutFieldExpensesInput>
 }

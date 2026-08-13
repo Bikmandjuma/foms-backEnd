@@ -7,6 +7,7 @@ import { prisma } from "../utils/prisma.js";
 import { signToken, signResetToken, verifyResetToken } from "../utils/jwt.js";
 import { recordActivity } from "../utils/activityLog.js";
 import { sendMail } from "../utils/mailer.js";
+import { generateSixDigitCode } from "../utils/otp.js";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -134,10 +135,6 @@ const verifyResetCodeSchema = z.object({ email: z.string().email(), code: z.stri
 const resetPasswordSchema = z.object({ resetToken: z.string().min(1), newPassword: z.string().min(8) });
 
 const RESET_CODE_TTL_MS = 15 * 60 * 1000;
-
-function generateSixDigitCode(): string {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-}
 
 // Works identically for platform admins, tenant admins, and regular users
 // — there's only one User table, so this one flow covers everyone.

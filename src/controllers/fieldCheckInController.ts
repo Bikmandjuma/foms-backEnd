@@ -13,6 +13,13 @@ import {
 } from "../utils/validators.js";
 import { buildDailyReportWorkbook, type DailyReportRow } from "../utils/excel.js";
 import { hasAction, parsePermissions } from "../utils/permissions.js";
+import { OTP_MAX_ATTEMPTS, OTP_RESEND_COOLDOWN_MS, OTP_TTL_MS, generateSixDigitCode } from "../utils/otp.js";
+import { formatRwandaPhone, sendSms } from "../utils/sms.js";
+
+// The two outcomes where the enumerator is actually standing with a
+// reachable beneficiary — an SMS code can't confirm NOT_FOUND/RELOCATED/
+// DECEASED, since there's no one there to text.
+const OTP_REQUIRED_OUTCOMES = new Set(["COMPLETED", "REFUSED"]);
 
 /**
  * Read access to one check-in's roster/notes: the check-in's own owner, or
@@ -249,6 +256,7 @@ export async function listTodayRespondents(req: Request, res: Response): Promise
           id: true,
           code: true,
           name: true,
+          telephone: true,
           province: { select: { id: true, name: true } },
           district: { select: { id: true, name: true } },
           sector: { select: { id: true, name: true } },
@@ -286,6 +294,71 @@ export async function listTodayRespondents(req: Request, res: Response): Promise
   });
 }
 
+/**
+ * POST /field-checkins/:id/respondents/:beneficiaryId/otp — texts a 6-digit
+ * code to the respondent's phone, required before a COMPLETED/REFUSED
+ * outcome can be saved (see recordVisitOutcome below).
+ */
+export async function requestVisitOtp(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+
+  const checkIn = await prisma.fieldCheckIn.findFirst({ where: { id: idParam(req), tenantId } });
+  if (!checkIn) throw new ApiError(404, "Check-in not found");
+  if (checkIn.userId !== req.user!.sub && !req.user!.isPlatformAdmin) {
+    throw new ApiError(403, "You can only request codes for your own check-in");
+  }
+  if (checkIn.checkOutAt) throw new ApiError(409, "This check-in has already ended");
+
+  const beneficiaryId = req.params.beneficiaryId as string;
+  const beneficiary = await prisma.beneficiary.findFirst({ where: { id: beneficiaryId, tenantId } });
+  if (!beneficiary) throw new ApiError(404, "Respondent not found");
+
+  const formattedPhone = formatRwandaPhone(beneficiary.telephone);
+  if (!formattedPhone) throw new ApiError(400, "This respondent doesn't have a valid phone number on file");
+
+  const recent = await prisma.fieldVisitOtp.findFirst({
+    where: { checkInId: checkIn.id, beneficiaryId, createdAt: { gt: new Date(Date.now() - OTP_RESEND_COOLDOWN_MS) } },
+    orderBy: { createdAt: "desc" },
+  });
+  if (recent) {
+    const retryInSeconds = Math.ceil((recent.createdAt.getTime() + OTP_RESEND_COOLDOWN_MS - Date.now()) / 1000);
+    throw new ApiError(429, `Wait ${retryInSeconds}s before requesting another code`);
+  }
+
+  const code = generateSixDigitCode();
+  await prisma.fieldVisitOtp.create({
+    data: { checkInId: checkIn.id, beneficiaryId, code, expiresAt: new Date(Date.now() + OTP_TTL_MS) },
+  });
+
+  await sendSms(formattedPhone, `Your Field Operation MS verification code is ${code}. It expires in 5 minutes.`);
+
+  sendResponse(res, 200, "Verification code sent", { expiresInSeconds: OTP_TTL_MS / 1000 });
+}
+
+/** Verifies the latest unused, unexpired OTP for this checkIn+beneficiary against `code`, consuming it on success. */
+async function verifyVisitOtp(checkInId: string, beneficiaryId: string, code: string | undefined): Promise<void> {
+  if (!code) throw new ApiError(400, "Enter the verification code sent to the respondent's phone");
+
+  const otp = await prisma.fieldVisitOtp.findFirst({
+    where: { checkInId, beneficiaryId, usedAt: null, expiresAt: { gt: new Date() } },
+    orderBy: { createdAt: "desc" },
+  });
+  if (!otp) throw new ApiError(400, "That code has expired. Request a new one.");
+
+  if (otp.code !== code) {
+    const attempts = otp.attempts + 1;
+    const attemptsLeft = OTP_MAX_ATTEMPTS - attempts;
+    if (attemptsLeft <= 0) {
+      await prisma.fieldVisitOtp.update({ where: { id: otp.id }, data: { attempts, expiresAt: new Date() } });
+      throw new ApiError(400, "Too many incorrect attempts. Request a new code.");
+    }
+    await prisma.fieldVisitOtp.update({ where: { id: otp.id }, data: { attempts } });
+    throw new ApiError(400, `Incorrect code. ${attemptsLeft} attempt(s) left.`);
+  }
+
+  await prisma.fieldVisitOtp.update({ where: { id: otp.id }, data: { usedAt: new Date() } });
+}
+
 /** Record (or update) one respondent's outcome for this check-in — the "attendance" step before checkout. */
 export async function recordVisitOutcome(req: Request, res: Response): Promise<void> {
   const data = recordFieldVisitSchema.parse(req.body);
@@ -301,6 +374,10 @@ export async function recordVisitOutcome(req: Request, res: Response): Promise<v
   const beneficiaryId = req.params.beneficiaryId as string;
   const beneficiary = await prisma.beneficiary.findFirst({ where: { id: beneficiaryId, tenantId } });
   if (!beneficiary) throw new ApiError(404, "Respondent not found");
+
+  if (OTP_REQUIRED_OUTCOMES.has(data.outcome)) {
+    await verifyVisitOtp(checkIn.id, beneficiaryId, data.otpCode);
+  }
 
   const visit = await prisma.fieldVisit.upsert({
     where: { checkInId_beneficiaryId: { checkInId: checkIn.id, beneficiaryId } },

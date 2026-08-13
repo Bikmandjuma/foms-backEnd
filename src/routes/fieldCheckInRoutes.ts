@@ -10,6 +10,7 @@ import {
   listTodayRespondents,
   pingCurrentGps,
   recordVisitOutcome,
+  requestVisitOtp,
 } from "../controllers/fieldCheckInController.js";
 import { asyncHandler } from "../middleware/asyncHandler.js";
 import { authenticate } from "../middleware/auth.js";
@@ -27,6 +28,7 @@ router.post("/", asyncHandler(createCheckIn));
 router.post("/:id/end", asyncHandler(endCheckIn));
 router.post("/:id/gps", asyncHandler(pingCurrentGps));
 router.get("/:id/respondents", asyncHandler(listTodayRespondents));
+router.post("/:id/respondents/:beneficiaryId/otp", asyncHandler(requestVisitOtp));
 router.put("/:id/respondents/:beneficiaryId", asyncHandler(recordVisitOutcome));
 router.get("/:id/notes", asyncHandler(listFieldNotes));
 router.post("/:id/notes", asyncHandler(addFieldNote));
