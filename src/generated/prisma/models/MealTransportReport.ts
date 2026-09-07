@@ -20,28 +20,16 @@ export type MealTransportReportModel = runtime.Types.Result.DefaultSelection<Pri
 
 export type AggregateMealTransportReport = {
   _count: MealTransportReportCountAggregateOutputType | null
-  _avg: MealTransportReportAvgAggregateOutputType | null
-  _sum: MealTransportReportSumAggregateOutputType | null
   _min: MealTransportReportMinAggregateOutputType | null
   _max: MealTransportReportMaxAggregateOutputType | null
-}
-
-export type MealTransportReportAvgAggregateOutputType = {
-  weekNumber: number | null
-}
-
-export type MealTransportReportSumAggregateOutputType = {
-  weekNumber: number | null
 }
 
 export type MealTransportReportMinAggregateOutputType = {
   id: string | null
   tenantId: string | null
   configId: string | null
+  weekId: string | null
   userId: string | null
-  weekNumber: number | null
-  weekStart: Date | null
-  weekEnd: Date | null
   status: $Enums.MealTransportReportStatus | null
   preparerSignatureName: string | null
   preparerSignatureImage: string | null
@@ -57,10 +45,8 @@ export type MealTransportReportMaxAggregateOutputType = {
   id: string | null
   tenantId: string | null
   configId: string | null
+  weekId: string | null
   userId: string | null
-  weekNumber: number | null
-  weekStart: Date | null
-  weekEnd: Date | null
   status: $Enums.MealTransportReportStatus | null
   preparerSignatureName: string | null
   preparerSignatureImage: string | null
@@ -76,10 +62,8 @@ export type MealTransportReportCountAggregateOutputType = {
   id: number
   tenantId: number
   configId: number
+  weekId: number
   userId: number
-  weekNumber: number
-  weekStart: number
-  weekEnd: number
   status: number
   preparerSignatureName: number
   preparerSignatureImage: number
@@ -93,22 +77,12 @@ export type MealTransportReportCountAggregateOutputType = {
 }
 
 
-export type MealTransportReportAvgAggregateInputType = {
-  weekNumber?: true
-}
-
-export type MealTransportReportSumAggregateInputType = {
-  weekNumber?: true
-}
-
 export type MealTransportReportMinAggregateInputType = {
   id?: true
   tenantId?: true
   configId?: true
+  weekId?: true
   userId?: true
-  weekNumber?: true
-  weekStart?: true
-  weekEnd?: true
   status?: true
   preparerSignatureName?: true
   preparerSignatureImage?: true
@@ -124,10 +98,8 @@ export type MealTransportReportMaxAggregateInputType = {
   id?: true
   tenantId?: true
   configId?: true
+  weekId?: true
   userId?: true
-  weekNumber?: true
-  weekStart?: true
-  weekEnd?: true
   status?: true
   preparerSignatureName?: true
   preparerSignatureImage?: true
@@ -143,10 +115,8 @@ export type MealTransportReportCountAggregateInputType = {
   id?: true
   tenantId?: true
   configId?: true
+  weekId?: true
   userId?: true
-  weekNumber?: true
-  weekStart?: true
-  weekEnd?: true
   status?: true
   preparerSignatureName?: true
   preparerSignatureImage?: true
@@ -197,18 +167,6 @@ export type MealTransportReportAggregateArgs<ExtArgs extends runtime.Types.Exten
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: MealTransportReportAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: MealTransportReportSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: MealTransportReportMinAggregateInputType
@@ -239,8 +197,6 @@ export type MealTransportReportGroupByArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   _count?: MealTransportReportCountAggregateInputType | true
-  _avg?: MealTransportReportAvgAggregateInputType
-  _sum?: MealTransportReportSumAggregateInputType
   _min?: MealTransportReportMinAggregateInputType
   _max?: MealTransportReportMaxAggregateInputType
 }
@@ -249,10 +205,8 @@ export type MealTransportReportGroupByOutputType = {
   id: string
   tenantId: string
   configId: string
+  weekId: string
   userId: string
-  weekNumber: number
-  weekStart: Date
-  weekEnd: Date
   status: $Enums.MealTransportReportStatus
   preparerSignatureName: string | null
   preparerSignatureImage: string | null
@@ -263,8 +217,6 @@ export type MealTransportReportGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: MealTransportReportCountAggregateOutputType | null
-  _avg: MealTransportReportAvgAggregateOutputType | null
-  _sum: MealTransportReportSumAggregateOutputType | null
   _min: MealTransportReportMinAggregateOutputType | null
   _max: MealTransportReportMaxAggregateOutputType | null
 }
@@ -291,10 +243,8 @@ export type MealTransportReportWhereInput = {
   id?: Prisma.StringFilter<"MealTransportReport"> | string
   tenantId?: Prisma.StringFilter<"MealTransportReport"> | string
   configId?: Prisma.StringFilter<"MealTransportReport"> | string
+  weekId?: Prisma.StringFilter<"MealTransportReport"> | string
   userId?: Prisma.StringFilter<"MealTransportReport"> | string
-  weekNumber?: Prisma.IntFilter<"MealTransportReport"> | number
-  weekStart?: Prisma.DateTimeFilter<"MealTransportReport"> | Date | string
-  weekEnd?: Prisma.DateTimeFilter<"MealTransportReport"> | Date | string
   status?: Prisma.EnumMealTransportReportStatusFilter<"MealTransportReport"> | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.StringNullableFilter<"MealTransportReport"> | string | null
   preparerSignatureImage?: Prisma.StringNullableFilter<"MealTransportReport"> | string | null
@@ -306,6 +256,7 @@ export type MealTransportReportWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"MealTransportReport"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   config?: Prisma.XOR<Prisma.MealTransportReportConfigScalarRelationFilter, Prisma.MealTransportReportConfigWhereInput>
+  week?: Prisma.XOR<Prisma.MealTransportReportWeekScalarRelationFilter, Prisma.MealTransportReportWeekWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   entries?: Prisma.MealTransportReportEntryListRelationFilter
 }
@@ -314,10 +265,8 @@ export type MealTransportReportOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   configId?: Prisma.SortOrder
+  weekId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  weekNumber?: Prisma.SortOrder
-  weekStart?: Prisma.SortOrder
-  weekEnd?: Prisma.SortOrder
   status?: Prisma.SortOrder
   preparerSignatureName?: Prisma.SortOrderInput | Prisma.SortOrder
   preparerSignatureImage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -329,6 +278,7 @@ export type MealTransportReportOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
   config?: Prisma.MealTransportReportConfigOrderByWithRelationInput
+  week?: Prisma.MealTransportReportWeekOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   entries?: Prisma.MealTransportReportEntryOrderByRelationAggregateInput
   _relevance?: Prisma.MealTransportReportOrderByRelevanceInput
@@ -336,16 +286,14 @@ export type MealTransportReportOrderByWithRelationInput = {
 
 export type MealTransportReportWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  userId_weekNumber?: Prisma.MealTransportReportUserIdWeekNumberCompoundUniqueInput
+  userId_weekId?: Prisma.MealTransportReportUserIdWeekIdCompoundUniqueInput
   AND?: Prisma.MealTransportReportWhereInput | Prisma.MealTransportReportWhereInput[]
   OR?: Prisma.MealTransportReportWhereInput[]
   NOT?: Prisma.MealTransportReportWhereInput | Prisma.MealTransportReportWhereInput[]
   tenantId?: Prisma.StringFilter<"MealTransportReport"> | string
   configId?: Prisma.StringFilter<"MealTransportReport"> | string
+  weekId?: Prisma.StringFilter<"MealTransportReport"> | string
   userId?: Prisma.StringFilter<"MealTransportReport"> | string
-  weekNumber?: Prisma.IntFilter<"MealTransportReport"> | number
-  weekStart?: Prisma.DateTimeFilter<"MealTransportReport"> | Date | string
-  weekEnd?: Prisma.DateTimeFilter<"MealTransportReport"> | Date | string
   status?: Prisma.EnumMealTransportReportStatusFilter<"MealTransportReport"> | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.StringNullableFilter<"MealTransportReport"> | string | null
   preparerSignatureImage?: Prisma.StringNullableFilter<"MealTransportReport"> | string | null
@@ -357,18 +305,17 @@ export type MealTransportReportWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"MealTransportReport"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   config?: Prisma.XOR<Prisma.MealTransportReportConfigScalarRelationFilter, Prisma.MealTransportReportConfigWhereInput>
+  week?: Prisma.XOR<Prisma.MealTransportReportWeekScalarRelationFilter, Prisma.MealTransportReportWeekWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   entries?: Prisma.MealTransportReportEntryListRelationFilter
-}, "id" | "userId_weekNumber">
+}, "id" | "userId_weekId">
 
 export type MealTransportReportOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   configId?: Prisma.SortOrder
+  weekId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  weekNumber?: Prisma.SortOrder
-  weekStart?: Prisma.SortOrder
-  weekEnd?: Prisma.SortOrder
   status?: Prisma.SortOrder
   preparerSignatureName?: Prisma.SortOrderInput | Prisma.SortOrder
   preparerSignatureImage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -379,10 +326,8 @@ export type MealTransportReportOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MealTransportReportCountOrderByAggregateInput
-  _avg?: Prisma.MealTransportReportAvgOrderByAggregateInput
   _max?: Prisma.MealTransportReportMaxOrderByAggregateInput
   _min?: Prisma.MealTransportReportMinOrderByAggregateInput
-  _sum?: Prisma.MealTransportReportSumOrderByAggregateInput
 }
 
 export type MealTransportReportScalarWhereWithAggregatesInput = {
@@ -392,10 +337,8 @@ export type MealTransportReportScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"MealTransportReport"> | string
   tenantId?: Prisma.StringWithAggregatesFilter<"MealTransportReport"> | string
   configId?: Prisma.StringWithAggregatesFilter<"MealTransportReport"> | string
+  weekId?: Prisma.StringWithAggregatesFilter<"MealTransportReport"> | string
   userId?: Prisma.StringWithAggregatesFilter<"MealTransportReport"> | string
-  weekNumber?: Prisma.IntWithAggregatesFilter<"MealTransportReport"> | number
-  weekStart?: Prisma.DateTimeWithAggregatesFilter<"MealTransportReport"> | Date | string
-  weekEnd?: Prisma.DateTimeWithAggregatesFilter<"MealTransportReport"> | Date | string
   status?: Prisma.EnumMealTransportReportStatusWithAggregatesFilter<"MealTransportReport"> | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.StringNullableWithAggregatesFilter<"MealTransportReport"> | string | null
   preparerSignatureImage?: Prisma.StringNullableWithAggregatesFilter<"MealTransportReport"> | string | null
@@ -409,9 +352,6 @@ export type MealTransportReportScalarWhereWithAggregatesInput = {
 
 export type MealTransportReportCreateInput = {
   id?: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -423,6 +363,7 @@ export type MealTransportReportCreateInput = {
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutMealTransportReportsInput
   config: Prisma.MealTransportReportConfigCreateNestedOneWithoutReportsInput
+  week: Prisma.MealTransportReportWeekCreateNestedOneWithoutReportsInput
   user: Prisma.UserCreateNestedOneWithoutMealTransportReportsPreparedInput
   entries?: Prisma.MealTransportReportEntryCreateNestedManyWithoutReportInput
 }
@@ -431,10 +372,8 @@ export type MealTransportReportUncheckedCreateInput = {
   id?: string
   tenantId: string
   configId: string
+  weekId: string
   userId: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -449,9 +388,6 @@ export type MealTransportReportUncheckedCreateInput = {
 
 export type MealTransportReportUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -463,6 +399,7 @@ export type MealTransportReportUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportReportsNestedInput
   config?: Prisma.MealTransportReportConfigUpdateOneRequiredWithoutReportsNestedInput
+  week?: Prisma.MealTransportReportWeekUpdateOneRequiredWithoutReportsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMealTransportReportsPreparedNestedInput
   entries?: Prisma.MealTransportReportEntryUpdateManyWithoutReportNestedInput
 }
@@ -471,10 +408,8 @@ export type MealTransportReportUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
+  weekId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -491,10 +426,8 @@ export type MealTransportReportCreateManyInput = {
   id?: string
   tenantId: string
   configId: string
+  weekId: string
   userId: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -508,9 +441,6 @@ export type MealTransportReportCreateManyInput = {
 
 export type MealTransportReportUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -526,10 +456,8 @@ export type MealTransportReportUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
+  weekId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -557,19 +485,17 @@ export type MealTransportReportOrderByRelevanceInput = {
   search: string
 }
 
-export type MealTransportReportUserIdWeekNumberCompoundUniqueInput = {
+export type MealTransportReportUserIdWeekIdCompoundUniqueInput = {
   userId: string
-  weekNumber: number
+  weekId: string
 }
 
 export type MealTransportReportCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   configId?: Prisma.SortOrder
+  weekId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  weekNumber?: Prisma.SortOrder
-  weekStart?: Prisma.SortOrder
-  weekEnd?: Prisma.SortOrder
   status?: Prisma.SortOrder
   preparerSignatureName?: Prisma.SortOrder
   preparerSignatureImage?: Prisma.SortOrder
@@ -581,18 +507,12 @@ export type MealTransportReportCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type MealTransportReportAvgOrderByAggregateInput = {
-  weekNumber?: Prisma.SortOrder
-}
-
 export type MealTransportReportMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   configId?: Prisma.SortOrder
+  weekId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  weekNumber?: Prisma.SortOrder
-  weekStart?: Prisma.SortOrder
-  weekEnd?: Prisma.SortOrder
   status?: Prisma.SortOrder
   preparerSignatureName?: Prisma.SortOrder
   preparerSignatureImage?: Prisma.SortOrder
@@ -608,10 +528,8 @@ export type MealTransportReportMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   configId?: Prisma.SortOrder
+  weekId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  weekNumber?: Prisma.SortOrder
-  weekStart?: Prisma.SortOrder
-  weekEnd?: Prisma.SortOrder
   status?: Prisma.SortOrder
   preparerSignatureName?: Prisma.SortOrder
   preparerSignatureImage?: Prisma.SortOrder
@@ -621,10 +539,6 @@ export type MealTransportReportMinOrderByAggregateInput = {
   approverSignedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type MealTransportReportSumOrderByAggregateInput = {
-  weekNumber?: Prisma.SortOrder
 }
 
 export type MealTransportReportScalarRelationFilter = {
@@ -758,6 +672,48 @@ export type MealTransportReportUncheckedUpdateManyWithoutConfigNestedInput = {
   deleteMany?: Prisma.MealTransportReportScalarWhereInput | Prisma.MealTransportReportScalarWhereInput[]
 }
 
+export type MealTransportReportCreateNestedManyWithoutWeekInput = {
+  create?: Prisma.XOR<Prisma.MealTransportReportCreateWithoutWeekInput, Prisma.MealTransportReportUncheckedCreateWithoutWeekInput> | Prisma.MealTransportReportCreateWithoutWeekInput[] | Prisma.MealTransportReportUncheckedCreateWithoutWeekInput[]
+  connectOrCreate?: Prisma.MealTransportReportCreateOrConnectWithoutWeekInput | Prisma.MealTransportReportCreateOrConnectWithoutWeekInput[]
+  createMany?: Prisma.MealTransportReportCreateManyWeekInputEnvelope
+  connect?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+}
+
+export type MealTransportReportUncheckedCreateNestedManyWithoutWeekInput = {
+  create?: Prisma.XOR<Prisma.MealTransportReportCreateWithoutWeekInput, Prisma.MealTransportReportUncheckedCreateWithoutWeekInput> | Prisma.MealTransportReportCreateWithoutWeekInput[] | Prisma.MealTransportReportUncheckedCreateWithoutWeekInput[]
+  connectOrCreate?: Prisma.MealTransportReportCreateOrConnectWithoutWeekInput | Prisma.MealTransportReportCreateOrConnectWithoutWeekInput[]
+  createMany?: Prisma.MealTransportReportCreateManyWeekInputEnvelope
+  connect?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+}
+
+export type MealTransportReportUpdateManyWithoutWeekNestedInput = {
+  create?: Prisma.XOR<Prisma.MealTransportReportCreateWithoutWeekInput, Prisma.MealTransportReportUncheckedCreateWithoutWeekInput> | Prisma.MealTransportReportCreateWithoutWeekInput[] | Prisma.MealTransportReportUncheckedCreateWithoutWeekInput[]
+  connectOrCreate?: Prisma.MealTransportReportCreateOrConnectWithoutWeekInput | Prisma.MealTransportReportCreateOrConnectWithoutWeekInput[]
+  upsert?: Prisma.MealTransportReportUpsertWithWhereUniqueWithoutWeekInput | Prisma.MealTransportReportUpsertWithWhereUniqueWithoutWeekInput[]
+  createMany?: Prisma.MealTransportReportCreateManyWeekInputEnvelope
+  set?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+  disconnect?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+  delete?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+  connect?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+  update?: Prisma.MealTransportReportUpdateWithWhereUniqueWithoutWeekInput | Prisma.MealTransportReportUpdateWithWhereUniqueWithoutWeekInput[]
+  updateMany?: Prisma.MealTransportReportUpdateManyWithWhereWithoutWeekInput | Prisma.MealTransportReportUpdateManyWithWhereWithoutWeekInput[]
+  deleteMany?: Prisma.MealTransportReportScalarWhereInput | Prisma.MealTransportReportScalarWhereInput[]
+}
+
+export type MealTransportReportUncheckedUpdateManyWithoutWeekNestedInput = {
+  create?: Prisma.XOR<Prisma.MealTransportReportCreateWithoutWeekInput, Prisma.MealTransportReportUncheckedCreateWithoutWeekInput> | Prisma.MealTransportReportCreateWithoutWeekInput[] | Prisma.MealTransportReportUncheckedCreateWithoutWeekInput[]
+  connectOrCreate?: Prisma.MealTransportReportCreateOrConnectWithoutWeekInput | Prisma.MealTransportReportCreateOrConnectWithoutWeekInput[]
+  upsert?: Prisma.MealTransportReportUpsertWithWhereUniqueWithoutWeekInput | Prisma.MealTransportReportUpsertWithWhereUniqueWithoutWeekInput[]
+  createMany?: Prisma.MealTransportReportCreateManyWeekInputEnvelope
+  set?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+  disconnect?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+  delete?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+  connect?: Prisma.MealTransportReportWhereUniqueInput | Prisma.MealTransportReportWhereUniqueInput[]
+  update?: Prisma.MealTransportReportUpdateWithWhereUniqueWithoutWeekInput | Prisma.MealTransportReportUpdateWithWhereUniqueWithoutWeekInput[]
+  updateMany?: Prisma.MealTransportReportUpdateManyWithWhereWithoutWeekInput | Prisma.MealTransportReportUpdateManyWithWhereWithoutWeekInput[]
+  deleteMany?: Prisma.MealTransportReportScalarWhereInput | Prisma.MealTransportReportScalarWhereInput[]
+}
+
 export type EnumMealTransportReportStatusFieldUpdateOperationsInput = {
   set?: $Enums.MealTransportReportStatus
 }
@@ -778,9 +734,6 @@ export type MealTransportReportUpdateOneRequiredWithoutEntriesNestedInput = {
 
 export type MealTransportReportCreateWithoutTenantInput = {
   id?: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -791,6 +744,7 @@ export type MealTransportReportCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   config: Prisma.MealTransportReportConfigCreateNestedOneWithoutReportsInput
+  week: Prisma.MealTransportReportWeekCreateNestedOneWithoutReportsInput
   user: Prisma.UserCreateNestedOneWithoutMealTransportReportsPreparedInput
   entries?: Prisma.MealTransportReportEntryCreateNestedManyWithoutReportInput
 }
@@ -798,10 +752,8 @@ export type MealTransportReportCreateWithoutTenantInput = {
 export type MealTransportReportUncheckedCreateWithoutTenantInput = {
   id?: string
   configId: string
+  weekId: string
   userId: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -847,10 +799,8 @@ export type MealTransportReportScalarWhereInput = {
   id?: Prisma.StringFilter<"MealTransportReport"> | string
   tenantId?: Prisma.StringFilter<"MealTransportReport"> | string
   configId?: Prisma.StringFilter<"MealTransportReport"> | string
+  weekId?: Prisma.StringFilter<"MealTransportReport"> | string
   userId?: Prisma.StringFilter<"MealTransportReport"> | string
-  weekNumber?: Prisma.IntFilter<"MealTransportReport"> | number
-  weekStart?: Prisma.DateTimeFilter<"MealTransportReport"> | Date | string
-  weekEnd?: Prisma.DateTimeFilter<"MealTransportReport"> | Date | string
   status?: Prisma.EnumMealTransportReportStatusFilter<"MealTransportReport"> | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.StringNullableFilter<"MealTransportReport"> | string | null
   preparerSignatureImage?: Prisma.StringNullableFilter<"MealTransportReport"> | string | null
@@ -864,9 +814,6 @@ export type MealTransportReportScalarWhereInput = {
 
 export type MealTransportReportCreateWithoutUserInput = {
   id?: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -878,6 +825,7 @@ export type MealTransportReportCreateWithoutUserInput = {
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutMealTransportReportsInput
   config: Prisma.MealTransportReportConfigCreateNestedOneWithoutReportsInput
+  week: Prisma.MealTransportReportWeekCreateNestedOneWithoutReportsInput
   entries?: Prisma.MealTransportReportEntryCreateNestedManyWithoutReportInput
 }
 
@@ -885,9 +833,7 @@ export type MealTransportReportUncheckedCreateWithoutUserInput = {
   id?: string
   tenantId: string
   configId: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
+  weekId: string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -928,9 +874,6 @@ export type MealTransportReportUpdateManyWithWhereWithoutUserInput = {
 
 export type MealTransportReportCreateWithoutConfigInput = {
   id?: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -941,6 +884,7 @@ export type MealTransportReportCreateWithoutConfigInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutMealTransportReportsInput
+  week: Prisma.MealTransportReportWeekCreateNestedOneWithoutReportsInput
   user: Prisma.UserCreateNestedOneWithoutMealTransportReportsPreparedInput
   entries?: Prisma.MealTransportReportEntryCreateNestedManyWithoutReportInput
 }
@@ -948,10 +892,8 @@ export type MealTransportReportCreateWithoutConfigInput = {
 export type MealTransportReportUncheckedCreateWithoutConfigInput = {
   id?: string
   tenantId: string
+  weekId: string
   userId: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -990,11 +932,8 @@ export type MealTransportReportUpdateManyWithWhereWithoutConfigInput = {
   data: Prisma.XOR<Prisma.MealTransportReportUpdateManyMutationInput, Prisma.MealTransportReportUncheckedUpdateManyWithoutConfigInput>
 }
 
-export type MealTransportReportCreateWithoutEntriesInput = {
+export type MealTransportReportCreateWithoutWeekInput = {
   id?: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -1007,16 +946,75 @@ export type MealTransportReportCreateWithoutEntriesInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutMealTransportReportsInput
   config: Prisma.MealTransportReportConfigCreateNestedOneWithoutReportsInput
   user: Prisma.UserCreateNestedOneWithoutMealTransportReportsPreparedInput
+  entries?: Prisma.MealTransportReportEntryCreateNestedManyWithoutReportInput
+}
+
+export type MealTransportReportUncheckedCreateWithoutWeekInput = {
+  id?: string
+  tenantId: string
+  configId: string
+  userId: string
+  status?: $Enums.MealTransportReportStatus
+  preparerSignatureName?: string | null
+  preparerSignatureImage?: string | null
+  preparerSignedAt?: Date | string | null
+  approverSignatureName?: string | null
+  approverSignatureImage?: string | null
+  approverSignedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  entries?: Prisma.MealTransportReportEntryUncheckedCreateNestedManyWithoutReportInput
+}
+
+export type MealTransportReportCreateOrConnectWithoutWeekInput = {
+  where: Prisma.MealTransportReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.MealTransportReportCreateWithoutWeekInput, Prisma.MealTransportReportUncheckedCreateWithoutWeekInput>
+}
+
+export type MealTransportReportCreateManyWeekInputEnvelope = {
+  data: Prisma.MealTransportReportCreateManyWeekInput | Prisma.MealTransportReportCreateManyWeekInput[]
+  skipDuplicates?: boolean
+}
+
+export type MealTransportReportUpsertWithWhereUniqueWithoutWeekInput = {
+  where: Prisma.MealTransportReportWhereUniqueInput
+  update: Prisma.XOR<Prisma.MealTransportReportUpdateWithoutWeekInput, Prisma.MealTransportReportUncheckedUpdateWithoutWeekInput>
+  create: Prisma.XOR<Prisma.MealTransportReportCreateWithoutWeekInput, Prisma.MealTransportReportUncheckedCreateWithoutWeekInput>
+}
+
+export type MealTransportReportUpdateWithWhereUniqueWithoutWeekInput = {
+  where: Prisma.MealTransportReportWhereUniqueInput
+  data: Prisma.XOR<Prisma.MealTransportReportUpdateWithoutWeekInput, Prisma.MealTransportReportUncheckedUpdateWithoutWeekInput>
+}
+
+export type MealTransportReportUpdateManyWithWhereWithoutWeekInput = {
+  where: Prisma.MealTransportReportScalarWhereInput
+  data: Prisma.XOR<Prisma.MealTransportReportUpdateManyMutationInput, Prisma.MealTransportReportUncheckedUpdateManyWithoutWeekInput>
+}
+
+export type MealTransportReportCreateWithoutEntriesInput = {
+  id?: string
+  status?: $Enums.MealTransportReportStatus
+  preparerSignatureName?: string | null
+  preparerSignatureImage?: string | null
+  preparerSignedAt?: Date | string | null
+  approverSignatureName?: string | null
+  approverSignatureImage?: string | null
+  approverSignedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutMealTransportReportsInput
+  config: Prisma.MealTransportReportConfigCreateNestedOneWithoutReportsInput
+  week: Prisma.MealTransportReportWeekCreateNestedOneWithoutReportsInput
+  user: Prisma.UserCreateNestedOneWithoutMealTransportReportsPreparedInput
 }
 
 export type MealTransportReportUncheckedCreateWithoutEntriesInput = {
   id?: string
   tenantId: string
   configId: string
+  weekId: string
   userId: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -1046,9 +1044,6 @@ export type MealTransportReportUpdateToOneWithWhereWithoutEntriesInput = {
 
 export type MealTransportReportUpdateWithoutEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1060,6 +1055,7 @@ export type MealTransportReportUpdateWithoutEntriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportReportsNestedInput
   config?: Prisma.MealTransportReportConfigUpdateOneRequiredWithoutReportsNestedInput
+  week?: Prisma.MealTransportReportWeekUpdateOneRequiredWithoutReportsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMealTransportReportsPreparedNestedInput
 }
 
@@ -1067,10 +1063,8 @@ export type MealTransportReportUncheckedUpdateWithoutEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
+  weekId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1085,10 +1079,8 @@ export type MealTransportReportUncheckedUpdateWithoutEntriesInput = {
 export type MealTransportReportCreateManyTenantInput = {
   id?: string
   configId: string
+  weekId: string
   userId: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -1102,9 +1094,6 @@ export type MealTransportReportCreateManyTenantInput = {
 
 export type MealTransportReportUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1115,6 +1104,7 @@ export type MealTransportReportUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   config?: Prisma.MealTransportReportConfigUpdateOneRequiredWithoutReportsNestedInput
+  week?: Prisma.MealTransportReportWeekUpdateOneRequiredWithoutReportsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMealTransportReportsPreparedNestedInput
   entries?: Prisma.MealTransportReportEntryUpdateManyWithoutReportNestedInput
 }
@@ -1122,10 +1112,8 @@ export type MealTransportReportUpdateWithoutTenantInput = {
 export type MealTransportReportUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
+  weekId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1141,10 +1129,8 @@ export type MealTransportReportUncheckedUpdateWithoutTenantInput = {
 export type MealTransportReportUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
+  weekId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1160,9 +1146,7 @@ export type MealTransportReportCreateManyUserInput = {
   id?: string
   tenantId: string
   configId: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
+  weekId: string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -1176,9 +1160,6 @@ export type MealTransportReportCreateManyUserInput = {
 
 export type MealTransportReportUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1190,6 +1171,7 @@ export type MealTransportReportUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportReportsNestedInput
   config?: Prisma.MealTransportReportConfigUpdateOneRequiredWithoutReportsNestedInput
+  week?: Prisma.MealTransportReportWeekUpdateOneRequiredWithoutReportsNestedInput
   entries?: Prisma.MealTransportReportEntryUpdateManyWithoutReportNestedInput
 }
 
@@ -1197,9 +1179,7 @@ export type MealTransportReportUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1216,9 +1196,7 @@ export type MealTransportReportUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   configId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1233,10 +1211,8 @@ export type MealTransportReportUncheckedUpdateManyWithoutUserInput = {
 export type MealTransportReportCreateManyConfigInput = {
   id?: string
   tenantId: string
+  weekId: string
   userId: string
-  weekNumber: number
-  weekStart: Date | string
-  weekEnd: Date | string
   status?: $Enums.MealTransportReportStatus
   preparerSignatureName?: string | null
   preparerSignatureImage?: string | null
@@ -1250,9 +1226,6 @@ export type MealTransportReportCreateManyConfigInput = {
 
 export type MealTransportReportUpdateWithoutConfigInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1263,6 +1236,7 @@ export type MealTransportReportUpdateWithoutConfigInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportReportsNestedInput
+  week?: Prisma.MealTransportReportWeekUpdateOneRequiredWithoutReportsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMealTransportReportsPreparedNestedInput
   entries?: Prisma.MealTransportReportEntryUpdateManyWithoutReportNestedInput
 }
@@ -1270,10 +1244,8 @@ export type MealTransportReportUpdateWithoutConfigInput = {
 export type MealTransportReportUncheckedUpdateWithoutConfigInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  weekId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1289,10 +1261,74 @@ export type MealTransportReportUncheckedUpdateWithoutConfigInput = {
 export type MealTransportReportUncheckedUpdateManyWithoutConfigInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  weekId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
+  preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preparerSignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approverSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approverSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approverSignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MealTransportReportCreateManyWeekInput = {
+  id?: string
+  tenantId: string
+  configId: string
+  userId: string
+  status?: $Enums.MealTransportReportStatus
+  preparerSignatureName?: string | null
+  preparerSignatureImage?: string | null
+  preparerSignedAt?: Date | string | null
+  approverSignatureName?: string | null
+  approverSignatureImage?: string | null
+  approverSignedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type MealTransportReportUpdateWithoutWeekInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
+  preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preparerSignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approverSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approverSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approverSignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportReportsNestedInput
+  config?: Prisma.MealTransportReportConfigUpdateOneRequiredWithoutReportsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutMealTransportReportsPreparedNestedInput
+  entries?: Prisma.MealTransportReportEntryUpdateManyWithoutReportNestedInput
+}
+
+export type MealTransportReportUncheckedUpdateWithoutWeekInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  configId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
+  preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preparerSignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approverSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approverSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approverSignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  entries?: Prisma.MealTransportReportEntryUncheckedUpdateManyWithoutReportNestedInput
+}
+
+export type MealTransportReportUncheckedUpdateManyWithoutWeekInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  configId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumMealTransportReportStatusFieldUpdateOperationsInput | $Enums.MealTransportReportStatus
   preparerSignatureName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preparerSignatureImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1339,10 +1375,8 @@ export type MealTransportReportSelect<ExtArgs extends runtime.Types.Extensions.I
   id?: boolean
   tenantId?: boolean
   configId?: boolean
+  weekId?: boolean
   userId?: boolean
-  weekNumber?: boolean
-  weekStart?: boolean
-  weekEnd?: boolean
   status?: boolean
   preparerSignatureName?: boolean
   preparerSignatureImage?: boolean
@@ -1354,6 +1388,7 @@ export type MealTransportReportSelect<ExtArgs extends runtime.Types.Extensions.I
   updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   config?: boolean | Prisma.MealTransportReportConfigDefaultArgs<ExtArgs>
+  week?: boolean | Prisma.MealTransportReportWeekDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   entries?: boolean | Prisma.MealTransportReport$entriesArgs<ExtArgs>
   _count?: boolean | Prisma.MealTransportReportCountOutputTypeDefaultArgs<ExtArgs>
@@ -1365,10 +1400,8 @@ export type MealTransportReportSelectScalar = {
   id?: boolean
   tenantId?: boolean
   configId?: boolean
+  weekId?: boolean
   userId?: boolean
-  weekNumber?: boolean
-  weekStart?: boolean
-  weekEnd?: boolean
   status?: boolean
   preparerSignatureName?: boolean
   preparerSignatureImage?: boolean
@@ -1380,10 +1413,11 @@ export type MealTransportReportSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MealTransportReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "configId" | "userId" | "weekNumber" | "weekStart" | "weekEnd" | "status" | "preparerSignatureName" | "preparerSignatureImage" | "preparerSignedAt" | "approverSignatureName" | "approverSignatureImage" | "approverSignedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["mealTransportReport"]>
+export type MealTransportReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "configId" | "weekId" | "userId" | "status" | "preparerSignatureName" | "preparerSignatureImage" | "preparerSignedAt" | "approverSignatureName" | "approverSignatureImage" | "approverSignedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["mealTransportReport"]>
 export type MealTransportReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   config?: boolean | Prisma.MealTransportReportConfigDefaultArgs<ExtArgs>
+  week?: boolean | Prisma.MealTransportReportWeekDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   entries?: boolean | Prisma.MealTransportReport$entriesArgs<ExtArgs>
   _count?: boolean | Prisma.MealTransportReportCountOutputTypeDefaultArgs<ExtArgs>
@@ -1394,6 +1428,7 @@ export type $MealTransportReportPayload<ExtArgs extends runtime.Types.Extensions
   objects: {
     tenant: Prisma.$TenantPayload<ExtArgs>
     config: Prisma.$MealTransportReportConfigPayload<ExtArgs>
+    week: Prisma.$MealTransportReportWeekPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
     entries: Prisma.$MealTransportReportEntryPayload<ExtArgs>[]
   }
@@ -1401,10 +1436,8 @@ export type $MealTransportReportPayload<ExtArgs extends runtime.Types.Extensions
     id: string
     tenantId: string
     configId: string
+    weekId: string
     userId: string
-    weekNumber: number
-    weekStart: Date
-    weekEnd: Date
     status: $Enums.MealTransportReportStatus
     preparerSignatureName: string | null
     preparerSignatureImage: string | null
@@ -1756,6 +1789,7 @@ export interface Prisma__MealTransportReportClient<T, Null = never, ExtArgs exte
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   config<T extends Prisma.MealTransportReportConfigDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MealTransportReportConfigDefaultArgs<ExtArgs>>): Prisma.Prisma__MealTransportReportConfigClient<runtime.Types.Result.GetResult<Prisma.$MealTransportReportConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  week<T extends Prisma.MealTransportReportWeekDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MealTransportReportWeekDefaultArgs<ExtArgs>>): Prisma.Prisma__MealTransportReportWeekClient<runtime.Types.Result.GetResult<Prisma.$MealTransportReportWeekPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   entries<T extends Prisma.MealTransportReport$entriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MealTransportReport$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealTransportReportEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1790,10 +1824,8 @@ export interface MealTransportReportFieldRefs {
   readonly id: Prisma.FieldRef<"MealTransportReport", 'String'>
   readonly tenantId: Prisma.FieldRef<"MealTransportReport", 'String'>
   readonly configId: Prisma.FieldRef<"MealTransportReport", 'String'>
+  readonly weekId: Prisma.FieldRef<"MealTransportReport", 'String'>
   readonly userId: Prisma.FieldRef<"MealTransportReport", 'String'>
-  readonly weekNumber: Prisma.FieldRef<"MealTransportReport", 'Int'>
-  readonly weekStart: Prisma.FieldRef<"MealTransportReport", 'DateTime'>
-  readonly weekEnd: Prisma.FieldRef<"MealTransportReport", 'DateTime'>
   readonly status: Prisma.FieldRef<"MealTransportReport", 'MealTransportReportStatus'>
   readonly preparerSignatureName: Prisma.FieldRef<"MealTransportReport", 'String'>
   readonly preparerSignatureImage: Prisma.FieldRef<"MealTransportReport", 'String'>

@@ -98,6 +98,11 @@ export type AvailabilityCheck = Prisma.AvailabilityCheckModel
  */
 export type MealTransportReportConfig = Prisma.MealTransportReportConfigModel
 /**
+ * Model MealTransportReportWeek
+ * 
+ */
+export type MealTransportReportWeek = Prisma.MealTransportReportWeekModel
+/**
  * Model MealTransportReport
  * 
  */

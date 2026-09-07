@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { ZipArchive } from "archiver";
 import { requireTenantId } from "../middleware/auth.js";
 import { ApiError } from "../middleware/errorHandler.js";
 import { sendResponse } from "../utils/apiResponse.js";
@@ -6,6 +7,8 @@ import { prisma } from "../utils/prisma.js";
 import { recordActivity } from "../utils/activityLog.js";
 import {
   upsertMealTransportConfigSchema,
+  createMealTransportReportWeekSchema,
+  updateMealTransportReportWeekSchema,
   createMealTransportReportSchema,
   upsertMealTransportEntrySchema,
   signMealTransportReportSchema,
@@ -15,23 +18,6 @@ import { buildMealTransportReportWorkbook } from "../utils/excel.js";
 
 function idParam(req: Request): string {
   return req.params.id as string;
-}
-
-/** Monday-to-Sunday bounds for the calendar week containing `d`. */
-/** Monday-anchored period bounds spanning `periodDays` days — 7 for a full
- * calendar week, 5 for a Mon-Fri work week, or whatever a config sets.
- * Never hardcoded to 7; every caller passes the config's own value. */
-function getWeekBounds(d: Date, periodDays: number): { start: Date; end: Date } {
-  const date = new Date(d);
-  date.setHours(0, 0, 0, 0);
-  const day = date.getDay(); // 0 = Sunday
-  const diffToMonday = day === 0 ? -6 : 1 - day;
-  const start = new Date(date);
-  start.setDate(date.getDate() + diffToMonday);
-  const end = new Date(start);
-  end.setDate(start.getDate() + (periodDays - 1));
-  end.setHours(23, 59, 59, 999);
-  return { start, end };
 }
 
 function computeTotals(entries: { mealUsd: number; accommodationUsd: number; transportUsd: number }[]) {
@@ -49,11 +35,12 @@ const reportInclude = {
       program: { select: { id: true, name: true } },
     },
   },
+  week: true,
   user: { select: { id: true, name: true, roleId: true } },
   entries: { orderBy: { date: "asc" as const } },
 };
 
-/** Loads a report and checks the caller may see it — its own preparer, its
+/** Loads a report and checks the caller may see it: its own preparer, its
  * config's approver, or someone with tenant-wide manage access. */
 async function loadReportForViewer(req: Request, reportId: string) {
   const tenantId = requireTenantId(req);
@@ -75,7 +62,7 @@ async function hasManagePermission(req: Request): Promise<boolean> {
   return hasAction(parsePermissions(role?.permissions), "meal-transport-reports:manage");
 }
 
-/** A lighter-weight permission than "manage" — lets someone make their own
+/** A lighter-weight permission than "manage": lets someone make their own
  * reports (picking a project, same as a manager can) without granting
  * them config/admin access over everyone else's reports. */
 async function hasCreatePermission(req: Request): Promise<boolean> {
@@ -87,7 +74,7 @@ async function hasCreatePermission(req: Request): Promise<boolean> {
   return hasAction(perms, "meal-transport-reports:create") || hasAction(perms, "meal-transport-reports:manage");
 }
 
-// --- Config -------------------------------------------------------------
+// --- Config -----------------------------------------------------------
 
 export async function listMealTransportConfigs(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
@@ -127,14 +114,12 @@ export async function upsertMealTransportConfig(req: Request, res: Response): Pr
       programId: data.programId,
       title: data.title ?? "",
       subtitle: data.subtitle ?? "Weekly Meal & Transport Expense Report Form",
-      periodDays: data.periodDays ?? 7,
     },
     update: {
       approverUserId: data.approverUserId,
       programId: data.programId,
       ...(data.title !== undefined ? { title: data.title } : {}),
       ...(data.subtitle !== undefined ? { subtitle: data.subtitle } : {}),
-      ...(data.periodDays !== undefined ? { periodDays: data.periodDays } : {}),
     },
     include: {
       submitterRole: { select: { id: true, name: true } },
@@ -173,68 +158,266 @@ export async function getMyMealTransportConfig(req: Request, res: Response): Pro
   }
   const config = await prisma.mealTransportReportConfig.findFirst({
     where: { tenantId, submitterRoleId: req.user!.roleId },
-    include: { submitterRole: { select: { id: true, name: true } } },
+    include: { submitterRole: { select: { id: true, name: true } }, program: { select: { id: true, name: true } } },
   });
   sendResponse(res, 200, "Configuration retrieved successfully", config);
 }
 
-// --- Reports --------------------------------------------------------------
+// --- Weeks (the reporting schedule) ------------------------------------
 
-/** "Make a report of today" — finds this week's report for the caller if
- * one already exists (so reopening it mid-week never creates a duplicate),
- * otherwise creates it against the caller's role's config. */
-export async function getOrCreateCurrentWeekReport(req: Request, res: Response): Promise<void> {
+/** Every week scheduled for a program, enabled or not, for whoever manages
+ * this to review, edit, and toggle. */
+export async function listWeeksForProgram(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
+  const isManager = await hasManagePermission(req);
+  if (!isManager && !(await hasCreatePermission(req))) {
+    throw new ApiError(403, "You don't have permission to perform this action (meal-transport-reports:manage)");
+  }
+  const programId = typeof req.query.programId === "string" ? req.query.programId : undefined;
+  if (!programId) throw new ApiError(400, "programId query parameter is required");
+
+  const weeks = await prisma.mealTransportReportWeek.findMany({
+    where: { tenantId, programId },
+    orderBy: { weekStart: "asc" },
+  });
+  sendResponse(res, 200, "Weeks retrieved successfully", weeks);
+}
+
+/** Creates a new scheduled reporting period, disabled by default until
+ * whoever manages this switches it on. */
+export async function createMealTransportReportWeek(req: Request, res: Response): Promise<void> {
+  const data = createMealTransportReportWeekSchema.parse(req.body);
+  const tenantId = requireTenantId(req);
+
+  const program = await prisma.program.findFirst({ where: { id: data.programId, tenantId } });
+  if (!program) throw new ApiError(404, "Program not found");
+
+  const week = await prisma.mealTransportReportWeek.create({
+    data: { tenantId, programId: data.programId, label: data.label, weekStart: data.weekStart, weekEnd: data.weekEnd },
+  });
+
+  await recordActivity({
+    tenantId,
+    userId: req.user!.sub,
+    action: "scheduled a meal & transport report week for",
+    entityType: "MealTransportReportWeek",
+    entityId: week.id,
+    metadata: { program: program.name, label: data.label },
+  });
+
+  sendResponse(res, 201, "Week scheduled successfully", week);
+}
+
+/** Edits a scheduled week, most commonly toggling it enabled or disabled.
+ * Enabling a week makes it visible to every eligible submitter on that
+ * program; disabling hides it from anyone who hasn't already started a
+ * report against it. */
+export async function updateMealTransportReportWeek(req: Request, res: Response): Promise<void> {
+  const data = updateMealTransportReportWeekSchema.parse(req.body);
+  const tenantId = requireTenantId(req);
+  const existing = await prisma.mealTransportReportWeek.findFirst({ where: { id: idParam(req), tenantId } });
+  if (!existing) throw new ApiError(404, "Week not found");
+
+  const week = await prisma.mealTransportReportWeek.update({ where: { id: existing.id }, data });
+
+  if (data.enabled !== undefined && data.enabled !== existing.enabled) {
+    await recordActivity({
+      tenantId,
+      userId: req.user!.sub,
+      action: data.enabled ? "enabled meal & transport report week" : "disabled meal & transport report week",
+      entityType: "MealTransportReportWeek",
+      entityId: week.id,
+      metadata: { label: week.label },
+    });
+  }
+
+  sendResponse(res, 200, "Week updated successfully", week);
+}
+
+export async function deleteMealTransportReportWeek(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const existing = await prisma.mealTransportReportWeek.findFirst({ where: { id: idParam(req), tenantId } });
+  if (!existing) throw new ApiError(404, "Week not found");
+  await prisma.mealTransportReportWeek.delete({ where: { id: existing.id } });
+  sendResponse(res, 200, "Week removed successfully", null);
+}
+
+/** The weeks an eligible submitter can actually see: enabled weeks on
+ * their own config's program, each flagged with whether they already
+ * have a report started against it. */
+export async function listEligibleWeeksForMe(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  if (!req.user!.roleId) {
+    sendResponse(res, 200, "Eligible weeks retrieved successfully", []);
+    return;
+  }
+  const config = await prisma.mealTransportReportConfig.findFirst({ where: { tenantId, submitterRoleId: req.user!.roleId } });
+  if (!config) {
+    sendResponse(res, 200, "Eligible weeks retrieved successfully", []);
+    return;
+  }
+
+  const weeks = await prisma.mealTransportReportWeek.findMany({
+    where: { tenantId, programId: config.programId, enabled: true },
+    orderBy: { weekStart: "desc" },
+  });
+  const myReports = await prisma.mealTransportReport.findMany({
+    where: { userId: req.user!.sub, weekId: { in: weeks.map((w) => w.id) } },
+    select: { id: true, weekId: true, status: true },
+  });
+  const reportByWeek = new Map(myReports.map((r) => [r.weekId, r]));
+
+  sendResponse(
+    res,
+    200,
+    "Eligible weeks retrieved successfully",
+    weeks.map((w) => ({ ...w, myReport: reportByWeek.get(w.id) ?? null }))
+  );
+}
+
+/** For whoever manages this: every configured submitter role on a week's
+ * program, how many people hold that role, and how many have already made
+ * their report for this specific week. */
+export async function getWeekRoleSummary(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const week = await prisma.mealTransportReportWeek.findFirst({ where: { id: idParam(req), tenantId } });
+  if (!week) throw new ApiError(404, "Week not found");
+
+  const configs = await prisma.mealTransportReportConfig.findMany({
+    where: { tenantId, programId: week.programId },
+    include: { submitterRole: { select: { id: true, name: true } } },
+  });
+
+  const roleSummaries = await Promise.all(
+    configs.map(async (config) => {
+      const [totalUsers, reports] = await Promise.all([
+        prisma.user.count({ where: { tenantId, roleId: config.submitterRoleId } }),
+        prisma.mealTransportReport.findMany({
+          where: { weekId: week.id, configId: config.id },
+          select: { status: true },
+        }),
+      ]);
+      return {
+        configId: config.id,
+        roleId: config.submitterRoleId,
+        roleName: config.submitterRole.name,
+        totalUsers,
+        madeCount: reports.length,
+        notMadeCount: Math.max(0, totalUsers - reports.length),
+        draftCount: reports.filter((r) => r.status === "DRAFT").length,
+        pendingCount: reports.filter((r) => r.status === "PENDING_APPROVAL").length,
+        approvedCount: reports.filter((r) => r.status === "APPROVED").length,
+      };
+    })
+  );
+
+  sendResponse(res, 200, "Week summary retrieved successfully", { week, roles: roleSummaries });
+}
+
+/** Every report made for a week under one role, so whoever manages this
+ * can drill from the role card into the actual people. */
+export async function listReportsForWeekAndRole(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const weekId = idParam(req);
+  const roleId = typeof req.query.roleId === "string" ? req.query.roleId : undefined;
+  if (!roleId) throw new ApiError(400, "roleId query parameter is required");
+
+  const reports = await prisma.mealTransportReport.findMany({
+    where: { tenantId, weekId, config: { submitterRoleId: roleId } },
+    include: reportInclude,
+    orderBy: { user: { name: "asc" } },
+  });
+  sendResponse(res, 200, "Reports retrieved successfully", reports.map((r) => ({ ...r, ...computeTotals(r.entries) })));
+}
+
+/** A zipped bundle of every report made for a week under one role, each
+ * exported as PDF or Excel. */
+export async function exportWeekRoleZip(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const weekId = idParam(req);
+  const roleId = typeof req.query.roleId === "string" ? req.query.roleId : undefined;
+  const format = typeof req.query.format === "string" ? req.query.format.toLowerCase() : "pdf";
+  if (!roleId) throw new ApiError(400, "roleId query parameter is required");
+  if (format !== "pdf" && format !== "xlsx") throw new ApiError(400, "format must be 'pdf' or 'xlsx'");
+
+  const week = await prisma.mealTransportReportWeek.findFirst({ where: { id: weekId, tenantId } });
+  if (!week) throw new ApiError(404, "Week not found");
+
+  const reports = await prisma.mealTransportReport.findMany({
+    where: { tenantId, weekId, config: { submitterRoleId: roleId } },
+    include: reportInclude,
+    orderBy: { user: { name: "asc" } },
+  });
+  if (reports.length === 0) throw new ApiError(404, "No reports have been made for this role yet");
+
+  const roleName = reports[0]!.config.submitterRole.name;
+  res.setHeader("Content-Type", "application/zip");
+  res.setHeader("Content-Disposition", `attachment; filename="${week.label}-${roleName}-reports.zip"`.replace(/\s+/g, "-"));
+
+  const archive = new ZipArchive({ zlib: { level: 9 } });
+  archive.on("error", (err: Error) => {
+    throw err;
+  });
+  archive.pipe(res);
+
+  for (const report of reports) {
+    const totals = computeTotals(report.entries);
+    const safeName = (report.user.name ?? "unknown").replace(/[^a-z0-9]+/gi, "-");
+    const buffer =
+      format === "xlsx" ? await buildMealTransportReportWorkbook(report, totals) : await buildMealTransportReportPdf(report, totals);
+    archive.append(buffer, { name: `${safeName}.${format}` });
+  }
+
+  await archive.finalize();
+}
+
+// --- Reports -------------------------------------------------------------
+
+/** Opens the caller's own report for a specific enabled week, creating it
+ * on first visit. Idempotent: reopening it just returns the same report. */
+export async function getOrCreateReportForWeek(req: Request, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const weekId = req.params.weekId as string;
   const data = createMealTransportReportSchema.parse(req.body ?? {});
   const isManager = await hasManagePermission(req);
   const canCreate = isManager || (await hasCreatePermission(req));
 
-  // Someone whose own role is configured as a submitter always uses that
-  // config, same as before. Someone with manage OR the dedicated create
-  // permission — who files expenses too, even if their own role was never
-  // set up as a submitter — can pick which project to file under; not
-  // given one, they fall back to their own role's config if it exists,
-  // else the first config in the tenant, so there's always a project to
-  // attach the report to as long as at least one has been configured.
+  const week = await prisma.mealTransportReportWeek.findFirst({ where: { id: weekId, tenantId } });
+  if (!week) throw new ApiError(404, "Week not found");
+  if (!week.enabled && !isManager) throw new ApiError(403, "This week isn't open for reports yet");
+
+  // Someone whose own role is configured as a submitter on this week's
+  // program always uses that config. Someone with manage or the dedicated
+  // create permission, who files expenses too even if their own role was
+  // never set up as a submitter, can pick which config to file under with
+  // an explicit configId, or falls back to whichever config exists for
+  // this week's program.
   let config = req.user!.roleId
-    ? await prisma.mealTransportReportConfig.findFirst({ where: { tenantId, submitterRoleId: req.user!.roleId } })
+    ? await prisma.mealTransportReportConfig.findFirst({ where: { tenantId, submitterRoleId: req.user!.roleId, programId: week.programId } })
     : null;
 
   if (data.configId && canCreate) {
-    const requested = await prisma.mealTransportReportConfig.findFirst({ where: { id: data.configId, tenantId } });
-    if (!requested) throw new ApiError(404, "Configuration not found");
+    const requested = await prisma.mealTransportReportConfig.findFirst({ where: { id: data.configId, tenantId, programId: week.programId } });
+    if (!requested) throw new ApiError(404, "Configuration not found for this week's program");
     config = requested;
   } else if (!config && canCreate) {
-    config = await prisma.mealTransportReportConfig.findFirst({ where: { tenantId }, orderBy: { createdAt: "asc" } });
+    config = await prisma.mealTransportReportConfig.findFirst({ where: { tenantId, programId: week.programId }, orderBy: { createdAt: "asc" } });
   }
 
-  if (!config) throw new ApiError(403, "There's no meal & transport report configured for you yet");
+  if (!config) throw new ApiError(403, "There's no meal & transport report configured for you on this program");
 
-  // The person responsible for managing this (manage/create permission)
-  // picks the From/To dates themselves rather than trusting a silently
-  // auto-computed range; a regular role-based submitter always gets the
-  // auto-computed current period and can't override it.
-  const { start, end } =
-    canCreate && data.weekStart && data.weekEnd
-      ? { start: data.weekStart, end: data.weekEnd }
-      : getWeekBounds(new Date(), config.periodDays);
-
-  const existing = await prisma.mealTransportReport.findFirst({
-    where: { userId: req.user!.sub, weekStart: start },
-    include: reportInclude,
-  });
+  const existing = await prisma.mealTransportReport.findFirst({ where: { userId: req.user!.sub, weekId }, include: reportInclude });
   if (existing) {
-    sendResponse(res, 200, "This week's report", { ...existing, ...computeTotals(existing.entries) });
+    sendResponse(res, 200, "Report for this week", { ...existing, ...computeTotals(existing.entries) });
     return;
   }
 
-  const weekNumber = (await prisma.mealTransportReport.count({ where: { userId: req.user!.sub } })) + 1;
   const report = await prisma.mealTransportReport.create({
-    data: { tenantId, configId: config.id, userId: req.user!.sub, weekNumber, weekStart: start, weekEnd: end },
+    data: { tenantId, configId: config.id, weekId, userId: req.user!.sub },
     include: reportInclude,
   });
 
-  sendResponse(res, 201, "This week's report created", { ...report, ...computeTotals(report.entries) });
+  sendResponse(res, 201, "Report created for this week", { ...report, ...computeTotals(report.entries) });
 }
 
 export async function listMyMealTransportReports(req: Request, res: Response): Promise<void> {
@@ -242,28 +425,30 @@ export async function listMyMealTransportReports(req: Request, res: Response): P
   const reports = await prisma.mealTransportReport.findMany({
     where: { tenantId, userId: req.user!.sub },
     include: reportInclude,
-    orderBy: { weekNumber: "desc" },
+    orderBy: { week: { weekStart: "desc" } },
   });
   sendResponse(res, 200, "Your reports retrieved successfully", reports.map((r) => ({ ...r, ...computeTotals(r.entries) })));
 }
 
-/** Admin/approver view — reports for a given submitter role, or everything
- * awaiting *this* caller's own signature as approver. */
+/** Admin/approver view: reports for a given submitter role and/or week, or
+ * everything awaiting *this* caller's own signature as approver. */
 export async function listMealTransportReports(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
   const roleId = typeof req.query.roleId === "string" ? req.query.roleId : undefined;
+  const weekId = typeof req.query.weekId === "string" ? req.query.weekId : undefined;
   const isManager = await hasManagePermission(req);
 
   const reports = await prisma.mealTransportReport.findMany({
     where: {
       tenantId,
+      ...(weekId ? { weekId } : {}),
       config: {
         ...(roleId ? { submitterRoleId: roleId } : {}),
         ...(isManager ? {} : { approverUserId: req.user!.sub }),
       },
     },
     include: reportInclude,
-    orderBy: [{ userId: "asc" }, { weekNumber: "desc" }],
+    orderBy: [{ user: { name: "asc" } }, { week: { weekStart: "desc" } }],
   });
   sendResponse(res, 200, "Reports retrieved successfully", reports.map((r) => ({ ...r, ...computeTotals(r.entries) })));
 }
@@ -273,17 +458,18 @@ export async function getMealTransportReport(req: Request, res: Response): Promi
   sendResponse(res, 200, "Report retrieved successfully", { ...report, ...computeTotals(report.entries) });
 }
 
-/** Modal-driven daily entry — create or update one day's row. Editing after
- * the preparer has already signed rolls the report back to DRAFT and clears
- * that signature, since a signed submission whose numbers just changed
- * needs signing again rather than silently drifting from what was signed. */
+/** Modal-driven daily entry: create or update one day's row. Editing after
+ * the preparer has already signed rolls the report back to DRAFT and
+ * clears that signature, since a signed submission whose numbers just
+ * changed needs signing again rather than silently drifting from what was
+ * signed. */
 export async function upsertMealTransportEntry(req: Request, res: Response): Promise<void> {
   const data = upsertMealTransportEntrySchema.parse(req.body);
   const { report, isPreparer } = await loadReportForViewer(req, idParam(req));
   if (!isPreparer) throw new ApiError(403, "Only the report's preparer can add entries");
   if (report.status === "APPROVED") throw new ApiError(409, "This report is already approved and can't be edited");
 
-  if (data.date < report.weekStart || data.date > report.weekEnd) {
+  if (data.date < report.week.weekStart || data.date > report.week.weekEnd) {
     throw new ApiError(400, "That date falls outside this report's week");
   }
 
@@ -315,8 +501,10 @@ export async function deleteMealTransportEntry(req: Request, res: Response): Pro
   sendResponse(res, 200, "Entry removed successfully", { ...updated, ...computeTotals(updated.entries) });
 }
 
-/** The preparer's digital signature — a typed, confirmed name placed on the
- * report, moving it to PENDING_APPROVAL for the configured approver. */
+/** The preparer's signature: either a real hand-drawn image from the
+ * canvas signature pad, or, when they chose "Name" instead, just the
+ * typed name, rendered in a signature-style font. Either way it moves the
+ * report to PENDING_APPROVAL for the configured approver. */
 export async function signAsPreparer(req: Request, res: Response): Promise<void> {
   const data = signMealTransportReportSchema.parse(req.body);
   const { report, isPreparer } = await loadReportForViewer(req, idParam(req));
@@ -327,7 +515,7 @@ export async function signAsPreparer(req: Request, res: Response): Promise<void>
     where: { id: report.id },
     data: {
       preparerSignatureName: data.signatureName,
-      preparerSignatureImage: data.signatureImage,
+      preparerSignatureImage: data.signatureImage ?? null,
       preparerSignedAt: new Date(),
       status: "PENDING_APPROVAL",
     },
@@ -340,13 +528,14 @@ export async function signAsPreparer(req: Request, res: Response): Promise<void>
     action: "signed and submitted meal & transport report for",
     entityType: "MealTransportReport",
     entityId: report.id,
-    metadata: { week: report.weekNumber },
+    metadata: { week: report.week.label },
   });
 
   sendResponse(res, 200, "Report signed and submitted for approval", { ...updated, ...computeTotals(updated.entries) });
 }
 
-/** The configured approver's own digital signature — completes the report. */
+/** The configured approver's own signature: same choice of a drawn image
+ * or a typed name in signature style. Completes the report. */
 export async function signAsApprover(req: Request, res: Response): Promise<void> {
   const data = signMealTransportReportSchema.parse(req.body);
   const { report, isApprover } = await loadReportForViewer(req, idParam(req));
@@ -357,7 +546,7 @@ export async function signAsApprover(req: Request, res: Response): Promise<void>
     where: { id: report.id },
     data: {
       approverSignatureName: data.signatureName,
-      approverSignatureImage: data.signatureImage,
+      approverSignatureImage: data.signatureImage ?? null,
       approverSignedAt: new Date(),
       status: "APPROVED",
     },
@@ -370,7 +559,7 @@ export async function signAsApprover(req: Request, res: Response): Promise<void>
     action: "approved meal & transport report for",
     entityType: "MealTransportReport",
     entityId: report.id,
-    metadata: { week: report.weekNumber, preparer: updated.user.name },
+    metadata: { week: report.week.label, preparer: updated.user.name },
   });
 
   sendResponse(res, 200, "Report approved", { ...updated, ...computeTotals(updated.entries) });
@@ -381,7 +570,7 @@ export async function exportMealTransportReport(req: Request, res: Response): Pr
   const totals = computeTotals(report.entries);
   const format = typeof req.query.format === "string" ? req.query.format.toLowerCase() : "pdf";
 
-  const weekLabel = `week-${report.weekNumber}`;
+  const weekLabel = report.week.label.replace(/\s+/g, "-");
   if (format === "xlsx") {
     const buffer = await buildMealTransportReportWorkbook(report, totals);
     res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

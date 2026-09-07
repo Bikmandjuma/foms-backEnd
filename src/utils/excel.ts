@@ -280,9 +280,7 @@ export async function buildAssignmentReportWorkbook(rows: AssignmentReportRow[])
 }
 
 interface MealTransportReportForWorkbook {
-  weekNumber: number;
-  weekStart: Date;
-  weekEnd: Date;
+  week: { label: string; weekStart: Date; weekEnd: Date };
   preparerSignatureName: string | null;
   preparerSignatureImage: string | null;
   preparerSignedAt: Date | null;
@@ -308,7 +306,7 @@ export async function buildMealTransportReportWorkbook(
   totals: { totalMeal: number; totalAccommodation: number; totalTransport: number; grandTotal: number }
 ): Promise<Buffer> {
   const workbook = new ExcelJS.Workbook();
-  const sheet = workbook.addWorksheet(`Week ${report.weekNumber}`);
+  const sheet = workbook.addWorksheet(report.week.label.slice(0, 31));
   sheet.columns = [{ width: 22 }, { width: 18 }, { width: 22 }, { width: 18 }, { width: 16 }];
 
   const borderSide = { style: "thin" as const, color: { argb: "FF000000" } };
@@ -331,7 +329,7 @@ export async function buildMealTransportReportWorkbook(
   const headerRows: [string, string][] = [
     ["Project:", report.config.program.name],
     [`Name of ${report.config.submitterRole.name}:`, report.user.name ?? "—"],
-    ["Week:", `From ${report.weekStart.toLocaleDateString()}  To ${report.weekEnd.toLocaleDateString()}`],
+    ["Week:", `From ${report.week.weekStart.toLocaleDateString()}  To ${report.week.weekEnd.toLocaleDateString()}`],
   ];
   for (const [key, value] of headerRows) {
     sheet.getCell(r, 1).value = key;
@@ -355,9 +353,9 @@ export async function buildMealTransportReportWorkbook(
   const dayMap = new Map(report.entries.map((e) => [e.date.toISOString().slice(0, 10), e]));
   // Not automatically a 7-day week — spans exactly however many days this
   // report's own weekStart→weekEnd covers.
-  const periodDays = Math.round((report.weekEnd.getTime() - report.weekStart.getTime()) / 86400000) + 1;
+  const periodDays = Math.round((report.week.weekEnd.getTime() - report.week.weekStart.getTime()) / 86400000) + 1;
   for (let i = 0; i < periodDays; i++) {
-    const d = new Date(report.weekStart);
+    const d = new Date(report.week.weekStart);
     d.setDate(d.getDate() + i);
     const entry = dayMap.get(d.toISOString().slice(0, 10));
     const rowTotal = entry ? entry.mealUsd + entry.accommodationUsd + entry.transportUsd : 0;

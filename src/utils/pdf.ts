@@ -3,9 +3,7 @@ import type { AssignmentReportRow } from "./excel.js";
 import type { FieldTeamReportRow } from "./fieldTeamReport.js";
 
 interface MealTransportReportForPdf {
-  weekNumber: number;
-  weekStart: Date;
-  weekEnd: Date;
+  week: { label: string; weekStart: Date; weekEnd: Date };
   status: string;
   preparerSignatureName: string | null;
   preparerSignatureImage: string | null;
@@ -62,7 +60,7 @@ export function buildMealTransportReportPdf(
     keyValueRow(`Name of ${report.config.submitterRole.name}:`, report.user.name ?? "—", y + 20);
     keyValueRow(
       "Week:",
-      `From ${report.weekStart.toLocaleDateString()}   To ${report.weekEnd.toLocaleDateString()}`,
+      `From ${report.week.weekStart.toLocaleDateString()}   To ${report.week.weekEnd.toLocaleDateString()}`,
       y + 40
     );
     doc.y = y + 66;
@@ -90,9 +88,9 @@ export function buildMealTransportReportPdf(
     const dayMap = new Map(report.entries.map((e) => [e.date.toISOString().slice(0, 10), e]));
     // Not automatically a 7-day week — spans exactly however many days this
     // report's own weekStart→weekEnd covers (5 for a Mon-Fri config, etc).
-    const periodDays = Math.round((report.weekEnd.getTime() - report.weekStart.getTime()) / 86400000) + 1;
+    const periodDays = Math.round((report.week.weekEnd.getTime() - report.week.weekStart.getTime()) / 86400000) + 1;
     for (let i = 0; i < periodDays; i++) {
-      const d = new Date(report.weekStart);
+      const d = new Date(report.week.weekStart);
       d.setDate(d.getDate() + i);
       const entry = dayMap.get(d.toISOString().slice(0, 10));
       const rowY = y + 20 * (i + 1);

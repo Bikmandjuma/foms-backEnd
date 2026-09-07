@@ -67,6 +67,7 @@ export const ModelName = {
   ProgramTeamVehicle: 'ProgramTeamVehicle',
   AvailabilityCheck: 'AvailabilityCheck',
   MealTransportReportConfig: 'MealTransportReportConfig',
+  MealTransportReportWeek: 'MealTransportReportWeek',
   MealTransportReport: 'MealTransportReport',
   MealTransportReportEntry: 'MealTransportReportEntry',
   FieldExpense: 'FieldExpense',
@@ -320,7 +321,6 @@ export const MealTransportReportConfigScalarFieldEnum = {
   programId: 'programId',
   title: 'title',
   subtitle: 'subtitle',
-  periodDays: 'periodDays',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -328,14 +328,27 @@ export const MealTransportReportConfigScalarFieldEnum = {
 export type MealTransportReportConfigScalarFieldEnum = (typeof MealTransportReportConfigScalarFieldEnum)[keyof typeof MealTransportReportConfigScalarFieldEnum]
 
 
+export const MealTransportReportWeekScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  programId: 'programId',
+  label: 'label',
+  weekStart: 'weekStart',
+  weekEnd: 'weekEnd',
+  enabled: 'enabled',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MealTransportReportWeekScalarFieldEnum = (typeof MealTransportReportWeekScalarFieldEnum)[keyof typeof MealTransportReportWeekScalarFieldEnum]
+
+
 export const MealTransportReportScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   configId: 'configId',
+  weekId: 'weekId',
   userId: 'userId',
-  weekNumber: 'weekNumber',
-  weekStart: 'weekStart',
-  weekEnd: 'weekEnd',
   status: 'status',
   preparerSignatureName: 'preparerSignatureName',
   preparerSignatureImage: 'preparerSignatureImage',
@@ -742,10 +755,21 @@ export const MealTransportReportConfigOrderByRelevanceFieldEnum = {
 export type MealTransportReportConfigOrderByRelevanceFieldEnum = (typeof MealTransportReportConfigOrderByRelevanceFieldEnum)[keyof typeof MealTransportReportConfigOrderByRelevanceFieldEnum]
 
 
+export const MealTransportReportWeekOrderByRelevanceFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  programId: 'programId',
+  label: 'label'
+} as const
+
+export type MealTransportReportWeekOrderByRelevanceFieldEnum = (typeof MealTransportReportWeekOrderByRelevanceFieldEnum)[keyof typeof MealTransportReportWeekOrderByRelevanceFieldEnum]
+
+
 export const MealTransportReportOrderByRelevanceFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   configId: 'configId',
+  weekId: 'weekId',
   userId: 'userId',
   preparerSignatureName: 'preparerSignatureName',
   preparerSignatureImage: 'preparerSignatureImage',

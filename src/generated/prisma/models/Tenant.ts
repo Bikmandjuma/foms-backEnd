@@ -185,6 +185,7 @@ export type TenantWhereInput = {
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
   fieldExpenses?: Prisma.FieldExpenseListRelationFilter
   mealTransportConfigs?: Prisma.MealTransportReportConfigListRelationFilter
+  mealTransportWeeks?: Prisma.MealTransportReportWeekListRelationFilter
   mealTransportReports?: Prisma.MealTransportReportListRelationFilter
   replacementRequests?: Prisma.ReplacementRequestListRelationFilter
   roles?: Prisma.RoleListRelationFilter
@@ -208,6 +209,7 @@ export type TenantOrderByWithRelationInput = {
   availabilityChecks?: Prisma.AvailabilityCheckOrderByRelationAggregateInput
   fieldExpenses?: Prisma.FieldExpenseOrderByRelationAggregateInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigOrderByRelationAggregateInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekOrderByRelationAggregateInput
   mealTransportReports?: Prisma.MealTransportReportOrderByRelationAggregateInput
   replacementRequests?: Prisma.ReplacementRequestOrderByRelationAggregateInput
   roles?: Prisma.RoleOrderByRelationAggregateInput
@@ -235,6 +237,7 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
   fieldExpenses?: Prisma.FieldExpenseListRelationFilter
   mealTransportConfigs?: Prisma.MealTransportReportConfigListRelationFilter
+  mealTransportWeeks?: Prisma.MealTransportReportWeekListRelationFilter
   mealTransportReports?: Prisma.MealTransportReportListRelationFilter
   replacementRequests?: Prisma.ReplacementRequestListRelationFilter
   roles?: Prisma.RoleListRelationFilter
@@ -278,6 +281,7 @@ export type TenantCreateInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -301,6 +305,7 @@ export type TenantUncheckedCreateInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -324,6 +329,7 @@ export type TenantUpdateInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -347,6 +353,7 @@ export type TenantUncheckedUpdateInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -514,6 +521,20 @@ export type TenantUpdateOneRequiredWithoutMealTransportConfigsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutMealTransportConfigsInput, Prisma.TenantUpdateWithoutMealTransportConfigsInput>, Prisma.TenantUncheckedUpdateWithoutMealTransportConfigsInput>
 }
 
+export type TenantCreateNestedOneWithoutMealTransportWeeksInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutMealTransportWeeksInput, Prisma.TenantUncheckedCreateWithoutMealTransportWeeksInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutMealTransportWeeksInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutMealTransportWeeksNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutMealTransportWeeksInput, Prisma.TenantUncheckedCreateWithoutMealTransportWeeksInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutMealTransportWeeksInput
+  upsert?: Prisma.TenantUpsertWithoutMealTransportWeeksInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutMealTransportWeeksInput, Prisma.TenantUpdateWithoutMealTransportWeeksInput>, Prisma.TenantUncheckedUpdateWithoutMealTransportWeeksInput>
+}
+
 export type TenantCreateNestedOneWithoutMealTransportReportsInput = {
   create?: Prisma.XOR<Prisma.TenantCreateWithoutMealTransportReportsInput, Prisma.TenantUncheckedCreateWithoutMealTransportReportsInput>
   connectOrCreate?: Prisma.TenantCreateOrConnectWithoutMealTransportReportsInput
@@ -657,6 +678,7 @@ export type TenantCreateWithoutNotificationsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -679,6 +701,7 @@ export type TenantUncheckedCreateWithoutNotificationsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -717,6 +740,7 @@ export type TenantUpdateWithoutNotificationsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -739,6 +763,7 @@ export type TenantUncheckedUpdateWithoutNotificationsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -762,6 +787,7 @@ export type TenantCreateWithoutRolesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -784,6 +810,7 @@ export type TenantUncheckedCreateWithoutRolesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -822,6 +849,7 @@ export type TenantUpdateWithoutRolesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -844,6 +872,7 @@ export type TenantUncheckedUpdateWithoutRolesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -866,6 +895,7 @@ export type TenantCreateWithoutUsersInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -888,6 +918,7 @@ export type TenantUncheckedCreateWithoutUsersInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -926,6 +957,7 @@ export type TenantUpdateWithoutUsersInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -948,6 +980,7 @@ export type TenantUncheckedUpdateWithoutUsersInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -969,6 +1002,7 @@ export type TenantCreateWithoutProgramsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -991,6 +1025,7 @@ export type TenantUncheckedCreateWithoutProgramsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -1029,6 +1064,7 @@ export type TenantUpdateWithoutProgramsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -1051,6 +1087,7 @@ export type TenantUncheckedUpdateWithoutProgramsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -1073,6 +1110,7 @@ export type TenantCreateWithoutProgramTeamsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -1095,6 +1133,7 @@ export type TenantUncheckedCreateWithoutProgramTeamsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -1133,6 +1172,7 @@ export type TenantUpdateWithoutProgramTeamsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -1155,6 +1195,7 @@ export type TenantUncheckedUpdateWithoutProgramTeamsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -1177,6 +1218,7 @@ export type TenantCreateWithoutAvailabilityChecksInput = {
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -1199,6 +1241,7 @@ export type TenantUncheckedCreateWithoutAvailabilityChecksInput = {
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -1237,6 +1280,7 @@ export type TenantUpdateWithoutAvailabilityChecksInput = {
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -1259,6 +1303,7 @@ export type TenantUncheckedUpdateWithoutAvailabilityChecksInput = {
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -1281,6 +1326,7 @@ export type TenantCreateWithoutMealTransportConfigsInput = {
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -1303,6 +1349,7 @@ export type TenantUncheckedCreateWithoutMealTransportConfigsInput = {
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -1341,6 +1388,7 @@ export type TenantUpdateWithoutMealTransportConfigsInput = {
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -1363,6 +1411,115 @@ export type TenantUncheckedUpdateWithoutMealTransportConfigsInput = {
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
+  replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutMealTransportWeeksInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutTenantInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutTenantInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentCreateNestedManyWithoutTenantInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutTenantInput
+  programAssignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutTenantInput
+  programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
+  replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutMealTransportWeeksInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutTenantInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutTenantInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedCreateNestedManyWithoutTenantInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutTenantInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutTenantInput
+  programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
+  replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutMealTransportWeeksInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutMealTransportWeeksInput, Prisma.TenantUncheckedCreateWithoutMealTransportWeeksInput>
+}
+
+export type TenantUpsertWithoutMealTransportWeeksInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutMealTransportWeeksInput, Prisma.TenantUncheckedUpdateWithoutMealTransportWeeksInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutMealTransportWeeksInput, Prisma.TenantUncheckedCreateWithoutMealTransportWeeksInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutMealTransportWeeksInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutMealTransportWeeksInput, Prisma.TenantUncheckedUpdateWithoutMealTransportWeeksInput>
+}
+
+export type TenantUpdateWithoutMealTransportWeeksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutTenantNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutTenantNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUpdateManyWithoutTenantNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutTenantNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUpdateManyWithoutTenantNestedInput
+  programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
+  replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutMealTransportWeeksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutTenantNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutTenantNestedInput
+  beneficiaryAssignments?: Prisma.BeneficiaryAssignmentUncheckedUpdateManyWithoutTenantNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutTenantNestedInput
+  programAssignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutTenantNestedInput
+  programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -1386,6 +1543,7 @@ export type TenantCreateWithoutMealTransportReportsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -1408,6 +1566,7 @@ export type TenantUncheckedCreateWithoutMealTransportReportsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -1446,6 +1605,7 @@ export type TenantUpdateWithoutMealTransportReportsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -1468,6 +1628,7 @@ export type TenantUncheckedUpdateWithoutMealTransportReportsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -1489,6 +1650,7 @@ export type TenantCreateWithoutFieldExpensesInput = {
   programTeams?: Prisma.ProgramTeamCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -1511,6 +1673,7 @@ export type TenantUncheckedCreateWithoutFieldExpensesInput = {
   programTeams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutTenantInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -1549,6 +1712,7 @@ export type TenantUpdateWithoutFieldExpensesInput = {
   programTeams?: Prisma.ProgramTeamUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -1571,6 +1735,7 @@ export type TenantUncheckedUpdateWithoutFieldExpensesInput = {
   programTeams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutTenantNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -1593,6 +1758,7 @@ export type TenantCreateWithoutBeneficiariesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -1615,6 +1781,7 @@ export type TenantUncheckedCreateWithoutBeneficiariesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -1653,6 +1820,7 @@ export type TenantUpdateWithoutBeneficiariesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -1675,6 +1843,7 @@ export type TenantUncheckedUpdateWithoutBeneficiariesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -1697,6 +1866,7 @@ export type TenantCreateWithoutProgramAssignmentsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -1719,6 +1889,7 @@ export type TenantUncheckedCreateWithoutProgramAssignmentsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -1757,6 +1928,7 @@ export type TenantUpdateWithoutProgramAssignmentsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -1779,6 +1951,7 @@ export type TenantUncheckedUpdateWithoutProgramAssignmentsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -1801,6 +1974,7 @@ export type TenantCreateWithoutBeneficiaryAssignmentsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -1823,6 +1997,7 @@ export type TenantUncheckedCreateWithoutBeneficiaryAssignmentsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -1861,6 +2036,7 @@ export type TenantUpdateWithoutBeneficiaryAssignmentsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -1883,6 +2059,7 @@ export type TenantUncheckedUpdateWithoutBeneficiaryAssignmentsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -1906,6 +2083,7 @@ export type TenantCreateWithoutVehiclesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -1928,6 +2106,7 @@ export type TenantUncheckedCreateWithoutVehiclesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -1966,6 +2145,7 @@ export type TenantUpdateWithoutVehiclesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -1988,6 +2168,7 @@ export type TenantUncheckedUpdateWithoutVehiclesInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -2010,6 +2191,7 @@ export type TenantCreateWithoutReplacementRequestsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   users?: Prisma.UserCreateNestedManyWithoutTenantInput
@@ -2032,6 +2214,7 @@ export type TenantUncheckedCreateWithoutReplacementRequestsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
@@ -2070,6 +2253,7 @@ export type TenantUpdateWithoutReplacementRequestsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUpdateManyWithoutTenantNestedInput
@@ -2092,6 +2276,7 @@ export type TenantUncheckedUpdateWithoutReplacementRequestsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -2113,6 +2298,7 @@ export type TenantCreateWithoutFieldCheckInsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -2135,6 +2321,7 @@ export type TenantUncheckedCreateWithoutFieldCheckInsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -2173,6 +2360,7 @@ export type TenantUpdateWithoutFieldCheckInsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -2195,6 +2383,7 @@ export type TenantUncheckedUpdateWithoutFieldCheckInsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -2217,6 +2406,7 @@ export type TenantCreateWithoutActivityLogsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
@@ -2239,6 +2429,7 @@ export type TenantUncheckedCreateWithoutActivityLogsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutTenantInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutTenantInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutTenantInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedCreateNestedManyWithoutTenantInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutTenantInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
@@ -2277,6 +2468,7 @@ export type TenantUpdateWithoutActivityLogsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
@@ -2299,6 +2491,7 @@ export type TenantUncheckedUpdateWithoutActivityLogsInput = {
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutTenantNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutTenantNestedInput
+  mealTransportWeeks?: Prisma.MealTransportReportWeekUncheckedUpdateManyWithoutTenantNestedInput
   mealTransportReports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutTenantNestedInput
   replacementRequests?: Prisma.ReplacementRequestUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
@@ -2323,6 +2516,7 @@ export type TenantCountOutputType = {
   availabilityChecks: number
   fieldExpenses: number
   mealTransportConfigs: number
+  mealTransportWeeks: number
   mealTransportReports: number
   replacementRequests: number
   roles: number
@@ -2342,6 +2536,7 @@ export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   availabilityChecks?: boolean | TenantCountOutputTypeCountAvailabilityChecksArgs
   fieldExpenses?: boolean | TenantCountOutputTypeCountFieldExpensesArgs
   mealTransportConfigs?: boolean | TenantCountOutputTypeCountMealTransportConfigsArgs
+  mealTransportWeeks?: boolean | TenantCountOutputTypeCountMealTransportWeeksArgs
   mealTransportReports?: boolean | TenantCountOutputTypeCountMealTransportReportsArgs
   replacementRequests?: boolean | TenantCountOutputTypeCountReplacementRequestsArgs
   roles?: boolean | TenantCountOutputTypeCountRolesArgs
@@ -2439,6 +2634,13 @@ export type TenantCountOutputTypeCountMealTransportConfigsArgs<ExtArgs extends r
 /**
  * TenantCountOutputType without action
  */
+export type TenantCountOutputTypeCountMealTransportWeeksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MealTransportReportWeekWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
 export type TenantCountOutputTypeCountMealTransportReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MealTransportReportWhereInput
 }
@@ -2488,6 +2690,7 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   availabilityChecks?: boolean | Prisma.Tenant$availabilityChecksArgs<ExtArgs>
   fieldExpenses?: boolean | Prisma.Tenant$fieldExpensesArgs<ExtArgs>
   mealTransportConfigs?: boolean | Prisma.Tenant$mealTransportConfigsArgs<ExtArgs>
+  mealTransportWeeks?: boolean | Prisma.Tenant$mealTransportWeeksArgs<ExtArgs>
   mealTransportReports?: boolean | Prisma.Tenant$mealTransportReportsArgs<ExtArgs>
   replacementRequests?: boolean | Prisma.Tenant$replacementRequestsArgs<ExtArgs>
   roles?: boolean | Prisma.Tenant$rolesArgs<ExtArgs>
@@ -2518,6 +2721,7 @@ export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   availabilityChecks?: boolean | Prisma.Tenant$availabilityChecksArgs<ExtArgs>
   fieldExpenses?: boolean | Prisma.Tenant$fieldExpensesArgs<ExtArgs>
   mealTransportConfigs?: boolean | Prisma.Tenant$mealTransportConfigsArgs<ExtArgs>
+  mealTransportWeeks?: boolean | Prisma.Tenant$mealTransportWeeksArgs<ExtArgs>
   mealTransportReports?: boolean | Prisma.Tenant$mealTransportReportsArgs<ExtArgs>
   replacementRequests?: boolean | Prisma.Tenant$replacementRequestsArgs<ExtArgs>
   roles?: boolean | Prisma.Tenant$rolesArgs<ExtArgs>
@@ -2540,6 +2744,7 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     availabilityChecks: Prisma.$AvailabilityCheckPayload<ExtArgs>[]
     fieldExpenses: Prisma.$FieldExpensePayload<ExtArgs>[]
     mealTransportConfigs: Prisma.$MealTransportReportConfigPayload<ExtArgs>[]
+    mealTransportWeeks: Prisma.$MealTransportReportWeekPayload<ExtArgs>[]
     mealTransportReports: Prisma.$MealTransportReportPayload<ExtArgs>[]
     replacementRequests: Prisma.$ReplacementRequestPayload<ExtArgs>[]
     roles: Prisma.$RolePayload<ExtArgs>[]
@@ -2902,6 +3107,7 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
   availabilityChecks<T extends Prisma.Tenant$availabilityChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$availabilityChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilityCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fieldExpenses<T extends Prisma.Tenant$fieldExpensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$fieldExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mealTransportConfigs<T extends Prisma.Tenant$mealTransportConfigsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$mealTransportConfigsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealTransportReportConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  mealTransportWeeks<T extends Prisma.Tenant$mealTransportWeeksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$mealTransportWeeksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealTransportReportWeekPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mealTransportReports<T extends Prisma.Tenant$mealTransportReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$mealTransportReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealTransportReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   replacementRequests<T extends Prisma.Tenant$replacementRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$replacementRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplacementRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roles<T extends Prisma.Tenant$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3549,6 +3755,30 @@ export type Tenant$mealTransportConfigsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.MealTransportReportConfigScalarFieldEnum | Prisma.MealTransportReportConfigScalarFieldEnum[]
+}
+
+/**
+ * Tenant.mealTransportWeeks
+ */
+export type Tenant$mealTransportWeeksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MealTransportReportWeek
+   */
+  select?: Prisma.MealTransportReportWeekSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MealTransportReportWeek
+   */
+  omit?: Prisma.MealTransportReportWeekOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MealTransportReportWeekInclude<ExtArgs> | null
+  where?: Prisma.MealTransportReportWeekWhereInput
+  orderBy?: Prisma.MealTransportReportWeekOrderByWithRelationInput | Prisma.MealTransportReportWeekOrderByWithRelationInput[]
+  cursor?: Prisma.MealTransportReportWeekWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MealTransportReportWeekScalarFieldEnum | Prisma.MealTransportReportWeekScalarFieldEnum[]
 }
 
 /**

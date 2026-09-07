@@ -20,18 +20,8 @@ export type MealTransportReportConfigModel = runtime.Types.Result.DefaultSelecti
 
 export type AggregateMealTransportReportConfig = {
   _count: MealTransportReportConfigCountAggregateOutputType | null
-  _avg: MealTransportReportConfigAvgAggregateOutputType | null
-  _sum: MealTransportReportConfigSumAggregateOutputType | null
   _min: MealTransportReportConfigMinAggregateOutputType | null
   _max: MealTransportReportConfigMaxAggregateOutputType | null
-}
-
-export type MealTransportReportConfigAvgAggregateOutputType = {
-  periodDays: number | null
-}
-
-export type MealTransportReportConfigSumAggregateOutputType = {
-  periodDays: number | null
 }
 
 export type MealTransportReportConfigMinAggregateOutputType = {
@@ -42,7 +32,6 @@ export type MealTransportReportConfigMinAggregateOutputType = {
   programId: string | null
   title: string | null
   subtitle: string | null
-  periodDays: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -55,7 +44,6 @@ export type MealTransportReportConfigMaxAggregateOutputType = {
   programId: string | null
   title: string | null
   subtitle: string | null
-  periodDays: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -68,20 +56,11 @@ export type MealTransportReportConfigCountAggregateOutputType = {
   programId: number
   title: number
   subtitle: number
-  periodDays: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
-
-export type MealTransportReportConfigAvgAggregateInputType = {
-  periodDays?: true
-}
-
-export type MealTransportReportConfigSumAggregateInputType = {
-  periodDays?: true
-}
 
 export type MealTransportReportConfigMinAggregateInputType = {
   id?: true
@@ -91,7 +70,6 @@ export type MealTransportReportConfigMinAggregateInputType = {
   programId?: true
   title?: true
   subtitle?: true
-  periodDays?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -104,7 +82,6 @@ export type MealTransportReportConfigMaxAggregateInputType = {
   programId?: true
   title?: true
   subtitle?: true
-  periodDays?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -117,7 +94,6 @@ export type MealTransportReportConfigCountAggregateInputType = {
   programId?: true
   title?: true
   subtitle?: true
-  periodDays?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -161,18 +137,6 @@ export type MealTransportReportConfigAggregateArgs<ExtArgs extends runtime.Types
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: MealTransportReportConfigAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: MealTransportReportConfigSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: MealTransportReportConfigMinAggregateInputType
@@ -203,8 +167,6 @@ export type MealTransportReportConfigGroupByArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   _count?: MealTransportReportConfigCountAggregateInputType | true
-  _avg?: MealTransportReportConfigAvgAggregateInputType
-  _sum?: MealTransportReportConfigSumAggregateInputType
   _min?: MealTransportReportConfigMinAggregateInputType
   _max?: MealTransportReportConfigMaxAggregateInputType
 }
@@ -217,12 +179,9 @@ export type MealTransportReportConfigGroupByOutputType = {
   programId: string
   title: string
   subtitle: string
-  periodDays: number
   createdAt: Date
   updatedAt: Date
   _count: MealTransportReportConfigCountAggregateOutputType | null
-  _avg: MealTransportReportConfigAvgAggregateOutputType | null
-  _sum: MealTransportReportConfigSumAggregateOutputType | null
   _min: MealTransportReportConfigMinAggregateOutputType | null
   _max: MealTransportReportConfigMaxAggregateOutputType | null
 }
@@ -253,7 +212,6 @@ export type MealTransportReportConfigWhereInput = {
   programId?: Prisma.StringFilter<"MealTransportReportConfig"> | string
   title?: Prisma.StringFilter<"MealTransportReportConfig"> | string
   subtitle?: Prisma.StringFilter<"MealTransportReportConfig"> | string
-  periodDays?: Prisma.IntFilter<"MealTransportReportConfig"> | number
   createdAt?: Prisma.DateTimeFilter<"MealTransportReportConfig"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MealTransportReportConfig"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
@@ -271,7 +229,6 @@ export type MealTransportReportConfigOrderByWithRelationInput = {
   programId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   subtitle?: Prisma.SortOrder
-  periodDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
@@ -294,7 +251,6 @@ export type MealTransportReportConfigWhereUniqueInput = Prisma.AtLeast<{
   programId?: Prisma.StringFilter<"MealTransportReportConfig"> | string
   title?: Prisma.StringFilter<"MealTransportReportConfig"> | string
   subtitle?: Prisma.StringFilter<"MealTransportReportConfig"> | string
-  periodDays?: Prisma.IntFilter<"MealTransportReportConfig"> | number
   createdAt?: Prisma.DateTimeFilter<"MealTransportReportConfig"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MealTransportReportConfig"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
@@ -312,14 +268,11 @@ export type MealTransportReportConfigOrderByWithAggregationInput = {
   programId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   subtitle?: Prisma.SortOrder
-  periodDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MealTransportReportConfigCountOrderByAggregateInput
-  _avg?: Prisma.MealTransportReportConfigAvgOrderByAggregateInput
   _max?: Prisma.MealTransportReportConfigMaxOrderByAggregateInput
   _min?: Prisma.MealTransportReportConfigMinOrderByAggregateInput
-  _sum?: Prisma.MealTransportReportConfigSumOrderByAggregateInput
 }
 
 export type MealTransportReportConfigScalarWhereWithAggregatesInput = {
@@ -333,7 +286,6 @@ export type MealTransportReportConfigScalarWhereWithAggregatesInput = {
   programId?: Prisma.StringWithAggregatesFilter<"MealTransportReportConfig"> | string
   title?: Prisma.StringWithAggregatesFilter<"MealTransportReportConfig"> | string
   subtitle?: Prisma.StringWithAggregatesFilter<"MealTransportReportConfig"> | string
-  periodDays?: Prisma.IntWithAggregatesFilter<"MealTransportReportConfig"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MealTransportReportConfig"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MealTransportReportConfig"> | Date | string
 }
@@ -342,7 +294,6 @@ export type MealTransportReportConfigCreateInput = {
   id?: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutMealTransportConfigsInput
@@ -360,7 +311,6 @@ export type MealTransportReportConfigUncheckedCreateInput = {
   programId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   reports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutConfigInput
@@ -370,7 +320,6 @@ export type MealTransportReportConfigUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportConfigsNestedInput
@@ -388,7 +337,6 @@ export type MealTransportReportConfigUncheckedUpdateInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutConfigNestedInput
@@ -402,7 +350,6 @@ export type MealTransportReportConfigCreateManyInput = {
   programId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -411,7 +358,6 @@ export type MealTransportReportConfigUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -424,7 +370,6 @@ export type MealTransportReportConfigUncheckedUpdateManyInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -458,13 +403,8 @@ export type MealTransportReportConfigCountOrderByAggregateInput = {
   programId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   subtitle?: Prisma.SortOrder
-  periodDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type MealTransportReportConfigAvgOrderByAggregateInput = {
-  periodDays?: Prisma.SortOrder
 }
 
 export type MealTransportReportConfigMaxOrderByAggregateInput = {
@@ -475,7 +415,6 @@ export type MealTransportReportConfigMaxOrderByAggregateInput = {
   programId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   subtitle?: Prisma.SortOrder
-  periodDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -488,13 +427,8 @@ export type MealTransportReportConfigMinOrderByAggregateInput = {
   programId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   subtitle?: Prisma.SortOrder
-  periodDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type MealTransportReportConfigSumOrderByAggregateInput = {
-  periodDays?: Prisma.SortOrder
 }
 
 export type MealTransportReportConfigScalarRelationFilter = {
@@ -688,7 +622,6 @@ export type MealTransportReportConfigCreateWithoutTenantInput = {
   id?: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   submitterRole: Prisma.RoleCreateNestedOneWithoutMealTransportConfigsInput
@@ -704,7 +637,6 @@ export type MealTransportReportConfigUncheckedCreateWithoutTenantInput = {
   programId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   reports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutConfigInput
@@ -747,7 +679,6 @@ export type MealTransportReportConfigScalarWhereInput = {
   programId?: Prisma.StringFilter<"MealTransportReportConfig"> | string
   title?: Prisma.StringFilter<"MealTransportReportConfig"> | string
   subtitle?: Prisma.StringFilter<"MealTransportReportConfig"> | string
-  periodDays?: Prisma.IntFilter<"MealTransportReportConfig"> | number
   createdAt?: Prisma.DateTimeFilter<"MealTransportReportConfig"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MealTransportReportConfig"> | Date | string
 }
@@ -756,7 +687,6 @@ export type MealTransportReportConfigCreateWithoutSubmitterRoleInput = {
   id?: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutMealTransportConfigsInput
@@ -772,7 +702,6 @@ export type MealTransportReportConfigUncheckedCreateWithoutSubmitterRoleInput = 
   programId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   reports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutConfigInput
@@ -808,7 +737,6 @@ export type MealTransportReportConfigCreateWithoutApproverInput = {
   id?: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutMealTransportConfigsInput
@@ -824,7 +752,6 @@ export type MealTransportReportConfigUncheckedCreateWithoutApproverInput = {
   programId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   reports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutConfigInput
@@ -860,7 +787,6 @@ export type MealTransportReportConfigCreateWithoutProgramInput = {
   id?: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutMealTransportConfigsInput
@@ -876,7 +802,6 @@ export type MealTransportReportConfigUncheckedCreateWithoutProgramInput = {
   approverUserId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   reports?: Prisma.MealTransportReportUncheckedCreateNestedManyWithoutConfigInput
@@ -912,7 +837,6 @@ export type MealTransportReportConfigCreateWithoutReportsInput = {
   id?: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutMealTransportConfigsInput
@@ -929,7 +853,6 @@ export type MealTransportReportConfigUncheckedCreateWithoutReportsInput = {
   programId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -954,7 +877,6 @@ export type MealTransportReportConfigUpdateWithoutReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportConfigsNestedInput
@@ -971,7 +893,6 @@ export type MealTransportReportConfigUncheckedUpdateWithoutReportsInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -983,7 +904,6 @@ export type MealTransportReportConfigCreateManyTenantInput = {
   programId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -992,7 +912,6 @@ export type MealTransportReportConfigUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   submitterRole?: Prisma.RoleUpdateOneRequiredWithoutMealTransportConfigsNestedInput
@@ -1008,7 +927,6 @@ export type MealTransportReportConfigUncheckedUpdateWithoutTenantInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutConfigNestedInput
@@ -1021,7 +939,6 @@ export type MealTransportReportConfigUncheckedUpdateManyWithoutTenantInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1033,7 +950,6 @@ export type MealTransportReportConfigCreateManySubmitterRoleInput = {
   programId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1042,7 +958,6 @@ export type MealTransportReportConfigUpdateWithoutSubmitterRoleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportConfigsNestedInput
@@ -1058,7 +973,6 @@ export type MealTransportReportConfigUncheckedUpdateWithoutSubmitterRoleInput = 
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutConfigNestedInput
@@ -1071,7 +985,6 @@ export type MealTransportReportConfigUncheckedUpdateManyWithoutSubmitterRoleInpu
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1083,7 +996,6 @@ export type MealTransportReportConfigCreateManyApproverInput = {
   programId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1092,7 +1004,6 @@ export type MealTransportReportConfigUpdateWithoutApproverInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportConfigsNestedInput
@@ -1108,7 +1019,6 @@ export type MealTransportReportConfigUncheckedUpdateWithoutApproverInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutConfigNestedInput
@@ -1121,7 +1031,6 @@ export type MealTransportReportConfigUncheckedUpdateManyWithoutApproverInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1133,7 +1042,6 @@ export type MealTransportReportConfigCreateManyProgramInput = {
   approverUserId: string
   title?: string
   subtitle?: string
-  periodDays?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1142,7 +1050,6 @@ export type MealTransportReportConfigUpdateWithoutProgramInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMealTransportConfigsNestedInput
@@ -1158,7 +1065,6 @@ export type MealTransportReportConfigUncheckedUpdateWithoutProgramInput = {
   approverUserId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.MealTransportReportUncheckedUpdateManyWithoutConfigNestedInput
@@ -1171,7 +1077,6 @@ export type MealTransportReportConfigUncheckedUpdateManyWithoutProgramInput = {
   approverUserId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subtitle?: Prisma.StringFieldUpdateOperationsInput | string
-  periodDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1215,7 +1120,6 @@ export type MealTransportReportConfigSelect<ExtArgs extends runtime.Types.Extens
   programId?: boolean
   title?: boolean
   subtitle?: boolean
-  periodDays?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
@@ -1236,12 +1140,11 @@ export type MealTransportReportConfigSelectScalar = {
   programId?: boolean
   title?: boolean
   subtitle?: boolean
-  periodDays?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MealTransportReportConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "submitterRoleId" | "approverUserId" | "programId" | "title" | "subtitle" | "periodDays" | "createdAt" | "updatedAt", ExtArgs["result"]["mealTransportReportConfig"]>
+export type MealTransportReportConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "submitterRoleId" | "approverUserId" | "programId" | "title" | "subtitle" | "createdAt" | "updatedAt", ExtArgs["result"]["mealTransportReportConfig"]>
 export type MealTransportReportConfigInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   submitterRole?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
@@ -1268,7 +1171,6 @@ export type $MealTransportReportConfigPayload<ExtArgs extends runtime.Types.Exte
     programId: string
     title: string
     subtitle: string
-    periodDays: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["mealTransportReportConfig"]>
@@ -1652,7 +1554,6 @@ export interface MealTransportReportConfigFieldRefs {
   readonly programId: Prisma.FieldRef<"MealTransportReportConfig", 'String'>
   readonly title: Prisma.FieldRef<"MealTransportReportConfig", 'String'>
   readonly subtitle: Prisma.FieldRef<"MealTransportReportConfig", 'String'>
-  readonly periodDays: Prisma.FieldRef<"MealTransportReportConfig", 'Int'>
   readonly createdAt: Prisma.FieldRef<"MealTransportReportConfig", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MealTransportReportConfig", 'DateTime'>
 }

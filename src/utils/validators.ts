@@ -312,26 +312,39 @@ export const confirmFieldVisitOutcomeSchema = z.object({
 export const upsertMealTransportConfigSchema = z.object({
   submitterRoleId: z.string().uuid(),
   approverUserId: z.string().uuid(),
-  // A real, existing Program — confirmed/selected by whoever manages this
+  // A real, existing Program, confirmed/selected by whoever manages this
   // config, never free text the report-filler could type themselves.
   programId: z.string().uuid(),
   title: z.string().optional(),
   subtitle: z.string().optional(),
-  // How many days a report period spans — not automatically a 7-day week;
-  // 5 for a Mon-Fri work week is just as valid.
-  periodDays: z.coerce.number().int().min(1).max(31).optional(),
 });
 
-// Only honored when the caller has manage/create permission — the person
-// "responsible to manage that" picks the actual From/To dates for a report
-// rather than trusting a silently auto-computed range. Regular role-based
-// submitters never send this; the server ignores it for them.
+// A scheduled reporting period for a program, set up explicitly by
+// whoever manages this. Each week's own From/To dates, not an automatic
+// recurring cadence, so weeks can be different lengths.
+export const createMealTransportReportWeekSchema = z
+  .object({
+    programId: z.string().uuid(),
+    label: z.string().min(1),
+    weekStart: z.coerce.date(),
+    weekEnd: z.coerce.date(),
+  })
+  .refine((v) => v.weekStart <= v.weekEnd, { message: "The From date must be on or before the To date" });
+
+export const updateMealTransportReportWeekSchema = z
+  .object({
+    label: z.string().min(1).optional(),
+    weekStart: z.coerce.date().optional(),
+    weekEnd: z.coerce.date().optional(),
+    enabled: z.boolean().optional(),
+  })
+  .refine((v) => !v.weekStart || !v.weekEnd || v.weekStart <= v.weekEnd, { message: "The From date must be on or before the To date" });
+
+// Only the configId override is honored when the caller has manage/create
+// permission and their own role has no matching config; a regular
+// role-based submitter always uses their own role's config.
 export const createMealTransportReportSchema = z.object({
   configId: z.string().uuid().optional(),
-  weekStart: z.coerce.date().optional(),
-  weekEnd: z.coerce.date().optional(),
-}).refine((v) => !v.weekStart || !v.weekEnd || v.weekStart <= v.weekEnd, {
-  message: "The From date must be on or before the To date",
 });
 
 export const upsertMealTransportEntrySchema = z.object({
@@ -341,9 +354,11 @@ export const upsertMealTransportEntrySchema = z.object({
   transportUsd: z.coerce.number().min(0).default(0),
 });
 
+// Either "name" (signatureName rendered in a signature-style font, no
+// drawn image) or "drawn" (a real PNG data URL from the canvas signature
+// pad). signatureName is always required either way, since it is also
+// what is printed on the Name line.
 export const signMealTransportReportSchema = z.object({
   signatureName: z.string().min(1),
-  // A PNG data URL from the canvas signature pad — the actual hand-drawn
-  // signature, not just a typed name rendered in a script font.
-  signatureImage: z.string().startsWith("data:image/png;base64,"),
+  signatureImage: z.string().startsWith("data:image/png;base64,").optional(),
 });
