@@ -199,6 +199,7 @@ export type RoleWhereInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramListRelationFilter
   programsAsTeamMemberRole?: Prisma.ProgramListRelationFilter
   programsAsCheckerRole?: Prisma.ProgramListRelationFilter
+  mealTransportConfigs?: Prisma.MealTransportReportConfigListRelationFilter
 }
 
 export type RoleOrderByWithRelationInput = {
@@ -214,6 +215,7 @@ export type RoleOrderByWithRelationInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramOrderByRelationAggregateInput
   programsAsTeamMemberRole?: Prisma.ProgramOrderByRelationAggregateInput
   programsAsCheckerRole?: Prisma.ProgramOrderByRelationAggregateInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigOrderByRelationAggregateInput
   _relevance?: Prisma.RoleOrderByRelevanceInput
 }
 
@@ -234,6 +236,7 @@ export type RoleWhereUniqueInput = Prisma.AtLeast<{
   programsAsTeamLeaderRole?: Prisma.ProgramListRelationFilter
   programsAsTeamMemberRole?: Prisma.ProgramListRelationFilter
   programsAsCheckerRole?: Prisma.ProgramListRelationFilter
+  mealTransportConfigs?: Prisma.MealTransportReportConfigListRelationFilter
 }, "id" | "tenantId_name">
 
 export type RoleOrderByWithAggregationInput = {
@@ -274,6 +277,7 @@ export type RoleCreateInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramCreateNestedManyWithoutTeamMemberRoleInput
   programsAsCheckerRole?: Prisma.ProgramCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleUncheckedCreateInput = {
@@ -288,6 +292,7 @@ export type RoleUncheckedCreateInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamMemberRoleInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleUpdateInput = {
@@ -302,6 +307,7 @@ export type RoleUpdateInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUpdateManyWithoutTeamMemberRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleUncheckedUpdateInput = {
@@ -316,6 +322,7 @@ export type RoleUncheckedUpdateInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamMemberRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleCreateManyInput = {
@@ -399,6 +406,11 @@ export type RoleMinOrderByAggregateInput = {
 export type RoleNullableScalarRelationFilter = {
   is?: Prisma.RoleWhereInput | null
   isNot?: Prisma.RoleWhereInput | null
+}
+
+export type RoleScalarRelationFilter = {
+  is?: Prisma.RoleWhereInput
+  isNot?: Prisma.RoleWhereInput
 }
 
 export type RoleCreateNestedManyWithoutTenantInput = {
@@ -507,6 +519,20 @@ export type RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutProgramsAsCheckerRoleInput, Prisma.RoleUpdateWithoutProgramsAsCheckerRoleInput>, Prisma.RoleUncheckedUpdateWithoutProgramsAsCheckerRoleInput>
 }
 
+export type RoleCreateNestedOneWithoutMealTransportConfigsInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutMealTransportConfigsInput, Prisma.RoleUncheckedCreateWithoutMealTransportConfigsInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutMealTransportConfigsInput
+  connect?: Prisma.RoleWhereUniqueInput
+}
+
+export type RoleUpdateOneRequiredWithoutMealTransportConfigsNestedInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutMealTransportConfigsInput, Prisma.RoleUncheckedCreateWithoutMealTransportConfigsInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutMealTransportConfigsInput
+  upsert?: Prisma.RoleUpsertWithoutMealTransportConfigsInput
+  connect?: Prisma.RoleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutMealTransportConfigsInput, Prisma.RoleUpdateWithoutMealTransportConfigsInput>, Prisma.RoleUncheckedUpdateWithoutMealTransportConfigsInput>
+}
+
 export type RoleCreateWithoutTenantInput = {
   id?: string
   name: string
@@ -518,6 +544,7 @@ export type RoleCreateWithoutTenantInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramCreateNestedManyWithoutTeamMemberRoleInput
   programsAsCheckerRole?: Prisma.ProgramCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleUncheckedCreateWithoutTenantInput = {
@@ -531,6 +558,7 @@ export type RoleUncheckedCreateWithoutTenantInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamMemberRoleInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleCreateOrConnectWithoutTenantInput = {
@@ -583,6 +611,7 @@ export type RoleCreateWithoutUsersInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramCreateNestedManyWithoutTeamMemberRoleInput
   programsAsCheckerRole?: Prisma.ProgramCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleUncheckedCreateWithoutUsersInput = {
@@ -596,6 +625,7 @@ export type RoleUncheckedCreateWithoutUsersInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamMemberRoleInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleCreateOrConnectWithoutUsersInput = {
@@ -625,6 +655,7 @@ export type RoleUpdateWithoutUsersInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUpdateManyWithoutTeamMemberRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleUncheckedUpdateWithoutUsersInput = {
@@ -638,6 +669,7 @@ export type RoleUncheckedUpdateWithoutUsersInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamMemberRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleCreateWithoutProgramsAsTeamLeaderRoleInput = {
@@ -651,6 +683,7 @@ export type RoleCreateWithoutProgramsAsTeamLeaderRoleInput = {
   users?: Prisma.UserCreateNestedManyWithoutRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramCreateNestedManyWithoutTeamMemberRoleInput
   programsAsCheckerRole?: Prisma.ProgramCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleUncheckedCreateWithoutProgramsAsTeamLeaderRoleInput = {
@@ -664,6 +697,7 @@ export type RoleUncheckedCreateWithoutProgramsAsTeamLeaderRoleInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamMemberRoleInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleCreateOrConnectWithoutProgramsAsTeamLeaderRoleInput = {
@@ -682,6 +716,7 @@ export type RoleCreateWithoutProgramsAsTeamMemberRoleInput = {
   users?: Prisma.UserCreateNestedManyWithoutRoleInput
   programsAsTeamLeaderRole?: Prisma.ProgramCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsCheckerRole?: Prisma.ProgramCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleUncheckedCreateWithoutProgramsAsTeamMemberRoleInput = {
@@ -695,6 +730,7 @@ export type RoleUncheckedCreateWithoutProgramsAsTeamMemberRoleInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutCheckerRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleCreateOrConnectWithoutProgramsAsTeamMemberRoleInput = {
@@ -713,6 +749,7 @@ export type RoleCreateWithoutProgramsAsCheckerRoleInput = {
   users?: Prisma.UserCreateNestedManyWithoutRoleInput
   programsAsTeamLeaderRole?: Prisma.ProgramCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramCreateNestedManyWithoutTeamMemberRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleUncheckedCreateWithoutProgramsAsCheckerRoleInput = {
@@ -726,6 +763,7 @@ export type RoleUncheckedCreateWithoutProgramsAsCheckerRoleInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamLeaderRoleInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamMemberRoleInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutSubmitterRoleInput
 }
 
 export type RoleCreateOrConnectWithoutProgramsAsCheckerRoleInput = {
@@ -755,6 +793,7 @@ export type RoleUpdateWithoutProgramsAsTeamLeaderRoleInput = {
   users?: Prisma.UserUpdateManyWithoutRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUpdateManyWithoutTeamMemberRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleUncheckedUpdateWithoutProgramsAsTeamLeaderRoleInput = {
@@ -768,6 +807,7 @@ export type RoleUncheckedUpdateWithoutProgramsAsTeamLeaderRoleInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamMemberRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleUpsertWithoutProgramsAsTeamMemberRoleInput = {
@@ -792,6 +832,7 @@ export type RoleUpdateWithoutProgramsAsTeamMemberRoleInput = {
   users?: Prisma.UserUpdateManyWithoutRoleNestedInput
   programsAsTeamLeaderRole?: Prisma.ProgramUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleUncheckedUpdateWithoutProgramsAsTeamMemberRoleInput = {
@@ -805,6 +846,7 @@ export type RoleUncheckedUpdateWithoutProgramsAsTeamMemberRoleInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleUpsertWithoutProgramsAsCheckerRoleInput = {
@@ -829,6 +871,7 @@ export type RoleUpdateWithoutProgramsAsCheckerRoleInput = {
   users?: Prisma.UserUpdateManyWithoutRoleNestedInput
   programsAsTeamLeaderRole?: Prisma.ProgramUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUpdateManyWithoutTeamMemberRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleUncheckedUpdateWithoutProgramsAsCheckerRoleInput = {
@@ -842,6 +885,79 @@ export type RoleUncheckedUpdateWithoutProgramsAsCheckerRoleInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamMemberRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutSubmitterRoleNestedInput
+}
+
+export type RoleCreateWithoutMealTransportConfigsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  permissions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  tenant: Prisma.TenantCreateNestedOneWithoutRolesInput
+  users?: Prisma.UserCreateNestedManyWithoutRoleInput
+  programsAsTeamLeaderRole?: Prisma.ProgramCreateNestedManyWithoutTeamLeaderRoleInput
+  programsAsTeamMemberRole?: Prisma.ProgramCreateNestedManyWithoutTeamMemberRoleInput
+  programsAsCheckerRole?: Prisma.ProgramCreateNestedManyWithoutCheckerRoleInput
+}
+
+export type RoleUncheckedCreateWithoutMealTransportConfigsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenantId: string
+  permissions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput
+  programsAsTeamLeaderRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamLeaderRoleInput
+  programsAsTeamMemberRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutTeamMemberRoleInput
+  programsAsCheckerRole?: Prisma.ProgramUncheckedCreateNestedManyWithoutCheckerRoleInput
+}
+
+export type RoleCreateOrConnectWithoutMealTransportConfigsInput = {
+  where: Prisma.RoleWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoleCreateWithoutMealTransportConfigsInput, Prisma.RoleUncheckedCreateWithoutMealTransportConfigsInput>
+}
+
+export type RoleUpsertWithoutMealTransportConfigsInput = {
+  update: Prisma.XOR<Prisma.RoleUpdateWithoutMealTransportConfigsInput, Prisma.RoleUncheckedUpdateWithoutMealTransportConfigsInput>
+  create: Prisma.XOR<Prisma.RoleCreateWithoutMealTransportConfigsInput, Prisma.RoleUncheckedCreateWithoutMealTransportConfigsInput>
+  where?: Prisma.RoleWhereInput
+}
+
+export type RoleUpdateToOneWithWhereWithoutMealTransportConfigsInput = {
+  where?: Prisma.RoleWhereInput
+  data: Prisma.XOR<Prisma.RoleUpdateWithoutMealTransportConfigsInput, Prisma.RoleUncheckedUpdateWithoutMealTransportConfigsInput>
+}
+
+export type RoleUpdateWithoutMealTransportConfigsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  permissions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutRolesNestedInput
+  users?: Prisma.UserUpdateManyWithoutRoleNestedInput
+  programsAsTeamLeaderRole?: Prisma.ProgramUpdateManyWithoutTeamLeaderRoleNestedInput
+  programsAsTeamMemberRole?: Prisma.ProgramUpdateManyWithoutTeamMemberRoleNestedInput
+  programsAsCheckerRole?: Prisma.ProgramUpdateManyWithoutCheckerRoleNestedInput
+}
+
+export type RoleUncheckedUpdateWithoutMealTransportConfigsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  permissions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput
+  programsAsTeamLeaderRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamLeaderRoleNestedInput
+  programsAsTeamMemberRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamMemberRoleNestedInput
+  programsAsCheckerRole?: Prisma.ProgramUncheckedUpdateManyWithoutCheckerRoleNestedInput
 }
 
 export type RoleCreateManyTenantInput = {
@@ -864,6 +980,7 @@ export type RoleUpdateWithoutTenantInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUpdateManyWithoutTeamMemberRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleUncheckedUpdateWithoutTenantInput = {
@@ -877,6 +994,7 @@ export type RoleUncheckedUpdateWithoutTenantInput = {
   programsAsTeamLeaderRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamLeaderRoleNestedInput
   programsAsTeamMemberRole?: Prisma.ProgramUncheckedUpdateManyWithoutTeamMemberRoleNestedInput
   programsAsCheckerRole?: Prisma.ProgramUncheckedUpdateManyWithoutCheckerRoleNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutSubmitterRoleNestedInput
 }
 
 export type RoleUncheckedUpdateManyWithoutTenantInput = {
@@ -898,6 +1016,7 @@ export type RoleCountOutputType = {
   programsAsTeamLeaderRole: number
   programsAsTeamMemberRole: number
   programsAsCheckerRole: number
+  mealTransportConfigs: number
 }
 
 export type RoleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -905,6 +1024,7 @@ export type RoleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   programsAsTeamLeaderRole?: boolean | RoleCountOutputTypeCountProgramsAsTeamLeaderRoleArgs
   programsAsTeamMemberRole?: boolean | RoleCountOutputTypeCountProgramsAsTeamMemberRoleArgs
   programsAsCheckerRole?: boolean | RoleCountOutputTypeCountProgramsAsCheckerRoleArgs
+  mealTransportConfigs?: boolean | RoleCountOutputTypeCountMealTransportConfigsArgs
 }
 
 /**
@@ -945,6 +1065,13 @@ export type RoleCountOutputTypeCountProgramsAsCheckerRoleArgs<ExtArgs extends ru
   where?: Prisma.ProgramWhereInput
 }
 
+/**
+ * RoleCountOutputType without action
+ */
+export type RoleCountOutputTypeCountMealTransportConfigsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MealTransportReportConfigWhereInput
+}
+
 
 export type RoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -959,6 +1086,7 @@ export type RoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   programsAsTeamLeaderRole?: boolean | Prisma.Role$programsAsTeamLeaderRoleArgs<ExtArgs>
   programsAsTeamMemberRole?: boolean | Prisma.Role$programsAsTeamMemberRoleArgs<ExtArgs>
   programsAsCheckerRole?: boolean | Prisma.Role$programsAsCheckerRoleArgs<ExtArgs>
+  mealTransportConfigs?: boolean | Prisma.Role$mealTransportConfigsArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["role"]>
 
@@ -981,6 +1109,7 @@ export type RoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   programsAsTeamLeaderRole?: boolean | Prisma.Role$programsAsTeamLeaderRoleArgs<ExtArgs>
   programsAsTeamMemberRole?: boolean | Prisma.Role$programsAsTeamMemberRoleArgs<ExtArgs>
   programsAsCheckerRole?: boolean | Prisma.Role$programsAsCheckerRoleArgs<ExtArgs>
+  mealTransportConfigs?: boolean | Prisma.Role$mealTransportConfigsArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -992,6 +1121,7 @@ export type $RolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     programsAsTeamLeaderRole: Prisma.$ProgramPayload<ExtArgs>[]
     programsAsTeamMemberRole: Prisma.$ProgramPayload<ExtArgs>[]
     programsAsCheckerRole: Prisma.$ProgramPayload<ExtArgs>[]
+    mealTransportConfigs: Prisma.$MealTransportReportConfigPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1346,6 +1476,7 @@ export interface Prisma__RoleClient<T, Null = never, ExtArgs extends runtime.Typ
   programsAsTeamLeaderRole<T extends Prisma.Role$programsAsTeamLeaderRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$programsAsTeamLeaderRoleArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   programsAsTeamMemberRole<T extends Prisma.Role$programsAsTeamMemberRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$programsAsTeamMemberRoleArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   programsAsCheckerRole<T extends Prisma.Role$programsAsCheckerRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$programsAsCheckerRoleArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  mealTransportConfigs<T extends Prisma.Role$mealTransportConfigsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$mealTransportConfigsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealTransportReportConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1823,6 +1954,30 @@ export type Role$programsAsCheckerRoleArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.ProgramScalarFieldEnum | Prisma.ProgramScalarFieldEnum[]
+}
+
+/**
+ * Role.mealTransportConfigs
+ */
+export type Role$mealTransportConfigsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MealTransportReportConfig
+   */
+  select?: Prisma.MealTransportReportConfigSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MealTransportReportConfig
+   */
+  omit?: Prisma.MealTransportReportConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MealTransportReportConfigInclude<ExtArgs> | null
+  where?: Prisma.MealTransportReportConfigWhereInput
+  orderBy?: Prisma.MealTransportReportConfigOrderByWithRelationInput | Prisma.MealTransportReportConfigOrderByWithRelationInput[]
+  cursor?: Prisma.MealTransportReportConfigWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MealTransportReportConfigScalarFieldEnum | Prisma.MealTransportReportConfigScalarFieldEnum[]
 }
 
 /**

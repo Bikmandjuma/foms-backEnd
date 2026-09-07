@@ -740,14 +740,6 @@ export type FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput = {
   deleteMany?: Prisma.FieldExpenseScalarWhereInput | Prisma.FieldExpenseScalarWhereInput[]
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type EnumFieldExpenseStatusFieldUpdateOperationsInput = {
   set?: $Enums.FieldExpenseStatus
 }

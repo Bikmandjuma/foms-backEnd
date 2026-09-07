@@ -14,6 +14,7 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import fieldCheckInRoutes from "./routes/fieldCheckInRoutes.js";
 import fieldTeamReportRoutes from "./routes/fieldTeamReportRoutes.js";
 import fieldExpenseRoutes from "./routes/fieldExpenseRoutes.js";
+import mealTransportReportRoutes from "./routes/mealTransportReportRoutes.js";
 import outcomeConfirmationRoutes from "./routes/outcomeConfirmationRoutes.js";
 import geoRoutes from "./routes/geoRoutes.js";
 import metaRoutes from "./routes/metaRoutes.js";
@@ -60,6 +61,7 @@ export function createApp() {
   app.use("/api/field-checkins", fieldCheckInRoutes);
   app.use("/api/field-team-reports", fieldTeamReportRoutes);
   app.use("/api/field-expenses", fieldExpenseRoutes);
+  app.use("/api/meal-transport-reports", mealTransportReportRoutes);
   app.use("/api/outcome-confirmations", outcomeConfirmationRoutes);
   app.use("/api/geo", geoRoutes);
   app.use("/uploads", express.static("uploads"));

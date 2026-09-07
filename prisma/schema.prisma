@@ -117,6 +117,8 @@ model Tenant {
   programTeams           ProgramTeam[]
   availabilityChecks     AvailabilityCheck[]
   fieldExpenses          FieldExpense[]
+  mealTransportConfigs   MealTransportReportConfig[]
+  mealTransportReports   MealTransportReport[]
   replacementRequests    ReplacementRequest[]
   roles                  Role[]
   users                  User[]
@@ -136,6 +138,7 @@ model Role {
   programsAsTeamLeaderRole Program[] @relation("TeamLeaderRole")
   programsAsTeamMemberRole Program[] @relation("TeamMemberRole")
   programsAsCheckerRole    Program[] @relation("CheckerRole")
+  mealTransportConfigs     MealTransportReportConfig[] @relation("MealTransportSubmitterRole")
 
   @@unique([tenantId, name])
 }
@@ -187,6 +190,8 @@ model User {
   availabilityChecks         AvailabilityCheck[]
   fieldExpensesSubmitted     FieldExpense[]          @relation("FieldExpenseSubmitter")
   fieldExpensesReviewed      FieldExpense[]          @relation("FieldExpenseReviewer")
+  mealTransportReportsPrepared MealTransportReport[] @relation("MealTransportPreparer")
+  mealTransportConfigsApproving MealTransportReportConfig[] @relation("MealTransportApprover")
   fieldVisitsConfirmed       FieldVisit[]            @relation("FieldVisitConfirmer")
   replacementRequestsDecided ReplacementRequest[]    @relation("DecidedBy")
   replacementRequestsMade    ReplacementRequest[]    @relation("RequestedBy")
@@ -243,6 +248,7 @@ model Program {
   teams              ProgramTeam[]
   availabilityChecks AvailabilityCheck[]
   fieldExpenses      FieldExpense[]
+  mealTransportConfigs MealTransportReportConfig[]
   beneficiaries      Beneficiary[]       @relation("BeneficiaryToProgram")
 
   @@unique([tenantId, name])
@@ -323,6 +329,80 @@ model AvailabilityCheck {
   @@index([beneficiaryId], map: "AvailabilityCheck_beneficiaryId_fkey")
   @@index([userId], map: "AvailabilityCheck_userId_fkey")
   @@index([tenantId], map: "AvailabilityCheck_tenantId_fkey")
+}
+
+// --- Weekly Meal & Transport Expense Report ---------------------------
+// One config per (tenant, submitter role): which role fills the form, who
+// approves it, and the project/title/subtitle text that appears on it.
+// Any role can be configured as a submitter — Facilitator, Data Collector,
+// or any other role a tenant defines.
+model MealTransportReportConfig {
+  id             String   @id @default(uuid())
+  tenantId       String
+  submitterRoleId String
+  approverUserId String
+  // A real, existing Program — confirmed by whoever manages this config,
+  // not free text the report-filler could type themselves.
+  programId      String
+  title          String   @default("")
+  subtitle       String   @default("Weekly Meal & Transport Expense Report Form")
+  // How many days a report period covers, starting Monday — 7 for a full
+  // calendar week, 5 for a Mon-Fri work week, or anything else a tenant
+  // needs. Not automatic at 7; set explicitly per config.
+  periodDays     Int      @default(7)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  tenant         Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  submitterRole  Role     @relation("MealTransportSubmitterRole", fields: [submitterRoleId], references: [id], onDelete: Cascade)
+  approver       User     @relation("MealTransportApprover", fields: [approverUserId], references: [id], onDelete: Cascade)
+  program        Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+  reports        MealTransportReport[]
+
+  @@unique([tenantId, submitterRoleId])
+}
+
+model MealTransportReport {
+  id                    String                     @id @default(uuid())
+  tenantId              String
+  configId              String
+  userId                String
+  weekNumber            Int
+  weekStart             DateTime
+  weekEnd               DateTime
+  status                MealTransportReportStatus  @default(DRAFT)
+  preparerSignatureName String?
+  // The actual hand-drawn signature — a PNG data URL from the canvas
+  // signature pad, not a typed/rendered name.
+  preparerSignatureImage String?                    @db.LongText
+  preparerSignedAt      DateTime?
+  approverSignatureName String?
+  approverSignatureImage String?                    @db.LongText
+  approverSignedAt      DateTime?
+  createdAt             DateTime                   @default(now())
+  updatedAt             DateTime                   @updatedAt
+  tenant                Tenant                     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  config                MealTransportReportConfig  @relation(fields: [configId], references: [id], onDelete: Cascade)
+  user                  User                       @relation("MealTransportPreparer", fields: [userId], references: [id], onDelete: Cascade)
+  entries               MealTransportReportEntry[]
+
+  @@unique([userId, weekNumber])
+  @@index([tenantId], map: "MealTransportReport_tenantId_fkey")
+  @@index([configId], map: "MealTransportReport_configId_fkey")
+}
+
+model MealTransportReportEntry {
+  id             String              @id @default(uuid())
+  reportId       String
+  date           DateTime
+  mealUsd        Float               @default(0)
+  accommodationUsd Float             @default(0)
+  transportUsd   Float               @default(0)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  report         MealTransportReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@unique([reportId, date])
+  @@index([reportId], map: "MealTransportReportEntry_reportId_fkey")
 }
 
 model FieldExpense {
@@ -663,6 +743,12 @@ enum ConfirmationStatus {
 // PENDING/AVAILABLE plus the app's established field-visit outcome
 // vocabulary — matches the corrected enum from migration
 // 20260810162020_availability_check_statuses.
+enum MealTransportReportStatus {
+  DRAFT
+  PENDING_APPROVAL
+  APPROVED
+}
+
 enum AvailabilityCheckStatus {
   PENDING
   AVAILABLE

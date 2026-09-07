@@ -117,6 +117,21 @@ export type ProgramTeamVehicle = Prisma.ProgramTeamVehicleModel
  */
 export type AvailabilityCheck = Prisma.AvailabilityCheckModel
 /**
+ * Model MealTransportReportConfig
+ * 
+ */
+export type MealTransportReportConfig = Prisma.MealTransportReportConfigModel
+/**
+ * Model MealTransportReport
+ * 
+ */
+export type MealTransportReport = Prisma.MealTransportReportModel
+/**
+ * Model MealTransportReportEntry
+ * 
+ */
+export type MealTransportReportEntry = Prisma.MealTransportReportEntryModel
+/**
  * Model FieldExpense
  * 
  */

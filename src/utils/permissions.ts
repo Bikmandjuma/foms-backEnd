@@ -54,6 +54,9 @@ export const PERMISSIONS = [
   "expenses:view",
   "expenses:edit",
   "expenses:delete",
+  "meal-transport-reports:manage",
+  "meal-transport-reports:create",
+  "meal-transport-reports:approve",
   "outcomes:view",
   "outcomes:confirm",
   "activity:view",
@@ -87,6 +90,10 @@ export const PERMISSION_GROUPS: { label: string; permissions: Permission[] }[] =
     permissions: ["field-team-reports:view", "field-team-reports:view-unconfirmed"],
   },
   { label: "Field expenses", permissions: ["expenses:view", "expenses:edit", "expenses:delete"] },
+  {
+    label: "Meal & transport reports",
+    permissions: ["meal-transport-reports:manage", "meal-transport-reports:create", "meal-transport-reports:approve"],
+  },
   { label: "Outcome confirmations", permissions: ["outcomes:view", "outcomes:confirm"] },
   { label: "Activity logs", permissions: ["activity:view"] },
 ];

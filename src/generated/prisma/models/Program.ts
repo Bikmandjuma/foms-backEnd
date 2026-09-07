@@ -345,6 +345,7 @@ export type ProgramWhereInput = {
   teams?: Prisma.ProgramTeamListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
   fieldExpenses?: Prisma.FieldExpenseListRelationFilter
+  mealTransportConfigs?: Prisma.MealTransportReportConfigListRelationFilter
   beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }
 
@@ -377,6 +378,7 @@ export type ProgramOrderByWithRelationInput = {
   teams?: Prisma.ProgramTeamOrderByRelationAggregateInput
   availabilityChecks?: Prisma.AvailabilityCheckOrderByRelationAggregateInput
   fieldExpenses?: Prisma.FieldExpenseOrderByRelationAggregateInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigOrderByRelationAggregateInput
   beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
   _relevance?: Prisma.ProgramOrderByRelevanceInput
 }
@@ -414,6 +416,7 @@ export type ProgramWhereUniqueInput = Prisma.AtLeast<{
   teams?: Prisma.ProgramTeamListRelationFilter
   availabilityChecks?: Prisma.AvailabilityCheckListRelationFilter
   fieldExpenses?: Prisma.FieldExpenseListRelationFilter
+  mealTransportConfigs?: Prisma.MealTransportReportConfigListRelationFilter
   beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }, "id" | "tenantId_name">
 
@@ -494,6 +497,7 @@ export type ProgramCreateInput = {
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -522,6 +526,7 @@ export type ProgramUncheckedCreateInput = {
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -550,6 +555,7 @@ export type ProgramUpdateInput = {
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -578,6 +584,7 @@ export type ProgramUncheckedUpdateInput = {
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -956,6 +963,20 @@ export type ProgramUpdateOneRequiredWithoutAvailabilityChecksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutAvailabilityChecksInput, Prisma.ProgramUpdateWithoutAvailabilityChecksInput>, Prisma.ProgramUncheckedUpdateWithoutAvailabilityChecksInput>
 }
 
+export type ProgramCreateNestedOneWithoutMealTransportConfigsInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutMealTransportConfigsInput, Prisma.ProgramUncheckedCreateWithoutMealTransportConfigsInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutMealTransportConfigsInput
+  connect?: Prisma.ProgramWhereUniqueInput
+}
+
+export type ProgramUpdateOneRequiredWithoutMealTransportConfigsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutMealTransportConfigsInput, Prisma.ProgramUncheckedCreateWithoutMealTransportConfigsInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutMealTransportConfigsInput
+  upsert?: Prisma.ProgramUpsertWithoutMealTransportConfigsInput
+  connect?: Prisma.ProgramWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutMealTransportConfigsInput, Prisma.ProgramUpdateWithoutMealTransportConfigsInput>, Prisma.ProgramUncheckedUpdateWithoutMealTransportConfigsInput>
+}
+
 export type ProgramCreateNestedOneWithoutFieldExpensesInput = {
   create?: Prisma.XOR<Prisma.ProgramCreateWithoutFieldExpensesInput, Prisma.ProgramUncheckedCreateWithoutFieldExpensesInput>
   connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutFieldExpensesInput
@@ -1062,6 +1083,7 @@ export type ProgramCreateWithoutTenantInput = {
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1089,6 +1111,7 @@ export type ProgramUncheckedCreateWithoutTenantInput = {
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1167,6 +1190,7 @@ export type ProgramCreateWithoutTeamLeaderRoleInput = {
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1194,6 +1218,7 @@ export type ProgramUncheckedCreateWithoutTeamLeaderRoleInput = {
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1231,6 +1256,7 @@ export type ProgramCreateWithoutTeamMemberRoleInput = {
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1258,6 +1284,7 @@ export type ProgramUncheckedCreateWithoutTeamMemberRoleInput = {
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1295,6 +1322,7 @@ export type ProgramCreateWithoutCheckerRoleInput = {
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1322,6 +1350,7 @@ export type ProgramUncheckedCreateWithoutCheckerRoleInput = {
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1407,6 +1436,7 @@ export type ProgramCreateWithoutTeamsInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1434,6 +1464,7 @@ export type ProgramUncheckedCreateWithoutTeamsInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1477,6 +1508,7 @@ export type ProgramUpdateWithoutTeamsInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1504,6 +1536,7 @@ export type ProgramUncheckedUpdateWithoutTeamsInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1531,6 +1564,7 @@ export type ProgramCreateWithoutAvailabilityChecksInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1558,6 +1592,7 @@ export type ProgramUncheckedCreateWithoutAvailabilityChecksInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1601,6 +1636,7 @@ export type ProgramUpdateWithoutAvailabilityChecksInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1627,6 +1663,135 @@ export type ProgramUncheckedUpdateWithoutAvailabilityChecksInput = {
   fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
+}
+
+export type ProgramCreateWithoutMealTransportConfigsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  endDate?: Date | string | null
+  scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
+  startDate?: Date | string | null
+  status?: $Enums.ProjectStatus
+  statusOther?: string | null
+  targetSampleSize?: number | null
+  tracingRequired?: boolean
+  teamCount?: number | null
+  membersPerTeam?: number | null
+  teamLeaderRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamLeaderRoleInput
+  teamMemberRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsTeamMemberRoleInput
+  checkerRole?: Prisma.RoleCreateNestedOneWithoutProgramsAsCheckerRoleInput
+  fieldCheckIns?: Prisma.FieldCheckInCreateNestedManyWithoutProjectInput
+  tenant: Prisma.TenantCreateNestedOneWithoutProgramsInput
+  assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
+  teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
+  availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
+}
+
+export type ProgramUncheckedCreateWithoutMealTransportConfigsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenantId: string
+  endDate?: Date | string | null
+  scenarioType?: $Enums.ScenarioType | null
+  scenarioTypeOther?: string | null
+  startDate?: Date | string | null
+  status?: $Enums.ProjectStatus
+  statusOther?: string | null
+  targetSampleSize?: number | null
+  tracingRequired?: boolean
+  teamCount?: number | null
+  membersPerTeam?: number | null
+  teamLeaderRoleId?: string | null
+  teamMemberRoleId?: string | null
+  checkerRoleId?: string | null
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedCreateNestedManyWithoutProjectInput
+  assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
+  teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
+}
+
+export type ProgramCreateOrConnectWithoutMealTransportConfigsInput = {
+  where: Prisma.ProgramWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutMealTransportConfigsInput, Prisma.ProgramUncheckedCreateWithoutMealTransportConfigsInput>
+}
+
+export type ProgramUpsertWithoutMealTransportConfigsInput = {
+  update: Prisma.XOR<Prisma.ProgramUpdateWithoutMealTransportConfigsInput, Prisma.ProgramUncheckedUpdateWithoutMealTransportConfigsInput>
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutMealTransportConfigsInput, Prisma.ProgramUncheckedCreateWithoutMealTransportConfigsInput>
+  where?: Prisma.ProgramWhereInput
+}
+
+export type ProgramUpdateToOneWithWhereWithoutMealTransportConfigsInput = {
+  where?: Prisma.ProgramWhereInput
+  data: Prisma.XOR<Prisma.ProgramUpdateWithoutMealTransportConfigsInput, Prisma.ProgramUncheckedUpdateWithoutMealTransportConfigsInput>
+}
+
+export type ProgramUpdateWithoutMealTransportConfigsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamLeaderRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamLeaderRoleNestedInput
+  teamMemberRole?: Prisma.RoleUpdateOneWithoutProgramsAsTeamMemberRoleNestedInput
+  checkerRole?: Prisma.RoleUpdateOneWithoutProgramsAsCheckerRoleNestedInput
+  fieldCheckIns?: Prisma.FieldCheckInUpdateManyWithoutProjectNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutProgramsNestedInput
+  assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
+  teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
+}
+
+export type ProgramUncheckedUpdateWithoutMealTransportConfigsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scenarioType?: Prisma.NullableEnumScenarioTypeFieldUpdateOperationsInput | $Enums.ScenarioType | null
+  scenarioTypeOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  statusOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetSampleSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tracingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  teamCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  membersPerTeam?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  teamLeaderRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamMemberRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fieldCheckIns?: Prisma.FieldCheckInUncheckedUpdateManyWithoutProjectNestedInput
+  assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
+  teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
+  availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
@@ -1655,6 +1820,7 @@ export type ProgramCreateWithoutFieldExpensesInput = {
   assignments?: Prisma.ProgramAssignmentCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1682,6 +1848,7 @@ export type ProgramUncheckedCreateWithoutFieldExpensesInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedCreateNestedManyWithoutProgramInput
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1725,6 +1892,7 @@ export type ProgramUpdateWithoutFieldExpensesInput = {
   assignments?: Prisma.ProgramAssignmentUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1752,6 +1920,7 @@ export type ProgramUncheckedUpdateWithoutFieldExpensesInput = {
   assignments?: Prisma.ProgramAssignmentUncheckedUpdateManyWithoutProgramNestedInput
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1780,6 +1949,7 @@ export type ProgramCreateWithoutBeneficiariesInput = {
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutBeneficiariesInput = {
@@ -1807,6 +1977,7 @@ export type ProgramUncheckedCreateWithoutBeneficiariesInput = {
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutBeneficiariesInput = {
@@ -1854,6 +2025,7 @@ export type ProgramCreateWithoutAssignmentsInput = {
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -1881,6 +2053,7 @@ export type ProgramUncheckedCreateWithoutAssignmentsInput = {
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -1924,6 +2097,7 @@ export type ProgramUpdateWithoutAssignmentsInput = {
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1951,6 +2125,7 @@ export type ProgramUncheckedUpdateWithoutAssignmentsInput = {
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -1978,6 +2153,7 @@ export type ProgramCreateWithoutFieldCheckInsInput = {
   teams?: Prisma.ProgramTeamCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutProgramsInput
 }
 
@@ -2005,6 +2181,7 @@ export type ProgramUncheckedCreateWithoutFieldCheckInsInput = {
   teams?: Prisma.ProgramTeamUncheckedCreateNestedManyWithoutProgramInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedCreateNestedManyWithoutProgramInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedCreateNestedManyWithoutProgramInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedCreateNestedManyWithoutProgramInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutProgramsInput
 }
 
@@ -2048,6 +2225,7 @@ export type ProgramUpdateWithoutFieldCheckInsInput = {
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2075,6 +2253,7 @@ export type ProgramUncheckedUpdateWithoutFieldCheckInsInput = {
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2123,6 +2302,7 @@ export type ProgramUpdateWithoutTenantInput = {
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2150,6 +2330,7 @@ export type ProgramUncheckedUpdateWithoutTenantInput = {
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2261,6 +2442,7 @@ export type ProgramUpdateWithoutTeamLeaderRoleInput = {
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2288,6 +2470,7 @@ export type ProgramUncheckedUpdateWithoutTeamLeaderRoleInput = {
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2336,6 +2519,7 @@ export type ProgramUpdateWithoutTeamMemberRoleInput = {
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2363,6 +2547,7 @@ export type ProgramUncheckedUpdateWithoutTeamMemberRoleInput = {
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2411,6 +2596,7 @@ export type ProgramUpdateWithoutCheckerRoleInput = {
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2438,6 +2624,7 @@ export type ProgramUncheckedUpdateWithoutCheckerRoleInput = {
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutProgramsNestedInput
 }
 
@@ -2487,6 +2674,7 @@ export type ProgramUpdateWithoutBeneficiariesInput = {
   teams?: Prisma.ProgramTeamUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutBeneficiariesInput = {
@@ -2514,6 +2702,7 @@ export type ProgramUncheckedUpdateWithoutBeneficiariesInput = {
   teams?: Prisma.ProgramTeamUncheckedUpdateManyWithoutProgramNestedInput
   availabilityChecks?: Prisma.AvailabilityCheckUncheckedUpdateManyWithoutProgramNestedInput
   fieldExpenses?: Prisma.FieldExpenseUncheckedUpdateManyWithoutProgramNestedInput
+  mealTransportConfigs?: Prisma.MealTransportReportConfigUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutBeneficiariesInput = {
@@ -2549,6 +2738,7 @@ export type ProgramCountOutputType = {
   teams: number
   availabilityChecks: number
   fieldExpenses: number
+  mealTransportConfigs: number
   beneficiaries: number
 }
 
@@ -2558,6 +2748,7 @@ export type ProgramCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   teams?: boolean | ProgramCountOutputTypeCountTeamsArgs
   availabilityChecks?: boolean | ProgramCountOutputTypeCountAvailabilityChecksArgs
   fieldExpenses?: boolean | ProgramCountOutputTypeCountFieldExpensesArgs
+  mealTransportConfigs?: boolean | ProgramCountOutputTypeCountMealTransportConfigsArgs
   beneficiaries?: boolean | ProgramCountOutputTypeCountBeneficiariesArgs
 }
 
@@ -2609,6 +2800,13 @@ export type ProgramCountOutputTypeCountFieldExpensesArgs<ExtArgs extends runtime
 /**
  * ProgramCountOutputType without action
  */
+export type ProgramCountOutputTypeCountMealTransportConfigsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MealTransportReportConfigWhereInput
+}
+
+/**
+ * ProgramCountOutputType without action
+ */
 export type ProgramCountOutputTypeCountBeneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BeneficiaryWhereInput
 }
@@ -2643,6 +2841,7 @@ export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   teams?: boolean | Prisma.Program$teamsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Program$availabilityChecksArgs<ExtArgs>
   fieldExpenses?: boolean | Prisma.Program$fieldExpensesArgs<ExtArgs>
+  mealTransportConfigs?: boolean | Prisma.Program$mealTransportConfigsArgs<ExtArgs>
   beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["program"]>
@@ -2682,6 +2881,7 @@ export type ProgramInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   teams?: boolean | Prisma.Program$teamsArgs<ExtArgs>
   availabilityChecks?: boolean | Prisma.Program$availabilityChecksArgs<ExtArgs>
   fieldExpenses?: boolean | Prisma.Program$fieldExpensesArgs<ExtArgs>
+  mealTransportConfigs?: boolean | Prisma.Program$mealTransportConfigsArgs<ExtArgs>
   beneficiaries?: boolean | Prisma.Program$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2698,6 +2898,7 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     teams: Prisma.$ProgramTeamPayload<ExtArgs>[]
     availabilityChecks: Prisma.$AvailabilityCheckPayload<ExtArgs>[]
     fieldExpenses: Prisma.$FieldExpensePayload<ExtArgs>[]
+    mealTransportConfigs: Prisma.$MealTransportReportConfigPayload<ExtArgs>[]
     beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -3069,6 +3270,7 @@ export interface Prisma__ProgramClient<T, Null = never, ExtArgs extends runtime.
   teams<T extends Prisma.Program$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   availabilityChecks<T extends Prisma.Program$availabilityChecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$availabilityChecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilityCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fieldExpenses<T extends Prisma.Program$fieldExpensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$fieldExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  mealTransportConfigs<T extends Prisma.Program$mealTransportConfigsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$mealTransportConfigsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealTransportReportConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   beneficiaries<T extends Prisma.Program$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3640,6 +3842,30 @@ export type Program$fieldExpensesArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.FieldExpenseScalarFieldEnum | Prisma.FieldExpenseScalarFieldEnum[]
+}
+
+/**
+ * Program.mealTransportConfigs
+ */
+export type Program$mealTransportConfigsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MealTransportReportConfig
+   */
+  select?: Prisma.MealTransportReportConfigSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MealTransportReportConfig
+   */
+  omit?: Prisma.MealTransportReportConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MealTransportReportConfigInclude<ExtArgs> | null
+  where?: Prisma.MealTransportReportConfigWhereInput
+  orderBy?: Prisma.MealTransportReportConfigOrderByWithRelationInput | Prisma.MealTransportReportConfigOrderByWithRelationInput[]
+  cursor?: Prisma.MealTransportReportConfigWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MealTransportReportConfigScalarFieldEnum | Prisma.MealTransportReportConfigScalarFieldEnum[]
 }
 
 /**

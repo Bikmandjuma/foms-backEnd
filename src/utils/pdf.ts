@@ -2,6 +2,169 @@ import PDFDocument from "pdfkit";
 import type { AssignmentReportRow } from "./excel.js";
 import type { FieldTeamReportRow } from "./fieldTeamReport.js";
 
+interface MealTransportReportForPdf {
+  weekNumber: number;
+  weekStart: Date;
+  weekEnd: Date;
+  status: string;
+  preparerSignatureName: string | null;
+  preparerSignatureImage: string | null;
+  preparerSignedAt: Date | null;
+  approverSignatureName: string | null;
+  approverSignatureImage: string | null;
+  approverSignedAt: Date | null;
+  user: { name: string | null };
+  config: {
+    title: string;
+    subtitle: string;
+    program: { name: string };
+    submitterRole: { name: string };
+    approver: { name: string | null; role: { name: string } | null };
+  };
+  entries: { date: Date; mealUsd: number; accommodationUsd: number; transportUsd: number }[];
+}
+
+/** Renders the weekly meal & transport report as close to the original
+ * paper form as a generated PDF reasonably can: title/subtitle, the
+ * project/name/week header block, the daily table, the totals block (with
+ * Total Transport correctly stacked under Total Accommodation rather than
+ * beside it, per the corrected layout), and the two signature blocks. */
+export function buildMealTransportReportPdf(
+  report: MealTransportReportForPdf,
+  totals: { totalMeal: number; totalAccommodation: number; totalTransport: number; grandTotal: number }
+): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const doc = new PDFDocument({ margin: 44, size: "A4" });
+    const chunks: Buffer[] = [];
+    doc.on("data", (chunk) => chunks.push(chunk));
+    doc.on("end", () => resolve(Buffer.concat(chunks)));
+    doc.on("error", reject);
+
+    const left = doc.page.margins.left;
+    const width = doc.page.width - doc.page.margins.left - doc.page.margins.right;
+    const money = (n: number) => `$${n.toFixed(2)}`;
+
+    if (report.config.title.trim()) {
+      doc.fontSize(15).font("Helvetica-Bold").fillColor("#111111").text(report.config.title, { align: "center" });
+    }
+    doc.fontSize(11).font("Helvetica-Bold").text(report.config.subtitle, { align: "center" });
+    doc.moveDown(1);
+
+    function keyValueRow(key: string, value: string, y: number, keyWidth = 150) {
+      doc.rect(left, y, width, 20).stroke("#000000");
+      doc.moveTo(left + keyWidth, y).lineTo(left + keyWidth, y + 20).stroke("#000000");
+      doc.fontSize(9).font("Helvetica-Bold").fillColor("#111111").text(key, left + 6, y + 6, { width: keyWidth - 12 });
+      doc.font("Helvetica").text(value, left + keyWidth + 6, y + 6, { width: width - keyWidth - 12 });
+    }
+
+    let y = doc.y;
+    keyValueRow("Project:", report.config.program.name, y);
+    keyValueRow(`Name of ${report.config.submitterRole.name}:`, report.user.name ?? "—", y + 20);
+    keyValueRow(
+      "Week:",
+      `From ${report.weekStart.toLocaleDateString()}   To ${report.weekEnd.toLocaleDateString()}`,
+      y + 40
+    );
+    doc.y = y + 66;
+    doc.moveDown(0.5);
+
+    // Daily table.
+    const cols = [
+      { key: "date", label: "Date", width: width * 0.24 },
+      { key: "meal", label: "Meal (USD)", width: width * 0.19 },
+      { key: "accommodation", label: "Accommodation (USD)", width: width * 0.23 },
+      { key: "transport", label: "Transport (USD)", width: width * 0.19 },
+      { key: "total", label: "Total (USD)", width: width * 0.15 },
+    ];
+    function tableRow(values: string[], rowY: number, bold: boolean) {
+      let x = left;
+      doc.rect(left, rowY, width, 20).stroke("#000000");
+      cols.forEach((c, i) => {
+        if (i > 0) doc.moveTo(x, rowY).lineTo(x, rowY + 20).stroke("#000000");
+        doc.fontSize(9).font(bold ? "Helvetica-Bold" : "Helvetica").fillColor("#111111").text(values[i] ?? "", x + 5, rowY + 6, { width: c.width - 10 });
+        x += c.width;
+      });
+    }
+    y = doc.y;
+    tableRow(cols.map((c) => c.label), y, true);
+    const dayMap = new Map(report.entries.map((e) => [e.date.toISOString().slice(0, 10), e]));
+    // Not automatically a 7-day week — spans exactly however many days this
+    // report's own weekStart→weekEnd covers (5 for a Mon-Fri config, etc).
+    const periodDays = Math.round((report.weekEnd.getTime() - report.weekStart.getTime()) / 86400000) + 1;
+    for (let i = 0; i < periodDays; i++) {
+      const d = new Date(report.weekStart);
+      d.setDate(d.getDate() + i);
+      const entry = dayMap.get(d.toISOString().slice(0, 10));
+      const rowY = y + 20 * (i + 1);
+      const total = entry ? entry.mealUsd + entry.accommodationUsd + entry.transportUsd : 0;
+      tableRow(
+        [
+          d.toLocaleDateString(),
+          entry ? money(entry.mealUsd) : "",
+          entry ? money(entry.accommodationUsd) : "",
+          entry ? money(entry.transportUsd) : "",
+          entry ? money(total) : "",
+        ],
+        rowY,
+        false
+      );
+    }
+    doc.y = y + 20 * (periodDays + 1);
+    doc.moveDown(0.5);
+
+    // Totals — Total Transport stacked under Total Accommodation, per the
+    // corrected layout, not beside it as the original paper form had it.
+    y = doc.y;
+    keyValueRow("Total Meal", money(totals.totalMeal), y);
+    keyValueRow("Total Accommodation", money(totals.totalAccommodation), y + 20);
+    keyValueRow("Total Transport", money(totals.totalTransport), y + 40);
+    keyValueRow("Grand Total", money(totals.grandTotal), y + 60);
+    doc.y = y + 86;
+    doc.moveDown(0.5);
+
+    // Signatures.
+    const half = width / 2;
+    y = doc.y;
+    doc.rect(left, y, width, 22).stroke("#000000");
+    doc.moveTo(left + half, y).lineTo(left + half, y + 22).stroke("#000000");
+    doc.fontSize(9).font("Helvetica-Bold").text(`Prepared by (${report.config.submitterRole.name})`, left + 6, y + 7);
+    doc.text(`Approved by (${report.config.approver.role?.name ?? "Approver"})`, left + half + 6, y + 7);
+
+    function signatureBlock(
+      rowY: number,
+      label: string,
+      name: string,
+      signatureImage: string | null,
+      signedAt: Date | null,
+      x: number
+    ) {
+      doc.fontSize(9).font("Helvetica").fillColor("#111111").text(`${label}: ${name}`, x + 6, rowY + 6, { width: half - 12 });
+      doc.text("Signature:", x + 6, rowY + 22, { width: half - 12 });
+      if (signatureImage) {
+        try {
+          const base64 = signatureImage.replace(/^data:image\/png;base64,/, "");
+          doc.image(Buffer.from(base64, "base64"), x + 60, rowY + 16, { fit: [half - 90, 34] });
+        } catch {
+          // A corrupt/unparseable data URL falls back to a blank line rather
+          // than crashing the whole export.
+          doc.text("____________________", x + 60, rowY + 22);
+        }
+      } else {
+        doc.text("____________________", x + 60, rowY + 22);
+      }
+      doc.text(`Date: ${signedAt ? signedAt.toLocaleDateString() : "____________"}`, x + 6, rowY + 58, { width: half - 12 });
+    }
+
+    const sigRowY = y + 22;
+    doc.rect(left, sigRowY, width, 84).stroke("#000000");
+    doc.moveTo(left + half, sigRowY).lineTo(left + half, sigRowY + 84).stroke("#000000");
+    signatureBlock(sigRowY, "Name", report.user.name ?? "—", report.preparerSignatureImage, report.preparerSignedAt, left);
+    signatureBlock(sigRowY, "Name", report.config.approver.name ?? "—", report.approverSignatureImage, report.approverSignedAt, left + half);
+
+    doc.end();
+  });
+}
+
 /** Simple tabular PDF for a Smart Assignment Engine run — no fancy grid
  * rendering, just clean, readable columns via manual x-positioning
  * (pdfkit has no built-in table support). */

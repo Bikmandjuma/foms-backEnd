@@ -412,6 +412,9 @@ export const ModelName = {
   ProgramTeamMember: 'ProgramTeamMember',
   ProgramTeamVehicle: 'ProgramTeamVehicle',
   AvailabilityCheck: 'AvailabilityCheck',
+  MealTransportReportConfig: 'MealTransportReportConfig',
+  MealTransportReport: 'MealTransportReport',
+  MealTransportReportEntry: 'MealTransportReportEntry',
   FieldExpense: 'FieldExpense',
   Beneficiary: 'Beneficiary',
   ProgramAssignment: 'ProgramAssignment',
@@ -437,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "province" | "district" | "sector" | "cell" | "village" | "notification" | "tenant" | "role" | "user" | "passwordResetCode" | "program" | "programTeam" | "programTeamMember" | "programTeamVehicle" | "availabilityCheck" | "fieldExpense" | "beneficiary" | "programAssignment" | "beneficiaryAssignment" | "vehicle" | "replacementRequest" | "fieldCheckIn" | "fieldVisit" | "fieldNote" | "activityLog"
+    modelProps: "province" | "district" | "sector" | "cell" | "village" | "notification" | "tenant" | "role" | "user" | "passwordResetCode" | "program" | "programTeam" | "programTeamMember" | "programTeamVehicle" | "availabilityCheck" | "mealTransportReportConfig" | "mealTransportReport" | "mealTransportReportEntry" | "fieldExpense" | "beneficiary" | "programAssignment" | "beneficiaryAssignment" | "vehicle" | "replacementRequest" | "fieldCheckIn" | "fieldVisit" | "fieldNote" | "activityLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1431,6 +1434,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MealTransportReportConfig: {
+      payload: Prisma.$MealTransportReportConfigPayload<ExtArgs>
+      fields: Prisma.MealTransportReportConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MealTransportReportConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MealTransportReportConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.MealTransportReportConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MealTransportReportConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportConfigPayload>
+        }
+        findMany: {
+          args: Prisma.MealTransportReportConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportConfigPayload>[]
+        }
+        create: {
+          args: Prisma.MealTransportReportConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportConfigPayload>
+        }
+        createMany: {
+          args: Prisma.MealTransportReportConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MealTransportReportConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportConfigPayload>
+        }
+        update: {
+          args: Prisma.MealTransportReportConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.MealTransportReportConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MealTransportReportConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MealTransportReportConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.MealTransportReportConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMealTransportReportConfig>
+        }
+        groupBy: {
+          args: Prisma.MealTransportReportConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MealTransportReportConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MealTransportReportConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MealTransportReportConfigCountAggregateOutputType> | number
+        }
+      }
+    }
+    MealTransportReport: {
+      payload: Prisma.$MealTransportReportPayload<ExtArgs>
+      fields: Prisma.MealTransportReportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MealTransportReportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MealTransportReportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportPayload>
+        }
+        findFirst: {
+          args: Prisma.MealTransportReportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MealTransportReportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportPayload>
+        }
+        findMany: {
+          args: Prisma.MealTransportReportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportPayload>[]
+        }
+        create: {
+          args: Prisma.MealTransportReportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportPayload>
+        }
+        createMany: {
+          args: Prisma.MealTransportReportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MealTransportReportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportPayload>
+        }
+        update: {
+          args: Prisma.MealTransportReportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportPayload>
+        }
+        deleteMany: {
+          args: Prisma.MealTransportReportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MealTransportReportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MealTransportReportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportPayload>
+        }
+        aggregate: {
+          args: Prisma.MealTransportReportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMealTransportReport>
+        }
+        groupBy: {
+          args: Prisma.MealTransportReportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MealTransportReportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MealTransportReportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MealTransportReportCountAggregateOutputType> | number
+        }
+      }
+    }
+    MealTransportReportEntry: {
+      payload: Prisma.$MealTransportReportEntryPayload<ExtArgs>
+      fields: Prisma.MealTransportReportEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MealTransportReportEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MealTransportReportEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.MealTransportReportEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MealTransportReportEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportEntryPayload>
+        }
+        findMany: {
+          args: Prisma.MealTransportReportEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportEntryPayload>[]
+        }
+        create: {
+          args: Prisma.MealTransportReportEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportEntryPayload>
+        }
+        createMany: {
+          args: Prisma.MealTransportReportEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MealTransportReportEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportEntryPayload>
+        }
+        update: {
+          args: Prisma.MealTransportReportEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.MealTransportReportEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MealTransportReportEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MealTransportReportEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MealTransportReportEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.MealTransportReportEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMealTransportReportEntry>
+        }
+        groupBy: {
+          args: Prisma.MealTransportReportEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MealTransportReportEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MealTransportReportEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MealTransportReportEntryCountAggregateOutputType> | number
+        }
+      }
+    }
     FieldExpense: {
       payload: Prisma.$FieldExpensePayload<ExtArgs>
       fields: Prisma.FieldExpenseFieldRefs
@@ -2345,6 +2546,58 @@ export const AvailabilityCheckScalarFieldEnum = {
 export type AvailabilityCheckScalarFieldEnum = (typeof AvailabilityCheckScalarFieldEnum)[keyof typeof AvailabilityCheckScalarFieldEnum]
 
 
+export const MealTransportReportConfigScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  submitterRoleId: 'submitterRoleId',
+  approverUserId: 'approverUserId',
+  programId: 'programId',
+  title: 'title',
+  subtitle: 'subtitle',
+  periodDays: 'periodDays',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MealTransportReportConfigScalarFieldEnum = (typeof MealTransportReportConfigScalarFieldEnum)[keyof typeof MealTransportReportConfigScalarFieldEnum]
+
+
+export const MealTransportReportScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  configId: 'configId',
+  userId: 'userId',
+  weekNumber: 'weekNumber',
+  weekStart: 'weekStart',
+  weekEnd: 'weekEnd',
+  status: 'status',
+  preparerSignatureName: 'preparerSignatureName',
+  preparerSignatureImage: 'preparerSignatureImage',
+  preparerSignedAt: 'preparerSignedAt',
+  approverSignatureName: 'approverSignatureName',
+  approverSignatureImage: 'approverSignatureImage',
+  approverSignedAt: 'approverSignedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MealTransportReportScalarFieldEnum = (typeof MealTransportReportScalarFieldEnum)[keyof typeof MealTransportReportScalarFieldEnum]
+
+
+export const MealTransportReportEntryScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  date: 'date',
+  mealUsd: 'mealUsd',
+  accommodationUsd: 'accommodationUsd',
+  transportUsd: 'transportUsd',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MealTransportReportEntryScalarFieldEnum = (typeof MealTransportReportEntryScalarFieldEnum)[keyof typeof MealTransportReportEntryScalarFieldEnum]
+
+
 export const FieldExpenseScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -2710,6 +2963,41 @@ export const AvailabilityCheckOrderByRelevanceFieldEnum = {
 export type AvailabilityCheckOrderByRelevanceFieldEnum = (typeof AvailabilityCheckOrderByRelevanceFieldEnum)[keyof typeof AvailabilityCheckOrderByRelevanceFieldEnum]
 
 
+export const MealTransportReportConfigOrderByRelevanceFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  submitterRoleId: 'submitterRoleId',
+  approverUserId: 'approverUserId',
+  programId: 'programId',
+  title: 'title',
+  subtitle: 'subtitle'
+} as const
+
+export type MealTransportReportConfigOrderByRelevanceFieldEnum = (typeof MealTransportReportConfigOrderByRelevanceFieldEnum)[keyof typeof MealTransportReportConfigOrderByRelevanceFieldEnum]
+
+
+export const MealTransportReportOrderByRelevanceFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  configId: 'configId',
+  userId: 'userId',
+  preparerSignatureName: 'preparerSignatureName',
+  preparerSignatureImage: 'preparerSignatureImage',
+  approverSignatureName: 'approverSignatureName',
+  approverSignatureImage: 'approverSignatureImage'
+} as const
+
+export type MealTransportReportOrderByRelevanceFieldEnum = (typeof MealTransportReportOrderByRelevanceFieldEnum)[keyof typeof MealTransportReportOrderByRelevanceFieldEnum]
+
+
+export const MealTransportReportEntryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportId: 'reportId'
+} as const
+
+export type MealTransportReportEntryOrderByRelevanceFieldEnum = (typeof MealTransportReportEntryOrderByRelevanceFieldEnum)[keyof typeof MealTransportReportEntryOrderByRelevanceFieldEnum]
+
+
 export const FieldExpenseOrderByRelevanceFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -2924,6 +3212,13 @@ export type EnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'AvailabilityCheckStatus'
  */
 export type EnumAvailabilityCheckStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AvailabilityCheckStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MealTransportReportStatus'
+ */
+export type EnumMealTransportReportStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MealTransportReportStatus'>
     
 
 
@@ -3155,6 +3450,9 @@ export type GlobalOmitConfig = {
   programTeamMember?: Prisma.ProgramTeamMemberOmit
   programTeamVehicle?: Prisma.ProgramTeamVehicleOmit
   availabilityCheck?: Prisma.AvailabilityCheckOmit
+  mealTransportReportConfig?: Prisma.MealTransportReportConfigOmit
+  mealTransportReport?: Prisma.MealTransportReportOmit
+  mealTransportReportEntry?: Prisma.MealTransportReportEntryOmit
   fieldExpense?: Prisma.FieldExpenseOmit
   beneficiary?: Prisma.BeneficiaryOmit
   programAssignment?: Prisma.ProgramAssignmentOmit

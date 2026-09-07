@@ -66,6 +66,9 @@ export const ModelName = {
   ProgramTeamMember: 'ProgramTeamMember',
   ProgramTeamVehicle: 'ProgramTeamVehicle',
   AvailabilityCheck: 'AvailabilityCheck',
+  MealTransportReportConfig: 'MealTransportReportConfig',
+  MealTransportReport: 'MealTransportReport',
+  MealTransportReportEntry: 'MealTransportReportEntry',
   FieldExpense: 'FieldExpense',
   Beneficiary: 'Beneficiary',
   ProgramAssignment: 'ProgramAssignment',
@@ -307,6 +310,58 @@ export const AvailabilityCheckScalarFieldEnum = {
 } as const
 
 export type AvailabilityCheckScalarFieldEnum = (typeof AvailabilityCheckScalarFieldEnum)[keyof typeof AvailabilityCheckScalarFieldEnum]
+
+
+export const MealTransportReportConfigScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  submitterRoleId: 'submitterRoleId',
+  approverUserId: 'approverUserId',
+  programId: 'programId',
+  title: 'title',
+  subtitle: 'subtitle',
+  periodDays: 'periodDays',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MealTransportReportConfigScalarFieldEnum = (typeof MealTransportReportConfigScalarFieldEnum)[keyof typeof MealTransportReportConfigScalarFieldEnum]
+
+
+export const MealTransportReportScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  configId: 'configId',
+  userId: 'userId',
+  weekNumber: 'weekNumber',
+  weekStart: 'weekStart',
+  weekEnd: 'weekEnd',
+  status: 'status',
+  preparerSignatureName: 'preparerSignatureName',
+  preparerSignatureImage: 'preparerSignatureImage',
+  preparerSignedAt: 'preparerSignedAt',
+  approverSignatureName: 'approverSignatureName',
+  approverSignatureImage: 'approverSignatureImage',
+  approverSignedAt: 'approverSignedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MealTransportReportScalarFieldEnum = (typeof MealTransportReportScalarFieldEnum)[keyof typeof MealTransportReportScalarFieldEnum]
+
+
+export const MealTransportReportEntryScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  date: 'date',
+  mealUsd: 'mealUsd',
+  accommodationUsd: 'accommodationUsd',
+  transportUsd: 'transportUsd',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MealTransportReportEntryScalarFieldEnum = (typeof MealTransportReportEntryScalarFieldEnum)[keyof typeof MealTransportReportEntryScalarFieldEnum]
 
 
 export const FieldExpenseScalarFieldEnum = {
@@ -672,6 +727,41 @@ export const AvailabilityCheckOrderByRelevanceFieldEnum = {
 } as const
 
 export type AvailabilityCheckOrderByRelevanceFieldEnum = (typeof AvailabilityCheckOrderByRelevanceFieldEnum)[keyof typeof AvailabilityCheckOrderByRelevanceFieldEnum]
+
+
+export const MealTransportReportConfigOrderByRelevanceFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  submitterRoleId: 'submitterRoleId',
+  approverUserId: 'approverUserId',
+  programId: 'programId',
+  title: 'title',
+  subtitle: 'subtitle'
+} as const
+
+export type MealTransportReportConfigOrderByRelevanceFieldEnum = (typeof MealTransportReportConfigOrderByRelevanceFieldEnum)[keyof typeof MealTransportReportConfigOrderByRelevanceFieldEnum]
+
+
+export const MealTransportReportOrderByRelevanceFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  configId: 'configId',
+  userId: 'userId',
+  preparerSignatureName: 'preparerSignatureName',
+  preparerSignatureImage: 'preparerSignatureImage',
+  approverSignatureName: 'approverSignatureName',
+  approverSignatureImage: 'approverSignatureImage'
+} as const
+
+export type MealTransportReportOrderByRelevanceFieldEnum = (typeof MealTransportReportOrderByRelevanceFieldEnum)[keyof typeof MealTransportReportOrderByRelevanceFieldEnum]
+
+
+export const MealTransportReportEntryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportId: 'reportId'
+} as const
+
+export type MealTransportReportEntryOrderByRelevanceFieldEnum = (typeof MealTransportReportEntryOrderByRelevanceFieldEnum)[keyof typeof MealTransportReportEntryOrderByRelevanceFieldEnum]
 
 
 export const FieldExpenseOrderByRelevanceFieldEnum = {

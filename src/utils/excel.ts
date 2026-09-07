@@ -278,3 +278,161 @@ export async function buildAssignmentReportWorkbook(rows: AssignmentReportRow[])
   const buffer = await workbook.xlsx.writeBuffer();
   return Buffer.from(buffer);
 }
+
+interface MealTransportReportForWorkbook {
+  weekNumber: number;
+  weekStart: Date;
+  weekEnd: Date;
+  preparerSignatureName: string | null;
+  preparerSignatureImage: string | null;
+  preparerSignedAt: Date | null;
+  approverSignatureName: string | null;
+  approverSignatureImage: string | null;
+  approverSignedAt: Date | null;
+  user: { name: string | null };
+  config: {
+    title: string;
+    subtitle: string;
+    program: { name: string };
+    submitterRole: { name: string };
+    approver: { name: string | null; role: { name: string } | null };
+  };
+  entries: { date: Date; mealUsd: number; accommodationUsd: number; transportUsd: number }[];
+}
+
+/** Same four-part layout as the PDF, laid out as real spreadsheet cells
+ * (merged header rows, bordered tables) rather than a flat row dump — so
+ * it reads like the original paper form, not a data export. */
+export async function buildMealTransportReportWorkbook(
+  report: MealTransportReportForWorkbook,
+  totals: { totalMeal: number; totalAccommodation: number; totalTransport: number; grandTotal: number }
+): Promise<Buffer> {
+  const workbook = new ExcelJS.Workbook();
+  const sheet = workbook.addWorksheet(`Week ${report.weekNumber}`);
+  sheet.columns = [{ width: 22 }, { width: 18 }, { width: 22 }, { width: 18 }, { width: 16 }];
+
+  const borderSide = { style: "thin" as const, color: { argb: "FF000000" } };
+  const border = { top: borderSide, left: borderSide, bottom: borderSide, right: borderSide };
+  let r = 1;
+
+  if (report.config.title.trim()) {
+    sheet.mergeCells(r, 1, r, 5);
+    sheet.getCell(r, 1).value = report.config.title;
+    sheet.getCell(r, 1).font = { bold: true, size: 14 };
+    sheet.getCell(r, 1).alignment = { horizontal: "center" };
+    r++;
+  }
+  sheet.mergeCells(r, 1, r, 5);
+  sheet.getCell(r, 1).value = report.config.subtitle;
+  sheet.getCell(r, 1).font = { bold: true, size: 12 };
+  sheet.getCell(r, 1).alignment = { horizontal: "center" };
+  r += 2;
+
+  const headerRows: [string, string][] = [
+    ["Project:", report.config.program.name],
+    [`Name of ${report.config.submitterRole.name}:`, report.user.name ?? "—"],
+    ["Week:", `From ${report.weekStart.toLocaleDateString()}  To ${report.weekEnd.toLocaleDateString()}`],
+  ];
+  for (const [key, value] of headerRows) {
+    sheet.getCell(r, 1).value = key;
+    sheet.getCell(r, 1).font = { bold: true };
+    sheet.mergeCells(r, 2, r, 5);
+    sheet.getCell(r, 2).value = value;
+    for (let c = 1; c <= 5; c++) sheet.getCell(r, c).border = border;
+    r++;
+  }
+  r++;
+
+  const tableHeaderRow = r;
+  ["Date", "Meal (USD)", "Accommodation (USD)", "Transport (USD)", "Total (USD)"].forEach((label, i) => {
+    const cell = sheet.getCell(tableHeaderRow, i + 1);
+    cell.value = label;
+    cell.font = { bold: true };
+    cell.border = border;
+  });
+  r++;
+
+  const dayMap = new Map(report.entries.map((e) => [e.date.toISOString().slice(0, 10), e]));
+  // Not automatically a 7-day week — spans exactly however many days this
+  // report's own weekStart→weekEnd covers.
+  const periodDays = Math.round((report.weekEnd.getTime() - report.weekStart.getTime()) / 86400000) + 1;
+  for (let i = 0; i < periodDays; i++) {
+    const d = new Date(report.weekStart);
+    d.setDate(d.getDate() + i);
+    const entry = dayMap.get(d.toISOString().slice(0, 10));
+    const rowTotal = entry ? entry.mealUsd + entry.accommodationUsd + entry.transportUsd : 0;
+    const values = [d.toLocaleDateString(), entry?.mealUsd ?? "", entry?.accommodationUsd ?? "", entry?.transportUsd ?? "", entry ? rowTotal : ""];
+    values.forEach((v, i2) => {
+      const cell = sheet.getCell(r, i2 + 1);
+      cell.value = v;
+      cell.border = border;
+    });
+    r++;
+  }
+  r++;
+
+  // Totals — Total Transport stacked under Total Accommodation, per the
+  // corrected layout.
+  const totalRows: [string, number][] = [
+    ["Total Meal", totals.totalMeal],
+    ["Total Accommodation", totals.totalAccommodation],
+    ["Total Transport", totals.totalTransport],
+    ["Grand Total", totals.grandTotal],
+  ];
+  for (const [label, value] of totalRows) {
+    sheet.getCell(r, 1).value = label;
+    sheet.getCell(r, 1).font = { bold: label === "Grand Total" };
+    sheet.mergeCells(r, 2, r, 5);
+    sheet.getCell(r, 2).value = value;
+    for (let c = 1; c <= 5; c++) sheet.getCell(r, c).border = border;
+    r++;
+  }
+  r++;
+
+  sheet.getCell(r, 1).value = `Prepared by (${report.config.submitterRole.name})`;
+  sheet.getCell(r, 1).font = { bold: true };
+  sheet.mergeCells(r, 1, r, 2);
+  sheet.getCell(r, 3).value = `Approved by (${report.config.approver.role?.name ?? "Approver"})`;
+  sheet.getCell(r, 3).font = { bold: true };
+  sheet.mergeCells(r, 3, r, 5);
+  r++;
+
+  sheet.getCell(r, 1).value = `Name: ${report.user.name ?? "—"}`;
+  sheet.mergeCells(r, 1, r, 2);
+  sheet.getCell(r, 3).value = `Name: ${report.config.approver.name ?? "—"}`;
+  sheet.mergeCells(r, 3, r, 5);
+  r++;
+
+  sheet.getCell(r, 1).value = "Signature:";
+  sheet.getCell(r, 3).value = "Signature:";
+  const signatureRow = r;
+  sheet.getRow(signatureRow).height = 40;
+  r++; // the image occupies this row visually; the date line follows
+
+  function embedSignature(image: string | null, col: number) {
+    if (!image) return;
+    try {
+      const base64 = image.replace(/^data:image\/png;base64,/, "");
+      const imageId = workbook.addImage({ base64, extension: "png" });
+      // tl/br are 0-indexed; the signature sits just right of its "Signature:"
+      // label, spanning roughly one row of height.
+      sheet.addImage(imageId, {
+        tl: { col: col - 1 + 0.6, row: signatureRow - 1 + 0.05 },
+        ext: { width: 140, height: 34 },
+      });
+    } catch {
+      // A corrupt/unparseable data URL is skipped rather than failing the
+      // whole export.
+    }
+  }
+  embedSignature(report.preparerSignatureImage, 1);
+  embedSignature(report.approverSignatureImage, 3);
+
+  sheet.getCell(r, 1).value = `Date: ${report.preparerSignedAt ? report.preparerSignedAt.toLocaleDateString() : "—"}`;
+  sheet.mergeCells(r, 1, r, 2);
+  sheet.getCell(r, 3).value = `Date: ${report.approverSignedAt ? report.approverSignedAt.toLocaleDateString() : "—"}`;
+  sheet.mergeCells(r, 3, r, 5);
+
+  const buffer = await workbook.xlsx.writeBuffer();
+  return Buffer.from(buffer);
+}

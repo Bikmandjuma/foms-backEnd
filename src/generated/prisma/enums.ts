@@ -155,6 +155,15 @@ export const ConfirmationStatus = {
 export type ConfirmationStatus = (typeof ConfirmationStatus)[keyof typeof ConfirmationStatus]
 
 
+export const MealTransportReportStatus = {
+  DRAFT: 'DRAFT',
+  PENDING_APPROVAL: 'PENDING_APPROVAL',
+  APPROVED: 'APPROVED'
+} as const
+
+export type MealTransportReportStatus = (typeof MealTransportReportStatus)[keyof typeof MealTransportReportStatus]
+
+
 export const AvailabilityCheckStatus = {
   PENDING: 'PENDING',
   AVAILABLE: 'AVAILABLE',

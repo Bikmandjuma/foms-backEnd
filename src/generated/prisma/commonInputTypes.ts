@@ -372,6 +372,23 @@ export type EnumAvailabilityCheckStatusWithAggregatesFilter<$PrismaModel = never
   _max?: Prisma.NestedEnumAvailabilityCheckStatusFilter<$PrismaModel>
 }
 
+export type EnumMealTransportReportStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MealTransportReportStatus | Prisma.EnumMealTransportReportStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MealTransportReportStatus[]
+  notIn?: $Enums.MealTransportReportStatus[]
+  not?: Prisma.NestedEnumMealTransportReportStatusFilter<$PrismaModel> | $Enums.MealTransportReportStatus
+}
+
+export type EnumMealTransportReportStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MealTransportReportStatus | Prisma.EnumMealTransportReportStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MealTransportReportStatus[]
+  notIn?: $Enums.MealTransportReportStatus[]
+  not?: Prisma.NestedEnumMealTransportReportStatusWithAggregatesFilter<$PrismaModel> | $Enums.MealTransportReportStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMealTransportReportStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMealTransportReportStatusFilter<$PrismaModel>
+}
+
 export type FloatFilter<$PrismaModel = never> = {
   equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   in?: number[]
@@ -381,13 +398,6 @@ export type FloatFilter<$PrismaModel = never> = {
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   not?: Prisma.NestedFloatFilter<$PrismaModel> | number
-}
-
-export type EnumFieldExpenseStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.FieldExpenseStatus | Prisma.EnumFieldExpenseStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.FieldExpenseStatus[]
-  notIn?: $Enums.FieldExpenseStatus[]
-  not?: Prisma.NestedEnumFieldExpenseStatusFilter<$PrismaModel> | $Enums.FieldExpenseStatus
 }
 
 export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -404,6 +414,13 @@ export type FloatWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatFilter<$PrismaModel>
   _min?: Prisma.NestedFloatFilter<$PrismaModel>
   _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
+export type EnumFieldExpenseStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FieldExpenseStatus | Prisma.EnumFieldExpenseStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FieldExpenseStatus[]
+  notIn?: $Enums.FieldExpenseStatus[]
+  not?: Prisma.NestedEnumFieldExpenseStatusFilter<$PrismaModel> | $Enums.FieldExpenseStatus
 }
 
 export type EnumFieldExpenseStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -910,11 +927,21 @@ export type NestedEnumAvailabilityCheckStatusWithAggregatesFilter<$PrismaModel =
   _max?: Prisma.NestedEnumAvailabilityCheckStatusFilter<$PrismaModel>
 }
 
-export type NestedEnumFieldExpenseStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.FieldExpenseStatus | Prisma.EnumFieldExpenseStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.FieldExpenseStatus[]
-  notIn?: $Enums.FieldExpenseStatus[]
-  not?: Prisma.NestedEnumFieldExpenseStatusFilter<$PrismaModel> | $Enums.FieldExpenseStatus
+export type NestedEnumMealTransportReportStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MealTransportReportStatus | Prisma.EnumMealTransportReportStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MealTransportReportStatus[]
+  notIn?: $Enums.MealTransportReportStatus[]
+  not?: Prisma.NestedEnumMealTransportReportStatusFilter<$PrismaModel> | $Enums.MealTransportReportStatus
+}
+
+export type NestedEnumMealTransportReportStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MealTransportReportStatus | Prisma.EnumMealTransportReportStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MealTransportReportStatus[]
+  notIn?: $Enums.MealTransportReportStatus[]
+  not?: Prisma.NestedEnumMealTransportReportStatusWithAggregatesFilter<$PrismaModel> | $Enums.MealTransportReportStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMealTransportReportStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMealTransportReportStatusFilter<$PrismaModel>
 }
 
 export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -931,6 +958,13 @@ export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatFilter<$PrismaModel>
   _min?: Prisma.NestedFloatFilter<$PrismaModel>
   _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
+export type NestedEnumFieldExpenseStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FieldExpenseStatus | Prisma.EnumFieldExpenseStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FieldExpenseStatus[]
+  notIn?: $Enums.FieldExpenseStatus[]
+  not?: Prisma.NestedEnumFieldExpenseStatusFilter<$PrismaModel> | $Enums.FieldExpenseStatus
 }
 
 export type NestedEnumFieldExpenseStatusWithAggregatesFilter<$PrismaModel = never> = {
