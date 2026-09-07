@@ -360,5 +360,5 @@ export const upsertMealTransportEntrySchema = z.object({
 // what is printed on the Name line.
 export const signMealTransportReportSchema = z.object({
   signatureName: z.string().min(1),
-  signatureImage: z.string().startsWith("data:image/png;base64,").optional(),
+  signatureImage: z.string().startsWith("data:image/png;base64,").nullable().optional(),
 });

@@ -2,6 +2,23 @@ import PDFDocument from "pdfkit";
 import type { AssignmentReportRow } from "./excel.js";
 import type { FieldTeamReportRow } from "./fieldTeamReport.js";
 
+/** Rounds a Date down to UTC midnight of its own calendar day, discarding
+ * any stray time-of-day component. Every date this report deals with
+ * (week bounds, entry dates) is meant to represent a calendar day, not a
+ * specific instant, comparing raw timestamps without this normalization
+ * is what causes a one-day drift depending on what timezone the server
+ * happens to be running in. */
+function utcMidnight(d: Date): number {
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+}
+
+/** Formats a Date using its UTC calendar day, never the server's local
+ * timezone, so "8/30/2026" always means the same calendar day it was
+ * entered as, regardless of where this process happens to run. */
+function formatUTCDate(d: Date): string {
+  return new Date(utcMidnight(d)).toLocaleDateString("en-US", { timeZone: "UTC" });
+}
+
 interface MealTransportReportForPdf {
   week: { label: string; weekStart: Date; weekEnd: Date };
   status: string;
@@ -60,7 +77,7 @@ export function buildMealTransportReportPdf(
     keyValueRow(`Name of ${report.config.submitterRole.name}:`, report.user.name ?? "—", y + 20);
     keyValueRow(
       "Week:",
-      `From ${report.week.weekStart.toLocaleDateString()}   To ${report.week.weekEnd.toLocaleDateString()}`,
+      `From ${formatUTCDate(report.week.weekStart)}   To ${formatUTCDate(report.week.weekEnd)}`,
       y + 40
     );
     doc.y = y + 66;
@@ -86,18 +103,24 @@ export function buildMealTransportReportPdf(
     y = doc.y;
     tableRow(cols.map((c) => c.label), y, true);
     const dayMap = new Map(report.entries.map((e) => [e.date.toISOString().slice(0, 10), e]));
-    // Not automatically a 7-day week — spans exactly however many days this
-    // report's own weekStart→weekEnd covers (5 for a Mon-Fri config, etc).
-    const periodDays = Math.round((report.week.weekEnd.getTime() - report.week.weekStart.getTime()) / 86400000) + 1;
+    // Not automatically a 7-day week, spans exactly however many days this
+    // report's own weekStart to weekEnd covers (5 for a Mon-Fri config,
+    // etc). Both bounds are normalized to UTC midnight first: comparing
+    // raw timestamps without that step drifts by a day depending on the
+    // server's local timezone, and so does building each day with local
+    // setDate/getDate on a UTC-stored date, which is also why an entry's
+    // amounts could go missing here even though it's really in the data,
+    // the lookup key silently stopped matching.
+    const periodDays = Math.round((utcMidnight(report.week.weekEnd) - utcMidnight(report.week.weekStart)) / 86400000) + 1;
     for (let i = 0; i < periodDays; i++) {
-      const d = new Date(report.week.weekStart);
-      d.setDate(d.getDate() + i);
+      const dayMs = utcMidnight(report.week.weekStart) + i * 86400000;
+      const d = new Date(dayMs);
       const entry = dayMap.get(d.toISOString().slice(0, 10));
       const rowY = y + 20 * (i + 1);
       const total = entry ? entry.mealUsd + entry.accommodationUsd + entry.transportUsd : 0;
       tableRow(
         [
-          d.toLocaleDateString(),
+          formatUTCDate(d),
           entry ? money(entry.mealUsd) : "",
           entry ? money(entry.accommodationUsd) : "",
           entry ? money(entry.transportUsd) : "",
@@ -132,6 +155,7 @@ export function buildMealTransportReportPdf(
       rowY: number,
       label: string,
       name: string,
+      signatureName: string | null,
       signatureImage: string | null,
       signedAt: Date | null,
       x: number
@@ -147,17 +171,30 @@ export function buildMealTransportReportPdf(
           // than crashing the whole export.
           doc.text("____________________", x + 60, rowY + 22);
         }
+      } else if (signatureName) {
+        // "Name" mode: no drawn image, the typed name itself is the
+        // signature, rendered in a signature-style font.
+        doc.font("Times-Italic").fontSize(14).text(signatureName, x + 60, rowY + 18, { width: half - 90 });
+        doc.font("Helvetica").fontSize(9);
       } else {
         doc.text("____________________", x + 60, rowY + 22);
       }
-      doc.text(`Date: ${signedAt ? signedAt.toLocaleDateString() : "____________"}`, x + 6, rowY + 58, { width: half - 12 });
+      doc.text(`Date: ${signedAt ? formatUTCDate(signedAt) : "____________"}`, x + 6, rowY + 58, { width: half - 12 });
     }
 
     const sigRowY = y + 22;
     doc.rect(left, sigRowY, width, 84).stroke("#000000");
     doc.moveTo(left + half, sigRowY).lineTo(left + half, sigRowY + 84).stroke("#000000");
-    signatureBlock(sigRowY, "Name", report.user.name ?? "—", report.preparerSignatureImage, report.preparerSignedAt, left);
-    signatureBlock(sigRowY, "Name", report.config.approver.name ?? "—", report.approverSignatureImage, report.approverSignedAt, left + half);
+    signatureBlock(sigRowY, "Name", report.user.name ?? "—", report.preparerSignatureName, report.preparerSignatureImage, report.preparerSignedAt, left);
+    signatureBlock(
+      sigRowY,
+      "Name",
+      report.config.approver.name ?? "—",
+      report.approverSignatureName,
+      report.approverSignatureImage,
+      report.approverSignedAt,
+      left + half
+    );
 
     doc.end();
   });

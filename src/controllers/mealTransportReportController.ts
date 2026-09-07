@@ -280,7 +280,7 @@ export async function listEligibleWeeksForMe(req: Request, res: Response): Promi
  * their report for this specific week. */
 export async function getWeekRoleSummary(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
-  const week = await prisma.mealTransportReportWeek.findFirst({ where: { id: idParam(req), tenantId } });
+  const week = await prisma.mealTransportReportWeek.findFirst({ where: { id: req.params.weekId as string, tenantId } });
   if (!week) throw new ApiError(404, "Week not found");
 
   const configs = await prisma.mealTransportReportConfig.findMany({
@@ -318,7 +318,7 @@ export async function getWeekRoleSummary(req: Request, res: Response): Promise<v
  * can drill from the role card into the actual people. */
 export async function listReportsForWeekAndRole(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
-  const weekId = idParam(req);
+  const weekId = req.params.weekId as string;
   const roleId = typeof req.query.roleId === "string" ? req.query.roleId : undefined;
   if (!roleId) throw new ApiError(400, "roleId query parameter is required");
 
@@ -334,7 +334,7 @@ export async function listReportsForWeekAndRole(req: Request, res: Response): Pr
  * exported as PDF or Excel. */
 export async function exportWeekRoleZip(req: Request, res: Response): Promise<void> {
   const tenantId = requireTenantId(req);
-  const weekId = idParam(req);
+  const weekId = req.params.weekId as string;
   const roleId = typeof req.query.roleId === "string" ? req.query.roleId : undefined;
   const format = typeof req.query.format === "string" ? req.query.format.toLowerCase() : "pdf";
   if (!roleId) throw new ApiError(400, "roleId query parameter is required");
@@ -351,8 +351,12 @@ export async function exportWeekRoleZip(req: Request, res: Response): Promise<vo
   if (reports.length === 0) throw new ApiError(404, "No reports have been made for this role yet");
 
   const roleName = reports[0]!.config.submitterRole.name;
+  // Only the filename itself gets sanitized here, the surrounding
+  // "attachment; filename=..." syntax must keep its own spaces or the
+  // header becomes invalid and browsers silently fail the download.
+  const safeFilename = `${week.label}-${roleName}-reports.zip`.replace(/\s+/g, "-");
   res.setHeader("Content-Type", "application/zip");
-  res.setHeader("Content-Disposition", `attachment; filename="${week.label}-${roleName}-reports.zip"`.replace(/\s+/g, "-"));
+  res.setHeader("Content-Disposition", `attachment; filename="${safeFilename}"`);
 
   const archive = new ZipArchive({ zlib: { level: 9 } });
   archive.on("error", (err: Error) => {

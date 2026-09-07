@@ -1,5 +1,20 @@
 import ExcelJS from "exceljs";
 
+/** Rounds a Date down to UTC midnight of its own calendar day, discarding
+ * any stray time-of-day component. Comparing raw timestamps without this
+ * step, or building a date with local setDate/getDate on a UTC-stored
+ * value, drifts by a day depending on the server's local timezone. */
+function utcMidnight(d: Date): number {
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+}
+
+/** Formats a Date using its UTC calendar day, never the server's local
+ * timezone, so "8/30/2026" always means the same calendar day it was
+ * entered as. */
+function formatUTCDate(d: Date): string {
+  return new Date(utcMidnight(d)).toLocaleDateString("en-US", { timeZone: "UTC" });
+}
+
 export interface RawBeneficiaryRow {
   rowNumber: number;
   name?: string;
@@ -329,7 +344,7 @@ export async function buildMealTransportReportWorkbook(
   const headerRows: [string, string][] = [
     ["Project:", report.config.program.name],
     [`Name of ${report.config.submitterRole.name}:`, report.user.name ?? "—"],
-    ["Week:", `From ${report.week.weekStart.toLocaleDateString()}  To ${report.week.weekEnd.toLocaleDateString()}`],
+    ["Week:", `From ${formatUTCDate(report.week.weekStart)}  To ${formatUTCDate(report.week.weekEnd)}`],
   ];
   for (const [key, value] of headerRows) {
     sheet.getCell(r, 1).value = key;
@@ -351,15 +366,19 @@ export async function buildMealTransportReportWorkbook(
   r++;
 
   const dayMap = new Map(report.entries.map((e) => [e.date.toISOString().slice(0, 10), e]));
-  // Not automatically a 7-day week — spans exactly however many days this
-  // report's own weekStart→weekEnd covers.
-  const periodDays = Math.round((report.week.weekEnd.getTime() - report.week.weekStart.getTime()) / 86400000) + 1;
+  // Not automatically a 7-day week, spans exactly however many days this
+  // report's own weekStart to weekEnd covers. Both bounds are normalized
+  // to UTC midnight first, and each day is built with UTC arithmetic
+  // rather than local setDate/getDate, otherwise the row count and the
+  // entry lookup key both drift by a day depending on the server's local
+  // timezone, which is also why an entry's amounts could go missing here
+  // even though it really is in the data.
+  const periodDays = Math.round((utcMidnight(report.week.weekEnd) - utcMidnight(report.week.weekStart)) / 86400000) + 1;
   for (let i = 0; i < periodDays; i++) {
-    const d = new Date(report.week.weekStart);
-    d.setDate(d.getDate() + i);
+    const d = new Date(utcMidnight(report.week.weekStart) + i * 86400000);
     const entry = dayMap.get(d.toISOString().slice(0, 10));
     const rowTotal = entry ? entry.mealUsd + entry.accommodationUsd + entry.transportUsd : 0;
-    const values = [d.toLocaleDateString(), entry?.mealUsd ?? "", entry?.accommodationUsd ?? "", entry?.transportUsd ?? "", entry ? rowTotal : ""];
+    const values = [formatUTCDate(d), entry?.mealUsd ?? "", entry?.accommodationUsd ?? "", entry?.transportUsd ?? "", entry ? rowTotal : ""];
     values.forEach((v, i2) => {
       const cell = sheet.getCell(r, i2 + 1);
       cell.value = v;
@@ -407,28 +426,37 @@ export async function buildMealTransportReportWorkbook(
   sheet.getRow(signatureRow).height = 40;
   r++; // the image occupies this row visually; the date line follows
 
-  function embedSignature(image: string | null, col: number) {
-    if (!image) return;
-    try {
-      const base64 = image.replace(/^data:image\/png;base64,/, "");
-      const imageId = workbook.addImage({ base64, extension: "png" });
-      // tl/br are 0-indexed; the signature sits just right of its "Signature:"
-      // label, spanning roughly one row of height.
-      sheet.addImage(imageId, {
-        tl: { col: col - 1 + 0.6, row: signatureRow - 1 + 0.05 },
-        ext: { width: 140, height: 34 },
-      });
-    } catch {
-      // A corrupt/unparseable data URL is skipped rather than failing the
-      // whole export.
+  function embedSignature(name: string | null, image: string | null, col: number) {
+    if (image) {
+      try {
+        const base64 = image.replace(/^data:image\/png;base64,/, "");
+        const imageId = workbook.addImage({ base64, extension: "png" });
+        // tl/br are 0-indexed; the signature sits just right of its
+        // "Signature:" label, spanning roughly one row of height.
+        sheet.addImage(imageId, {
+          tl: { col: col - 1 + 0.6, row: signatureRow - 1 + 0.05 },
+          ext: { width: 140, height: 34 },
+        });
+        return;
+      } catch {
+        // A corrupt/unparseable data URL falls through to the name below
+        // rather than failing the whole export.
+      }
+    }
+    if (name) {
+      // "Name" mode: no drawn image, the typed name itself is the
+      // signature, styled to read as one rather than plain data text.
+      const cell = sheet.getCell(signatureRow, col + 1);
+      cell.value = name;
+      cell.font = { italic: true, size: 14, name: "Times New Roman" };
     }
   }
-  embedSignature(report.preparerSignatureImage, 1);
-  embedSignature(report.approverSignatureImage, 3);
+  embedSignature(report.preparerSignatureName, report.preparerSignatureImage, 1);
+  embedSignature(report.approverSignatureName, report.approverSignatureImage, 3);
 
-  sheet.getCell(r, 1).value = `Date: ${report.preparerSignedAt ? report.preparerSignedAt.toLocaleDateString() : "—"}`;
+  sheet.getCell(r, 1).value = `Date: ${report.preparerSignedAt ? formatUTCDate(report.preparerSignedAt) : "—"}`;
   sheet.mergeCells(r, 1, r, 2);
-  sheet.getCell(r, 3).value = `Date: ${report.approverSignedAt ? report.approverSignedAt.toLocaleDateString() : "—"}`;
+  sheet.getCell(r, 3).value = `Date: ${report.approverSignedAt ? formatUTCDate(report.approverSignedAt) : "—"}`;
   sheet.mergeCells(r, 3, r, 5);
 
   const buffer = await workbook.xlsx.writeBuffer();
